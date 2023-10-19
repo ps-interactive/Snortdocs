@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node8.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+<HEAD>
+<TITLE>1.6 Reading pcap files</TITLE>
+<META NAME="description" CONTENT="1.6 Reading pcap files">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html485"
+  HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html481"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html475"
+  HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html483"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html486"
+  HREF="node9.html">1.7 Basic Output</A>
+<B> Up:</B> <A NAME="tex2html482"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html476"
+  HREF="node7.html">1.5 Packet Acquisition</A>
+ &nbsp; <B>  <A NAME="tex2html484"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html487"
+  HREF="node8.html#SECTION00261000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Command line arguments</A>
+<LI><A NAME="tex2html488"
+  HREF="node8.html#SECTION00262000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+<UL>
+<LI><A NAME="tex2html489"
+  HREF="node8.html#SECTION00262100000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Read a single pcap</A>
+<LI><A NAME="tex2html490"
+  HREF="node8.html#SECTION00262200000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Read pcaps from a file</A>
+<LI><A NAME="tex2html491"
+  HREF="node8.html#SECTION00262300000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Read pcaps from a command line list</A>
+<LI><A NAME="tex2html492"
+  HREF="node8.html#SECTION00262400000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Read pcaps under a directory</A>
+<LI><A NAME="tex2html493"
+  HREF="node8.html#SECTION00262500000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN> Using filters</A>
+<LI><A NAME="tex2html494"
+  HREF="node8.html#SECTION00262600000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN> Resetting state</A>
+<LI><A NAME="tex2html495"
+  HREF="node8.html#SECTION00262700000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN> Printing the pcap</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00260000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN> Reading pcap files</A>
+</H1>
+
+<P>
+Instead of having Snort listen on an interface, you can give it a packet
+capture to read.  Snort will read and analyze the packets as if they came off
+the wire.  This can be useful for testing and debugging Snort.
+
+<P>
+
+<H2><A NAME="SECTION00261000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Command line arguments</A>
+</H2>
+
+<P>
+Any of the below can be specified multiple times on the command line
+(<TT>-r</TT> included) and in addition to other Snort command line options.
+Note, however, that specifying <TT>-pcap-reset</TT> and <TT>-pcap-show</TT>
+multiple times has the same effect as specifying them once.
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TH ALIGN="LEFT"><SPAN  CLASS="textbf">Option</SPAN></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=324><SPAN  CLASS="textbf">Description</SPAN></TH>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-r &lt;file&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Read a single pcap.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-pcap-single=&lt;file&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Same as -r.  Added for completeness.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-pcap-file=&lt;file&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+File that contains a list of pcap files to read.  Can specify path to each
+pcap or directory to recurse to get pcaps.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-pcap-list="&lt;list&gt;"</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+A space separated list of pcaps to read.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-pcap-dir=&lt;dir&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+A directory to recurse to look for pcaps.  Sorted in ASCII order.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-pcap-filter=&lt;filter&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Shell style filter to apply when getting pcaps from file or directory.  This
+filter will apply to any <TT>-pcap-file</TT> or <TT>-pcap-dir</TT> arguments
+following.  Use <TT>-pcap-no-filter</TT> to delete filter for following
+<TT>-pcap-file</TT> or <TT>-pcap-dir</TT> arguments or specify
+<TT>-pcap-filter</TT> again to forget previous filter and to apply to
+following <TT>-pcap-file</TT> or <TT>-pcap-dir</TT> arguments.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-pcap-no-filter</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Reset to use no filter when getting pcaps from file or directory.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-pcap-reset</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+If reading multiple pcaps, reset snort to post-configuration state before
+reading next pcap.  The default, i.e. without this option, is not to reset
+state.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-pcap-show</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Print a line saying what pcap is currently being read.</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION00262000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H2>
+
+<P>
+
+<H3><A NAME="SECTION00262100000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Read a single pcap</A>
+</H3>
+
+<P>
+<PRE>
+    $ snort -r foo.pcap
+    $ snort --pcap-single=foo.pcap
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00262200000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Read pcaps from a file</A>
+</H3>
+
+<P>
+<PRE>
+    $ cat foo.txt
+    foo1.pcap
+    foo2.pcap
+    /home/foo/pcaps
+</PRE>
+
+<P>
+<PRE>
+    $ snort --pcap-file=foo.txt
+</PRE>
+
+<P>
+This will read foo1.pcap, foo2.pcap and all files under /home/foo/pcaps.  Note
+that Snort will not try to determine whether the files under that directory are
+really pcap files or not.
+
+<P>
+
+<H3><A NAME="SECTION00262300000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Read pcaps from a command line list</A>
+</H3>
+
+<P>
+<PRE>
+    $ snort --pcap-list="foo1.pcap foo2.pcap foo3.pcap"
+</PRE>
+
+<P>
+This will read foo1.pcap, foo2.pcap and foo3.pcap.
+
+<P>
+
+<H3><A NAME="SECTION00262400000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Read pcaps under a directory</A>
+</H3>
+
+<P>
+<PRE>
+    $ snort --pcap-dir="/home/foo/pcaps"
+</PRE>
+
+<P>
+This will include all of the files under /home/foo/pcaps.
+
+<P>
+
+<H3><A NAME="SECTION00262500000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN> Using filters</A>
+</H3>
+
+<P>
+<PRE>
+    $ cat foo.txt
+    foo1.pcap
+    foo2.pcap
+    /home/foo/pcaps
+</PRE>
+
+<P>
+<PRE>
+    $ snort --pcap-filter="*.pcap" --pcap-file=foo.txt
+    $ snort --pcap-filter="*.pcap" --pcap-dir=/home/foo/pcaps
+</PRE>
+
+<P>
+The above will only include files that match the shell pattern "*.pcap", in
+other words, any file ending in ".pcap".
+
+<P>
+<PRE>
+    $ snort --pcap-filter="*.pcap --pcap-file=foo.txt \
+    &gt; --pcap-filter="*.cap" --pcap-dir=/home/foo/pcaps
+</PRE>
+
+<P>
+In the above, the first filter "*.pcap" will only be applied to the pcaps in
+the file "foo.txt" (and any directories that are recursed in that file).  The
+addition of the second filter "*.cap" will cause the first filter to be
+forgotten and then applied to the directory /home/foo/pcaps, so only files
+ending in ".cap" will be included from that directory.
+
+<P>
+<PRE>
+    $ snort --pcap-filter="*.pcap --pcap-file=foo.txt \
+    &gt; --pcap-no-filter --pcap-dir=/home/foo/pcaps
+</PRE>
+
+<P>
+In this example, the first filter will be applied to foo.txt, then no filter
+will be applied to the files found under /home/foo/pcaps, so all files found
+under /home/foo/pcaps will be included. 
+
+<P>
+<PRE>
+    $ snort --pcap-filter="*.pcap --pcap-file=foo.txt \
+    &gt; --pcap-no-filter --pcap-dir=/home/foo/pcaps \
+    &gt; --pcap-filter="*.cap" --pcap-dir=/home/foo/pcaps2
+</PRE>
+
+<P>
+In this example, the first filter will be applied to foo.txt, then no filter
+will be applied to the files found under /home/foo/pcaps, so all files found
+under /home/foo/pcaps will be included, then the filter "*.cap" will be applied
+to files found under /home/foo/pcaps2. 
+
+<P>
+
+<H3><A NAME="SECTION00262600000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN> Resetting state</A>
+</H3>
+
+<P>
+<PRE>
+    $ snort --pcap-dir=/home/foo/pcaps --pcap-reset
+</PRE>
+
+<P>
+The above example will read all of the files under /home/foo/pcaps, but after
+each pcap is read, Snort will be reset to a post-configuration state, meaning
+all buffers will be flushed, statistics reset, etc.  For each pcap, it will be
+like Snort is seeing traffic for the first time.
+
+<P>
+
+<H3><A NAME="SECTION00262700000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN> Printing the pcap</A>
+</H3>
+
+<P>
+<PRE>
+    $ snort --pcap-dir=/home/foo/pcaps --pcap-show
+</PRE>
+
+<P>
+The above example will read all of the files under /home/foo/pcaps and will
+print a line indicating which pcap is currently being read.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html485"
+  HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html481"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html475"
+  HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html483"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html486"
+  HREF="node9.html">1.7 Basic Output</A>
+<B> Up:</B> <A NAME="tex2html482"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html476"
+  HREF="node7.html">1.5 Packet Acquisition</A>
+ &nbsp; <B>  <A NAME="tex2html484"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node8.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+</HTML>

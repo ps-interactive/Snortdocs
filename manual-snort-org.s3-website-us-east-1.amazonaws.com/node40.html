@@ -1,0 +1,430 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node40.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+<HEAD>
+<TITLE>4.3 Examples</TITLE>
+<META NAME="description" CONTENT="4.3 Examples">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="previous" HREF="node39.html">
+<LINK REL="up" HREF="node37.html">
+<LINK REL="next" HREF="node41.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1572"
+  HREF="node41.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1568"
+  HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1564"
+  HREF="node39.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1570"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1573"
+  HREF="node41.html">5. Snort Development</A>
+<B> Up:</B> <A NAME="tex2html1569"
+  HREF="node37.html">4. Dynamic Modules</A>
+<B> Previous:</B> <A NAME="tex2html1565"
+  HREF="node39.html">4.2 Required Functions</A>
+ &nbsp; <B>  <A NAME="tex2html1571"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1574"
+  HREF="node40.html#SECTION00531000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Preprocessor Example</A>
+<LI><A NAME="tex2html1575"
+  HREF="node40.html#SECTION00532000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Rules</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00530000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Examples</A>
+</H1>
+
+<P>
+This section provides a simple example of a dynamic preprocessor and a dynamic
+rule.
+
+<P>
+
+<H2><A NAME="SECTION00531000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Preprocessor Example</A>
+</H2>
+
+<P>
+The following is an example of a simple preprocessor.  This preprocessor always
+alerts on a packet if the TCP port matches the one configured.
+
+<P>
+The following code is defined in <EM>spp_example.c</EM> and is compiled
+together with <EM>libsf_dynamic_preproc.a</EM>, using pkg-config, into
+lib_sfdynamic_preprocessor_example.so.
+
+<P>
+Define the required meta data variables.
+
+<P>
+<PRE>
+#define GENERATOR_EXAMPLE 256
+extern DynamicPreprocessorData _dpd;
+
+const int MAJOR_VERSION = 1;
+const int MINOR_VERSION = 0;
+const int BUILD_VERSION = 0;
+const char *PREPROC_NAME = "SF_Dynamic_Example_Preprocessor";
+
+#define ExampleSetup DYNAMIC_PREPROC_SETUP
+</PRE>
+
+<P>
+Define the Setup function to register the initialization function.
+
+<P>
+<PRE>
+void ExampleInit(unsigned char *);
+void ExampleProcess(void *, void *);
+
+void ExampleSetup()
+{
+    _dpd.registerPreproc("dynamic_example", ExampleInit);
+
+    DEBUG_WRAP(_dpd.debugMsg(DEBUG_PLUGIN, "Preprocessor: Example is setup\n"););
+}
+</PRE>
+
+<P>
+The initialization function to parse the keywords from <TT>snort.conf</TT>.
+
+<P>
+<PRE>
+u_int16_t portToCheck;
+
+void ExampleInit(unsigned char *args)
+{
+    char *arg;
+    char *argEnd;
+    unsigned long port;
+
+    _dpd.logMsg("Example dynamic preprocessor configuration\n");
+
+    arg = strtok(args, " \t\n\r");
+
+    if(!strcasecmp("port", arg))
+    {
+        arg = strtok(NULL, "\t\n\r");
+        if (!arg)
+        {
+            _dpd.fatalMsg("ExamplePreproc: Missing port\n");
+        }
+        
+        port = strtoul(arg, &amp;argEnd, 10);
+        if (port &lt; 0 || port &gt; 65535)
+        {
+            _dpd.fatalMsg("ExamplePreproc: Invalid port %d\n", port);
+        }
+        portToCheck = port;
+    
+        _dpd.logMsg("    Port: %d\n", portToCheck);
+    }
+    else
+    {
+        _dpd.fatalMsg("ExamplePreproc: Invalid option %s\n", arg);
+    }
+
+    /* Register the preprocessor function, Transport layer, ID 10000 */
+    _dpd.addPreproc(ExampleProcess, PRIORITY_TRANSPORT, 10000);
+
+    DEBUG_WRAP(_dpd.debugMsg(DEBUG_PLUGIN, "Preprocessor: Example is initialized\n"););
+}
+</PRE>
+
+<P>
+The function to process the packet and log an alert if the either port matches.
+
+<P>
+<PRE>
+#define SRC_PORT_MATCH  1
+#define SRC_PORT_MATCH_STR "example_preprocessor: src port match"
+#define DST_PORT_MATCH  2
+#define DST_PORT_MATCH_STR "example_preprocessor: dest port match"
+void ExampleProcess(void *pkt, void *context)
+{
+    SFSnortPacket *p = (SFSnortPacket *)pkt;
+    if (!p-&gt;ip4_header || p-&gt;ip4_header-&gt;proto != IPPROTO_TCP || !p-&gt;tcp_header)
+    {
+        /* Not for me, return */
+        return;
+    }
+
+    if (p-&gt;src_port == portToCheck)
+    {
+        /* Source port matched, log alert */
+        _dpd.alertAdd(GENERATOR_EXAMPLE, SRC_PORT_MATCH,
+                      1, 0, 3, SRC_PORT_MATCH_STR, 0);
+        return;
+    }
+
+    if (p-&gt;dst_port == portToCheck)
+    {
+        /* Destination port matched, log alert */
+        _dpd.alertAdd(GENERATOR_EXAMPLE, DST_PORT_MATCH,
+                      1, 0, 3, DST_PORT_MATCH_STR, 0);
+        return;
+    }
+}
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00532000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Rules</A>
+</H2>
+
+<P>
+The following is an example of a simple rule, take from the current rule set,
+SID 109.  It is implemented to work with the detection engine provided with
+snort.
+
+<P>
+The snort rule in normal format:
+
+<P>
+<PRE>
+alert tcp $HOME_NET 12345:12346 -&gt; $EXTERNAL_NET any \
+(msg:"BACKDOOR netbus active"; flow:from_server,established; \
+content:"NetBus"; reference:arachnids,401; classtype:misc-activity; \
+sid:109; rev:5;)
+</PRE>
+
+<P>
+This is the metadata for this rule library, defined in <EM>detection_lib_meta.h</EM>.
+
+<P>
+<PRE>
+/* Version for this rule library */
+#define DETECTION_LIB_MAJOR_VERSION 1
+#define DETECTION_LIB_MINOR_VERSION 0
+#define DETECTION_LIB_BUILD_VERSION 1
+#define DETECTION_LIB_NAME "Snort_Dynamic_Rule_Example"
+
+/* Required version and name of the engine */
+#define REQ_ENGINE_LIB_MAJOR_VERSION 1
+#define REQ_ENGINE_LIB_MINOR_VERSION 0
+#define REQ_ENGINE_LIB_NAME "SF_SNORT_DETECTION_ENGINE"
+</PRE>
+
+<P>
+The definition of each data structure for this rule is in <EM>sid109.c</EM>.
+
+<P>
+Declaration of the data structures.
+
+<P>
+
+<UL>
+<LI>Flow option
+
+<P>
+Define the <EM>FlowFlags</EM> structure and its corresponding <EM>RuleOption</EM>.
+Per the text version, flow is from_server,established.
+
+<P>
+<PRE>
+static FlowFlags sid109flow =
+{
+    FLOW_ESTABLISHED|FLOW_TO_CLIENT
+};
+
+static RuleOption sid109option1 =
+{
+    OPTION_TYPE_FLOWFLAGS,
+    {
+        &amp;sid109flow
+    }
+};
+</PRE>
+
+<P>
+</LI>
+<LI>Content Option
+
+<P>
+Define the <EM>ContentInfo</EM> structure and its corresponding <EM>RuleOption</EM>.
+Per the text version, content is "NetBus", no depth or offset, case sensitive,
+and non-relative.  Search on the normalized buffer by default.  <B>NOTE</B>:
+This content will be used for the fast pattern matcher since it is the longest
+content option for this rule and no contents have a flag of <EM>CONTENT_FAST_PATTERN</EM>.
+
+<P>
+<PRE>
+static ContentInfo sid109content =
+{
+    "NetBus",               /* pattern to search for */
+    0,                      /* depth */
+    0,                      /* offset */
+    CONTENT_BUF_NORMALIZED, /* flags */
+    NULL,                   /* holder for boyer/moore info */
+    NULL,                   /* holder for byte representation of "NetBus" */
+    0,                      /* holder for length of byte representation */
+    0                       /* holder for increment length */
+};
+
+static RuleOption sid109option2 =
+{
+    OPTION_TYPE_CONTENT,
+    {
+        &amp;sid109content
+    }
+};
+</PRE>
+
+<P>
+</LI>
+<LI>Rule and Meta Data
+
+<P>
+Define the references.
+
+<P>
+<PRE>
+static RuleReference sid109ref_arachnids =
+{
+    "arachnids",    /* Type */
+    "401"           /* value */
+};
+
+static RuleReference *sid109refs[] =
+{
+    &amp;sid109ref_arachnids,
+    NULL
+};
+</PRE>
+
+<P>
+The list of rule options.  Rule options are evaluated in the order specified.
+
+<P>
+<PRE>
+RuleOption *sid109options[] =
+{
+    &amp;sid109option1,
+    &amp;sid109option2,
+    NULL
+};
+</PRE>
+
+<P>
+The rule itself, with the protocol header, meta data (sid, classification,
+message, etc).  
+
+<P>
+<PRE>
+Rule sid109 =
+{
+    /* protocol header, akin to =&gt; tcp any any -&gt; any any               */
+    {
+        IPPROTO_TCP,        /* proto */
+        HOME_NET,           /* source IP     */
+        "12345:12346",      /* source port(s) */
+        0,                  /* Direction */
+        EXTERNAL_NET,       /* destination IP     */
+        ANY_PORT,           /* destination port   */
+    },
+    /* metadata */
+    {
+        3,                  /* genid -- use 3 to distinguish a C rule */
+        109,                /* sigid */
+        5,                  /* revision */
+        "misc-activity",    /* classification */
+        0,                  /* priority */
+        "BACKDOOR netbus active",     /* message */
+        sid109refs          /* ptr to references */
+    },
+    sid109options,          /* ptr to rule options */
+    NULL,                   /* Use internal eval func */
+    0,                      /* Holder, not yet initialized, used internally */
+    0,                      /* Holder, option count, used internally */
+    0,                      /* Holder, no alert, used internally for flowbits */
+    NULL                    /* Holder, rule data, used internally */
+</PRE>
+
+<P>
+</LI>
+<LI>The List of rules defined by this rules library
+
+<P>
+The NULL terminated list of rules.  The InitializeDetection iterates through
+each Rule in the list and initializes the content, flowbits, pcre, etc.
+
+<P>
+<PRE>
+extern Rule sid109;
+extern Rule sid637;
+
+Rule *rules[] = 
+{
+    &amp;sid109,
+    &amp;sid637,
+    NULL
+};
+</PRE>
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1572"
+  HREF="node41.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1568"
+  HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1564"
+  HREF="node39.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1570"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1573"
+  HREF="node41.html">5. Snort Development</A>
+<B> Up:</B> <A NAME="tex2html1569"
+  HREF="node37.html">4. Dynamic Modules</A>
+<B> Previous:</B> <A NAME="tex2html1565"
+  HREF="node39.html">4.2 Required Functions</A>
+ &nbsp; <B>  <A NAME="tex2html1571"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node40.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>

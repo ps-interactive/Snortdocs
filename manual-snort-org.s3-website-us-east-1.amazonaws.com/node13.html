@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node13.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+<HEAD>
+<TITLE>1.11 Configure signal value</TITLE>
+<META NAME="description" CONTENT="1.11 Configure signal value">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node14.html">
+<LINK REL="previous" HREF="node12.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node14.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html568"
+  HREF="node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html564"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html558"
+  HREF="node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html566"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html569"
+  HREF="node14.html">1.12 More Information</A>
+<B> Up:</B> <A NAME="tex2html565"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html559"
+  HREF="node12.html">1.10 Control socket</A>
+ &nbsp; <B>  <A NAME="tex2html567"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002110000000000000000"></A>
+<A NAME="configure_signal"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">11</SPAN> Configure signal value
+</H1>
+On some systems, signal used by snort might be used by other functions. To avoid conflicts, 
+users can change the default signal value through <TT>./configure</TT> options for non-Windows system.
+
+<P>
+These signals can be changed: 
+
+<UL>
+<LI><TT>SIGNAL_SNORT_RELOAD</TT> 
+</LI>
+<LI><TT>SIGNAL_SNORT_DUMP_STATS</TT>
+</LI>
+<LI><TT>SIGNAL_SNORT_ROTATE_STATS</TT>
+</LI>
+<LI><TT>SIGNAL_SNORT_READ_ATTR_TBL</TT>
+</LI>
+</UL> 
+
+<P>
+Syntax:
+
+<P>
+<PRE>
+    ./configure SIGNAL_SNORT_RELOAD=&lt;value/name&gt;  SIGNAL_SNORT_DUMP_STATS=&lt;value/name&gt;\
+        SIGNAL_SNORT_READ_ATTR_TBL=&lt;value/name&gt; SIGNAL_SNORT_ROTATE_STATS=&lt;value/name&gt;
+</PRE>
+
+<P>
+You can set those signals to user defined values or known signal names in the system.
+The following example changes the rotate stats signal to 31 and reload attribute table to
+signal SIGUSR2 :
+
+<P>
+<PRE>
+    ./configure SIGNAL_SNORT_ROTATE_STATS=31 SIGNAL_SNORT_READ_ATTR_TBL=SIGUSR2
+</PRE>
+
+<P>
+If the same signal is assigned more than once a warning will be logged 
+during snort initialization. If a signal handler cannot be installed a warning
+will be logged and that has to be fixed, otherwise the functionality will be lost.
+
+<P>
+<TT>Signals used in snort</TT>
+<A NAME="signalactions"></A><TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">Signal name</TD>
+<TD ALIGN="LEFT">Default value</TD>
+<TD ALIGN="LEFT">Action</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SIGTERM</TD>
+<TD ALIGN="LEFT">SIGTERM</TD>
+<TD ALIGN="LEFT">exit</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SIGINT</TD>
+<TD ALIGN="LEFT">SIGINT</TD>
+<TD ALIGN="LEFT">exit</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SIGQUIT</TD>
+<TD ALIGN="LEFT">SIGQUIT</TD>
+<TD ALIGN="LEFT">exit</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SIGPIPE</TD>
+<TD ALIGN="LEFT">SIGPIPE</TD>
+<TD ALIGN="LEFT">ignore</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SIGNAL_SNORT_RELOAD</TD>
+<TD ALIGN="LEFT">SIGHUP</TD>
+<TD ALIGN="LEFT">reload snort</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SIGNAL_SNORT_DUMP_STATS</TD>
+<TD ALIGN="LEFT">SIGUSR1</TD>
+<TD ALIGN="LEFT">dump stats</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SIGNAL_SNORT_ROTATE_STATS</TD>
+<TD ALIGN="LEFT">SIGUSR2</TD>
+<TD ALIGN="LEFT">rotate stats</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SIGNAL_SNORT_READ_ATTR_TBL</TD>
+<TD ALIGN="LEFT">SIGURG</TD>
+<TD ALIGN="LEFT">reload attribute table</TD>
+</TR>
+<TR><TD ALIGN="LEFT">SIGNAL_SNORT_CHILD_READY</TD>
+<TD ALIGN="LEFT">SIGCHLD</TD>
+<TD ALIGN="LEFT">internal use in daemon mode</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html568"
+  HREF="node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html564"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html558"
+  HREF="node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html566"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html569"
+  HREF="node14.html">1.12 More Information</A>
+<B> Up:</B> <A NAME="tex2html565"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html559"
+  HREF="node12.html">1.10 Control socket</A>
+ &nbsp; <B>  <A NAME="tex2html567"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node13.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+</HTML>

@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node35.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+<HEAD>
+<TITLE>3.8 Rule Thresholds</TITLE>
+<META NAME="description" CONTENT="3.8 Rule Thresholds">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node36.html">
+<LINK REL="previous" HREF="node34.html">
+<LINK REL="up" HREF="node27.html">
+<LINK REL="next" HREF="node36.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1484"
+  HREF="node36.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1480"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1474"
+  HREF="node34.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1482"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1485"
+  HREF="node36.html">3.9 Writing Good Rules</A>
+<B> Up:</B> <A NAME="tex2html1481"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Previous:</B> <A NAME="tex2html1475"
+  HREF="node34.html">3.7 Post-Detection Rule Options</A>
+ &nbsp; <B>  <A NAME="tex2html1483"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><UL>
+<LI><A NAME="tex2html1486"
+  HREF="node35.html#SECTION00480100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">0</SPAN>.<SPAN CLASS="arabic">1</SPAN> Examples</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00480000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN> Rule Thresholds</A>
+</H1>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+Rule thresholds are deprecated and will not be supported in a future release.
+Use <TT>detection_filter</TT>s (<A HREF="node34.html#detection_filter"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>) within rules, or
+<TT>event_filter</TT>s (<A HREF="node19.html#event_filtering"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>) as standalone configurations
+instead.
+        
+        </b></td></tr></table></p>
+
+<P>
+<TT>threshold</TT> can be included as part of a rule, or you can use standalone
+thresholds that reference the generator and SID they are applied to. There is
+no functional difference between adding a threshold to a rule, or using a
+standalone threshold applied to the same rule.   There is a logical difference.
+Some rules may only make sense with a threshold.  These should incorporate the
+threshold into the rule.  For instance, a rule for detecting a too many login
+password attempts may require more than 5 attempts.  This can be done using the
+`limit' type of threshold.  It makes sense that the threshold feature is an
+integral part of this rule.
+
+<P>
+
+<H4><A NAME="SECTION00480010000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">0</SPAN>.<SPAN CLASS="arabic">0</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H4>
+
+<P>
+<PRE>
+    threshold: \
+        type &lt;limit|threshold|both&gt;, \
+        track &lt;by_src|by_dst&gt;, \
+        count &lt;c&gt;, seconds &lt;s&gt;;
+</PRE>
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<TR><TH ALIGN="LEFT"><SPAN  CLASS="textbf">Option</SPAN></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=324><SPAN  CLASS="textbf">Description</SPAN></TH>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>type limit|threshold|both</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+type <TT>limit</TT> alerts on the 1st m events during the time interval, then
+ignores events for the rest of the time interval.  Type <TT>threshold</TT>
+alerts every m times we see this event during the time interval.  Type
+<TT>both</TT> alerts once per time interval after seeing m occurrences of the
+event, then ignores any additional events during the time interval.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>track by_src|by_dst</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+rate is tracked either by source IP address, or destination IP address.  This
+means count is maintained for each unique source IP addresses, or for each
+unique destination IP addresses.  Ports or anything else are not tracked.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>count c</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+number of rule matching in s seconds that will cause <TT>event_filter</TT>
+limit to be exceeded.  <TT>c</TT> must be nonzero value.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>seconds s</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+time period over which <TT>count</TT> is accrued.  <TT>s</TT> must be nonzero
+value.</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+
+<H3><A NAME="SECTION00480100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">0</SPAN>.<SPAN CLASS="arabic">1</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule logs the first event of this SID every 60 seconds.
+
+<P>
+<PRE>
+    alert tcp $external_net any -&gt; $http_servers $http_ports \
+        (msg:"web-misc robots.txt access"; flow:to_server, established; \
+        uricontent:"/robots.txt"; nocase; reference:nessus,10302; \
+        classtype:web-application-activity; threshold:type limit, track \
+        by_src, count 1 , seconds 60; sid:1000852; rev:1;)
+</PRE>
+
+<P>
+This rule logs every 10th event on this SID during a 60 second interval. So if
+less than 10 events occur in 60 seconds, nothing gets logged.  Once an event is
+logged, a new time period starts for type=threshold.
+
+<P>
+<PRE>
+    alert tcp $external_net any -&gt; $http_servers $http_ports \
+        (msg:"web-misc robots.txt access"; flow:to_server, established; \
+        uricontent:"/robots.txt"; nocase; reference:nessus,10302; \
+        classtype:web-application-activity; threshold:type threshold, \
+        track by_dst, count 10 , seconds 60 ; sid:1000852; rev:1;)
+</PRE>
+
+<P>
+This rule logs at most one event every 60 seconds if at least 10 events on this
+SID are fired.
+
+<P>
+<PRE>
+    alert tcp $external_net any -&gt; $http_servers $http_ports \
+        (msg:"web-misc robots.txt access"; flow:to_server, established; \
+        uricontent:"/robots.txt"; nocase; reference:nessus,10302; \
+        classtype:web-application-activity; threshold:type both, track \
+        by_dst, count 10, seconds 60; sid:1000852; rev:1;)
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1484"
+  HREF="node36.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1480"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1474"
+  HREF="node34.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1482"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1485"
+  HREF="node36.html">3.9 Writing Good Rules</A>
+<B> Up:</B> <A NAME="tex2html1481"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Previous:</B> <A NAME="tex2html1475"
+  HREF="node34.html">3.7 Post-Detection Rule Options</A>
+ &nbsp; <B>  <A NAME="tex2html1483"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node35.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>

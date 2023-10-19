@@ -1,0 +1,1052 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node21.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:44 GMT -->
+<HEAD>
+<TITLE>2.6 Output Modules</TITLE>
+<META NAME="description" CONTENT="2.6 Output Modules">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node22.html">
+<LINK REL="previous" HREF="node20.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node22.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html908"
+  HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html904"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html898"
+  HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html906"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html909"
+  HREF="node22.html">2.7 Host Attribute Table</A>
+<B> Up:</B> <A NAME="tex2html905"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html899"
+  HREF="node20.html">2.5 Performance Profiling</A>
+ &nbsp; <B>  <A NAME="tex2html907"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html910"
+  HREF="node21.html#SECTION00361000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> alert_syslog</A>
+<UL>
+<LI><A NAME="tex2html911"
+  HREF="node21.html#SECTION00361100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Available Keywords</A>
+<LI><A NAME="tex2html912"
+  HREF="node21.html#SECTION00361200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Format</A>
+<LI><A NAME="tex2html913"
+  HREF="node21.html#SECTION00361300000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html914"
+  HREF="node21.html#SECTION00362000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> alert_fast</A>
+<UL>
+<LI><A NAME="tex2html915"
+  HREF="node21.html#SECTION00362100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html916"
+  HREF="node21.html#SECTION00362200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html917"
+  HREF="node21.html#SECTION00363000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> alert_full</A>
+<UL>
+<LI><A NAME="tex2html918"
+  HREF="node21.html#SECTION00363100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html919"
+  HREF="node21.html#SECTION00363200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html920"
+  HREF="node21.html#SECTION00364000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN> alert_unixsock</A>
+<UL>
+<LI><A NAME="tex2html921"
+  HREF="node21.html#SECTION00364100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html922"
+  HREF="node21.html#SECTION00364200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html923"
+  HREF="node21.html#SECTION00365000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">5</SPAN> log_tcpdump</A>
+<UL>
+<LI><A NAME="tex2html924"
+  HREF="node21.html#SECTION00365100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html925"
+  HREF="node21.html#SECTION00365200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html926"
+  HREF="node21.html#SECTION00366000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">6</SPAN> csv</A>
+<UL>
+<LI><A NAME="tex2html927"
+  HREF="node21.html#SECTION00366100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html928"
+  HREF="node21.html#SECTION00366200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html929"
+  HREF="node21.html#SECTION00367000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN> unified 2</A>
+<UL>
+<LI><A NAME="tex2html930"
+  HREF="node21.html#SECTION00367100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html931"
+  HREF="node21.html#SECTION00367200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+<LI><A NAME="tex2html932"
+  HREF="node21.html#SECTION00367300000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> Extra Data Configurations</A>
+<LI><A NAME="tex2html933"
+  HREF="node21.html#SECTION00367400000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Reading Unified2 Files</A>
+<LI><A NAME="tex2html934"
+  HREF="node21.html#SECTION00367500000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> U2SpewFoo</A>
+<LI><A NAME="tex2html935"
+  HREF="node21.html#SECTION00367600000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN> U2Boat</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html936"
+  HREF="node21.html#SECTION00368000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">8</SPAN> log null</A>
+<UL>
+<LI><A NAME="tex2html937"
+  HREF="node21.html#SECTION00368100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html938"
+  HREF="node21.html#SECTION00368200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html939"
+  HREF="node21.html#SECTION00369000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">9</SPAN> Log Limits</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00360000000000000000"></A>
+<A NAME="output_config"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN> Output Modules
+</H1>
+
+<P>
+Output modules are new as of version 1.6. They allow Snort to be much more
+flexible in the formatting and presentation of output to its users. The output
+modules are run when the alert or logging subsystems of Snort are called, after
+the preprocessors and detection engine.  The format of the directives in the
+config file is very similar to that of the preprocessors.
+
+<P>
+Multiple output plugins may be specified in the Snort configuration file. When
+multiple plugins of the same type (log, alert) are specified, they are stacked
+and called in sequence when an event occurs. As with the standard logging and
+alerting systems, output plugins send their data to /var/log/snort by default
+or to a user directed directory (using the -l command line switch).
+
+<P>
+Output modules are loaded at runtime by specifying the output keyword in the
+config file:
+
+<P>
+<PRE>
+    output &lt;name&gt;: &lt;options&gt;
+</PRE>
+
+<P>
+<PRE>
+    output alert_syslog: log_auth log_alert
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00361000000000000000"></A>
+<A NAME="alert_syslog_label"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> alert_syslog
+</H2>
+
+<P>
+This module sends alerts to the syslog facility (much like the -s command line
+switch). This module also allows the user to specify the logging facility and
+priority within the Snort config file, giving users greater flexibility in
+logging alerts.
+
+<P>
+
+<H3><A NAME="SECTION00361100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Available Keywords</A>
+</H3>
+
+<P>
+
+<H4><A NAME="SECTION00361110000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Facilities</A>
+</H4>
+
+<P>
+
+<UL>
+<LI><TT>log_auth</TT> 
+</LI>
+<LI><TT>log_authpriv</TT> 
+</LI>
+<LI><TT>log_daemon</TT>
+</LI>
+<LI><TT>log_local0</TT> 
+</LI>
+<LI><TT>log_local1</TT>
+</LI>
+<LI><TT>log_local2</TT>
+</LI>
+<LI><TT>log_local3</TT>
+</LI>
+<LI><TT>log_local4</TT>
+</LI>
+<LI><TT>log_local5</TT>
+</LI>
+<LI><TT>log_local6</TT>
+</LI>
+<LI><TT>log_local7</TT>
+</LI>
+<LI><TT>log_user</TT>
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION00361120000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Priorities</A>
+</H4>
+
+<P>
+
+<UL>
+<LI><TT>log_emerg</TT> 
+</LI>
+<LI><TT>log_alert</TT>
+</LI>
+<LI><TT>log_crit</TT>
+</LI>
+<LI><TT>log_err</TT>
+</LI>
+<LI><TT>log_warning</TT> 
+</LI>
+<LI><TT>log_notice</TT>
+</LI>
+<LI><TT>log_info</TT>
+</LI>
+<LI><TT>log_debug</TT>
+</LI>
+</UL>
+
+<P>
+
+<H4><A NAME="SECTION00361130000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Options</A>
+</H4>
+
+<P>
+
+<UL>
+<LI><TT>log_cons</TT> 
+</LI>
+<LI><TT>log_ndelay</TT>
+</LI>
+<LI><TT>log_perror</TT>
+</LI>
+<LI><TT>log_pid</TT>
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00361200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    alert_syslog: \
+        &lt;facility&gt; &lt;priority&gt; &lt;options&gt;
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+As WIN32 does not run syslog servers locally by default, a hostname and port
+can be passed as options.  The default host is 127.0.0.1.  The default port is
+514.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+<PRE>
+    output alert_syslog: \
+        [host=&lt;hostname[:&lt;port&gt;],] \
+        &lt;facility&gt; &lt;priority&gt; &lt;options&gt;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00361300000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    output alert_syslog: host=10.1.1.1:514, &lt;facility&gt; &lt;priority&gt; &lt;options&gt;
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00362000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> alert_fast</A>
+</H2>
+
+<P>
+This will print Snort alerts in a quick one-line format to a specified output
+file. It is a faster alerting method than full alerts because it doesn't need
+to print all of the packet headers to the output file and because it logs to
+only 1 file.
+
+<P>
+
+<H3><A NAME="SECTION00362100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    output alert_fast: [&lt;filename&gt; ["packet"] [&lt;limit&gt;]]
+    &lt;limit&gt; ::= &lt;number&gt;[('G'|'M'|K')]
+</PRE>
+
+<P>
+
+<UL>
+<LI><TT>filename</TT>: the name of the log file.  The default name is
+<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>logdir<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>/alert.  You may specify "stdout" for terminal output.  The name may
+include an absolute or relative path.
+
+<P>
+</LI>
+<LI><TT>packet</TT>: this option will cause multiline entries with full
+packet headers to be logged.  By default, only brief single-line entries are
+logged.
+
+<P>
+</LI>
+<LI><TT>limit</TT>: an optional limit on file size which defaults to 128 MB.  
+The minimum is 1 KB.  See <A HREF="#Log_Limits"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information.
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00362200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    output alert_fast: alert.fast
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00363000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> alert_full</A>
+</H2>
+
+<P>
+This will print Snort alert messages with full packet headers. The alerts will
+be written in the default logging directory (/var/log/snort) or in the logging
+directory specified at the command line.
+
+<P>
+Inside the logging directory, a directory will be created per IP.  These files
+will be decoded packet dumps of the packets that triggered the alerts. The
+creation of these files slows Snort down considerably.  This output method is
+discouraged for all but the lightest traffic situations.
+
+<P>
+
+<H3><A NAME="SECTION00363100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    output alert_full: [&lt;filename&gt; [&lt;limit&gt;]]
+    &lt;limit&gt; ::= &lt;number&gt;[('G'|'M'|K')]
+</PRE>
+
+<P>
+
+<UL>
+<LI><TT>filename</TT>: the name of the log file.  The default name is
+<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>logdir<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>/alert.  You may specify "stdout" for terminal output.  The name may
+include an absolute or relative path.
+
+<P>
+</LI>
+<LI><TT>limit</TT>: an optional limit on file size which defaults to 128 MB.  
+The minimum is 1 KB.  See <A HREF="#Log_Limits"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information.
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00363200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    output alert_full: alert.full
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00364000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN> alert_unixsock</A>
+</H2>
+
+<P>
+Sets up a UNIX domain socket and sends alert reports to it. External
+programs/processes can listen in on this socket and receive Snort alert and
+packet data in real time.
+
+<P>
+
+<H3><A NAME="SECTION00364100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    alert_unixsock
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00364200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    output alert_unixsock
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+On FreeBSD, the default <TT>sysctl</TT> value for <TT>net.local.dgram.recvspace</TT>
+is too low for <TT>alert_unixsock</TT> datagrams and you will likely not receive any
+data.  You can change this value after booting by running:
+<PRE>
+$ sudo sysctl net.local.dgram.recvspace=100000
+</PRE>
+To have this value set on each boot automatically, add the following to <TT>/etc/sysctl.conf</TT>:
+<PRE>
+net.local.dgram.recvspace=100000
+</PRE>
+Note that the value of 100000 may be slightly generous, but the value should be at least 65864.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION00365000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">5</SPAN> log_tcpdump</A>
+</H2>
+
+<P>
+The log_tcpdump module logs packets to a tcpdump-formatted file.  This is
+useful for performing post-process analysis on collected traffic with the vast
+number of tools that are available for examining tcpdump-formatted files.
+
+<P>
+
+<H3><A NAME="SECTION00365100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    output log_tcpdump: [&lt;filename&gt; [&lt;limit&gt;]]
+    &lt;limit&gt; ::= &lt;number&gt;[('G'|'M'|K')]
+</PRE>
+
+<P>
+
+<UL>
+<LI><TT>filename</TT>: the name of the log file.  The default name is
+<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>logdir<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>/snort.log.  The name may include an absolute or relative path.  A
+UNIX timestamp is appended to the filename.
+
+<P>
+</LI>
+<LI><TT>limit</TT>: an optional limit on file size which defaults to 128 MB.
+When a sequence of packets is to be logged, the aggregate size is used to test
+the rollover condition.  See <A HREF="#Log_Limits"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information.
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00365200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    output log_tcpdump: snort.log
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00366000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">6</SPAN> csv</A>
+</H2>
+
+<P>
+The csv output plugin allows alert data to be written in a format easily
+importable to a database.  The output fields and their order may be customized.
+
+<P>
+
+<H3><A NAME="SECTION00366100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    output alert_csv: [&lt;filename&gt; [&lt;format&gt; [&lt;limit&gt;]]]
+    &lt;format&gt; ::= "default"|&lt;list&gt;
+    &lt;list&gt; ::= &lt;field&gt;(,&lt;field&gt;)*
+    &lt;field&gt; ::= "dst"|"src"|"ttl" ...
+    &lt;limit&gt; ::= &lt;number&gt;[('G'|'M'|K')]
+</PRE>
+
+<P>
+
+<UL>
+<LI><TT>filename</TT>: the name of the log file.  The default name is
+<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>logdir<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>/alert.csv.  You may specify "stdout" for terminal output.  The name
+may include an absolute or relative path.
+
+<P>
+</LI>
+<LI><TT>format</TT>: The list of formatting options is below. If the
+formatting option is "default", the output is in the order of the formatting
+options listed.
+
+<P>
+
+<UL>
+<LI><TT>timestamp</TT>
+</LI>
+<LI><TT>sig_generator</TT>
+</LI>
+<LI><TT>sig_id</TT>
+</LI>
+<LI><TT>sig_rev</TT>
+</LI>
+<LI><TT>msg</TT>
+</LI>
+<LI><TT>proto</TT>
+</LI>
+<LI><TT>src</TT>
+</LI>
+<LI><TT>srcport</TT>
+</LI>
+<LI><TT>dst</TT>
+</LI>
+<LI><TT>dstport</TT>
+</LI>
+<LI><TT>ethsrc</TT>
+</LI>
+<LI><TT>ethdst</TT>
+</LI>
+<LI><TT>ethlen</TT>
+</LI>
+<LI><TT>tcpflags</TT>
+</LI>
+<LI><TT>tcpseq</TT>
+</LI>
+<LI><TT>tcpack</TT>
+</LI>
+<LI><TT>tcplen</TT>
+</LI>
+<LI><TT>tcpwindow</TT>
+</LI>
+<LI><TT>ttl</TT>
+</LI>
+<LI><TT>tos</TT>
+</LI>
+<LI><TT>id</TT>
+</LI>
+<LI><TT>dgmlen</TT>
+</LI>
+<LI><TT>iplen</TT>
+</LI>
+<LI><TT>icmptype</TT>
+</LI>
+<LI><TT>icmpcode</TT>
+</LI>
+<LI><TT>icmpid</TT>
+</LI>
+<LI><TT>icmpseq</TT>
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI><TT>limit</TT>: an optional limit on file size which defaults to 128 MB.  
+The minimum is 1 KB.  See <A HREF="#Log_Limits"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information.
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00366200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    output alert_csv: /var/log/alert.csv default
+
+    output alert_csv: /var/log/alert.csv timestamp, msg
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00367000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN> unified 2</A>
+</H2>
+
+<P>
+Unified2 can work in one of three modes, packet logging, alert logging, or true
+unified logging.  Packet logging includes a capture of the entire packet and is
+specified with <TT>log_unified2</TT>.  Likewise, alert logging will only log
+events and is specified with <TT>alert_unified2</TT>.  To include both logging
+styles in a single, unified file, simply specify <TT>unified2</TT>.
+
+<P>
+When MPLS support is turned on, MPLS labels can be included in unified2 events.
+Use option <TT>mpls_event_types</TT> to enable this. If option
+<TT>mpls_event_types</TT> is not used, then MPLS labels will be not be
+included in unified2 events.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+By default, unified 2 files have the file creation time (in Unix Epoch format)
+appended to each file when it is created.  
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION00367100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    output alert_unified2: \
+        filename &lt;base filename&gt; [, &lt;limit &lt;size in MB&gt;] [, nostamp] [, mpls_event_types] \
+        [, vlan_event_types]
+
+    output log_unified2: \
+        filename &lt;base filename&gt; [, &lt;limit &lt;size in MB&gt;] [, nostamp]
+
+    output unified2: \
+        filename &lt;base file name&gt; [, &lt;limit &lt;size in MB&gt;] [, nostamp] [, mpls_event_types] \
+        [, vlan_event_types]
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00367200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    output alert_unified2: filename snort.alert, limit 128, nostamp
+    output log_unified2: filename snort.log, limit 128, nostamp
+    output unified2: filename merged.log, limit 128, nostamp
+    output unified2: filename merged.log, limit 128, nostamp, mpls_event_types
+    output unified2: filename merged.log, limit 128, nostamp, vlan_event_types
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00367300000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> Extra Data Configurations</A>
+</H3>
+
+<P>
+Unified2 also has logging support for various extra data. The
+  following configuration items will enable these extra data logging
+  facilities.
+
+<P>
+<PRE>
+config log_ipv6_extra_data
+</PRE>
+
+<P>
+This option enables Snort to log IPv6 source and destination
+address as unified2 extra data events.
+
+<P>
+See section <A HREF="node16.html#Config"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information
+
+<P>
+<PRE>
+enable_xff
+</PRE>
+
+<P>
+This option enables HTTP Inspect to parse and log the original
+client IP present in the X-Forwarded-For, True-Client-IP, or custom
+HTTP request headers along with the generated events.
+
+<P>
+See section <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information
+
+<P>
+<PRE>
+log_uri
+</PRE>
+
+<P>
+This option enables HTTP Inspect to parse and log the URI data
+from the HTTP request and log it along with all the generated
+events for that session.
+
+<P>
+See section <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information
+
+<P>
+<PRE>
+log_hostname
+</PRE>
+
+<P>
+This option enables HTTP Inspect to parse and log the Host header
+data from the HTTP request and log it along with all the generated
+events for that session.
+
+<P>
+See section <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information
+
+<P>
+<PRE>
+log_hostname
+</PRE>
+
+<P>
+This option enables HTTP Inspect to parse and log the Host header
+data from the HTTP request and log it along with all the generated
+events for that session.
+
+<P>
+See section <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information
+
+<P>
+<PRE>
+log_mailfrom
+</PRE>
+
+<P>
+This option enables SMTP preprocessor to parse and log the senders
+email address extracted from the "MAIL FROM" command along with
+all the generated events for that session.
+
+<P>
+See section <A HREF="node17.html#SMTP"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information
+
+<P>
+<PRE>
+log_rcptto
+</PRE>
+
+<P>
+This option enables SMTP preprocessor to parse and log the
+recipients email address extracted from the "RCPT TO" command
+along with all the generated events for that session.
+
+<P>
+See section <A HREF="node17.html#SMTP"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information
+
+<P>
+<PRE>
+log_filename
+</PRE>
+
+<P>
+This option enables SMTP preprocessor to parse and log the MIME
+attachment filenames extracted from the Content-Disposition header
+within the MIME body along with all the generated events for that
+session.
+
+<P>
+See section <A HREF="node17.html#SMTP"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information
+
+<P>
+<PRE>
+log_email_hdrs
+</PRE>
+
+<P>
+This option enables SMTP preprocessor to parse and log the SMTP
+email headers extracted from the SMTP data along with all the
+generated events for that session.
+
+<P>
+See section <A HREF="node17.html#SMTP"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information
+
+<P>
+
+<H3><A NAME="SECTION00367400000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Reading Unified2 Files</A>
+</H3>
+
+<P>
+
+<H3><A NAME="SECTION00367500000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> U2SpewFoo</A>
+</H3>
+
+<P>
+U2SpewFoo is a lightweight tool for dumping the contents of unified2 files to stdout.
+
+<P>
+<SPAN  CLASS="textbf">E</SPAN>xample usage:
+
+<P>
+<PRE>    
+    u2spewfoo snort.log
+</PRE>
+
+<P>
+<SPAN  CLASS="textbf">E</SPAN>xample Output:
+
+<P>
+<PRE>
+(Event)
+    sensor id: 0    event id: 4 event second: 1299698138    event microsecond: 146591
+    sig id: 1   gen id: 1   revision: 0  classification: 0
+    priority: 0 ip source: 10.1.2.3 ip destination: 10.9.8.7
+    src port: 60710 dest port: 80   protocol: 6 impact_flag: 0  blocked: 0
+
+Packet
+    sensor id: 0    event id: 4 event second: 1299698138
+    packet second: 1299698138   packet microsecond: 146591
+    linktype: 1 packet_length: 54
+[    0] 02 09 08 07 06 05 02 01 02 03 04 05 08 00 45 00  ..............E.
+[   16] 00 28 00 06 00 00 40 06 5C B7 0A 01 02 03 0A 09  .(....@.\.......
+[   32] 08 07 ED 26 00 50 00 00 00 62 00 00 00 2D 50 10  ...&amp;.P...b...-P.
+[   48] 01 00 A2 BB 00 00                                ......
+
+(ExtraDataHdr)
+    event type: 4   event length: 33
+
+(ExtraData)
+    sensor id: 0    event id: 2 event second: 1299698138
+    type: 9 datatype: 1 bloblength: 9   HTTP URI: /
+
+(ExtraDataHdr)
+    event type: 4   event length: 78
+
+(ExtraData)
+    sensor id: 0    event id: 2 event second: 1299698138
+    type: 10    datatype: 1 bloblength: 12  HTTP Hostname: example.com
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00367600000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN> U2Boat</A>
+</H3>
+
+<P>
+U2boat is a tool for converting unified2 files into different formats.
+
+<P>
+Currently supported conversion formats are: pcap
+
+<P>
+<SPAN  CLASS="textbf">E</SPAN>xample usage:
+<PRE>
+    u2boat -t pcap &lt;infile&gt; &lt;outfile&gt;
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00368000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">8</SPAN> log null</A>
+</H2>
+
+<P>
+Sometimes it is useful to be able to create rules that will alert to certain
+types of traffic but will not cause packet log entries.  In Snort 1.8.2, the
+log_null plugin was introduced. This is equivalent to using the -n command
+line option but it is able to work within a ruletype.
+
+<P>
+
+<H3><A NAME="SECTION00368100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    output log_null
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00368200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    output log_null  # like using snort -n
+    
+    ruletype info {
+        type alert
+        output alert_fast: info.alert
+        output log_null
+    }
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00369000000000000000"></A>
+<A NAME="Log_Limits"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">9</SPAN> Log Limits
+</H2>
+
+<P>
+This section pertains to logs produced by <TT>alert_fast</TT>,
+<TT>alert_full</TT>, <TT>alert_csv</TT>, and <TT>log_tcpdump</TT>.
+<TT>unified2</TT> also may be given limits.  Those limits
+are described in the respective sections.
+
+<P>
+When a configured limit is reached, the current log is closed and a new log is
+opened with a UNIX timestamp appended to the configured log name.
+
+<P>
+Limits are configured as follows:
+
+<P>
+<PRE>
+    &lt;limit&gt; ::= &lt;number&gt;[(&lt;gb&gt;|&lt;mb&gt;|&lt;kb&gt;)]
+    &lt;gb&gt; ::= 'G'|'g'
+    &lt;mb&gt; ::= 'M'|'m'
+    &lt;kb&gt; ::= 'K'|'k'
+</PRE>
+
+<P>
+Rollover will occur at most once per second so if limit is too small for
+logging rate, limit will be exceeded.  Rollover works correctly if snort is
+stopped/restarted.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html908"
+  HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html904"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html898"
+  HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html906"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html909"
+  HREF="node22.html">2.7 Host Attribute Table</A>
+<B> Up:</B> <A NAME="tex2html905"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html899"
+  HREF="node20.html">2.5 Performance Profiling</A>
+ &nbsp; <B>  <A NAME="tex2html907"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node21.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:44 GMT -->
+</HTML>

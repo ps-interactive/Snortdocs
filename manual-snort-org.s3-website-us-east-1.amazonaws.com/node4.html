@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node4.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:20 GMT -->
+<HEAD>
+<TITLE>1.2 Sniffer Mode</TITLE>
+<META NAME="description" CONTENT="1.2 Sniffer Mode">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html425"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html421"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html415"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html423"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html426"
+  HREF="node5.html">1.3 Packet Logger Mode</A>
+<B> Up:</B> <A NAME="tex2html422"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html416"
+  HREF="node3.html">1.1 Getting Started</A>
+ &nbsp; <B>  <A NAME="tex2html424"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00220000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Sniffer Mode</A>
+</H1>
+
+<P>
+First, let's start with the basics. If you just want to print out the TCP/IP
+packet headers to the screen (i.e. sniffer mode), try this:
+
+<P>
+<PRE>
+    ./snort -v
+</PRE>
+
+<P>
+This command will run Snort and just show the IP and TCP/UDP/ICMP headers,
+nothing else. If you want to see the application data in transit, try the
+following:
+
+<P>
+<PRE>
+    ./snort -vd
+</PRE>
+
+<P>
+This instructs Snort to display the packet data as well as the headers.  If you
+want an even more descriptive display, showing the data link layer headers, do
+this:
+
+<P>
+<PRE>
+    ./snort -vde
+</PRE>
+
+<P>
+As an aside, notice that the command line switches can be listed separately or
+in a combined form. The last command could also be typed out as:
+
+<P>
+<PRE>
+    ./snort -d -v -e
+</PRE>
+
+<P>
+to produce the same result.
+
+<P>
+<BR><HR>
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node4.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:20 GMT -->
+</HTML>

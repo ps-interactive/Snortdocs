@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node10.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+<HEAD>
+<TITLE>1.8 Tunneling Protocol Support</TITLE>
+<META NAME="description" CONTENT="1.8 Tunneling Protocol Support">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html523"
+  HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html519"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html513"
+  HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html521"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html524"
+  HREF="node11.html">1.9 Miscellaneous</A>
+<B> Up:</B> <A NAME="tex2html520"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html514"
+  HREF="node9.html">1.7 Basic Output</A>
+ &nbsp; <B>  <A NAME="tex2html522"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html525"
+  HREF="node10.html#SECTION00281000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Multiple Encapsulations</A>
+<LI><A NAME="tex2html526"
+  HREF="node10.html#SECTION00282000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> Logging</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00280000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">8</SPAN> Tunneling Protocol Support</A>
+</H1>
+
+<P>
+Snort supports decoding of many tunneling protocols, including GRE, PPTP over GRE,
+MPLS, IP in IP, and ERSPAN, all of which are enabled by default.  
+
+<P>
+To disable support for any GRE related encapsulation, PPTP over GRE, IPv4/IPv6 over
+GRE, and ERSPAN, an extra configuration option is necessary:
+
+<P>
+<PRE>
+    $ ./configure --disable-gre
+</PRE>
+
+<P>
+To disable support for MPLS, an separate extra configuration option is necessary:
+
+<P>
+<PRE>
+    $ ./configure --disable-mpls
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00281000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Multiple Encapsulations</A>
+</H2>
+
+<P>
+Snort will not decode more than one encapsulation.  Scenarios such as
+
+<P>
+<PRE>
+    Eth IPv4 GRE IPv4 GRE IPv4 TCP Payload
+</PRE>
+
+<P>
+or
+
+<P>
+<PRE>
+    Eth IPv4 IPv6 IPv4 TCP Payload
+</PRE>
+
+<P>
+will not be handled and will generate a decoder alert.
+
+<P>
+
+<H2><A NAME="SECTION00282000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> Logging</A>
+</H2>
+
+<P>
+Currently, only the encapsulated part of the packet is logged, e.g.
+
+<P>
+<PRE>
+    Eth IP1 GRE IP2 TCP Payload
+</PRE>
+
+<P>
+gets logged as
+
+<P>
+<PRE>
+    Eth IP2 TCP Payload
+</PRE>
+
+<P>
+and
+
+<P>
+<PRE>
+    Eth IP1 IP2 TCP Payload
+</PRE>
+
+<P>
+gets logged as
+
+<P>
+<PRE>
+    Eth IP2 TCP Payload
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Decoding of PPTP, which utilizes GRE and PPP, is not currently supported on
+architectures that require word alignment such as SPARC.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+<BR><HR>
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node10.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+</HTML>

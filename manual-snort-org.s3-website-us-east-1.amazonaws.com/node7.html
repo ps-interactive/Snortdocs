@@ -1,0 +1,502 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node7.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+<HEAD>
+<TITLE>1.5 Packet Acquisition</TITLE>
+<META NAME="description" CONTENT="1.5 Packet Acquisition">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html465"
+  HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html461"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html455"
+  HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html463"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html466"
+  HREF="node8.html">1.6 Reading pcap files</A>
+<B> Up:</B> <A NAME="tex2html462"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html456"
+  HREF="node6.html">1.4 Network Intrusion Detection</A>
+ &nbsp; <B>  <A NAME="tex2html464"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html467"
+  HREF="node7.html#SECTION00251000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Configuration</A>
+<LI><A NAME="tex2html468"
+  HREF="node7.html#SECTION00252000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> pcap</A>
+<LI><A NAME="tex2html469"
+  HREF="node7.html#SECTION00253000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> AFPACKET</A>
+<LI><A NAME="tex2html470"
+  HREF="node7.html#SECTION00254000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> NFQ</A>
+<LI><A NAME="tex2html471"
+  HREF="node7.html#SECTION00255000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> IPQ</A>
+<LI><A NAME="tex2html472"
+  HREF="node7.html#SECTION00256000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN> IPFW</A>
+<LI><A NAME="tex2html473"
+  HREF="node7.html#SECTION00257000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">7</SPAN> Dump</A>
+<LI><A NAME="tex2html474"
+  HREF="node7.html#SECTION00258000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">8</SPAN> Statistics Changes</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00250000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN> Packet Acquisition</A>
+</H1>
+
+<P>
+Snort 2.9 introduces the DAQ, or Data Acquisition library, for packet I/O.  The
+DAQ replaces direct calls to libpcap functions with an abstraction layer that
+facilitates operation on a variety of hardware and software interfaces without
+requiring changes to Snort.  It is possible to select the DAQ type and mode
+when invoking Snort to perform pcap readback or inline operation, etc.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Some network cards have features which can affect Snort. Two of these features
+are named "Large Receive Offload" (lro) and "Generic Receive Offload" (gro). 
+With these features enabled, the network card performs packet reassembly 
+before they're processed by the kernel.
+
+<P>
+By default, Snort will truncate packets larger than the default snaplen of 1518
+bytes. In addition, LRO and GRO may cause issues with Stream target-based
+reassembly. We recommend that you turn off LRO and GRO. On linux systems, you can run:
+
+<P>
+<PRE>
+    $ ethtool -K eth1 gro off
+    $ ethtool -K eth1 lro off
+</PRE>
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION00251000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Configuration</A>
+</H2>
+
+<P>
+Assuming that you did not disable static modules or change the default DAQ
+type, you can run Snort just as you always did for file readback or sniffing an
+interface.  However, you can select and configure the DAQ when Snort is invoked
+as follows:
+
+<P>
+<PRE>
+    ./snort \
+        [--daq &lt;type&gt;] \
+        [--daq-mode &lt;mode&gt;] \
+        [--daq-dir &lt;dir&gt;] \
+        [--daq-var &lt;var&gt;]
+
+    config daq: &lt;type&gt;
+    config daq_dir: &lt;dir&gt;
+    config daq_var: &lt;var&gt;
+    config daq_mode: &lt;mode&gt;
+
+    &lt;type&gt; ::= pcap | afpacket | dump | nfq | ipq | ipfw
+    &lt;mode&gt; ::= read-file | passive | inline
+    &lt;var&gt; ::= arbitrary &lt;name&gt;=&lt;value&gt; passed to DAQ
+    &lt;dir&gt; ::= path where to look for DAQ module so's
+</PRE>
+
+<P>
+The DAQ type, mode, variable, and directory may be specified either via the 
+command line or in the conf file.  You may include as many variables and 
+directories as needed by repeating the arg / config.  DAQ type may be specified
+at most once in the conf and once on the command line; if configured in both
+places, the command line overrides the conf.
+
+<P>
+If the mode is not set explicitly, -Q will force it to inline, and if that
+hasn't been set, -r will force it to read-file, and if that hasn't been set,
+the mode defaults to passive.  Also, -Q and -daq-mode inline are allowed,
+since there is no conflict, but -Q and any other DAQ mode will cause a fatal
+error at start-up.
+
+<P>
+Note that if Snort finds multiple versions of a given library, the most recent
+version is selected.  This applies to static and dynamic versions of the same
+library.
+
+<P>
+<PRE>
+    ./snort --daq-list[=&lt;dir&gt;]
+    ./snort --daq-dir=&lt;dir&gt; --daq-list
+</PRE>
+
+<P>
+The above commands search the specified directories for DAQ modules and print
+type, version, and attributes of each.  This feature is not available in the
+conf.  Snort stops processing after parsing -daq-list so if you want to add
+one or more directories add -daq-dir options before -daq-list on the command
+line.  (Since the directory is optional to -daq-list, you must use an =
+without spaces for this option.)
+
+<P>
+
+<H2><A NAME="SECTION00252000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> pcap</A>
+</H2>
+
+<P>
+pcap is the default DAQ.  if snort is run w/o any DAQ arguments, it will
+operate as it always did using this module.  These are equivalent:
+
+<P>
+<PRE>
+    ./snort -i &lt;device&gt;
+    ./snort -r &lt;file&gt;
+
+    ./snort --daq pcap --daq-mode passive -i &lt;device&gt;
+    ./snort --daq pcap --daq-mode read-file -r &lt;file&gt;
+</PRE>
+
+<P>
+You can specify the buffer size pcap uses with:
+
+<P>
+<PRE>
+    ./snort --daq pcap --daq-var buffer_size=&lt;#bytes&gt;
+</PRE>
+
+<P>
+Note that the pcap DAQ does not count filtered packets.
+
+<P>
+
+<H2><A NAME="SECTION00253000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> AFPACKET</A>
+</H2>
+
+<P>
+afpacket functions similar to the memory mapped pcap DAQ but no external 
+library is required:
+
+<P>
+<PRE>
+    ./snort --daq afpacket -i &lt;device&gt;
+            [--daq-var buffer_size_mb=&lt;#MB&gt;]
+            [--daq-var debug]
+</PRE>
+
+<P>
+If you want to run afpacket in inline mode, you must set device to one or more
+interface pairs, where each member of a pair is separated by a single colon and 
+each pair is separated by a double colon like this:
+
+<P>
+<PRE>
+    eth0:eth1
+</PRE>
+
+<P>
+or this:
+
+<P>
+<PRE>
+    eth0:eth1::eth2:eth3
+</PRE>
+
+<P>
+By default, the afpacket DAQ allocates 128MB for packet memory.  You can change
+this with:
+
+<P>
+<PRE>
+    --daq-var buffer_size_mb=&lt;#MB&gt;
+</PRE>
+
+<P>
+Note that the total allocated is actually higher, here's why.  Assuming the
+default packet memory with a snaplen of 1518, the numbers break down like this:
+
+<P>
+
+<DL COMPACT>
+<DT> <B><SPAN CLASS="arabic">1</SPAN>.</B> 
+<DD>The frame size is 1518 (snaplen) + the size of the AFPacket header (66
+bytes) = 1584 bytes.
+
+<P>
+<DT> <B><SPAN CLASS="arabic">2</SPAN>.</B> 
+<DD>The number of frames is 128 MB / 1518 = 84733.
+
+<P>
+<DT> <B><SPAN CLASS="arabic">3</SPAN>.</B> 
+<DD>The smallest block size that can fit at least one frame is  4 KB = 4096 bytes
+  @ 2 frames per block.
+
+<P>
+<DT> <B><SPAN CLASS="arabic">4</SPAN>.</B> 
+<DD>As a result, we need 84733 / 2 = 42366 blocks.
+
+<P>
+<DT> <B><SPAN CLASS="arabic">5</SPAN>.</B> 
+<DD>Actual memory allocated is 42366 * 4 KB = 165.5 MB. 
+</DD>
+</DL> 
+<P>
+
+<H2><A NAME="SECTION00254000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> NFQ</A>
+</H2>
+
+<P>
+NFQ is the new and improved way to process iptables packets:
+
+<P>
+<PRE>
+    ./snort --daq nfq \
+        [--daq-var device=&lt;dev&gt;] \
+        [--daq-var proto=&lt;proto&gt;] \
+        [--daq-var queue=&lt;qid&gt;] \
+	[--daq-var queue_len=&lt;qlen&gt;]
+
+    &lt;dev&gt; ::= ip | eth0, etc; default is IP injection
+    &lt;proto&gt; ::= ip4 | ip6 | ip*; default is ip4
+    &lt;qid&gt; ::= 0..65535; default is 0
+    &lt;qlen&gt; ::= 0..65535; default is 0
+</PRE>
+
+<P>
+Notes on iptables can be found in the DAQ distro README.
+
+<P>
+
+<H2><A NAME="SECTION00255000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> IPQ</A>
+</H2>
+
+<P>
+IPQ is the old way to process iptables packets.  It replaces the inline version
+available in pre-2.9 versions built with this:
+
+<P>
+<PRE>
+    ./configure --enable-inline / -DGIDS
+</PRE>
+
+<P>
+Start the IPQ DAQ as follows:
+
+<P>
+<PRE>
+    ./snort --daq ipq \
+        [--daq-var device=&lt;dev&gt;] \
+        [--daq-var proto=&lt;proto&gt;] \
+
+    &lt;dev&gt; ::= ip | eth0, etc; default is IP injection
+    &lt;proto&gt; ::= ip4 | ip6; default is ip4
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00256000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN> IPFW</A>
+</H2>
+
+<P>
+IPFW is available for BSD systems.  It replaces the inline version available in
+pre-2.9 versions built with this:
+
+<P>
+<PRE>
+    ./configure --enable-ipfw / -DGIDS -DIPFW
+</PRE>
+
+<P>
+This command line argument is no longer supported:
+
+<P>
+<PRE>
+    ./snort -J &lt;port#&gt;
+</PRE>
+
+<P>
+Instead, start Snort like this:
+
+<P>
+<PRE>
+    ./snort --daq ipfw [--daq-var port=&lt;port&gt;]
+
+    &lt;port&gt; ::= 1..65535; default is 8000
+</PRE>
+
+<P>
+* IPFW only supports ip4 traffic.
+
+<P>
+
+<H2><A NAME="SECTION00257000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">7</SPAN> Dump</A>
+</H2>
+
+<P>
+The dump DAQ allows you to test the various inline mode features available in
+2.9 Snort like injection and normalization.
+
+<P>
+<PRE>
+    ./snort -i &lt;device&gt; --daq dump
+    ./snort -r &lt;pcap&gt; --daq dump
+</PRE>
+
+<P>
+By default a file named inline-out.pcap will be created containing all packets
+that passed through or were generated by snort.  You can optionally specify a
+different name.
+
+<P>
+<PRE>
+    ./snort --daq dump --daq-var file=&lt;name&gt;
+</PRE>
+
+<P>
+dump uses the pcap daq for packet acquisition.  It therefore does not count
+filtered packets.
+
+<P>
+Note that the dump DAQ inline mode is not an actual inline mode.  Furthermore,
+you will probably want to have the pcap DAQ acquire in another mode like this:
+
+<P>
+<PRE>
+    ./snort -r &lt;pcap&gt; -Q --daq dump --daq-var load-mode=read-file
+    ./snort -i &lt;device&gt; -Q --daq dump --daq-var load-mode=passive
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00258000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">8</SPAN> Statistics Changes</A>
+</H2>
+
+<P>
+The Packet Wire Totals and Action Stats sections of Snort's output include
+additional fields:
+
+<P>
+
+<UL>
+<LI><TT>Filtered</TT>
+count of packets filtered out and not handed to Snort for analysis.
+
+<P>
+</LI>
+<LI><TT>Injected</TT>
+packets Snort generated and sent, e.g. TCP resets.
+
+<P>
+</LI>
+<LI><TT>Allow</TT>
+packets Snort analyzed and did not take action on.
+
+<P>
+</LI>
+<LI><TT>Block</TT>
+packets Snort did not forward, e.g. due to a block rule.
+
+<P>
+</LI>
+<LI><TT>Replace</TT>
+packets Snort modified.
+
+<P>
+</LI>
+<LI><TT>Whitelist</TT>
+packets that caused Snort to allow a flow to pass w/o inspection by any
+analysis program.
+
+<P>
+</LI>
+<LI><TT>Blacklist</TT>
+packets that caused Snort to block a flow from passing.
+
+<P>
+</LI>
+<LI><TT>Ignore</TT>
+packets that caused Snort to allow a flow to pass w/o inspection by this
+instance of Snort.
+</LI>
+</UL>
+
+<P>
+The action stats show "blocked" packets instead of "dropped" packets to avoid
+confusion between dropped packets (those Snort didn't actually see) and blocked
+packets (those Snort did not allow to pass).
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html465"
+  HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html461"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html455"
+  HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html463"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html466"
+  HREF="node8.html">1.6 Reading pcap files</A>
+<B> Up:</B> <A NAME="tex2html462"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html456"
+  HREF="node6.html">1.4 Network Intrusion Detection</A>
+ &nbsp; <B>  <A NAME="tex2html464"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node7.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+</HTML>

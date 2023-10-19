@@ -1,0 +1,425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node9.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+<HEAD>
+<TITLE>1.7 Basic Output</TITLE>
+<META NAME="description" CONTENT="1.7 Basic Output">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node10.html">
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html506"
+  HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html502"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html496"
+  HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html504"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html507"
+  HREF="node10.html">1.8 Tunneling Protocol Support</A>
+<B> Up:</B> <A NAME="tex2html503"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html497"
+  HREF="node8.html">1.6 Reading pcap files</A>
+ &nbsp; <B>  <A NAME="tex2html505"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html508"
+  HREF="node9.html#SECTION00271000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Timing Statistics</A>
+<LI><A NAME="tex2html509"
+  HREF="node9.html#SECTION00272000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Packet I/O Totals</A>
+<LI><A NAME="tex2html510"
+  HREF="node9.html#SECTION00273000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> Protocol Statistics</A>
+<LI><A NAME="tex2html511"
+  HREF="node9.html#SECTION00274000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Snort Memory Statistics</A>
+<LI><A NAME="tex2html512"
+  HREF="node9.html#SECTION00275000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> Actions, Limits, and Verdicts</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00270000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN> Basic Output</A>
+</H1>
+
+<P>
+Snort does a lot of work and outputs some useful statistics when it is done.
+Many of these are self-explanatory.  The others are summarized below.  This
+does not include all possible output data, just the basics.
+
+<P>
+
+<H2><A NAME="SECTION00271000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Timing Statistics</A>
+</H2>
+
+<P>
+This section provides basic timing statistics.  It includes total seconds and
+packets as well as packet processing rates.  The rates are based on whole
+seconds, minutes, etc. and only shown when non-zero.
+
+<P>
+Example:
+
+<P>
+<PRE>
+===============================================================================
+Run time for packet processing was 175.856509 seconds
+Snort processed 3716022 packets.
+Snort ran for 0 days 0 hours 2 minutes 55 seconds
+   Pkts/min:      1858011
+   Pkts/sec:        21234
+===============================================================================
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00272000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Packet I/O Totals</A>
+</H2>
+
+<P>
+This section shows basic packet acquisition and injection peg counts obtained
+from the DAQ.  If you are reading pcaps, the totals are for all pcaps combined,
+unless you use -pcap-reset, in which case it is shown per pcap.
+
+<P>
+
+<UL>
+<LI>Outstanding indicates how many packets are buffered awaiting processing.
+The way this is counted varies per DAQ so the DAQ documentation should be
+consulted for more info.
+
+<P>
+</LI>
+<LI>Filtered packets are not shown for pcap DAQs.
+
+<P>
+</LI>
+<LI>Injected packets are the result of active response which can be
+configured for inline or passive modes.
+</LI>
+</UL>
+
+<P>
+Example:
+
+<P>
+<PRE>
+===============================================================================
+Packet I/O Totals:
+   Received:      3716022
+   Analyzed:      3716022 (100.000%)
+    Dropped:            0 (  0.000%)
+   Filtered:            0 (  0.000%)
+Outstanding:            0 (  0.000%)
+   Injected:            0
+===============================================================================
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00273000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> Protocol Statistics</A>
+</H2>
+
+<P>
+Traffic for all the protocols decoded by Snort is summarized in the breakdown
+section.  This traffic includes internal "pseudo-packets" if preprocessors such
+as frag3 and stream5 are enabled so the total may be greater than the number of
+analyzed packets in the packet I/O section.
+
+<P>
+
+<UL>
+<LI>Disc counts are discards due to basic encoding integrity flaws that
+prevents Snort from decoding the packet.
+
+<P>
+</LI>
+<LI>Other includes packets that contained an encapsulation that Snort doesn't
+decode.
+
+<P>
+</LI>
+<LI>S5 G 1/2 is the number of client/server sessions stream5 flushed due to
+cache limit, session timeout, session reset.
+</LI>
+</UL>
+
+<P>
+Example:
+
+<P>
+<PRE>
+===============================================================================
+Breakdown by protocol (includes rebuilt packets):
+        Eth:      3722347 (100.000%)
+       VLAN:            0 (  0.000%)
+        IP4:      1782394 ( 47.884%)
+       Frag:         3839 (  0.103%)
+       ICMP:        38860 (  1.044%)
+        UDP:       137162 (  3.685%)
+        TCP:      1619621 ( 43.511%)
+        IP6:      1781159 ( 47.850%)
+    IP6 Ext:      1787327 ( 48.016%)
+   IP6 Opts:         6168 (  0.166%)
+      Frag6:         3839 (  0.103%)
+      ICMP6:         1650 (  0.044%)
+       UDP6:       140446 (  3.773%)
+       TCP6:      1619633 ( 43.511%)
+     Teredo:           18 (  0.000%)
+    ICMP-IP:            0 (  0.000%)
+      EAPOL:            0 (  0.000%)
+    IP4/IP4:            0 (  0.000%)
+    IP4/IP6:            0 (  0.000%)
+    IP6/IP4:            0 (  0.000%)
+    IP6/IP6:            0 (  0.000%)
+        GRE:          202 (  0.005%)
+    GRE Eth:            0 (  0.000%)
+   GRE VLAN:            0 (  0.000%)
+    GRE IP4:            0 (  0.000%)
+    GRE IP6:            0 (  0.000%)
+GRE IP6 Ext:            0 (  0.000%)
+   GRE PPTP:          202 (  0.005%)
+    GRE ARP:            0 (  0.000%)
+    GRE IPX:            0 (  0.000%)
+   GRE Loop:            0 (  0.000%)
+       MPLS:            0 (  0.000%)
+        ARP:       104840 (  2.817%)
+        IPX:           60 (  0.002%)
+   Eth Loop:            0 (  0.000%)
+   Eth Disc:            0 (  0.000%)
+   IP4 Disc:            0 (  0.000%)
+   IP6 Disc:            0 (  0.000%)
+   TCP Disc:            0 (  0.000%)
+   UDP Disc:         1385 (  0.037%)
+  ICMP Disc:            0 (  0.000%)
+All Discard:         1385 (  0.037%)
+      Other:        57876 (  1.555%)
+Bad Chk Sum:        32135 (  0.863%)
+    Bad TTL:            0 (  0.000%)
+     S5 G 1:         1494 (  0.040%)
+     S5 G 2:         1654 (  0.044%)
+      Total:      3722347
+===============================================================================
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00274000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Snort Memory Statistics</A>
+</H2>
+On systems with mallinfo (3), you will see additional statistics. Check the man 
+page of mallinfo for details
+
+<P>
+Example:
+<PRE>
+===============================================================================
+Memory usage summary:
+  Total non-mmapped bytes (arena):       415481856
+  Bytes in mapped regions (hblkhd):      409612288
+  Total allocated space (uordblks):      92130384
+  Total free space (fordblks):           323351472
+  Topmost releasable block (keepcost):   3200
+===============================================================================
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00275000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> Actions, Limits, and Verdicts</A>
+</H2>
+
+<P>
+Action and verdict counts show what Snort did with the packets it analyzed.
+This information is only output in IDS mode (when snort is run with the
+<TT>-c &lt;conf&gt;</TT> option).
+
+<P>
+
+<UL>
+<LI>Alerts is the number of alert, and block actions processed as
+determined by the rule actions.  Here block includes block, drop, and reject
+actions.
+</LI>
+</UL>
+
+<P>
+Limits arise due to real world constraints on processing time and available
+memory.  These indicate potential actions that did not happen:
+
+<P>
+
+<UL>
+<LI>Match Limit counts rule matches were not processed due to the
+<TT>config detection: max_queue_events</TT> setting.  The default is 5.
+
+<P>
+</LI>
+<LI>Queue Limit counts events couldn't be stored in the event queue
+due to the <TT>config event_queue: max_queue</TT> setting.  The default is 8.
+
+<P>
+</LI>
+<LI>Log Limit counts events were not alerted due to the
+<TT>config event_queue: log</TT> setting.  The default is 3.
+
+<P>
+</LI>
+<LI>Event Limit counts events not alerted due to 
+<TT>event_filter</TT> limits.
+
+<P>
+</LI>
+<LI>Alert Limit counts events were not alerted because they already
+were triggered on the session.
+</LI>
+</UL>
+
+<P>
+Verdicts are rendered by Snort on each packet:
+
+<P>
+
+<UL>
+<LI>Allow = packets Snort analyzed and did not take action on. 
+
+<P>
+</LI>
+<LI>Block = packets Snort did not forward, e.g. due to a block rule.  "Block"
+is used instead of "Drop" to avoid confusion between dropped packets (those
+Snort didn't actually see) and blocked packets (those Snort did not allow to
+pass).
+
+<P>
+</LI>
+<LI>Replace = packets Snort modified, for example, due to normalization or
+replace rules.  This can only happen in inline mode with a compatible DAQ.
+
+<P>
+</LI>
+<LI>Whitelist = packets that caused Snort to allow a flow to pass w/o
+inspection by any analysis program.  Like blacklist, this is done by the DAQ or
+by Snort on subsequent packets.
+
+<P>
+</LI>
+<LI>Blacklist = packets that caused Snort to block a flow from passing.  This
+is the case when a block TCP rule fires.  If the DAQ supports this in hardware,
+no further packets will be seen by Snort for that session.  If not, snort will
+block each packet and this count will be higher.
+
+<P>
+</LI>
+<LI>Ignore = packets that caused Snort to allow a flow to pass w/o inspection
+by this instance of Snort.  Like blacklist, this is done by the DAQ or by Snort
+on subsequent packets.
+
+<P>
+</LI>
+<LI>Int Blklst = packets that are GTP, Teredo, 6in4 or 4in6 encapsulated that are
+being blocked.  These packets could get the Blacklist verdict if <TT>config
+tunnel_verdicts</TT> was set for the given protocol.  Note that these counts are
+output only if non-zero.  Also, this count is incremented on the first packet
+in the flow that alerts.  The alerting packet and all following packets on the
+flow will be counted under Block.
+
+<P>
+</LI>
+<LI>Int Whtlst = packets that are GTP, Teredo, 6in4 or 4in6 encapsulated that are
+being allowed.  These packets could get the Whitelist verdict if <TT>config
+tunnel_verdicts</TT> was set for the given protocol.  Note that these counts are
+output only if non-zero.  Also, this count is incremented for all packets on
+the flow starting with the alerting packet.
+</LI>
+</UL>
+
+<P>
+Example:
+
+<P>
+<PRE>
+===============================================================================
+Action Stats:
+     Alerts:            0 (  0.000%)
+     Logged:            0 (  0.000%)
+     Passed:            0 (  0.000%)
+Limits:
+      Match:            0
+      Queue:            0
+        Log:            0
+      Event:            0
+      Alert:            0
+Verdicts:
+      Allow:      3716022 (100.000%)
+      Block:            0 (  0.000%)
+    Replace:            0 (  0.000%)
+  Whitelist:            0 (  0.000%)
+  Blacklist:            0 (  0.000%)
+     Ignore:            0 (  0.000%)
+===============================================================================
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html506"
+  HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html502"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html496"
+  HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html504"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html507"
+  HREF="node10.html">1.8 Tunneling Protocol Support</A>
+<B> Up:</B> <A NAME="tex2html503"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html497"
+  HREF="node8.html">1.6 Reading pcap files</A>
+ &nbsp; <B>  <A NAME="tex2html505"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node9.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+</HTML>

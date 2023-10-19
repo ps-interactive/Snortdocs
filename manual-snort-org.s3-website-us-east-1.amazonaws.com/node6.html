@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node6.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:20 GMT -->
+<HEAD>
+<TITLE>1.4 Network Intrusion Detection System Mode</TITLE>
+<META NAME="description" CONTENT="1.4 Network Intrusion Detection System Mode">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html449"
+  HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html445"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html439"
+  HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html447"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html450"
+  HREF="node7.html">1.5 Packet Acquisition</A>
+<B> Up:</B> <A NAME="tex2html446"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html440"
+  HREF="node5.html">1.3 Packet Logger Mode</A>
+ &nbsp; <B>  <A NAME="tex2html448"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html451"
+  HREF="node6.html#SECTION00241000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> NIDS Mode Output Options</A>
+<LI><A NAME="tex2html452"
+  HREF="node6.html#SECTION00242000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Understanding Standard Alert Output</A>
+<LI><A NAME="tex2html453"
+  HREF="node6.html#SECTION00243000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> High Performance Configuration</A>
+<LI><A NAME="tex2html454"
+  HREF="node6.html#SECTION00244000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Changing Alert Order</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00240000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> Network Intrusion Detection System Mode</A>
+</H1>
+
+<P>
+To enable Network Intrusion Detection System (NIDS) mode so that you don't
+record every single packet sent down the wire, try this:
+
+<P>
+<PRE>
+    ./snort -dev -l ./log -h 192.168.1.0/24 -c snort.conf
+</PRE>
+
+<P>
+where <TT>snort.conf</TT> is the name of your snort configuration file. This will
+apply the rules configured in the <code>snort.conf</code> file to each packet to decide
+if an action based upon the rule type in the file should be taken. If you don't
+specify an output directory for the program, it will default to
+<code>/var/log/snort</code>.
+
+<P>
+One thing to note about the last command line is that if Snort is going to be
+used in a long term way as an IDS, the -v switch should be left off the command
+line for the sake of speed.  The screen is a slow place to write data to, and
+packets can be dropped while writing to the display.
+
+<P>
+It's also not necessary to record the data link headers for most applications,
+so you can usually omit the -e switch, too.
+
+<P>
+<PRE>
+    ./snort -d -h 192.168.1.0/24 -l ./log -c snort.conf
+</PRE>
+
+<P>
+This will configure Snort to run in its most basic NIDS form, logging packets
+that trigger rules specified in the <TT>snort.conf</TT> in plain ASCII to disk
+using a hierarchical directory structure (just like packet logger mode). 
+
+<P>
+
+<H2><A NAME="SECTION00241000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> NIDS Mode Output Options</A>
+</H2>
+
+<P>
+There are a number of ways to configure the output of Snort in NIDS mode. The
+default logging and alerting mechanisms are to log in decoded ASCII format and
+use full alerts. The full alert mechanism prints out the alert message in
+addition to the full packet headers. There are several other alert output modes
+available at the command line, as well as two logging facilities.
+
+<P>
+Alert modes are somewhat more complex. There are seven alert modes available at
+the command line: full, fast, socket, syslog, console, cmg, and none. Six of
+these modes are accessed with the -A command line switch.  These options are:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=389><B>Description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-A fast</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=389><P>
+Fast alert mode. Writes the alert in a simple format with a timestamp, alert
+message, source and destination IPs/ports.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-A full</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=389><P>
+Full alert mode. This is the default alert mode and will be used automatically
+if you do not specify a mode.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-A unsock</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=389><P>
+Sends alerts to a UNIX socket that another program can listen on.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-A none</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=389><P>
+Turns off alerting.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-A console</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=389><P>
+Sends &ldquo;fast-style&rdquo; alerts to the console (screen).</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>-A cmg</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=389><P>
+Generates &ldquo;cmg style&rdquo; alerts.</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Packets can be logged to their default decoded ASCII format or to a binary log
+file via the -b command line switch. To disable packet logging altogether, use
+the -N command line switch.
+
+<P>
+For output modes available through the configuration file, see Section
+<A HREF="node21.html#output_config"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Command line logging options override any output options specified in the
+configuration file. This allows debugging of configuration issues quickly via
+the command line.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+To send alerts to syslog, use the -s switch. The default facilities for the
+syslog alerting mechanism are LOG_AUTHPRIV and LOG_ALERT.  If you want to
+configure other facilities for syslog output, use the output plugin directives
+in snort.conf. See Section <A HREF="node21.html#alert_syslog_label"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more details on
+configuring syslog output.
+
+<P>
+For example, use the following command line to log to default (decoded ASCII)
+facility and send alerts to syslog: 
+
+<P>
+<PRE>
+    ./snort -c snort.conf -l ./log -h 192.168.1.0/24 -s
+</PRE>
+
+<P>
+As another example, use the following command line to log to the default
+facility in /var/log/snort and send alerts to a fast alert file: 
+
+<P>
+<PRE>
+    ./snort -c snort.conf -A fast -h 192.168.1.0/24
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00242000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Understanding Standard Alert Output</A>
+</H2>
+
+<P>
+When Snort generates an alert message, it will usually look like the following:
+
+<P>
+<PRE>	 
+    [**] [116:56:1] (snort_decoder): T/TCP Detected [**]
+</PRE>
+
+<P>
+The first number is the Generator ID, this tells the user what component of
+Snort generated this alert. For a list of GIDs, please read etc/generators in
+the Snort source. In this case, we know that this event came from the
+&ldquo;decode&rdquo; (116) component of Snort.
+
+<P>
+The second number is the Snort ID (sometimes referred to as Signature ID).
+For a list of preprocessor SIDs, please see etc/gen-msg.map.  Rule-based SIDs
+are written directly into the rules with the <SPAN  CLASS="textit">sid</SPAN> option. In this case,
+<SPAN  CLASS="textit">56</SPAN> represents a T/TCP event.
+
+<P>
+The third number is the revision ID. This number is primarily used when
+writing signatures, as each rendition of the rule should increment this number
+with the <SPAN  CLASS="textit">rev</SPAN> option.
+
+<P>
+
+<H2><A NAME="SECTION00243000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> High Performance Configuration</A>
+</H2>
+
+<P>
+If you want Snort to go <SPAN  CLASS="textit">fast</SPAN> (like keep up with a 1000 Mbps connection),
+you need to use unified2 logging and a unified2 log reader such as
+<SPAN  CLASS="textit">barnyard2</SPAN>.  This allows Snort to log alerts in a binary form as fast as
+possible while another program performs the slow actions, such as writing to a
+database.
+
+<P>
+If you want a text file that's easily parsed, but still somewhat fast, try
+using binary logging with the &ldquo;fast&rdquo; output mechanism. 
+
+<P>
+This will log packets in tcpdump format and produce minimal alerts. For
+example:
+
+<P>
+<PRE>
+    ./snort -b -A fast -c snort.conf
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00244000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Changing Alert Order</A>
+</H2>
+
+<P>
+The default way in which Snort applies its rules to packets may not be
+appropriate for all installations.  The Pass rules are applied first, then the
+Drop rules, then the Alert rules and finally, Log rules are applied. 
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+Sometimes an errant pass rule could cause alerts to not show up, in
+which case you can change the default ordering to allow Alert rules
+to be applied before Pass rules.  For more information, please refer
+to the <TT>-alert-before-pass</TT> option.
+        
+        </b></td></tr></table></p>
+
+<P>
+Several command line options are available to change the order in
+which rule actions are taken.
+
+<P>
+
+<UL>
+<LI><TT>-alert-before-pass</TT> option forces alert rules to take
+affect in favor of a pass rule.
+
+<P>
+</LI>
+<LI><TT>-treat-drop-as-alert</TT> causes drop and reject rules and 
+any associated alerts to be logged as alerts, rather then the normal 
+action.  This allows use of an inline policy with passive/IDS mode.
+The sdrop rules are not loaded.
+
+<P>
+</LI>
+<LI><TT>-process-all-events</TT> option causes Snort to process
+every event associated with a packet, while taking the actions based
+on the rules ordering.  Without this option (default case), only the
+events for the first action based on rules ordering are processed.
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Pass rules are special cases here, in that the event processing is terminated
+when a pass rule is encountered, regardless of the use of
+<TT>-process-all-events</TT>.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html449"
+  HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html445"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html439"
+  HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html447"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html450"
+  HREF="node7.html">1.5 Packet Acquisition</A>
+<B> Up:</B> <A NAME="tex2html446"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html440"
+  HREF="node5.html">1.3 Packet Logger Mode</A>
+ &nbsp; <B>  <A NAME="tex2html448"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node6.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+</HTML>

@@ -1,0 +1,3725 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node32.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:53 GMT -->
+<HEAD>
+<TITLE>3.5 Payload Detection Rule Options</TITLE>
+<META NAME="description" CONTENT="3.5 Payload Detection Rule Options">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node33.html">
+<LINK REL="previous" HREF="node31.html">
+<LINK REL="up" HREF="node27.html">
+<LINK REL="next" HREF="node33.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1233"
+  HREF="node33.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1229"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1223"
+  HREF="node31.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1231"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1234"
+  HREF="node33.html">3.6 Non-Payload Detection Rule</A>
+<B> Up:</B> <A NAME="tex2html1230"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Previous:</B> <A NAME="tex2html1224"
+  HREF="node31.html">3.4 General Rule Options</A>
+ &nbsp; <B>  <A NAME="tex2html1232"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1235"
+  HREF="node32.html#SECTION00451000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> content</A>
+<UL>
+<LI><A NAME="tex2html1236"
+  HREF="node32.html#SECTION00451100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1237"
+  HREF="node32.html#SECTION00451200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+<LI><A NAME="tex2html1238"
+  HREF="node32.html#SECTION00451300000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Changing content behavior</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1239"
+  HREF="node32.html#SECTION00452000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> protected_content</A>
+<UL>
+<LI><A NAME="tex2html1240"
+  HREF="node32.html#SECTION00452100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1241"
+  HREF="node32.html#SECTION00452200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1242"
+  HREF="node32.html#SECTION00453000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> hash</A>
+<UL>
+<LI><A NAME="tex2html1243"
+  HREF="node32.html#SECTION00453100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1244"
+  HREF="node32.html#SECTION00454000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> length</A>
+<UL>
+<LI><A NAME="tex2html1245"
+  HREF="node32.html#SECTION00454100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1246"
+  HREF="node32.html#SECTION00455000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> nocase</A>
+<UL>
+<LI><A NAME="tex2html1247"
+  HREF="node32.html#SECTION00455100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1248"
+  HREF="node32.html#SECTION00455200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1249"
+  HREF="node32.html#SECTION00456000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN> rawbytes</A>
+<UL>
+<LI><A NAME="tex2html1250"
+  HREF="node32.html#SECTION00456100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> format</A>
+<LI><A NAME="tex2html1251"
+  HREF="node32.html#SECTION00456200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1252"
+  HREF="node32.html#SECTION00457000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">7</SPAN> depth</A>
+<UL>
+<LI><A NAME="tex2html1253"
+  HREF="node32.html#SECTION00457100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1254"
+  HREF="node32.html#SECTION00458000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">8</SPAN> offset</A>
+<UL>
+<LI><A NAME="tex2html1255"
+  HREF="node32.html#SECTION00458100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1256"
+  HREF="node32.html#SECTION00458200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1257"
+  HREF="node32.html#SECTION00459000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">9</SPAN> distance</A>
+<UL>
+<LI><A NAME="tex2html1258"
+  HREF="node32.html#SECTION00459100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1259"
+  HREF="node32.html#SECTION00459200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1260"
+  HREF="node32.html#SECTION004510000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">10</SPAN> within</A>
+<UL>
+<LI><A NAME="tex2html1261"
+  HREF="node32.html#SECTION004510100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1262"
+  HREF="node32.html#SECTION004510200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1263"
+  HREF="node32.html#SECTION004511000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">11</SPAN> http_client_body</A>
+<UL>
+<LI><A NAME="tex2html1264"
+  HREF="node32.html#SECTION004511100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1265"
+  HREF="node32.html#SECTION004511200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1266"
+  HREF="node32.html#SECTION004512000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">12</SPAN> http_cookie</A>
+<UL>
+<LI><A NAME="tex2html1267"
+  HREF="node32.html#SECTION004512100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1268"
+  HREF="node32.html#SECTION004512200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1269"
+  HREF="node32.html#SECTION004513000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">13</SPAN> http_raw_cookie</A>
+<UL>
+<LI><A NAME="tex2html1270"
+  HREF="node32.html#SECTION004513100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1271"
+  HREF="node32.html#SECTION004513200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1272"
+  HREF="node32.html#SECTION004514000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">14</SPAN> http_header</A>
+<UL>
+<LI><A NAME="tex2html1273"
+  HREF="node32.html#SECTION004514100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1274"
+  HREF="node32.html#SECTION004514200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1275"
+  HREF="node32.html#SECTION004515000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">15</SPAN> http_raw_header</A>
+<UL>
+<LI><A NAME="tex2html1276"
+  HREF="node32.html#SECTION004515100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1277"
+  HREF="node32.html#SECTION004515200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1278"
+  HREF="node32.html#SECTION004516000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">16</SPAN> http_method</A>
+<UL>
+<LI><A NAME="tex2html1279"
+  HREF="node32.html#SECTION004516100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1280"
+  HREF="node32.html#SECTION004516200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1281"
+  HREF="node32.html#SECTION004517000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">17</SPAN> http_uri</A>
+<UL>
+<LI><A NAME="tex2html1282"
+  HREF="node32.html#SECTION004517100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1283"
+  HREF="node32.html#SECTION004517200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1284"
+  HREF="node32.html#SECTION004518000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">18</SPAN> http_raw_uri</A>
+<UL>
+<LI><A NAME="tex2html1285"
+  HREF="node32.html#SECTION004518100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1286"
+  HREF="node32.html#SECTION004518200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1287"
+  HREF="node32.html#SECTION004519000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">19</SPAN> http_stat_code</A>
+<UL>
+<LI><A NAME="tex2html1288"
+  HREF="node32.html#SECTION004519100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">19</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1289"
+  HREF="node32.html#SECTION004519200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">19</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1290"
+  HREF="node32.html#SECTION004520000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">20</SPAN> http_stat_msg</A>
+<UL>
+<LI><A NAME="tex2html1291"
+  HREF="node32.html#SECTION004520100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">20</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1292"
+  HREF="node32.html#SECTION004520200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">20</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1293"
+  HREF="node32.html#SECTION004521000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">21</SPAN> http_encode</A>
+<UL>
+<LI><A NAME="tex2html1294"
+  HREF="node32.html#SECTION004521100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">21</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1295"
+  HREF="node32.html#SECTION004521200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">21</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1296"
+  HREF="node32.html#SECTION004522000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">22</SPAN> fast_pattern</A>
+<UL>
+<LI><A NAME="tex2html1297"
+  HREF="node32.html#SECTION004522100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1298"
+  HREF="node32.html#SECTION004522200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1299"
+  HREF="node32.html#SECTION004523000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">23</SPAN> uricontent</A>
+<UL>
+<LI><A NAME="tex2html1300"
+  HREF="node32.html#SECTION004523100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">23</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1301"
+  HREF="node32.html#SECTION004524000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">24</SPAN> urilen</A>
+<UL>
+<LI><A NAME="tex2html1302"
+  HREF="node32.html#SECTION004524100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1303"
+  HREF="node32.html#SECTION004525000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">25</SPAN> isdataat</A>
+<UL>
+<LI><A NAME="tex2html1304"
+  HREF="node32.html#SECTION004525100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">25</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1305"
+  HREF="node32.html#SECTION004525200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">25</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1306"
+  HREF="node32.html#SECTION004526000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">26</SPAN> pcre</A>
+<UL>
+<LI><A NAME="tex2html1307"
+  HREF="node32.html#SECTION004526100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">26</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1308"
+  HREF="node32.html#SECTION004526200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">26</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1309"
+  HREF="node32.html#SECTION004527000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">27</SPAN> pkt_data</A>
+<UL>
+<LI><A NAME="tex2html1310"
+  HREF="node32.html#SECTION004527100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">27</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1311"
+  HREF="node32.html#SECTION004527200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">27</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1312"
+  HREF="node32.html#SECTION004528000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">28</SPAN> file_data</A>
+<UL>
+<LI><A NAME="tex2html1313"
+  HREF="node32.html#SECTION004528100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">28</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1314"
+  HREF="node32.html#SECTION004528200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">28</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1315"
+  HREF="node32.html#SECTION004529000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">29</SPAN> base64_decode</A>
+<UL>
+<LI><A NAME="tex2html1316"
+  HREF="node32.html#SECTION004529100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">29</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1317"
+  HREF="node32.html#SECTION004529200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">29</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1318"
+  HREF="node32.html#SECTION004530000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">30</SPAN> base64_data</A>
+<UL>
+<LI><A NAME="tex2html1319"
+  HREF="node32.html#SECTION004530100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">30</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1320"
+  HREF="node32.html#SECTION004530200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">30</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1321"
+  HREF="node32.html#SECTION004531000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">31</SPAN> byte_test</A>
+<UL>
+<LI><A NAME="tex2html1322"
+  HREF="node32.html#SECTION004531100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">31</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1323"
+  HREF="node32.html#SECTION004531200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">31</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1324"
+  HREF="node32.html#SECTION004532000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">32</SPAN> byte_jump</A>
+<UL>
+<LI><A NAME="tex2html1325"
+  HREF="node32.html#SECTION004532100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">32</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1326"
+  HREF="node32.html#SECTION004532200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">32</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1327"
+  HREF="node32.html#SECTION004533000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">33</SPAN> byte_extract</A>
+<UL>
+<LI><A NAME="tex2html1328"
+  HREF="node32.html#SECTION004533100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">33</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1329"
+  HREF="node32.html#SECTION004533200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">33</SPAN>.<SPAN CLASS="arabic">2</SPAN> Other options which use byte_extract variables</A>
+<LI><A NAME="tex2html1330"
+  HREF="node32.html#SECTION004533300000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">33</SPAN>.<SPAN CLASS="arabic">3</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1331"
+  HREF="node32.html#SECTION004534000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">34</SPAN> byte_math</A>
+<UL>
+<LI><A NAME="tex2html1332"
+  HREF="node32.html#SECTION004534100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">34</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1333"
+  HREF="node32.html#SECTION004534200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">34</SPAN>.<SPAN CLASS="arabic">2</SPAN> Other rule options which use byte_math result variable</A>
+<LI><A NAME="tex2html1334"
+  HREF="node32.html#SECTION004534300000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">34</SPAN>.<SPAN CLASS="arabic">3</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1335"
+  HREF="node32.html#SECTION004535000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">35</SPAN> ftpbounce</A>
+<UL>
+<LI><A NAME="tex2html1336"
+  HREF="node32.html#SECTION004535100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">35</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1337"
+  HREF="node32.html#SECTION004535200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">35</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1338"
+  HREF="node32.html#SECTION004536000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">36</SPAN> asn1</A>
+<UL>
+<LI><A NAME="tex2html1339"
+  HREF="node32.html#SECTION004536100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">36</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1340"
+  HREF="node32.html#SECTION004536200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">36</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1341"
+  HREF="node32.html#SECTION004537000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">37</SPAN> cvs</A>
+<UL>
+<LI><A NAME="tex2html1342"
+  HREF="node32.html#SECTION004537100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">37</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1343"
+  HREF="node32.html#SECTION004537200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">37</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1344"
+  HREF="node32.html#SECTION004538000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">38</SPAN> dce_iface</A>
+<LI><A NAME="tex2html1345"
+  HREF="node32.html#SECTION004539000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">39</SPAN> dce_opnum</A>
+<LI><A NAME="tex2html1346"
+  HREF="node32.html#SECTION004540000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">40</SPAN> dce_stub_data</A>
+<LI><A NAME="tex2html1347"
+  HREF="node32.html#SECTION004541000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">41</SPAN> sip_method</A>
+<LI><A NAME="tex2html1348"
+  HREF="node32.html#SECTION004542000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">42</SPAN> sip_stat_code</A>
+<LI><A NAME="tex2html1349"
+  HREF="node32.html#SECTION004543000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">43</SPAN> sip_header</A>
+<LI><A NAME="tex2html1350"
+  HREF="node32.html#SECTION004544000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">44</SPAN> sip_body</A>
+<LI><A NAME="tex2html1351"
+  HREF="node32.html#SECTION004545000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">45</SPAN> gtp_type</A>
+<LI><A NAME="tex2html1352"
+  HREF="node32.html#SECTION004546000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">46</SPAN> gtp_info</A>
+<LI><A NAME="tex2html1353"
+  HREF="node32.html#SECTION004547000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">47</SPAN> gtp_version</A>
+<LI><A NAME="tex2html1354"
+  HREF="node32.html#SECTION004548000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">48</SPAN> ssl_version</A>
+<LI><A NAME="tex2html1355"
+  HREF="node32.html#SECTION004549000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">49</SPAN> ssl_state</A>
+<LI><A NAME="tex2html1356"
+  HREF="node32.html#SECTION004550000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">50</SPAN> Payload Detection Quick Reference</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00450000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN> Payload Detection Rule Options</A>
+</H1>
+
+<H2><A NAME="SECTION00451000000000000000"></A>
+<A NAME="sub:content"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> content
+</H2>
+
+<P>
+The content keyword is one of the more important features of Snort.  It allows
+the user to set rules that search for specific content in the packet payload
+and trigger response based on that data. Whenever a content option pattern
+match is performed, the Boyer-Moore pattern match function is called and the
+(rather computationally expensive) test is performed against the packet
+contents. If data exactly matching the argument data string is contained
+anywhere within the packet's payload, the test is successful and the remainder
+of the rule option tests are performed. Be aware that this test is case
+sensitive.
+
+<P>
+The option data for the content keyword is somewhat complex; it can contain
+mixed text and binary data. The binary data is generally enclosed within the
+pipe (<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$\vert$"></SPAN>) character and represented as bytecode. Bytecode represents binary
+data as hexadecimal numbers and is a good shorthand method for describing
+complex binary data.  The example below shows use of mixed text and binary data
+in a Snort rule. 
+
+<P>
+Note that multiple content rules can be specified in one rule. This allows
+rules to be tailored for less false positives. 
+
+<P>
+If the rule is preceded by a <TT>!</TT>, the alert will be triggered on packets
+that do not contain this content. This is useful when writing rules that want
+to alert on packets that do not match a certain pattern
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Also note that the following characters must be escaped inside a content rule:
+
+<P>
+<PRE>
+    ; \ "
+</PRE>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION00451100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    content:[!]"&lt;content string&gt;";
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00451200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 139 (content:"|5c 00|P|00|I|00|P|00|E|00 5c|";)
+</PRE>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:!"GET";)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+A <TT>!</TT> modifier negates the results of the entire content search,
+modifiers included.  For example, if using <TT>content:!"A"; within:50;</TT>
+and there are only 5 bytes of payload and there is no "A" in those 5 bytes, the
+result will return a match.  If there must be 50 bytes for a valid match, use
+<TT>isdataat</TT> as a pre-cursor to the content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION00451300000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Changing content behavior</A>
+</H3>
+
+<P>
+The <TT>content</TT> keyword has a number of modifier keywords.  The modifier
+keywords change how the previously specified content works.  These modifier
+keywords are:
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<A NAME="Content_Modifiers"></A><A NAME="4409"></A>
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<CAPTION><STRONG>Table:</STRONG>
+Content Modifiers</CAPTION>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>Modifier</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>Section</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>nocase</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:nocase"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>rawbytes</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:rawbytes"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>depth</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:depth"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>offset</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:offset"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>distance</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:Distance"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>within</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:Within"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>http_client_body</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:HttpClientBody"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>http_cookie</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:HttpCookie"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>http_raw_cookie</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:RawHttpCookie"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>http_header</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:HttpHeader"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>http_raw_header</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:RawHttpHeader"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>http_method</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:HttpMethod"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>http_uri</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:HttpUri"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>http_raw_uri</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:RawHttpUri"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>http_stat_code</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:HttpStatCode"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>http_stat_msg</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:HttpStatMsg"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>fast_pattern</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:FastPattern"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+
+<H2><A NAME="SECTION00452000000000000000"></A>
+<A NAME="sub:protectedcontent"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> protected_content
+</H2>
+
+<P>
+The protected_content keyword provides much of the functionality of the content keyword, however it performs and is utilized in a very different manner. The primary advantage protected_content has over content is that protected allows one to hide the target contents by only revealing secure hash digests of said content. As with the content keyword, its primary purpose is to match strings of specific bytes. The search is performed by hashing portions of incoming packets and comparing the results against the hash provided, and as such, it is computationally expensive.
+
+<P>
+Currently, it is possible to utilize the MD5, SHA256, and SHA512 hash algorithms with the protected_content keyword. A hashing algorithm must be specified in the rule using <TT>hash</TT> if a default has not be set in the Snort configuration. Additionally, a <TT>length</TT> modifier must be specified with protected to indicate the length of the raw data.
+
+<P>
+As with content, it is possible to use multiple protected_content rules can in one rule. Additionally, it is possible to mix multiple protected_content rules with multiple content rules.
+
+<P>
+If the rule is preceded by a <TT>!</TT>, the alert will be triggered on packets
+that do not contain the target content. This is useful when writing rules that want
+to alert on packets that do not match a certain pattern
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The protected_content keyword can be used with some (but not all) of the content modifiers. Those not supported include:
+<PRE>
+	nocase
+	fast_pattern
+	depth
+	within
+</PRE>
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION00452100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    protected_content:[!]"&lt;content hash&gt;", length:orig_len[, hash:md5|sha256|sha512];
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00452200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+The following alert on the string "HTTP":
+
+<P>
+<PRE>
+    alert tcp any any &lt;&gt; any 80 (msg:"MD5 Alert"; 
+    protected_content:"293C9EA246FF9985DC6F62A650F78986"; hash:md5; offset:0; length:4;)
+</PRE>
+
+<P>
+<PRE>
+    alert tcp any any &lt;&gt; any 80 (msg:"SHA256 Alert"; 
+    protected_content:"56D6F32151AD8474F40D7B939C2161EE2BBF10023F4AF1DBB3E13260EBDC6342"; 
+    hash:sha256; offset:0; length:4;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+A <TT>!</TT> modifier negates the results of the entire content search,
+modifiers included.  For example, if using <TT>content:!"A"; within:50;</TT>
+and there are only 5 bytes of payload and there is no "A" in those 5 bytes, the
+result will return a match.  If there must be 50 bytes for a valid match, use
+<TT>isdataat</TT> as a pre-cursor to the content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION00453000000000000000"></A>
+<A NAME="sub:hash"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> hash
+</H2>
+
+<P>
+The hash keyword is used to specify the hashing algorithm to use when matching a protected_content rule. If a default algorithm is not specified in the Snort configuration, a protected_content rule must specify the algorithm used. Currently, MD5, SHA256, and SHA512 are supported.
+
+<P>
+
+<H3><A NAME="SECTION00453100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    hash:[md5|sha256|sha512];
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00454000000000000000"></A>
+<A NAME="sub:length"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> length
+</H2>
+
+<P>
+The length keyword is used to specify the original length of the content specified in a protected_content rule digest. The value provided must be greater than 0 and less than 65536.
+
+<P>
+
+<H3><A NAME="SECTION00454100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    length:[&lt;original_length&gt;];
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00455000000000000000"></A>
+<A NAME="sub:nocase"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> nocase
+</H2>
+
+<P>
+The nocase keyword allows the rule writer to specify that the Snort should look
+for the specific pattern, ignoring case.  nocase modifies the previous
+<TT>content</TT> keyword in the rule.
+
+<P>
+
+<H3><A NAME="SECTION00455100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    nocase;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00455200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 21 (msg:"FTP ROOT"; content:"USER root"; nocase;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00456000000000000000"></A>
+<A NAME="sub:rawbytes"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN> rawbytes
+</H2>
+
+<P>
+The rawbytes keyword allows rules to look at the raw packet data, ignoring any
+decoding that was done by preprocessors.  This acts as a modifier to the
+previous content <A HREF="#sub:content"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> option.
+
+<P>
+HTTP Inspect has a set of keywords to use raw data, such as 
+<TT>http_raw_cookie</TT>, <TT>http_raw_header</TT>, <TT>http_raw_uri</TT> etc
+that match on specific portions of the raw HTTP requests and responses.
+
+<P>
+Most other preprocessors use decoded/normalized data for content match by default, if
+<TT>rawbytes</TT> is not specified explicitly.  Therefore, <TT>rawbytes</TT> should
+be specified in order to inspect arbitrary raw data from the packet.
+
+<P>
+
+<H3><A NAME="SECTION00456100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> format</A>
+</H3>
+
+<P>
+<PRE>
+    rawbytes;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00456200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+This example tells the content pattern matcher to look at the raw traffic,
+instead of the decoded traffic provided by the Telnet decoder.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 21 (msg:"Telnet NOP"; content:"|FF F1|"; rawbytes;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00457000000000000000"></A>
+<A NAME="sub:depth"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">7</SPAN> depth
+</H2>
+
+<P>
+The depth keyword allows the rule writer to specify how far into a packet Snort
+should search for the specified pattern.  depth modifies the previous `content'
+keyword in the rule.
+
+<P>
+A depth of 5 would tell Snort to only look for the specified pattern within the
+first 5 bytes of the payload.
+
+<P>
+As the depth keyword is a modifier to the previous <TT>content</TT> keyword, there
+must be a content in the rule before <TT>depth</TT> is specified.
+
+<P>
+This keyword allows values greater than or equal to the pattern length being
+searched. The minimum allowed value is 1.  The maximum allowed value for this
+keyword is 65535.
+
+<P>
+The value can also be set to a string value referencing a variable extracted by the
+<TT>byte_extract</TT> keyword in the same rule.
+
+<P>
+
+<H3><A NAME="SECTION00457100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    depth:[&lt;number&gt;|&lt;var_name&gt;];
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00458000000000000000"></A>
+<A NAME="sub:offset"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">8</SPAN> offset
+</H2>
+
+<P>
+The offset keyword allows the rule writer to specify where to start searching
+for a pattern within a packet.  offset modifies the previous 'content' keyword
+in the rule.
+
+<P>
+An offset of 5 would tell Snort to start looking for the specified pattern
+after the first 5 bytes of the payload.
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before <TT>offset</TT> is specified.
+
+<P>
+This keyword allows values from -65535 to 65535.
+
+<P>
+The value can also be set to a string value referencing a variable extracted by the
+<TT>byte_extract</TT> keyword in the same rule.
+
+<P>
+
+<H3><A NAME="SECTION00458100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    offset:[&lt;number&gt;|&lt;var_name&gt;];
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00458200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+The following example shows use of a combined content, offset, and depth search
+rule.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"cgi-bin/phf"; offset:4; depth:20;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00459000000000000000"></A>
+<A NAME="sub:Distance"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">9</SPAN> distance
+</H2>
+
+<P>
+The distance keyword allows the rule writer to specify how far into a packet
+Snort should ignore before starting to search for the specified pattern
+relative to the end of the previous pattern match.  
+
+<P>
+This can be thought of as exactly the same thing as offset (See Section
+<A HREF="#sub:offset"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>), except it is relative to the end of the last pattern match
+instead of the beginning of the packet.
+
+<P>
+This keyword allows values from -65535 to 65535.
+
+<P>
+The value can also be set to a string value referencing a variable extracted by the
+<TT>byte_extract</TT> keyword in the same rule.
+
+<P>
+
+<H3><A NAME="SECTION00459100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    distance:[&lt;byte_count&gt;|&lt;var_name&gt;];
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00459200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+The rule below maps to a regular expression of /ABC.{1,}DEF/.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any any (content:"ABC"; content:"DEF"; distance:1;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004510000000000000000"></A>
+<A NAME="sub:Within"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">10</SPAN> within
+</H2>
+
+<P>
+The within keyword is a content modifier that makes sure that at most N bytes
+are between pattern matches using the content keyword ( See Section
+<A HREF="#sub:content"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> ).  It's designed to be used in conjunction with the distance
+(Section <A HREF="#sub:Distance"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>) rule option.
+
+<P>
+This keyword allows values greater than or equal to pattern length being searched. 
+The maximum allowed value for this keyword is 65535.
+
+<P>
+The value can also be set to a string value referencing a variable extracted by the
+<TT>byte_extract</TT> keyword in the same rule.
+
+<P>
+
+<H3><A NAME="SECTION004510100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    within:[&lt;byte_count&gt;|&lt;var_name&gt;];
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004510200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search of EFG to not go past 10 bytes past the ABC match. 
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any any (content:"ABC"; content:"EFG"; within:10;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004511000000000000000"></A>
+<A NAME="sub:HttpClientBody"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">11</SPAN> http_client_body
+</H2>
+
+<P>
+The http_client_body keyword is a content modifier that restricts the search
+to the body of an HTTP client request.
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before 'http_client_body' is specified. 
+
+<P>
+The amount of data that is inspected with this option depends on the <TT>post_depth</TT>
+config option of HttpInspect. Pattern matches with this keyword wont work when 
+ <TT>post_depth</TT> is set to -1.
+
+<P>
+
+<H3><A NAME="SECTION004511100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_client_body;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004511200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search for the pattern "EFG" to the raw body of
+an HTTP client request.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"ABC"; content:"EFG"; http_client_body;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+The <TT>http_client_body</TT> modifier is not allowed to be used with
+the <TT>rawbytes</TT> modifier for the same content.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004512000000000000000"></A>
+<A NAME="sub:HttpCookie"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">12</SPAN> http_cookie
+</H2>
+
+<P>
+The http_cookie keyword is a content modifier that restricts the search to the
+extracted Cookie Header field (excluding the header name itself and the CRLF terminating 
+the header line) of a HTTP client request or a HTTP server response (per the configuration 
+of HttpInspect <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>). The Cookie buffer does not include the header 
+names (<TT>Cookie:</TT> for HTTP requests or <TT>Set-Cookie:</TT> for HTTP responses) 
+or leading spaces and the CRLF terminating the header line. These are included in the HTTP
+header buffer. 
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before <TT>http_cookie</TT> is specified. This keyword is dependent
+on the <TT>enable_cookie</TT> config option. The Cookie Header field will be extracted only
+when this option is configured. If <TT>enable_cookie</TT> is not specified, the cookie 
+still ends up in HTTP header.  When <TT>enable_cookie</TT> is not specified, using 
+<TT>http_cookie</TT> is the same as using <TT>http_header</TT>.
+
+<P>
+The extracted Cookie Header field may be NORMALIZED, per the configuration of
+HttpInspect (see <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+
+<H3><A NAME="SECTION004512100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_cookie;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004512200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search for the pattern "EFG" to the extracted Cookie
+Header field of a HTTP client request.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"ABC"; content:"EFG"; http_cookie;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The <TT>http_cookie</TT> modifier is not allowed to be used with the
+<TT>rawbytes</TT> or <TT>fast_pattern</TT> modifiers for the same content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004513000000000000000"></A>
+<A NAME="sub:RawHttpCookie"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">13</SPAN> http_raw_cookie
+</H2>
+
+<P>
+The http_raw_cookie keyword is a content modifier that restricts the search to the
+extracted UNNORMALIZED Cookie Header field of a HTTP client request or a HTTP server 
+response (per the configuration of HttpInspect <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before <TT>http_raw_cookie</TT> is specified. This keyword is dependent
+on the <TT>enable_cookie</TT> config option. The Cookie Header field will be extracted only
+when this option is configured.
+
+<P>
+
+<H3><A NAME="SECTION004513100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_raw_cookie;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004513200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search for the pattern "EFG" to the extracted Unnormalized
+Cookie Header field of a HTTP client request.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"ABC"; content:"EFG"; http_raw_cookie;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The <TT>http_raw_cookie</TT> modifier is not allowed to be used with the
+<TT>rawbytes</TT>, <TT>http_cookie</TT> or <TT>fast_pattern</TT> modifiers for the same 
+content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004514000000000000000"></A>
+<A NAME="sub:HttpHeader"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">14</SPAN> http_header
+</H2>
+
+<P>
+The http_header keyword is a content modifier that restricts the search to the
+extracted Header fields of a HTTP client request or a HTTP server response (per the 
+configuration of HttpInspect <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before <TT>http_header</TT> is specified.
+
+<P>
+The extracted Header fields may be NORMALIZED, per the configuration of
+HttpInspect (see <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+
+<H3><A NAME="SECTION004514100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_header;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004514200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search for the pattern "EFG" to the extracted Header
+fields of a HTTP client request or a HTTP server response.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"ABC"; content:"EFG"; http_header;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The <TT>http_header</TT> modifier is not allowed to be used with the
+<TT>rawbytes</TT> modifier for the same content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004515000000000000000"></A>
+<A NAME="sub:RawHttpHeader"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">15</SPAN> http_raw_header
+</H2>
+
+<P>
+The http_raw_header keyword is a content modifier that restricts the search to the
+extracted UNNORMALIZED Header fields of a HTTP client request or a HTTP server
+response (per the configuration of HttpInspect <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before <TT>http_raw_header</TT> is specified.
+
+<P>
+
+<H3><A NAME="SECTION004515100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_raw_header;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004515200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search for the pattern "EFG" to the extracted Header fields
+of a HTTP client request or a HTTP server response.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"ABC"; content:"EFG"; http_raw_header;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The <TT>http_raw_header</TT> modifier is not allowed to be used with the
+<TT>rawbytes</TT>, <TT>http_header</TT> or <TT>fast_pattern</TT> modifiers for the same
+content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004516000000000000000"></A>
+<A NAME="sub:HttpMethod"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">16</SPAN> http_method
+</H2>
+
+<P>
+The http_method keyword is a content modifier that restricts the search to the
+extracted Method from a HTTP client request.
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before <TT>http_method</TT> is specified.
+
+<P>
+
+<H3><A NAME="SECTION004516100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_method;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004516200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search for the pattern "GET" to the extracted Method
+from a HTTP client request.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"ABC"; content:"GET"; http_method;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The <TT>http_method</TT> modifier is not allowed to be used with the
+<TT>rawbytes</TT> or <TT>fast_pattern</TT> modifiers for the same content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004517000000000000000"></A>
+<A NAME="sub:HttpUri"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">17</SPAN> http_uri
+</H2>
+
+<P>
+The http_uri keyword is a content modifier that restricts the search to the
+NORMALIZED request URI field .  Using a content rule option followed
+by a http_uri modifier is the same as using a uricontent by itself (see:
+<A HREF="#sub:UriContent"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before <TT>http_uri</TT> is specified.
+
+<P>
+
+<H3><A NAME="SECTION004517100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_uri;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004517200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search for the pattern "EFG" to the NORMALIZED URI.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"ABC"; content:"EFG"; http_uri;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The <TT>http_uri</TT> modifier is not allowed to be used with the
+<TT>rawbytes</TT> modifier for the same content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004518000000000000000"></A>
+<A NAME="sub:RawHttpUri"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">18</SPAN> http_raw_uri
+</H2>
+The http_raw_uri keyword is a content modifier that restricts the search to the
+UNNORMALIZED request URI field . 
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before <TT>http_raw_uri</TT> is specified.
+
+<P>
+
+<H3><A NAME="SECTION004518100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_raw_uri;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004518200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search for the pattern "EFG" to the UNNORMALIZED URI.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"ABC"; content:"EFG"; http_raw_uri;)
+</PRE>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The <TT>http_raw_uri</TT> modifier is not allowed to be used with the
+<TT>rawbytes</TT>, <TT>http_uri</TT> or <TT>fast_pattern</TT> modifiers for the same
+content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004519000000000000000"></A>
+<A NAME="sub:HttpStatCode"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">19</SPAN> http_stat_code
+</H2>
+
+<P>
+The http_stat_code keyword is a content modifier that restricts the search to the
+extracted Status code field from a HTTP server response.
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before <TT>http_stat_code</TT> is specified. 
+
+<P>
+The Status Code field will be extracted only if the extended_response_inspection is 
+configured for the HttpInspect (see <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+
+<H3><A NAME="SECTION004519100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">19</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_stat_code;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004519200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">19</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search for the pattern "200" to the extracted Status Code field 
+of a HTTP server response.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"ABC"; content:"200"; http_stat_code;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The <TT>http_stat_code</TT> modifier is not allowed to be used with the
+<TT>rawbytes</TT> or <TT>fast_pattern</TT> modifiers for the same content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004520000000000000000"></A>
+<A NAME="sub:HttpStatMsg"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">20</SPAN> http_stat_msg
+</H2>
+
+<P>
+The http_stat_msg keyword is a content modifier that restricts the search to the
+extracted Status Message field from a HTTP server response.
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a content in the rule before <TT>http_stat_msg</TT> is specified.
+
+<P>
+The Status Message field will be extracted only if the extended_response_inspection is
+configured for the HttpInspect (see <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+
+<H3><A NAME="SECTION004520100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">20</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_stat_msg;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004520200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">20</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule constrains the search for the pattern "Not Found" to the extracted Status 
+Message field of a HTTP server response.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"ABC"; content:"Not Found"; http_stat_msg;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The <TT>http_stat_msg</TT> modifier is not allowed to be used with the
+<TT>rawbytes</TT> or <TT>fast_pattern</TT> modifiers for the same content.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004521000000000000000"></A>
+<A NAME="sub:HttpEncode"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">21</SPAN> http_encode
+</H2>
+
+<P>
+The <TT>http_encode</TT> keyword will enable alerting based on encoding type present
+in a HTTP client request or a HTTP server response (per the configuration of 
+HttpInspect <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+There are several keywords associated with <TT>http_encode</TT>. The keywords
+'uri', 'header' and 'cookie' determine the HTTP fields used to search for a
+particular encoding type.  The keywords 'utf8', 'double_encode', 'non_ascii',
+'uencode', 'iis_encode', 'ascii' and 'bare_byte' determine the encoding 
+type which would trigger the alert. These keywords can be combined using a OR operation.
+Negation is allowed on these keywords.
+
+<P>
+The config option 'normalize_headers' needs to be turned on for rules to work
+with the keyword 'header'.  The keyword 'cookie' is dependent on config options
+'enable_cookie' and 'normalize_cookies' (see <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).  This
+rule option will not be able to detect encodings if the specified HTTP fields
+are not NORMALIZED.
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>uri</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Check for the specified encoding type in HTTP client request URI field.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>header</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Check for the specified encoding type in HTTP request or HTTP response header fields
+(depending on the packet flow)</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>cookie</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Check for the specified encoding type in HTTP request or HTTP response cookie 
+header fields (depending on the packet flow)</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>utf8</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Check for utf8 encoding in the specified buffer</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>double_encode</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Check for double encoding in the specified buffer</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>non_ascii</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Check for non-ASCII encoding in the specified buffer</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>uencode</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Check for u-encoding in the specified buffer</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bare_byte</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Check for bare byte encoding in the specified buffer</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>ascii</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Check for ascii encoding in the specified buffer</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>iis_encode</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Check for IIS Unicode encoding in the specified buffer</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H3><A NAME="SECTION004521100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">21</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    http_encode:&lt;http buffer type&gt;, [!]&lt;encoding type&gt;
+    http_encode:[uri|header|cookie], [!][&lt;utf8|double_encode|non_ascii|uencode|bare_byte|ascii|iis_encode&gt;];
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004521200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">21</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+<PRE>
+    alert tcp any any -&gt; any any (msg:"UTF8/UEncode Encoding present"; http_encode:uri,utf8|uencode;)
+    alert tcp any any -&gt; any any (msg:"No UTF8"; http_encode:uri,!utf8;)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Negation(!) and OR(<TT>|</TT>) operations cannot be used in conjunction with each other for the 
+<TT>http_encode</TT> keyword. The OR and negation operations work only on the encoding type
+field and not on http buffer type field.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004522000000000000000"></A>
+<A NAME="sub:FastPattern"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">22</SPAN> fast_pattern
+</H2>
+
+<P>
+The <TT>fast_pattern</TT> keyword is a content modifier that sets the content
+within a rule to be used with the fast pattern matcher. The default behavior of
+fast pattern determination is to use the longest HTTP buffer content. If no HTTP
+buffer is present, then the fast pattern is the longest content. Given this behavior,
+it is useful if a shorter content is more "unique" than the longer content, 
+meaning the shorter content is less likely to be found in a packet than the longer content.
+
+<P>
+The fast pattern matcher is used to select only those rules that have a
+chance of matching by using a content in the rule for selection and only
+evaluating that rule if the content is found in the payload.  Though this
+may seem to be overhead, it can significantly reduce the number of rules
+that need to be evaluated and thus increases performance.  The better the
+content used for the fast pattern matcher, the less likely the rule will
+needlessly be evaluated.
+
+<P>
+As this keyword is a modifier to the previous <TT>content</TT> keyword, there must be
+a <TT>content</TT> rule option in the rule before <TT>fast_pattern</TT> is specified.
+The <TT>fast_pattern</TT> option may be specified only once per rule.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+The <TT>fast_pattern</TT> modifier cannot be used with the following http
+content modifiers: <TT>http_cookie</TT>, <TT>http_raw_uri</TT>,
+<TT>http_raw_header</TT>, <TT>http_raw_cookie</TT>, <TT>http_method</TT>,
+<TT>http_stat_code</TT>, <TT>http_stat_msg</TT>.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+The <TT>fast_pattern</TT> modifier can be used with negated contents only if
+those contents are not modified with <TT>offset</TT>, <TT>depth</TT>,
+<TT>distance</TT> or <TT>within</TT>.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+The fast pattern matcher is always case insensitive.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION004522100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+The <TT>fast_pattern</TT> option can be used alone or optionally take arguments.
+When used alone, the meaning is simply to use the specified content as the
+fast pattern content for the rule.
+
+<P>
+<PRE>
+fast_pattern;
+</PRE>
+
+<P>
+The optional argument <TT>only</TT> can be used to specify that the content
+should only be used for the fast pattern matcher and should not be evaluated
+as a rule option.  This is useful, for example, if a known content must be
+located in the payload independent of location in the payload, as it saves
+the time necessary to evaluate the rule option.  
+Note that (1) the modified content must be case insensitive since
+patterns are inserted into the pattern matcher in a case insensitive manner,
+(2) negated contents cannot be used and (3) contents cannot have any positional
+modifiers such as <TT>offset</TT>, <TT>depth</TT>, <TT>distance</TT>
+or <TT>within</TT>.
+<PRE>
+fast_pattern:only;
+</PRE>
+
+<P>
+The optional argument <TT>&lt;offset&gt;,&lt;length&gt;</TT> can be used to specify that
+only a portion of the content should be used for the fast pattern matcher.
+This is useful if the pattern is very long and only a portion of the pattern
+is necessary to satisfy "uniqueness" thus reducing the memory required to
+store the entire pattern in the fast pattern matcher.
+<PRE>
+fast_pattern:&lt;offset&gt;,&lt;length&gt;;
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+The optional arguments <TT>only</TT> and <TT>&lt;offset&gt;,&lt;length&gt;</TT> are
+mutually exclusive.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION004522200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+This rule causes the pattern "IJKLMNO" to be used with the fast pattern matcher,
+even though it is shorter than the earlier pattern "ABCDEFGH".
+
+<P>
+<PRE>
+alert tcp any any -&gt; any 80 (content:"ABCDEFGH"; content:"IJKLMNO"; fast_pattern;)
+</PRE>
+
+<P>
+This rule says to use the content "IJKLMNO" for the fast pattern matcher and that
+the content should only be used for the fast pattern matcher and not evaluated
+as a <TT>content</TT> rule option.
+<PRE>
+alert tcp any any -&gt; any 80 (content:"ABCDEFGH"; content:"IJKLMNO"; nocase; fast_pattern:only;)
+</PRE>
+
+<P>
+This rule says to use "JKLMN" as the fast pattern content, but still evaluate
+the <TT>content</TT> rule option as "IJKLMNO".
+<PRE>
+alert tcp any any -&gt; any 80 (content:"ABCDEFGH"; content:"IJKLMNO"; fast_pattern:1,5;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004523000000000000000"></A>
+<A NAME="sub:UriContent"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">23</SPAN> uricontent
+</H2>
+
+<P>
+The <TT>uricontent</TT> keyword in the Snort rule language searches the
+NORMALIZED request URI field.  This is equivalent to using the
+<TT>http_uri</TT> modifier to a <TT>content</TT> keyword.  As such if you
+are writing rules that include things that are normalized, such as %2f or
+directory traversals, these rules will not alert.  The reason is that the
+things you are looking for are normalized out of the URI buffer.  
+
+<P>
+For example, the URI: 
+
+<P>
+<PRE>
+    /scripts/..%c0%af../winnt/system32/cmd.exe?/c+ver
+</PRE>
+
+<P>
+will get normalized into:
+
+<P>
+<PRE>
+    /winnt/system32/cmd.exe?/c+ver
+</PRE>
+
+<P>
+Another example, the URI:
+
+<P>
+<PRE>
+    /cgi-bin/aaaaaaaaaaaaaaaaaaaaaaaaaa/..%252fp%68f?
+</PRE>
+
+<P>
+will get normalized into:
+
+<P>
+<PRE>
+    /cgi-bin/phf?
+</PRE>
+
+<P>
+When writing a <TT>uricontent</TT> rule, write the content that you want to
+find in the context that the URI will be normalized.  For example, if Snort
+normalizes directory traversals, do not include directory traversals.  
+
+<P>
+You can write rules that look for the non-normalized content by using the
+content option.  (See Section <A HREF="#sub:content"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>)
+
+<P>
+<TT>uricontent</TT> can be used with several of the modifiers available to the
+<TT>content</TT> keyword.  These include:
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<A NAME="Uricontent_Modifiers"></A><A NAME="4803"></A>
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<CAPTION><STRONG>Table:</STRONG>
+Uricontent Modifiers</CAPTION>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>Modifier</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>Section</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>nocase</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:nocase"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>depth</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:depth"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>offset</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:offset"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>distance</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:Distance"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>within</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:Within"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>fast_pattern</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><A HREF="#sub:FastPattern"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A></TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+This option works in conjunction with the HTTP Inspect preprocessor specified
+in Section <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.
+
+<P>
+
+<H3><A NAME="SECTION004523100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">23</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    uricontent:[!]"&lt;content string&gt;";
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+<TT>uricontent</TT> cannot be modified by a <TT>rawbytes</TT> modifier or any
+of the other HTTP modifiers.  If you wish to search the UNNORMALIZED
+request URI field, use the <TT>http_raw_uri</TT> modifier with a
+<TT>content</TT> option.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004524000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">24</SPAN> urilen</A>
+</H2>
+
+<P>
+The <TT>urilen</TT> keyword in the Snort rule language specifies the exact
+length, the minimum length, the maximum length, or range of URI lengths to
+match.  By default the raw uri buffer will be used.  With the optional
+<TT>&lt;uribuf&gt;</TT> argument, you can specify whether the raw or normalized
+buffer are used.
+
+<P>
+
+<H3><A NAME="SECTION004524100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">24</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    urilen:min&lt;&gt;max[,&lt;uribuf&gt;];
+    urilen:[&lt;|&gt;]&lt;number&gt;[,&lt;uribuf&gt;];
+
+    &lt;uribuf&gt; : "norm" | "raw"
+</PRE>
+
+<P>
+The following example will match URIs that are 5 bytes long:
+
+<P>
+<PRE>
+    urilen:5;
+</PRE>
+
+<P>
+The following example will match URIs that are shorter than 5 bytes:
+
+<P>
+<PRE>
+    urilen:&lt;5;
+</PRE>
+
+<P>
+The following example will match URIs that are greater than 5 bytes and less
+than 10 bytes (inclusive):
+
+<P>
+<PRE>
+    urilen:5&lt;&gt;10;
+</PRE>
+
+<P>
+The following example will match URIs that are greater than 500 bytes using the
+normalized URI buffer:
+
+<P>
+<PRE>
+    urilen:&gt;500,norm;
+</PRE>
+
+<P>
+The following example will match URIs that are greater than 500 bytes explicitly
+stating to use the raw URI buffer:
+
+<P>
+<PRE>
+    urilen:&gt;500,raw;
+</PRE>
+
+<P>
+This option works in conjunction with the HTTP Inspect preprocessor specified
+in Section <A HREF="node17.html#sub:http-inspect"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.
+
+<P>
+
+<H2><A NAME="SECTION004525000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">25</SPAN> isdataat</A>
+</H2>
+
+<P>
+Verify that the payload has data at a specified location, optionally looking
+for data relative to the end of the previous content match.
+
+<P>
+
+<H3><A NAME="SECTION004525100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">25</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    isdataat:[!]&lt;int&gt;[, relative|rawbytes];
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004525200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">25</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 111 (content:"PASS"; isdataat:50,relative; \ 
+        content:!"|0a|"; within:50;)
+</PRE>
+
+<P>
+This rule looks for the string PASS exists in the packet, then verifies there
+is at least 50 bytes after the end of the string PASS, then verifies that there
+is not a newline character within 50 bytes of the end of the PASS string.
+
+<P>
+When the <TT>rawbytes</TT> modifier is specified with <TT>isdataat</TT>, it 
+looks at the raw packet data, ignoring any decoding that was done by the 
+preprocessors. This modifier will work with the <TT>relative</TT> modifier 
+as long as the previous content match was in the raw packet data.
+
+<P>
+A <TT>!</TT> modifier negates the results of the isdataat test. It will alert 
+if a certain amount of data is not present within the payload. For example,
+the rule with modifiers <TT>content:"foo"; isdataat:!10,relative;</TT>  would 
+alert if there were not 10 bytes after "foo" before the payload ended. 
+
+<P>
+
+<H2><A NAME="SECTION004526000000000000000"></A>
+<A NAME="pcre"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">26</SPAN> pcre
+</H2>
+
+<P>
+The pcre keyword allows rules to be written using perl compatible regular
+expressions.   For more detail on what can be done via a pcre regular
+expression, check out the PCRE web site <TT><A NAME="tex2html26"
+  HREF="http://www.pcre.org/">http://www.pcre.org</A></TT>
+<P>
+
+<H3><A NAME="SECTION004526100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">26</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    pcre:[!]"(/&lt;regex&gt;/|m&lt;delim&gt;&lt;regex&gt;&lt;delim&gt;)[ismxAEGRUBPHMCOIDKYS]";
+</PRE>
+
+<P>
+The post-re modifiers set compile time flags for the regular expression.  See
+tables <A HREF="#pcre-mod_perl"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>, <A HREF="#pcre-mod_pcre"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>, and <A HREF="#pcre-mod_snort"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for
+descriptions of each modifier.
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<A NAME="pcre-mod_perl"></A><A NAME="6208"></A>
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<CAPTION><STRONG>Table:</STRONG>
+Perl compatible modifiers for <TT>pcre</TT></CAPTION>
+<TR><TD ALIGN="CENTER">i</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>case insensitive</TD>
+</TR>
+<TR><TD ALIGN="CENTER">s</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>include newlines in the dot metacharacter</TD>
+</TR>
+<TR><TD ALIGN="CENTER">m</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+By default, the string is treated as one big line of characters.  ^ and $
+match at the beginning and ending of the string. When m is set, ^ and $
+match immediately following or immediately before any newline in the buffer, as
+well as the very start and very end of the buffer.</TD>
+</TR>
+<TR><TD ALIGN="CENTER">x</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+whitespace  data characters in the pattern are ignored except when escaped or
+inside a character class</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<A NAME="pcre-mod_pcre"></A><A NAME="6210"></A>
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<CAPTION><STRONG>Table:</STRONG>
+PCRE compatible modifiers for <TT>pcre</TT></CAPTION>
+<TR><TD ALIGN="CENTER">A</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+the pattern must match only at the start of the buffer (same as ^ )</TD>
+</TR>
+<TR><TD ALIGN="CENTER">E</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Set $ to match only at the end of the subject string.  Without E, $ also
+matches immediately before the final character if it is a newline (but not
+before any other newlines).</TD>
+</TR>
+<TR><TD ALIGN="CENTER">G</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Inverts the "greediness" of the quantifiers so that they are not greedy by
+default, but become greedy if followed by "?".</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<A NAME="pcre-mod_snort"></A><A NAME="6212"></A>
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<CAPTION><STRONG>Table:</STRONG>
+Snort specific modifiers for <TT>pcre</TT></CAPTION>
+<TR><TD ALIGN="CENTER">R</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match relative to the end of the last pattern match.  (Similar to distance:0;)</TD>
+</TR>
+<TR><TD ALIGN="CENTER">U</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match the decoded URI buffers (Similar to <TT>uricontent</TT> and <TT>http_uri</TT>).
+This modifier is not allowed with the unnormalized HTTP request uri buffer modifier(I) 
+for the same content.</TD>
+</TR>
+<TR><TD ALIGN="CENTER">I</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match the unnormalized HTTP request uri buffer (Similar to <TT>http_raw_uri</TT>).
+This modifier is not allowed with the HTTP request uri buffer modifier(U) for the
+same content.</TD>
+</TR>
+<TR><TD ALIGN="CENTER">P</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match unnormalized HTTP request body (Similar to <TT>http_client_body</TT>).</TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>For SIP message, match SIP body for request or response (Similar to <TT>sip_body</TT>).</TD>
+</TR>
+<TR><TD ALIGN="CENTER">H</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match normalized HTTP request or HTTP response header (Similar to <TT>http_header</TT>).
+This modifier is not allowed with the unnormalized HTTP request or HTTP response header 
+modifier(D) for the same content.</TD>
+</TR>
+<TR><TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>For SIP message, match SIP header for request or response (Similar to <TT>sip_header</TT>).</TD>
+</TR>
+<TR><TD ALIGN="CENTER">D</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match unnormalized HTTP request or HTTP response header (Similar to <TT>http_raw_header</TT>). 
+This modifier is not allowed with the normalized HTTP request or HTTP response header 
+modifier(H) for the same content.</TD>
+</TR>
+<TR><TD ALIGN="CENTER">M</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match normalized HTTP request method (Similar to <TT>http_method</TT>)</TD>
+</TR>
+<TR><TD ALIGN="CENTER">C</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match normalized HTTP request or HTTP response cookie (Similar to <TT>http_cookie</TT>).
+This modifier is not allowed with the unnormalized HTTP request or HTTP response cookie 
+modifier(K) for the same content.</TD>
+</TR>
+<TR><TD ALIGN="CENTER">K</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match unnormalized HTTP request or HTTP response cookie (Similar to <TT>http_raw_cookie</TT>). 
+This modifier is not allowed with the normalized HTTP request or HTTP response cookie 
+modifier(C) for the same content.</TD>
+</TR>
+<TR><TD ALIGN="CENTER">S</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match HTTP response status code (Similar to <TT>http_stat_code</TT>)</TD>
+</TR>
+<TR><TD ALIGN="CENTER">Y</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Match HTTP response status message (Similar to <TT>http_stat_msg</TT>)</TD>
+</TR>
+<TR><TD ALIGN="CENTER">B</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Do not use the decoded buffers (Similar to rawbytes)</TD>
+</TR>
+<TR><TD ALIGN="CENTER">O</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Override the configured pcre match limit and pcre match limit recursion for 
+this expression (See section <A HREF="node16.html#Config"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>). It completely ignores the limits 
+while evaluating the pcre pattern specified.</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+The modifiers R (relative) and B (rawbytes) are not allowed with any of the HTTP modifiers such as U, I, 
+P, H, D, M, C, K, S and Y. 
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION004526200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">26</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+This example performs a case-insensitive search for the HTTP URI <TT>foo.php?id=&lt;some numbers&gt;</TT>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"/foo.php?id="; pcre:"/\/foo.php?id=[0-9]{1,10}/iU";)
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+It is wise to have at least one <TT>content</TT> keyword in a rule that uses <TT>pcre</TT>.  This
+allows the fast-pattern matcher to filter out non-matching packets so that the pcre evaluation is
+not performed on each and every packet coming across the wire.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Snort's handling of multiple URIs with PCRE does not work as expected.  PCRE
+when used without a <TT>uricontent</TT> only evaluates the first URI.  In order
+to use pcre to inspect all URIs, you must use either a content or a uricontent.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION004527000000000000000"></A>
+<A NAME="sub:pkt_data"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">27</SPAN> pkt_data
+</H2>
+This option sets the cursor used for detection to the raw transport payload.
+
+<P>
+Any relative or absolute content matches (without HTTP modifiers or rawbytes) and other 
+payload detecting rule options that follow <TT>pkt_data</TT> in a rule will apply to the 
+raw TCP/UDP payload or the normalized buffers (in case of telnet, smtp normalization) until 
+the cursor (used for detection) is set again.
+
+<P>
+This rule option can be used several times in a rule.
+
+<P>
+
+<H3><A NAME="SECTION004527100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">27</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+        pkt_data;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004527200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">27</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+        
+        alert tcp any any -&gt; any any(msg:"Absolute Match"; pkt_data; content:"BLAH"; offset:0; depth:10;)
+        alert tcp any any -&gt; any any(msg:"PKT DATA"; pkt_data; content:"foo"; within:10;)
+        alert tcp any any -&gt; any any(msg:"PKT DATA"; pkt_data; content:"foo";)
+        alert tcp any any -&gt; any any(msg:"PKT DATA"; pkt_data; pcre:"/foo/i";)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004528000000000000000"></A>
+<A NAME="sub:file_data"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">28</SPAN> file_data
+</H2>
+This option sets the cursor used for detection to one of the following buffers:
+1. When the traffic being detected is HTTP it sets the buffer to,
+	a. HTTP response body (without chunking/compression/normalization)
+	b. HTTP de-chunked response body
+	c. HTTP decompressed response body (when <TT>inspect_gzip</TT> is turned on)
+	d. HTTP normalized response body (when <TT>normalized_javascript</TT> is turned on)
+	e. HTTP UTF normalized response body (when <TT>normalize_utf</TT> is turned on)
+	f. All of the above
+2. When the traffic being detected is SMTP/POP/IMAP it sets the buffer to,
+	a. SMTP/POP/IMAP data body (including Email headers and MIME when decoding
+	   is turned off)
+        b. Base64 decoded MIME attachment (when <TT>b64_decode_depth</TT> is greater than -1)
+	c. Non-Encoded MIME attachment (when <TT>bitenc_decode_depth</TT> is greater than -1)
+	d. Quoted-Printable decoded MIME attachment (when <TT>qp_decode_depth</TT> is greater than -1) 
+	e. Unix-to-Unix decoded attachment (when <TT>uu_decode_depth</TT> is greater than -1)
+3. If it is not set by 1 and 2, it will be set to the payload.
+
+<P>
+Any relative or absolute content matches (without HTTP modifiers or rawbytes) and payload detecting
+rule options that follow <TT>file_data</TT> in a rule will apply to this buffer until explicitly reset 
+by other rule options.
+
+<P>
+This rule option can be used several time in a rule. 
+
+<P>
+The argument <TT>mime</TT> to <TT>file_data</TT> is deprecated. The rule options <TT>file_data</TT> will 
+itself point to the decoded MIME attachment.
+
+<P>
+
+<H3><A NAME="SECTION004528100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">28</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+	file_data;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004528200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">28</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+	alert tcp any any -&gt; any any(msg:"Absolute Match"; file_data; content:"BLAH"; offset:0; depth:10;)
+	alert tcp any any -&gt; any any(msg:"FILE DATA"; file_data; content:"foo"; within:10;)
+	alert tcp any any -&gt; any any(msg:"FILE DATA"; file_data; content:"foo";)
+	alert tcp any any -&gt; any any(msg:"FILE DATA"; file_data; pcre:"/foo/i";)
+	
+	The following rule searches for content "foo" within the file_data buffer and content "bar" within the 
+	entire packet payload. The rule option pkt_data will reset the cursor used for detection to the 
+	TCP payload.
+	alert tcp any any -&gt; any any(msg:"FILE DATA"; file_data; content:"foo"; pkt_data; content:"bar";)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004529000000000000000"></A>
+<A NAME="sub:base64_decode"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">29</SPAN> base64_decode
+</H2>
+
+<P>
+This option is used to decode the base64 encoded data. This option is particularly useful
+in case of HTTP headers such as HTTP authorization headers. This option unfolds the data
+before decoding it.
+
+<P>
+
+<H3><A NAME="SECTION004529100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">29</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+	base64_decode[:[bytes &lt;bytes_to_decode&gt;][, ][offset &lt;offset&gt;[, relative]]];
+</PRE>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bytes</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Number of base64 encoded bytes to decode. This argument takes positive and 
+non-zero values only. When this option is not specified we look for base64
+encoded data till either the end of header line is reached or end of packet
+payload is reached.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>offset</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Determines the offset relative to the doe_ptr when the option <TT>relative</TT> 
+is specified or relative to the start of the packet payload to begin inspection 
+of base64 encoded data. This argument takes positive and non-zero values only.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>relative</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Specifies the inspection for base64 encoded data is relative to the doe_ptr.</TD>
+</TR>
+</TABLE>
+
+<P>
+The above arguments to <TT>base64_decode</TT> are optional.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+This option can be extended to protocols with folding similar to HTTP. If folding is not
+present the search for base64 encoded data will end when we see a carriage return or line feed
+or both without a following space or tab.
+
+<P>
+This option needs to be used in conjunction with <TT>base64_data</TT> for any other 
+payload detecting rule options to work on base64 decoded buffer.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION004529200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">29</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any \
+	(msg:"Base64 Encoded Data"; base64_decode; base64_data; \
+	content:"foo bar"; within:20;)
+
+    alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any \
+	(msg:"Authorization NTLM"; content:"Authorization: NTLM";
+	base64_decode:relative; base64_data; content:"NTLMSSP"; )
+
+    alert tcp any any -&gt; any any (msg:"Authorization NTLM"; \
+	content:"Authorization:"; http_header; \
+	base64_decode:bytes 12, offset 6, relative; base64_data; \
+	content:"NTLMSSP"; within:8;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004530000000000000000"></A>
+<A NAME="sub:base64_data"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">30</SPAN> base64_data
+</H2>
+This option is similar to the rule option <TT>file_data</TT> and is used 
+to set the cursor used for detection to the beginning of the base64 decoded 
+buffer if present.
+
+<P>
+This option does not take any arguments. The rule option <TT>base64_decode</TT>
+needs to be specified before the <TT>base64_data</TT> option. 
+
+<P>
+
+<H3><A NAME="SECTION004530100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">30</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+	base64_data;
+</PRE>
+
+<P>
+This option matches if there is base64 decoded buffer.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Fast pattern content matches are not allowed with this buffer.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION004530200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">30</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any any (msg:"Authorization NTLM"; \
+        content:"Authorization:"; http_header; \
+        base64_decode:bytes 12, offset 6, relative; base64_data; \
+        content:"NTLMSSP"; within:8;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004531000000000000000"></A>
+<A NAME="sub:byte_test"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">31</SPAN> byte_test
+</H2>
+
+<P>
+Test a byte field against a specific value (with operator).  Capable of testing
+binary values or converting representative byte strings to their binary
+equivalent and testing them.
+
+<P>
+For a more detailed explanation, please read Section <A HREF="node36.html#testing_numerical_values"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.
+
+<P>
+
+<H3><A NAME="SECTION004531100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">31</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    byte_test:&lt;bytes to convert&gt;, [!]&lt;operator&gt;, &lt;value&gt;, &lt;offset&gt; \
+        [, relative][, &lt;endian&gt;][, string, &lt;number type&gt;][, dce] \
+        [, bitmask &lt;bitmask_value&gt;];
+
+    bytes            = 1 - 10
+    operator         = '&lt;' | '=' | '&gt;' | '&lt;=' | '&gt;=' | '&amp;' | '^'
+    value            = 0 - 4294967295
+    offset           = -65535 to 65535
+    bitmask_value    = 1 to 4 byte hexadecimal value
+</PRE>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bytes_to_convert</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Number of bytes to pick up from the packet. The allowed values are 1 to 10 when 
+used without <TT>dce</TT>. If used with <TT>dce</TT> allowed values are 1, 2 and 4.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>operator</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Operation to perform to test the value:
+
+<UL>
+<LI>&lt; - less than
+</LI>
+<LI>&gt; - greater than
+</LI>
+<LI>&lt;= - less than or equal
+</LI>
+<LI>&gt;= - greater than or equal
+</LI>
+<LI>= - equal
+</LI>
+<LI>&amp; - bitwise AND
+</LI>
+<LI>&#94; - bitwise OR
+</LI>
+</UL></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>value</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Value to test the converted value against</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>offset</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Number of bytes into the payload to start processing</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>relative</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Use an offset relative to last pattern match</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>endian</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Endian type of the number being read: 
+
+<UL>
+<LI><TT>big</TT> - Process data as big endian (default)
+</LI>
+<LI><TT>little</TT> - Process data as little endian
+</LI>
+</UL></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>string</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Data is stored in string format in packet</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>number type</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Type of number being read:
+
+<UL>
+<LI><TT>hex</TT> - Converted string data is represented in hexadecimal
+</LI>
+<LI><TT>dec</TT> - Converted string data is represented in decimal
+</LI>
+<LI><TT>oct</TT> - Converted string data is represented in octal
+</LI>
+</UL></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>dce</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Let the DCE/RPC 2 preprocessor determine the byte order of the value to be
+converted.  See section <A HREF="node17.html#sub:dcerpc2"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and examples
+(<A HREF="node17.html#dcerpc2:byte_test_jump"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for quick reference).</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bitmask</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Applies the AND operator on the bytes converted. The result will be
+right-shifted by the number of bits equal to the number of trailing zeros
+in the mask.</TD>
+</TR>
+</TABLE>
+
+<P>
+Any of the operators can also include <SPAN  CLASS="textit">!</SPAN> to check if the operator is not
+true.  If <SPAN  CLASS="textit">!</SPAN> is specified without an operator, then the operator is set
+to <SPAN  CLASS="textit">=</SPAN>.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Snort uses the C operators for each of these operators.  If the <SPAN  CLASS="textit">&amp;</SPAN>
+operator is used, then it would be the same as using <SPAN  CLASS="textit">if (data &amp; value)
+{ do_something();} </SPAN>
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION004531200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">31</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+<PRE>
+    alert udp $EXTERNAL_NET any -&gt; $HOME_NET any \
+        (msg:"AMD procedure 7 plog overflow"; \
+        content:"|00 04 93 F3|"; \
+        content:"|00 00 00 07|"; distance:4; within:4; \
+        byte_test:4, &gt;, 1000, 20, relative;)
+    
+    alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any \
+        (msg:"AMD procedure 7 plog overflow"; \
+        content:"|00 04 93 F3|"; \
+        content:"|00 00 00 07|"; distance:4; within:4; \
+        byte_test:4, &gt;, 1000, 20, relative;)
+    
+    alert udp any any -&gt; any 1234 \
+        (byte_test:4, =, 1234, 0, string, dec; \
+        msg:"got 1234!";)
+    
+    alert udp any any -&gt; any 1235 \
+        (byte_test:3, =, 123, 0, string, dec; \
+        msg:"got 123!";)
+    
+    alert udp any any -&gt; any 1236 \
+        (byte_test:2, =, 12, 0, string, dec; \
+        msg:"got 12!";)
+    
+    alert udp any any -&gt; any 1237 \
+        (byte_test:10, =, 1234567890, 0, string, dec; \
+        msg:"got 1234567890!";)
+ 
+    alert udp any any -&gt; any 1238 \
+        (byte_test:8, =, 0xdeadbeef, 0, string, hex; \
+        msg:"got DEADBEEF!";)
+
+    alert tcp any any -&gt; any any \
+        (byte_test:2, =, 568, 0, bitmask 0x3FF0; \
+        msg:"got 568 after applying bitmask 0x3FF0 on 2 bytes extracted";)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004532000000000000000"></A>
+<A NAME="sub:byte_jump"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">32</SPAN> byte_jump
+</H2>
+
+<P>
+The <TT>byte_jump</TT> keyword allows rules to be written for length encoded
+protocols trivially. By having an option that reads the length of a portion of
+data, then skips that far forward in the packet, rules can be written that skip
+over specific portions of length-encoded protocols and perform detection in
+very specific locations.
+
+<P>
+The <TT>byte_jump</TT> option does this by reading some number of bytes,
+convert them to their numeric representation, move that many bytes forward and
+set a pointer for later detection.  This pointer is known as the detect offset
+end pointer, or doe_ptr.
+
+<P>
+For a more detailed explanation, please read Section <A HREF="node36.html#testing_numerical_values"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.
+
+<P>
+
+<H3><A NAME="SECTION004532100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">32</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    byte_jump:&lt;bytes_to_convert&gt;, &lt;offset&gt; [, relative][, multiplier &lt;mult_value&gt;] \
+        [, &lt;endian&gt;][, string, &lt;number_type&gt;][, align][, from_beginning][, from_end] \ 
+        [, post_offset &lt;adjustment value&gt;][, dce][, bitmask &lt;bitmask_value&gt;];
+
+    bytes             = 1 - 10
+    offset            = -65535 to 65535
+    mult_value        = 0 - 65535
+    post_offset       = -65535 to 65535
+    bitmask_value     = 1 to 4 bytes hexadecimal value
+</PRE>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bytes_to_convert</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Number of bytes to pick up from the packet. The allowed values are 1 to 10 when
+used without <TT>dce</TT>. If used with <TT>dce</TT> allowed values are 1, 2 and 4.
+
+<P>
+If used with <TT>from_end</TT> argument, bytes_to_convert can be 0. If 
+bytes_to_convert is 0, the extracted value is 0.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>offset</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Number of bytes into the payload to start processing</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>relative</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Use an offset relative to last pattern match</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>multiplier <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Multiply the number of calculated bytes by
+<TT><SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT> and skip forward that number of bytes.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>big</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Process data as big endian (default)</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>little</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Process data as little endian</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>string</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Data is stored in string format in packet</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>hex</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Converted string data is represented in hexadecimal</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>dec</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Converted string data is represented in decimal</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>oct</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Converted string data is represented in octal</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>align</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Round the number of converted bytes up to the next 32-bit boundary</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>from_beginning</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Skip forward from the beginning of the packet
+payload instead of from the current position in the packet.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>from_end</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>The jump will originate from the end of payload</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>post_offset <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Skip forward or backwards (positive of
+negative value) <TT>by <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT> number of bytes after the other jump
+options have been applied.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>dce</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Let the DCE/RPC 2 preprocessor determine the byte order of the
+value to be converted.  See section <A HREF="node17.html#sub:dcerpc2"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples (<A HREF="node17.html#dcerpc2:byte_test_jump"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for quick reference).</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bitmask</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Applies the AND operator on the <TT>bytes_to_convert</TT> 
+argument. The result will be right-shifted by the number of bits equal to the  
+number of trailing zeros in the mask.</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H3><A NAME="SECTION004532200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">32</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    alert udp any any -&gt; any 32770:34000 (content:"|00 01 86 B8|"; \
+        content:"|00 00 00 01|"; distance:4; within:4; \
+        byte_jump:4, 12, relative, align; \
+        byte_test:4, &gt;, 900, 20, relative; \
+        msg:"statd format string buffer overflow";)
+
+    alert tcp any any -&gt; any any (content:"Begin"; \
+        byte_jump:0, 0, from_end, post_offset -6; \
+        content:"end.."; distance:0; within:5; \
+        msg:"Content match from end of the payload";)
+
+    alert tcp any any -&gt; any any (content:"catalog"; \
+        byte_jump:2, 1, relative, post_offset 2, bitmask 0x03f0; \
+        byte_test:2, =, 968, 0, relative; \
+        msg:"Bitmask applied on the 2 bytes extracted for byte_jump";)
+
+    alert tcp any any -&gt; any any (content:"catalog"; \
+        byte_jump:1, 2, from_end, post_offset -5, bitmask 0x3c; \
+        byte_test:1, =, 106, 0, relative; \
+        msg:"Byte jump calculated from end of payload after bitmask applied";)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004533000000000000000"></A>
+<A NAME="byte_extract"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">33</SPAN> byte_extract
+</H2>
+
+<P>
+The <TT>byte_extract</TT> keyword is another useful option for writing rules
+against length-encoded protocols. It reads in some number of bytes from the
+packet payload and saves it to a variable. These variables can be referenced
+later in the rule, instead of using hard-coded values.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Only two <TT>byte_extract</TT> variables may be created per rule. They can be
+re-used in the same rule any number of times.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION004533100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">33</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    byte_extract:&lt;bytes_to_extract&gt;, &lt;offset&gt;, &lt;name&gt; [, relative] \
+        [, multiplier &lt;multiplier value&gt;][, &lt;endian&gt;][, string][, hex][, dec][, oct] \
+        [, align &lt;align value&gt;][, dce][, bitmask &lt;bitmask&gt;];
+
+    bytes_to_extract = 1 - 10
+    operator         = '&lt;' | '=' | '&gt;' | '&lt;=' | '&gt;=' | '&amp;' | '^'
+    value            = 0 - 4294967295
+    offset           = -65535 to 65535
+    bitmask_value    = 1 to 4 byte hexadecimal value
+</PRE>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bytes_to_extract</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Number of bytes to pick up from the packet</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>offset</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Number of bytes into the payload to start processing</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>name</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Name of the variable. This will be used to reference the
+variable in other rule options.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>relative</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Use an offset relative to last pattern match</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>multiplier <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Multiply the bytes read from the packet by
+<TT><SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT> and save that number into the variable.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>big</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Process data as big endian (default)</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>little</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Process data as little endian</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>dce</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Use the DCE/RPC 2 preprocessor to determine the byte-ordering.
+The DCE/RPC 2 preprocessor must be enabled for this option to work.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>string</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Data is stored in string format in packet</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>hex</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Converted string data is represented in hexadecimal</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>dec</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Converted string data is represented in decimal</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>oct</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Converted string data is represented in octal</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>align <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Round the number of converted bytes up to the next
+<TT><SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>-byte</TT> boundary. <TT><SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT> may be <TT>2</TT> or
+<TT>4</TT>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bitmask</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Applies the AND operator on the value of <TT>bytes_to_extract</TT> 
+argument. The result will be right-shifted by the number of bits equal to the 
+number of trailing zeros in the mask.</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H3><A NAME="SECTION004533200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">33</SPAN>.<SPAN CLASS="arabic">2</SPAN> Other options which use byte_extract variables</A>
+</H3>
+
+<P>
+A <TT>byte_extract</TT> rule option detects nothing by itself. Its use is in
+extracting packet data for use in other rule options. Here is a list of places
+where <TT>byte_extract</TT> variables can be used:
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Rule Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Arguments that Take Variables</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>content</TT>/<TT>uricontent</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><TT>offset</TT>, <TT>depth</TT>,
+<TT>distance</TT>, <TT>within</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>byte_test</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><TT>offset</TT>, <TT>value</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>byte_jump</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><TT>offset</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>isdataat</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><TT>offset</TT></TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H3><A NAME="SECTION004533300000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">33</SPAN>.<SPAN CLASS="arabic">3</SPAN> Examples</A>
+</H3>
+
+<P>
+This example uses two variables to:
+
+<UL>
+<LI>Read the offset of a string from a byte at offset 0.
+</LI>
+<LI>Read the depth of a string from a byte at offset 1.
+</LI>
+<LI>Use these values to constrain a pattern match to a smaller area.
+</LI>
+</UL>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any any (byte_extract:1, 0, str_offset; \
+        byte_extract:1, 1, str_depth; \
+        content:"bad stuff"; offset:str_offset; depth:str_depth; \
+        msg:"Bad Stuff detected within field";)
+
+    alert tcp any any -&gt; any any (content:"|04 63 34 35|"; offset:4; depth:4; \
+        byte_extract: 2, 0, var_match, relative, bitmask 0x03ff; \
+        byte_test: 2, =, var_match, 2, relative; \
+        msg:"Byte test value matches bitmask applied on bytes extracted";)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004534000000000000000"></A>
+<A NAME="sub:byte_math"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">34</SPAN> byte_math
+</H2>
+
+<P>
+Perform a mathematical operation on an extracted value and a specified value 
+or existing variable, and store the outcome in a new resulting variable. 
+These resulting variables can be referenced later in the rule, 
+instead of using hard-coded values.
+
+<P>
+
+<H3><A NAME="SECTION004534100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">34</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    byte_math:bytes &lt;bytes_to_extract&gt;, offset &lt;offset_value&gt;, oper &lt;operator&gt;, 
+        rvalue &lt;r_value&gt;, result &lt;result_variable&gt; [, relative] 
+        [, endian &lt;endian&gt;] [, string &lt;number type&gt;][, dce] 
+        [, bitmask &lt;bitmask_value&gt;];
+
+    bytes_to_extract = 1 - 10
+    operator         = '+' | '-' | '*' | '/' | '&lt;&lt;' | '&gt;&gt;'
+    r_value          = 0 - 4294967295 | byte extract variable
+    offset_value     = -65535 to 65535
+    bitmask_value    = 1 to 4 byte hexadecimal value
+    result_variable  = Result Variable name
+</PRE>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bytes_to_extract</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Number of bytes to pick up from the packet. The allowed values are 1 to 10 when
+used without <TT>dce</TT>. If used with <TT>dce</TT> allowed values are 1, 2 and 4.
+If used with <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img36.png"
+ ALT="$&lt;&lt;$"></SPAN> or <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$&gt;&gt;$"></SPAN> operator, allowed values are 1 to 4.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>oper</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Mathematical Operation to perform on the extracted value
+Operations allowed: +, -, *, /, <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img36.png"
+ ALT="$&lt;&lt;$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$&gt;&gt;$"></SPAN></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>rvalue</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Value to use mathematical operation against</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>offset</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Number of bytes into the payload to start processing</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>relative</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Use an offset relative to last pattern match</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>endian</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Endian type of the number being read:
+
+<UL>
+<LI><TT>big</TT> - Process data as big endian (default)
+</LI>
+<LI><TT>little</TT> - Process data as little endian
+</LI>
+</UL></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>string</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Data is stored in string format in packet</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>number type</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Type of number being read:
+
+<UL>
+<LI><TT>hex</TT> - Converted string data is represented in hexadecimal
+</LI>
+<LI><TT>dec</TT> - Converted string data is represented in decimal
+</LI>
+<LI><TT>oct</TT> - Converted string data is represented in octal
+</LI>
+</UL></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>dce</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Let the DCE/RPC 2 preprocessor determine the byte order of the value to be
+converted.  See section <A HREF="node17.html#sub:dcerpc2"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and examples
+(<A HREF="node17.html#dcerpc2:byte_test_jump"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for quick reference).</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bitmask</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Applies the AND operator on the bytes extracted. The result will be
+right-shifted by the number of bits equal to the number of trailing zeros
+in the mask.</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H3><A NAME="SECTION004534200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">34</SPAN>.<SPAN CLASS="arabic">2</SPAN> Other rule options which use byte_math result variable</A>
+</H3>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Rule Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Arguments that take result variable</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>content</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><TT>offset</TT>, <TT>depth</TT>,
+<TT>distance</TT>, <TT>within</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>byte_test</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><TT>offset</TT>, <TT>value</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>byte_jump</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><TT>offset</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>isdataat</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><TT>offset</TT></TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H3><A NAME="SECTION004534300000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">34</SPAN>.<SPAN CLASS="arabic">3</SPAN> Examples</A>
+</H3>
+
+<P>
+<PRE>
+    alert udp $EXTERNAL_NET any -&gt; $HOME_NET any \
+        (msg:"Perform Arithmetic Operation on the extracted bytes"; \
+        content:"|00 04 93 F3|"; \
+        content:"|00 00 00 07|"; distance:4; within:4; \
+        byte_math:bytes 4, offset 0, oper +, rvalue 248, result var, relative; \
+        byte_test:4, &gt;, var, 2, relative;)
+
+    alert tcp $EXTERNAL_NET any -&gt; $HOME_NET any \
+        (msg:"Bitwise shift operator"; \
+        content:"|00 00 00 07|"; distance:4; within:4; \
+        byte_extract: 1, 0, extracted_val, relative; \
+        byte_math: bytes 1, offset 2, oper &gt;&gt;, rvalue extracted_val, result var, relative; \
+        byte_test:2, =, var, 0, relative;)
+
+    alert udp any any -&gt; any 1234 \
+        (content: "Packets start"; \
+        byte_math: bytes 2, offset 0, oper -, rvalue 100, result var, relative, bitmask 0x7FF0; \
+        content: "Packets end"; distance: 2; within var; \
+        msg:"Content match with bitmask applied to the bytes extracted";)
+
+    alert udp any any -&gt; any 1235 \
+        (byte_extract: 4, 3,  extracted_val, relative; \
+        byte_math: bytes 5, offset 0, oper +, rvalue extracted_val, result var, string hex; \
+        byte_test:5, =, var, 4, string, hex; \
+        msg:"String operator used with math rule option";)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004535000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">35</SPAN> ftpbounce</A>
+</H2>
+
+<P>
+The ftpbounce keyword detects FTP bounce attacks.
+
+<P>
+
+<H3><A NAME="SECTION004535100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">35</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    ftpbounce;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION004535200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">35</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp $EXTERNAL_NET any -&gt; $HOME_NET 21 (msg:"FTP PORT bounce attempt"; \
+        flow:to_server,established; content:"PORT"; nocase; ftpbounce; pcre:"/^PORT/smi";\
+        classtype:misc-attack; sid:3441; rev:1;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004536000000000000000"></A>
+<A NAME="asn1"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">36</SPAN> asn1
+</H2>
+
+<P>
+The ASN.1 detection plugin decodes a packet or a portion of a packet, and looks
+for various malicious encodings.
+
+<P>
+Multiple options can be used in an 'asn1' option and the implied logic is
+boolean OR.  So if any of the arguments evaluate as true, the whole option
+evaluates as true.
+
+<P>
+The ASN.1 options provide programmatic detection capabilities as well as some
+more dynamic type detection.  If an option has an argument, the option and the
+argument are separated by a space or a comma.  The preferred usage is to use a
+space between option and argument.
+
+<P>
+
+<H3><A NAME="SECTION004536100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">36</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    asn1:[bitstring_overflow][, double_overflow][, oversize_length &lt;value&gt;][, absolute_offset &lt;value&gt;|relative_offset &lt;value&gt;];
+</PRE>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>bitstring_overflow</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Detects invalid bitstring encodings that are known to be remotely exploitable.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>double_overflow</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Detects a double ASCII encoding that is larger than a standard buffer.  This is
+known to be an exploitable function in Microsoft, but it is unknown at this
+time which services may be exploitable.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>oversize_length <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Compares ASN.1 type lengths with the supplied argument.  The syntax looks like,
+&ldquo;oversize_length 500&rdquo;.  This means that if an ASN.1 type is greater than
+500, then this keyword is evaluated as true.  This keyword must have one
+argument which specifies the length to compare against.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>absolute_offset <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+This is the absolute offset from the beginning of the packet.  For example, if
+you wanted to decode snmp packets, you would say &ldquo;absolute_offset 0&rdquo;.
+<TT>absolute_offset</TT> has one argument, the offset value.  Offset may be
+positive or negative.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>relative_offset <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>value<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+This is the relative offset from the last content match, pcre or byte_jump.
+<TT>relative_offset</TT> has one argument, the offset number.  So if you
+wanted to start decoding an ASN.1 sequence right after the content &ldquo;foo&rdquo;,
+you would specify <code>'content:"foo"; asn1:bitstring_overflow, relative_offset 0'</code>.
+Offset values may be positive or negative.</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H3><A NAME="SECTION004536200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">36</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+<PRE>
+    alert udp any any -&gt; any 161 (msg:"Oversize SNMP Length"; \
+        asn1:oversize_length 10000, absolute_offset 0;)
+        
+    alert tcp any any -&gt; any 80 (msg:"ASN1 Relative Foo"; content:"foo"; \
+        asn1:bitstring_overflow, relative_offset 0;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004537000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">37</SPAN> cvs</A>
+</H2>
+
+<P>
+The CVS detection plugin aids in the detection of: Bugtraq-10384,
+CVE-2004-0396: "Malformed Entry Modified and Unchanged flag insertion".
+Default CVS server ports are 2401 and 514 and are included in the default ports
+for stream reassembly.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+This plugin cannot do detection over encrypted sessions, e.g. SSH (usually port
+22).
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION004537100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">37</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    cvs:&lt;option&gt;;
+</PRE>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Option</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>invalid-entry</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Looks for an invalid Entry string, which is a way of causing a heap overflow
+(see CVE-2004-0396) and bad pointer dereference in versions of CVS 1.11.15 and
+before.</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H3><A NAME="SECTION004537200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">37</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 2401 (msg:"CVS Invalid-entry"; \
+        flow:to_server,established; cvs:invalid-entry;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION004538000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">38</SPAN> dce_iface</A>
+</H2>
+
+<P>
+See the DCE/RPC 2 Preprocessor section <A HREF="node17.html#sub:dcerpc2"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples of using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004539000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">39</SPAN> dce_opnum</A>
+</H2>
+
+<P>
+See the DCE/RPC 2 Preprocessor section <A HREF="node17.html#sub:dcerpc2"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples of using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004540000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">40</SPAN> dce_stub_data</A>
+</H2>
+
+<P>
+See the DCE/RPC 2 Preprocessor section <A HREF="node17.html#sub:dcerpc2"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples of using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004541000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">41</SPAN> sip_method</A>
+</H2>
+
+<P>
+See the SIP Preprocessor section <A HREF="node17.html#sub:sip"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples of using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004542000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">42</SPAN> sip_stat_code</A>
+</H2>
+
+<P>
+See the SIP Preprocessor section <A HREF="node17.html#sub:sip"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples of using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004543000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">43</SPAN> sip_header</A>
+</H2>
+
+<P>
+See the SIP Preprocessor section <A HREF="node17.html#sub:sip"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples of using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004544000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">44</SPAN> sip_body</A>
+</H2>
+
+<P>
+See the SIP Preprocessor section <A HREF="node17.html#sub:sip"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples of using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004545000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">45</SPAN> gtp_type</A>
+</H2>
+
+<P>
+See the GTP Preprocessor section <A HREF="node17.html#sub:gtp"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples of using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004546000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">46</SPAN> gtp_info</A>
+</H2>
+
+<P>
+See the GTP Preprocessor section <A HREF="node17.html#sub:gtp"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples of using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004547000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">47</SPAN> gtp_version</A>
+</H2>
+
+<P>
+See the GTP Preprocessor section <A HREF="node17.html#sub:gtp"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and
+examples of using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004548000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">48</SPAN> ssl_version</A>
+</H2>
+
+<P>
+See the SSL/TLS Preprocessor section <A HREF="node17.html#sub:SSL_TLS"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and examples of
+using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004549000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">49</SPAN> ssl_state</A>
+</H2>
+
+<P>
+See the SSL/TLS Preprocessor section <A HREF="node17.html#sub:SSL_TLS"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a description and examples of
+using this rule option.
+
+<P>
+
+<H2><A NAME="SECTION004550000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">50</SPAN> Payload Detection Quick Reference</A>
+</H2>
+<DIV ALIGN="CENTER">
+<A NAME="5258"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Table:</STRONG>
+Payload detection rule option keywords</CAPTION>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>Keyword</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Description</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>content</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The content keyword allows the user to set rules that search for specific
+content in the packet payload and trigger response based on that data.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>rawbytes</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The rawbytes keyword allows rules to look at the raw packet data, ignoring any
+decoding that was done by preprocessors.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>depth</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The depth keyword allows the rule writer to specify how far into a packet Snort
+should search for the specified pattern.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>offset</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The offset keyword allows the rule writer to specify where to start searching
+for a pattern within a packet.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>distance</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The distance keyword allows the rule writer to specify how far into a packet
+Snort should ignore before starting to search for the specified pattern
+relative to the end of the previous pattern match.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>within</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The within keyword is a content modifier that makes sure that at most N bytes
+are between pattern matches using the content keyword.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>uricontent</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The uricontent keyword in the Snort rule language searches the normalized
+request URI field.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>isdataat</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The isdataat keyword verifies that the payload has data at a specified
+location.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>pcre</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The pcre keyword allows rules to be written using perl compatible regular
+expressions.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>byte_test</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The byte_test keyword tests a byte field against a specific value (with
+operator).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>byte_jump</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The byte_jump keyword allows rules to read the length of a portion of data,
+then skip that far forward in the packet.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>ftpbounce</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The ftpbounce keyword detects FTP bounce attacks.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>asn1</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The asn1 detection plugin decodes a packet or a portion of a packet, and looks
+for various malicious encodings.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>cvs</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The cvs keyword detects invalid entry strings.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>dce_iface</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+See the DCE/RPC 2 Preprocessor section <A HREF="node17.html#dcerpc2:dce_iface"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>dce_opnum</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+See the DCE/RPC 2 Preprocessor section <A HREF="node17.html#dcerpc2:dce_opnum"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>dce_stub_data</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+See the DCE/RPC 2 Preprocessor section <A HREF="node17.html#dcerpc2:dce_stub_data"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>sip_method</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+See the SIP Preprocessor section <A HREF="node17.html#sub:sip"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>sip_stat_code</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+See the SIP Preprocessor section <A HREF="node17.html#sub:sip"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>sip_header</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+See the SIP Preprocessor section <A HREF="node17.html#sub:sip"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>sip_body</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+See the SIP Preprocessor section <A HREF="node17.html#sub:sip"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>gtp_type</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+See the GTP Preprocessor section <A HREF="node17.html#sub:gtp"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>gtp_info</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+See the GTP Preprocessor section <A HREF="node17.html#sub:gtp"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>gtp_version</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+See the GTP Preprocessor section <A HREF="node17.html#sub:gtp"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1233"
+  HREF="node33.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1229"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1223"
+  HREF="node31.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1231"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1234"
+  HREF="node33.html">3.6 Non-Payload Detection Rule</A>
+<B> Up:</B> <A NAME="tex2html1230"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Previous:</B> <A NAME="tex2html1224"
+  HREF="node31.html">3.4 General Rule Options</A>
+ &nbsp; <B>  <A NAME="tex2html1232"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node32.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>

@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node45.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+<HEAD>
+<TITLE>5.4 Buffer dump utility</TITLE>
+<META NAME="description" CONTENT="5.4 Buffer dump utility">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node46.html">
+<LINK REL="previous" HREF="node44.html">
+<LINK REL="up" HREF="node41.html">
+<LINK REL="next" HREF="node46.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1662"
+  HREF="node46.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1658"
+  HREF="node41.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1652"
+  HREF="node44.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1660"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1663"
+  HREF="node46.html">5.5 The Snort Team</A>
+<B> Up:</B> <A NAME="tex2html1659"
+  HREF="node41.html">5. Snort Development</A>
+<B> Previous:</B> <A NAME="tex2html1653"
+  HREF="node44.html">5.3 Unified2 File Format</A>
+ &nbsp; <B>  <A NAME="tex2html1661"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1664"
+  HREF="node45.html#SECTION00641000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Example Buffer Dump output</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00640000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> Buffer dump utility</A>
+</H1>
+
+<P>
+Buffer dump option will dump the buffers used by snort during different stages of packet processing path.
+
+<P>
+<PRE>
+    ./configure --enable-buffer-dump / -DDUMP_BUFFER
+</PRE>
+
+<P>
+Two options are provided to dump buffers. '-buffer-dump-alert' will dump buffers only when there is an alert.
+
+<P>
+'-buffer-dump' will dump buffers for every packet.
+
+<P>
+<PRE>
+   ./snort -A cmg -k none -Q --daq-dir=&lt;dir&gt; --daq dump -r &lt;pcap&gt; -c snort.conf --buffer-dump-alert=&lt;file&gt;
+     or
+   ./snort -A cmg -k none -Q --daq-dir=&lt;dir&gt; --daq dump -r &lt;pcap&gt; -c snort.conf --buffer-dump=&lt;file&gt;
+
+Note: If &lt;file&gt; parameter is not used, buffers are dumped on the console
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00641000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Example Buffer Dump output</A>
+</H2>
+
+<P>
+<PRE>
+METHOD_DUMP, 3
+
+00000000  47 45 54                                          |GET             |
+
+URI_DUMP, 340
+
+00000000  2F 70 68 70 42 42 33 2F  76 69 65 77 74 6F 70 69  |/phpBB3/viewtopi|
+00000010  63 2E 70 68 70 3F 70 3D  39 30 30 32 26 73 69 64  |c.php?p=9002&amp;sid|
+00000020  3D 66 35 33 39 39 61 32  64 32 34 33 63 65 61 64  |=f5399a2d243cead|
+00000030  33 61 35 65 61 37 61 64  66 31 35 62 66 63 38 37  |3a5ea7adf15bfc87|
+00000040  32 26 68 69 67 68 6C 69  67 68 74 3D 27 2E 66 77  |2&amp;highlight='.fw|
+00000050  72 69 74 65 28 66 6F 70  65 6E 28 63 68 72 28 31  |rite(fopen(chr(1|
+00000060  30 39 29 2E 63 68 72 28  34 39 29 2E 63 68 72 28  |09).chr(49).chr(|
+00000070  31 30 34 29 2E 63 68 72  28 31 31 31 29 2E 63 68  |104).chr(111).ch|
+00000080  72 28 35 30 29 2E 63 68  72 28 31 31 31 29 2E 63  |r(50).chr(111).c|
+00000090  68 72 28 31 30 32 29 2C  63 68 72 28 39 37 29 29  |hr(102),chr(97))|
+000000a0  2C 63 68 72 28 33 35 29  2E 63 68 72 28 33 33 29  |,chr(35).chr(33)|
+000000b0  2E 63 68 72 28 34 37 29  2E 63 68 72 28 31 31 37  |.chr(47).chr(117|
+000000c0  29 2E 63 68 72 28 31 31  35 29 2E 63 68 72 28 31  |).chr(115).chr(1|
+000000d0  31 34 29 2E 63 68 72 28  34 37 29 2E 63 68 72 28  |14).chr(47).chr(|
+000000e0  39 38 29 2E 63 68 72 28  31 30 35 29 2E 63 68 72  |98).chr(105).chr|
+000000f0  28 31 31 30 29 2E 63 68  72 28 34 37 29 2E 63 68  |(110).chr(47).ch|
+00000100  72 28 31 31 32 29 2E 63  68 72 28 31 30 31 29 2E  |r(112).chr(101).|
+00000110  63 68 72 28 31 31 34 29  2E 63 68 72 28 31 30 38  |chr(114).chr(108|
+00000120  29 2E 63 68 72 28 31 30  29 2E 63 68 72 28 31 31  |).chr(10).chr(11|
+00000130  37 29 2E 63 68 72 28 31  31 35 29 2E 63 68 72 28  |7).chr(115).chr(|
+00000140  31 30 31 29 2E 63 68 72  28 33 32 29 29 2C 65 78  |101).chr(32)),ex|
+00000150  69 74 2E FF                                       |it..            |
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node45.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>

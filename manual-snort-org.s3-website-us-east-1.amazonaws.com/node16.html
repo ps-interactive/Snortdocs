@@ -1,0 +1,1249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node16.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+<HEAD>
+<TITLE>2.1 Includes</TITLE>
+<META NAME="description" CONTENT="2.1 Includes">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node17.html">
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html677"
+  HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html673"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html667"
+  HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html675"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html678"
+  HREF="node17.html">2.2 Preprocessors</A>
+<B> Up:</B> <A NAME="tex2html674"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html668"
+  HREF="node15.html">2. Configuring Snort</A>
+ &nbsp; <B>  <A NAME="tex2html676"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html679"
+  HREF="node16.html#SECTION00311000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html680"
+  HREF="node16.html#SECTION00312000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Variables</A>
+<UL>
+<LI><A NAME="tex2html681"
+  HREF="node16.html#SECTION00312100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> IP Variables and IP Lists</A>
+<LI><A NAME="tex2html682"
+  HREF="node16.html#SECTION00312200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Port Variables and Port Lists</A>
+<LI><A NAME="tex2html683"
+  HREF="node16.html#SECTION00312300000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Variable Modifiers</A>
+<LI><A NAME="tex2html684"
+  HREF="node16.html#SECTION00312400000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Limitations</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html685"
+  HREF="node16.html#SECTION00313000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Config</A>
+<UL>
+<LI><A NAME="tex2html686"
+  HREF="node16.html#SECTION00313100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00310000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Includes</A>
+</H1>
+
+<P>
+The <TT>include</TT> keyword allows other snort config files to be included within the
+snort.conf indicated on the Snort command line. It works much like an #include
+from the C programming language, reading the contents of the named file and
+adding the contents in the place where the include statement appears in the
+file.
+
+<P>
+
+<H2><A NAME="SECTION00311000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H2>
+<PRE>
+    include &lt;include file path/name&gt;
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Note that there is no semicolon at the end of this line. 
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+Included files will substitute any predefined variable values into their own
+variable references.  See Section <A HREF="#variables"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information on
+defining and using variables in Snort config files.
+
+<P>
+
+<H2><A NAME="SECTION00312000000000000000"></A>
+<A NAME="variables"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Variables
+</H2>
+
+<P>
+Three types of variables may be defined in Snort:
+
+<P>
+
+<UL>
+<LI>var
+</LI>
+<LI>portvar
+</LI>
+<LI>ipvar
+</LI>
+</UL>
+
+<P>
+These are simple substitution variables set with the <TT>var</TT>, <TT>ipvar</TT>, or
+<TT>portvar</TT> keywords as follows:
+
+<P>
+<PRE>
+    var RULES_PATH rules/
+    portvar MY_PORTS [22,80,1024:1050]
+    ipvar MY_NET [192.168.1.0/24,10.1.1.0/24]
+    alert tcp any any -&gt; $MY_NET $MY_PORTS (flags:S; msg:"SYN packet";)
+    include $RULE_PATH/example.rule
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00312100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> IP Variables and IP Lists</A>
+</H3>
+
+<P>
+IPs may be specified individually, in a list, as a CIDR block, or any
+combination of the three.  IP variables should be specified using 'ipvar'
+instead of 'var'.  Using 'var' for an IP variable is still allowed for backward
+compatibility, but it will be deprecated in a future release.
+
+<P>
+IP variable name can begin with an alphanumeric character [A-Za-z0-9] or '_'
+and should be followed by characters and numbers. Only numbers are not
+accepted as variable names.
+
+<P>
+IPs, IP lists, and CIDR blocks may be negated with '!'.  Negation is handled
+differently compared with Snort versions 2.7.x and earlier.  Previously, each
+element in a list was logically OR'ed together.  IP lists now OR non-negated
+elements and AND the result with the OR'ed negated elements.  
+
+<P>
+The following example list will match the IP 1.1.1.1 and IP from 2.2.2.0 to
+2.2.2.255, with the exception of IPs 2.2.2.2 and 2.2.2.3.
+
+<P>
+<PRE>
+    [1.1.1.1,2.2.2.0/24,![2.2.2.2,2.2.2.3]]
+</PRE>
+
+<P>
+The order of the elements in the list does not matter.  The element 'any' can
+be used to match all IPs, although '!any' is not allowed.  Also, negated IP
+ranges that are more general than non-negated IP ranges are not allowed.  
+
+<P>
+See below for some valid examples if IP variables and IP lists.
+
+<P>
+<PRE>
+    ipvar EXAMPLE [1.1.1.1,2.2.2.0/24,![2.2.2.2,2.2.2.3]] 
+    
+    alert tcp $EXAMPLE any -&gt; any any (msg:"Example"; sid:1;)
+
+    alert tcp [1.0.0.0/8,!1.1.1.0/24] any -&gt; any any (msg:"Example";sid:2;)
+</PRE>
+
+<P>
+The following examples demonstrate some invalid uses of IP variables and IP
+lists.
+
+<P>
+Use of !any:
+
+<P>
+<PRE>
+    ipvar EXAMPLE any
+    alert tcp !$EXAMPLE any -&gt; any any (msg:"Example";sid:3;)
+</PRE>
+
+<P>
+Different use of !any:
+
+<P>
+<PRE>
+    ipvar EXAMPLE !any
+    alert tcp $EXAMPLE any -&gt; any any (msg:"Example";sid:3;)
+</PRE>
+
+<P>
+Logical contradictions:
+
+<P>
+<PRE>
+    ipvar EXAMPLE [1.1.1.1,!1.1.1.1]
+</PRE>
+
+<P>
+Nonsensical negations:
+
+<P>
+<PRE>
+    ipvar EXAMPLE [1.1.1.0/24,!1.1.0.0/16]
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00312200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Port Variables and Port Lists</A>
+</H3>
+
+<P>
+Portlists supports the declaration and lookup of ports and the representation
+of lists and ranges of ports.  Variables, ranges, or lists may all be negated
+with '!'.  Also, 'any' will specify any ports, but '!any' is not allowed.
+Valid port ranges are from 0 to 65535.
+
+<P>
+Lists of ports must be enclosed in brackets and port ranges may be specified
+with a ':', such as in:
+
+<P>
+<PRE>     
+    [10:50,888:900]
+</PRE>
+
+<P>
+Port variables should be specified using 'portvar'.  The use of 'var' to
+declare a port variable will be deprecated in a future release.  For backwards
+compatibility, a 'var' can still be used to declare a port variable, provided
+the variable name either ends with '_PORT' or begins with 'PORT_'. 
+
+<P>
+The following examples demonstrate several valid usages of both port variables
+and port lists.
+
+<P>
+<PRE>     
+    portvar EXAMPLE1 80
+
+    var EXAMPLE2_PORT [80:90]
+
+    var PORT_EXAMPLE2 [1]
+
+    portvar EXAMPLE3 any
+
+    portvar EXAMPLE4 [!70:90]
+
+    portvar EXAMPLE5 [80,91:95,100:200]
+
+    alert tcp any $EXAMPLE1 -&gt; any $EXAMPLE2_PORT (msg:"Example"; sid:1;)
+
+    alert tcp any $PORT_EXAMPLE2 -&gt; any any (msg:"Example"; sid:2;)
+
+    alert tcp any 90 -&gt; any [100:1000,9999:20000] (msg:"Example"; sid:3;)
+</PRE>
+
+<P>
+Several invalid examples of port variables and port lists are demonstrated
+below:
+
+<P>
+Use of !any:
+
+<P>
+<PRE>     
+    portvar EXAMPLE5 !any
+    var EXAMPLE5 !any
+</PRE>
+
+<P>
+Logical contradictions:
+
+<P>
+<PRE>     
+    portvar EXAMPLE6 [80,!80]
+</PRE>
+
+<P>
+Ports out of range:
+
+<P>
+<PRE>     
+    portvar EXAMPLE7 [65536]
+</PRE>
+
+<P>
+Incorrect declaration and use of a port variable:
+
+<P>
+<PRE>     
+    var EXAMPLE8 80 
+    alert tcp any $EXAMPLE8 -&gt; any any (msg:"Example"; sid:4;)
+</PRE>
+
+<P>
+Port variable used as an IP:
+
+<P>
+<PRE>     
+    alert tcp $EXAMPLE1 any -&gt; any any (msg:"Example"; sid:5;)
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00312300000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Variable Modifiers</A>
+</H3>
+
+<P>
+Rule variable names can be modified in several ways. You can define
+meta-variables using the $ operator. These can be used with the variable
+modifier operators <TT>?</TT>  and <TT>-</TT>, as described in the following table: 
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TH ALIGN="LEFT"><SPAN  CLASS="textbf">Variable Syntax</SPAN></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=324><SPAN  CLASS="textbf">Description</SPAN></TH>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>var</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Defines a meta-variable.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>$(var) or $var</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Replaces with the contents of variable <TT>var</TT>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>$(var:-default)</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Replaces the contents of the variable <TT>var</TT> with &ldquo;default&rdquo; if
+<TT>var</TT> is undefined.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>$(var:?message)</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Replaces with the contents of variable <TT>var</TT> or prints out the error
+message and exits.</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Here is an example of advanced variable usage in action:
+
+<P>
+<PRE>
+    ipvar MY_NET 192.168.1.0/24
+    log tcp any any -&gt; $(MY_NET:?MY_NET is undefined!) 23
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00312400000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Limitations</A>
+</H3>
+
+<P>
+When embedding variables, types can not be mixed.  For instance, port variables
+can be defined in terms of other port variables, but old-style variables (with
+the 'var' keyword) can not be embedded inside a 'portvar'.
+
+<P>
+Valid embedded variable:
+
+<P>
+<PRE>
+    portvar pvar1 80
+    portvar pvar2 [$pvar1,90]
+</PRE>
+
+<P>
+Invalid embedded variable:
+
+<P>
+<PRE>
+    var pvar1 80
+    portvar pvar2 [$pvar1,90]
+</PRE>
+
+<P>
+Likewise, variables can not be redefined if they were previously defined as a
+different type.  They should be renamed instead:
+
+<P>
+Invalid redefinition:
+
+<P>
+<PRE>
+    var pvar 80
+    portvar pvar 90
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00313000000000000000"></A>
+<A NAME="Config"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Config
+</H2>
+
+<P>
+Many configuration and command line options of Snort can be specified in the
+configuration file. 
+
+<P>
+
+<H3><A NAME="SECTION00313100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    config &lt;directive&gt; [: &lt;value&gt;]
+</PRE>
+
+<P>
+
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><B>Config Directive</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252><B>Description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config alert_with_interface_name</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Appends interface name to alert
+(<TT>snort -I</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config alertfile: &lt;filename&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets the alerts output file.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config asn1: &lt;max-nodes&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Specifies the maximum number of nodes to track when
+doing ASN1 decoding. See Section <A HREF="node32.html#asn1"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information and
+examples.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config autogenerate_preprocessor
+<BR>
+_decoder_rules</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>If Snort was
+configured to enable decoder and preprocessor rules, this option will cause
+Snort to revert back to its original behavior of alerting if the decoder or
+preprocessor generates an event.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config bpf_file: &lt;filename&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Specifies BPF filters (<TT>snort
+-F</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config checksum_drop: &lt;types&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Types of packets to drop if invalid
+checksums. Values: <TT>none</TT>, <TT>noip</TT>, <TT>notcp</TT>,
+<TT>noicmp</TT>, <TT>noudp</TT>, <TT>ip</TT>, <TT>tcp</TT>, <TT>udp</TT>,
+<TT>icmp</TT> or <TT>all</TT> (only applicable in inline mode and for packets
+checked per <TT>checksum_mode</TT> config option).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config checksum_mode: &lt;types&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Types of packets to calculate checksums.
+Values: <TT>none</TT>, <TT>noip</TT>, <TT>notcp</TT>, <TT>noicmp</TT>,
+<TT>noudp</TT>, <TT>ip</TT>, <TT>tcp</TT>, <TT>udp</TT>, <TT>icmp</TT> or
+<TT>all</TT>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config chroot: &lt;dir&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Chroots to specified dir (<TT>snort
+-t</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config classification: &lt;class&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>See Table
+<A HREF="node31.html#Snort_Default_Classifications"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for a list of classifications.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config cs_dir: &lt;path&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>configure snort to provide a Unix socket in the path
+that can be used to issue commands to the running process. See Section
+<A HREF="node12.html#control_socket"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more details.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config daemon</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Forks as a daemon (<TT>snort -D</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config decode_data_link</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Decodes Layer2 headers (<TT>snort
+-e</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config default_rule_state: &lt;state&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Global configuration directive
+to enable or disable the loading of rules into the detection engine.  Default
+(with or without directive) is enabled.  Specify <TT>disabled</TT> to disable
+loading rules.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config daq: &lt;type&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Selects the type of DAQ to instantiate.  The
+DAQ with the highest version of the given type is selected if there are 
+multiple of the same type (this includes any built-in DAQs).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config daq_mode: &lt;mode&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Select the DAQ mode: passive, inline, or
+read-file.  Not all DAQs support modes.  See the DAQ distro README for
+possible DAQ modes or list DAQ capabilities for a brief summary.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config daq_var: &lt;name=value&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Set a DAQ specific variable.  Snort
+just passes this information down to the DAQ.  See the DAQ distro README for
+possible DAQ variables.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config daq_dir: &lt;dir&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Tell Snort where to look for available
+dynamic DAQ modules.  This can be repeated.  The selected DAQ will be the
+one with the latest version.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config daq_list: [&lt;dir&gt;]</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Tell Snort to dump basic DAQ
+capabilities and exit.  You can optionally specify a directory to include any
+dynamic DAQs from that directory.  You can also precede this option with extra
+DAQ directory options to look in multiple directories.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config decode_esp: [enable | disable]</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enable or disable the decoding of
+Encapsulated Security Protocol (ESP). This is disabled by default.
+Some networks use ESP for authentication without encryption, allowing their
+content to be inspected. Encrypted ESP may cause some false positives if this
+option is enabled.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config detection: [search-method &lt;method&gt;]</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Select type of fast pattern
+matcher algorithm to use.
+
+<UL>
+<LI><TT>search-method &lt;method&gt;</TT>
+
+<UL>
+<LI>Queued match search methods -  Matches are queued until the fast pattern
+matcher is finished with the payload, then evaluated.  This was found to generally
+increase performance through fewer cache misses (evaluating each rule would
+generally blow away the fast pattern matcher
+state in the cache).
+
+<UL>
+<LI><TT>ac</TT> and <TT>ac-q</TT> - Aho-Corasick Full (high memory, best performance).
+</LI>
+<LI><TT>ac-bnfa</TT> and <TT>ac-bnfa-q</TT> - Aho-Corasick Binary NFA (low memory, high performance)
+</LI>
+<LI><TT>lowmem</TT> and <TT>lowmem-q</TT> - Low Memory Keyword Trie (low memory, moderate performance)
+</LI>
+<LI><TT>ac-split</TT> - Aho-Corasick Full with ANY-ANY port group evaluated separately (low memory, high performance).  Note this is shorthand for <TT>search-method ac, split-any-any</TT>
+</LI>
+<LI><TT>intel-cpm</TT> - Intel CPM library (must have compiled Snort with location of libraries to enable this)
+</LI>
+</UL>
+</LI>
+</UL>
+
+<UL>
+<LI>No queue search methods - The "nq" option specifies that matches should not
+be queued and evaluated as they are found.
+
+<UL>
+<LI><TT>ac-nq</TT> - Aho-Corasick Full (high memory, best performance).
+</LI>
+<LI><TT>ac-bnfa-nq</TT> - Aho-Corasick Binary NFA (low memory, high performance).
+This is the default search method if none is specified.
+</LI>
+<LI><TT>lowmem-nq</TT> - Low Memory Keyword Trie (low memory, moderate performance)
+</LI>
+</UL>
+</LI>
+</UL>
+
+<UL>
+<LI>Other search methods (the above are considered superior to these)
+
+<UL>
+<LI><TT>ac-std</TT> - Aho-Corasick Standard (high memory, high performance)
+</LI>
+<LI><TT>acs</TT> - Aho-Corasick Sparse (high memory, moderate performance)
+</LI>
+<LI><TT>ac-banded</TT> - Aho-Corasick Banded (high memory, moderate performance)
+</LI>
+<LI><TT>ac-sparsebands</TT> - Aho-Corasick Sparse-Banded (high memory, moderate performance)
+</LI>
+</UL>
+</LI>
+</UL>
+</LI>
+</UL></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config detection: [split-any-any] [search-optimize] [max-pattern-len &lt;int&gt;]</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Other options
+that affect fast pattern matching.
+
+<UL>
+<LI><TT>split-any-any</TT>
+
+<UL>
+<LI>A memory/performance tradeoff.  By default, ANY-ANY port rules are added to 
+every non ANY-ANY port group so that only one port group rule evaluation needs to 
+be done per packet.  Not putting the ANY-ANY port rule group into every other
+port group can significantly reduce the memory footprint of the fast pattern
+matchers if there are many ANY-ANY port rules.  But doing so may require two
+port group evaluations per packet - one for the specific port group and one for
+the ANY-ANY port group, thus potentially reducing performance.  This option is
+generic and can be used with any <TT>search-method</TT> but was specifically
+intended for use with the <TT>ac</TT> <TT>search-method</TT> where the memory
+footprint is significantly reduced though overall fast pattern performance is
+better than <TT>ac-bnfa</TT>.  Of note is that the lower memory footprint can
+also increase performance through fewer cache misses.  Default is not to split
+the ANY-ANY port group.
+</LI>
+</UL>
+</LI>
+<LI><TT>search-optimize</TT>
+
+<UL>
+<LI>Optimizes fast pattern memory when used with <TT>search-method</TT>
+<TT>ac</TT> or <TT>ac-split</TT> by dynamically determining the size of a 
+state based on the total number of states. When used with <TT>ac-bnfa</TT>, some
+fail-state resolution will be attempted, potentially increasing performance.
+Default is not to optimize.
+</LI>
+</UL>
+</LI>
+<LI><TT>max-pattern-len &lt;integer&gt;</TT>
+
+<UL>
+<LI>This is a memory optimization that specifies the maximum length of a pattern
+that will be put in the fast pattern matcher.  Patterns longer than this length
+will be truncated to this length before inserting into the pattern matcher.  Useful
+when there are very long contents being used and truncating the pattern won't diminish
+the uniqueness of the patterns.  Note that this may cause more false positive rule
+evaluations, i.e. rules that will be evaluated because a fast pattern was matched,
+but eventually fail, however CPU cache can play a part in performance so a smaller memory
+footprint of the fast pattern matcher can potentially increase performance.  Default
+is to not set a maximum pattern length.
+</LI>
+</UL>
+</LI>
+</UL></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config detection: [no_stream_inserts] [max_queue_events &lt;int&gt;] [enable-single-rule-group] [bleedover-port-limit]</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Other detection engine options.
+
+<UL>
+<LI><TT>no_stream_inserts</TT>
+
+<UL>
+<LI>Specifies that stream inserted packets should not be evaluated against the detection engine.
+This is a potential performance improvement with the idea that the stream rebuilt packet will
+contain the payload in the inserted one so the stream inserted packet doesn't need to be
+evaluated.  Default is to inspect stream inserts.
+</LI>
+</UL>
+</LI>
+<LI><TT>max_queue_events &lt;integer&gt;</TT>
+
+<UL>
+<LI>Specifies the maximum number of matching fast-pattern states to queue per packet.
+Default is 5 events.
+</LI>
+</UL>
+</LI>
+<LI><TT>enable-single-rule-group</TT>
+
+<UL>
+<LI>Put all rules into one port group.  Not recommended.  Default is not to
+do this.
+</LI>
+</UL>
+</LI>
+<LI><TT>bleedover-port-limit</TT>
+
+<UL>
+<LI>The maximum number of source or destination ports designated in a rule
+before the rule is considered an ANY-ANY port group rule.  Default is 1024.
+</LI>
+</UL>
+</LI>
+</UL></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config detection: [debug] [debug-print-nocontent-rule-tests] [debug-print-rule-group-build-details] [debug-print-rule-groups-uncompiled] [debug-print-rule-groups-compiled] [debug-print-fast-pattern] [bleedover-warnings-enabled]</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Options for detection engine debugging.
+
+<UL>
+<LI><TT>debug</TT>
+
+<UL>
+<LI>Prints fast pattern information for a particular port group.
+</LI>
+</UL>
+</LI>
+<LI><TT>debug-print-nocontent-rule-tests</TT>
+
+<UL>
+<LI>Prints port group information during packet evaluation.
+</LI>
+</UL>
+</LI>
+<LI><TT>debug-print-rule-group-build-details</TT>
+
+<UL>
+<LI>Prints port group information during port group compilation.
+</LI>
+</UL>
+</LI>
+<LI><TT>debug-print-rule-groups-uncompiled</TT>
+
+<UL>
+<LI>Prints uncompiled port group information.
+</LI>
+</UL>
+</LI>
+<LI><TT>debug-print-rule-groups-compiled</TT>
+
+<UL>
+<LI>Prints compiled port group information.
+</LI>
+</UL>
+</LI>
+<LI><TT>debug-print-fast-pattern</TT>
+
+<UL>
+<LI>For each rule with fast pattern content, prints information about the content
+being used for the fast pattern matcher.
+</LI>
+</UL>
+</LI>
+<LI><TT>bleedover-warnings-enabled</TT>
+
+<UL>
+<LI>Prints a warning if the number of source or destination ports used in a
+rule exceed the <TT>bleedover-port-limit</TT> forcing the rule to be moved into
+the ANY-ANY port group.
+</LI>
+</UL>
+</LI>
+</UL></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config disable_decode_alerts</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Turns off the alerts generated by the
+decode phase of Snort.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config disable_inline_init_failopen</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Disables failopen thread that
+allows inline traffic to pass while Snort is starting up.  Only useful if Snort
+was configured with -enable-inline-init-failopen.  (<TT>snort
+-disable-inline-init-failopen</TT>)</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config disable_ipopt_alerts</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Disables IP option length validation
+alerts.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config disable_tcpopt_alerts</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Disables option length validation
+alerts.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config
+<BR>
+disable_tcpopt_experimental_alerts</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Turns off
+alerts generated by experimental TCP options.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config disable_tcpopt_obsolete_alerts</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Turns off alerts
+generated by obsolete TCP options.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config disable_tcpopt_ttcp_alerts</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Turns off alerts generated by
+T/TCP options.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config disable_ttcp_alerts</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Turns off alerts generated by T/TCP
+options.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config dump_chars_only</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Turns on character dumps (<TT>snort
+-C</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config dump_payload</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Dumps application layer (<TT>snort -d</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config dump_payload_verbose</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Dumps raw packet starting at link
+layer (<TT>snort -X</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_decode_drops</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enables the dropping of bad packets
+identified by decoder (only applicable in inline mode).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_decode_oversized_alerts</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enable alerting
+on packets that have headers containing length fields for which the value is
+greater than the length of the packet.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_decode_oversized_drops</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enable dropping
+packets that have headers containing length fields for which the value is
+greater than the length of the packet.
+<TT>enable_decode_oversized_alerts</TT> must also be enabled for this to be
+effective (only applicable in inline mode).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_deep_teredo_inspection</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Snort's packet decoder only
+decodes Teredo (IPv6 over UDP over IPv4) traffic on UDP port 3544. This option
+makes Snort decode Teredo traffic on all UDP ports.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_ipopt_drops</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enables the dropping of bad packets with
+bad/truncated IP options (only applicable in inline mode).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_mpls_multicast</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enables support for MPLS multicast.
+This option is needed when the network allows MPLS multicast traffic. When this
+option is off and MPLS multicast traffic is detected, Snort will generate an
+alert. By default, it is off.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_mpls_overlapping_ip</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enables support for overlapping
+IP addresses in an MPLS network. In a normal situation, where there are no
+overlapping IP addresses, this configuration option should not be turned on.
+However, there could be situations where two private networks share the same IP
+space and different MPLS labels are used to differentiate traffic from the two
+VPNs. In such a situation, this configuration option should be turned on. By
+default, it is off.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_tcpopt_drops</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enables the dropping of bad packets
+with bad/truncated TCP option (only applicable in inline mode).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config
+<BR>
+enable_tcpopt_experimental_drops</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enables the
+dropping of bad packets with experimental TCP option.  (only applicable in
+inline mode).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_tcpopt_obsolete_drops</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enables the
+dropping of bad packets with obsolete TCP option.  (only applicable in inline
+mode).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_tcpopt_ttcp_drops</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enables the dropping of bad packets with
+T/TCP option. (only applicable in inline mode).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config enable_ttcp_drops</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Enables the dropping of bad packets with T/TCP
+option. (only applicable in inline mode).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config event_filter: memcap &lt;bytes&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Set global memcap in bytes for
+thresholding. Default is 1048576 bytes (1 megabyte).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config event_queue: [max_queue &lt;num&gt;] [log &lt;num&gt;] [order_events
+&lt;order&gt;]</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Specifies conditions about Snort's event queue. You can use the
+following options:
+
+<P>
+
+<UL>
+<LI><TT>max_queue <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>integer<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT> (max events supported)
+</LI>
+<LI><TT>log <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>integer<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT> (number of events to log) 
+</LI>
+<LI><TT>order_events [priority<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$\vert$"></SPAN>content_length]</TT> (how to order events within the queue)
+</LI>
+</UL>
+
+<P>
+See Section <A HREF="node19.html#eventqueue"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more information and examples.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config flowbits_size: &lt;num-bits&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Specifies the maximum number of
+flowbit tags that can be used within a rule set.  The default is 1024 bits
+and maximum is 2048.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config ignore_ports: &lt;proto&gt; &lt;port-list&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Specifies ports to ignore
+(useful for ignoring noisy NFS traffic). Specify the protocol (TCP, UDP, IP, or
+ICMP), followed by a list of ports. Port ranges are supported.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config interface: &lt;iface&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets the network interface (<TT>snort
+-i</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config ipv6_frag: [bsd_icmp_frag_alert on|off] [,
+bad_ipv6_frag_alert on|off] [, frag_timeout &lt;secs&gt;] [, max_frag_sessions
+&lt;max-track&gt;]</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>The following options can be used:
+
+<P>
+
+<UL>
+<LI><TT>bsd_icmp_frag_alert on|off</TT> (Specify whether or not to alert.
+Default is on)
+
+<P>
+</LI>
+<LI><TT>bad_ipv6_frag_alert on|off</TT> (Specify whether or not to alert.
+Default is on)
+
+<P>
+</LI>
+<LI><TT>frag_timeout <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>integer<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT> (Specify amount of time in seconds
+to timeout first frag in hash table)
+
+<P>
+</LI>
+<LI><TT>max_frag_sessions <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>integer<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT> (Specify the number of
+fragments to track in the hash table)
+
+<P>
+</LI>
+</UL></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config logdir: &lt;dir&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets the logdir (<TT>snort -l</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config log_ipv6_extra_data</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Set Snort to log IPv6 source and destination
+addresses as unified2 extra data events.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config max_attribute_hosts: &lt;hosts&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets a limit on the maximum
+number of hosts to read from the attribute table.  Minimum value is 32 and the
+maximum is 524288 (512k).  The default is 10000.  If the number of hosts in the
+attribute table exceeds this value, an error is logged and the remainder of the
+hosts are ignored.  This option is only supported with a Host Attribute Table
+(see section <A HREF="node22.html#targetbased"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config max_attribute_services_per_host: &lt;hosts&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets a per host
+limit on the maximum number of services to read from the attribute table. 
+Minimum value is 1 and the maximum is 65535.  The default is 100.  For a given
+host, if the number of services in the attribute table exceeds this value, an
+error is logged and the remainder of the services for that host are ignored. 
+This option is only supported with a Host Attribute Table (see section
+<A HREF="node22.html#targetbased"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config max_mpls_labelchain_len: &lt;num-hdrs&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets a Snort-wide
+limit on the number of MPLS headers a packet can have. Its default value is -1,
+which means that there is no limit on label chain length.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config max_ip6_extensions: &lt;num-extensions&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets the maximum number
+of IPv6 extension headers that Snort will decode. Default is 8.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config min_ttl: &lt;ttl&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets a Snort-wide minimum ttl to ignore all
+traffic.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config mpls_payload_type: ipv4|ipv6|ethernet</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets a Snort-wide
+MPLS payload type. In addition to ipv4, ipv6 and ethernet are also valid
+options. The default MPLS payload type is ipv4</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config no_promisc</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Disables promiscuous mode (<TT>snort -p</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config nolog</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Disables logging. Note: Alerts will still occur.
+(<TT>snort -N</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config nopcre</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Disables pcre pattern matching.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config obfuscate</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Obfuscates IP Addresses (<TT>snort -O</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config order: &lt;order&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Changes the order that rules
+are evaluated, e.g.: pass alert log activation.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config pcre_match_limit: <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>integer<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Restricts the amount of
+backtracking a given PCRE option.  For example, it will limit the number of
+nested repeats within a pattern.  A value of -1 allows for unlimited PCRE, up
+to the PCRE library compiled limit (around 10 million).  A value of 0 results
+in no PCRE evaluation.  The snort default value is 1500.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config pcre_match_limit_recursion: <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>integer<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Restricts the
+amount of stack used by a given PCRE option.  A value of -1 allows for
+unlimited PCRE, up to the PCRE library compiled limit (around 10 million).  A
+value of 0 results in no PCRE evaluation.  The snort default value is 1500.
+This option is only useful if the value is less than the
+<TT>pcre_match_limit</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config pkt_count: &lt;N&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Exits after N packets (<TT>snort -n</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config policy_version: <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>base-version-string<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN> [<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>binding-version-string<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>]</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Supply versioning information to configuration files.  Base version should be
+a string in all configuration files including included ones.  In addition,
+binding version must be in any file configured with <TT>config binding</TT>.
+This option is used to avoid race conditions when modifying and loading a
+configuration within a short time span - before Snort has had a chance to
+load a previous configuration.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config profile_preprocs</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Print statistics on preprocessor
+performance.  See Section <A HREF="node20.html#preproc_profiling"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more details.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config profile_rules</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Print statistics on rule performance.  See
+Section <A HREF="node20.html#rule_profiling"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for more details.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config protected_content:
+md5|sha256|sha512</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Specifies a default algorithm to use for protected_content rules.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config quiet</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Disables banner and status reports (<TT>snort -q</TT>).
+NOTE: The command line switch <TT>-q</TT> takes effect immediately after
+processing the command line parameters, whereas using <TT>config quiet</TT>
+in snort.conf takes effect when the configuration line in snort.conf is parsed.
+That may occur after other configuration settings that result in output to
+console or syslog.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config reference: &lt;ref&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Adds a new reference system to Snort, e.g.:
+myref http://myurl.com/?id=</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config reference_net &lt;cidr&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>For IP obfuscation, the obfuscated net
+will be used if the packet contains an IP address in the reference net.  Also
+used to determine how to set up the logging directory structure for the
+<TT>session</TT> post detection rule option and ASCII output plugin - an
+attempt is made to name the log directories after the IP address that is not in
+the reference net.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config response: [attempts &lt;count&gt;] [, device &lt;dev&gt;]</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Set the
+number of strafing attempts per injected response and/or the device, such as
+eth0, from which to send responses.  These options may appear in any order but
+must be comma separated.  The are intended for passive mode.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config set_gid: &lt;gid&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Changes GID to specified GID (<TT>snort
+-g</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config set_uid: &lt;uid&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets UID to <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>id<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN> (<TT>snort -u</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config show_year</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Shows year in timestamps (<TT>snort -y</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config snaplen: &lt;bytes&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Set the snaplength of packet, same effect as
+<TT>-P <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>snaplen<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT> or <TT>-snaplen <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>snaplen<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN></TT> options.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config so_rule_memcap: &lt;bytes&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Set global memcap in bytes for
+so rules that dynamically allocate memory for storing session data in the
+stream preprocessor.  A value of 0 disables the memcap.  Default is 0.
+Maximum value is the maximum value an unsigned 32 bit integer can hold
+which is 4294967295 or 4GB.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config stateful</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets assurance mode for stream (stream is
+established).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config tagged_packet_limit: &lt;max-tag&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>When a metric other than
+<TT>packets</TT> is used in a tag option in a rule, this option sets the
+maximum number of packets to be tagged regardless of the amount defined by the
+other metric.  See Section <A HREF="node34.html#tag_section"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> on using the tag option when
+writing rules for more details.  The default value when this option is not
+configured is 256 packets.  Setting this option to a value of 0 will disable
+the packet limit.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config threshold: memcap &lt;bytes&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Set global memcap in bytes for
+thresholding. Default is 1048576 bytes (1 megabyte). (This is deprecated.
+Use config event_filter instead.)</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config umask: &lt;umask&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets umask when running (<TT>snort -m</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config utc</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Uses UTC instead of local time for timestamps
+(<TT>snort -U</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config verbose</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Uses verbose logging to STDOUT (<TT>snort -v</TT>).</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config vlan_agnostic</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Causes Snort to ignore vlan headers for
+the purposes of connection and frag tracking.  This option is only valid in the
+base configuration when using multiple configurations, and the default is off.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config address_space_agnostic</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Causes Snort to ignore DAQ
+address space ID for the purposes of connection and frag tracking.  This option
+is only valid in the base configuration when using multiple configurations, and
+the default is off.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config policy_mode: tap|inline|inline_test</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Sets the policy
+mode to either <TT>passive</TT>, <TT>inline</TT> or <TT>inline_test</TT>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config disable_replace</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>Disables content replace option. Default
+behaviour is to replace content.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180><TT>config tunnel_verdicts: gtp|teredo|6in4|4in6</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=252>By default, whitelist
+and blacklist verdicts are handled internally by Snort for GTP, Teredo, 6in4 and 4in6
+encapsulated traffic.  This means Snort actually gives the DAQ a pass or block
+verdict instead.  This is to workaround cases where the DAQ would apply
+the verdict to the whole tunnel instead of the individual session within the
+tunnel.  If your DAQ decodes GTP, Teredo, 6in4 or 4in6 correctly, setting this config
+will allow the whitelist or blacklist verdict to go to the DAQ.  There is a
+modest performance boost by doing this where possible since Snort won't see the
+remaining packets on the session.</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html677"
+  HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html673"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html667"
+  HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html675"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html678"
+  HREF="node17.html">2.2 Preprocessors</A>
+<B> Up:</B> <A NAME="tex2html674"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html668"
+  HREF="node15.html">2. Configuring Snort</A>
+ &nbsp; <B>  <A NAME="tex2html676"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node16.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:22 GMT -->
+</HTML>

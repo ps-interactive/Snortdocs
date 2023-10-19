@@ -1,0 +1,590 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node34.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+<HEAD>
+<TITLE>3.7 Post-Detection Rule Options</TITLE>
+<META NAME="description" CONTENT="3.7 Post-Detection Rule Options">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node35.html">
+<LINK REL="previous" HREF="node33.html">
+<LINK REL="up" HREF="node27.html">
+<LINK REL="next" HREF="node35.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1458"
+  HREF="node35.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1454"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1448"
+  HREF="node33.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1456"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1459"
+  HREF="node35.html">3.8 Rule Thresholds</A>
+<B> Up:</B> <A NAME="tex2html1455"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Previous:</B> <A NAME="tex2html1449"
+  HREF="node33.html">3.6 Non-Payload Detection Rule</A>
+ &nbsp; <B>  <A NAME="tex2html1457"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1460"
+  HREF="node34.html#SECTION00471000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> logto</A>
+<UL>
+<LI><A NAME="tex2html1461"
+  HREF="node34.html#SECTION00471100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1462"
+  HREF="node34.html#SECTION00472000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> session</A>
+<UL>
+<LI><A NAME="tex2html1463"
+  HREF="node34.html#SECTION00472100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1464"
+  HREF="node34.html#SECTION00472200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+<LI><A NAME="tex2html1465"
+  HREF="node34.html#SECTION00472300000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Warnings</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1466"
+  HREF="node34.html#SECTION00473000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> resp</A>
+<LI><A NAME="tex2html1467"
+  HREF="node34.html#SECTION00474000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> react</A>
+<LI><A NAME="tex2html1468"
+  HREF="node34.html#SECTION00475000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> tag</A>
+<UL>
+<LI><A NAME="tex2html1469"
+  HREF="node34.html#SECTION00475100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1470"
+  HREF="node34.html#SECTION00475200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1471"
+  HREF="node34.html#SECTION00476000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN> replace</A>
+<LI><A NAME="tex2html1472"
+  HREF="node34.html#SECTION00477000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">7</SPAN> detection_filter</A>
+<LI><A NAME="tex2html1473"
+  HREF="node34.html#SECTION00478000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">8</SPAN> Post-Detection Quick Reference</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00470000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN> Post-Detection Rule Options</A>
+</H1>
+
+<H2><A NAME="SECTION00471000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> logto</A>
+</H2>
+
+<P>
+The logto keyword tells Snort to log all packets that trigger this rule to a
+special output log file. This is especially handy for combining data from
+things like NMAP activity, HTTP CGI scans, etc. It should be noted that this
+option does not work when Snort is in binary logging mode.
+
+<P>
+
+<H3><A NAME="SECTION00471100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    logto:"filename";
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00472000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> session</A>
+</H2>
+
+<P>
+The session keyword is built to extract user data from TCP Sessions.  There are
+many cases where seeing what users are typing in telnet, rlogin, ftp, or even
+web sessions is very useful. 
+
+<P>
+There are three available argument keywords for the session rule option:
+<TT>printable</TT>, <TT>binary</TT>, or <TT>all</TT>.
+
+<P>
+The <TT>printable</TT> keyword only prints out data that the user
+would normally see or be able to type.  The <TT>binary</TT> keyword prints out data in a
+binary format. The <TT>all</TT> keyword substitutes non-printable characters with
+their hexadecimal equivalents. 
+
+<P>
+
+<H3><A NAME="SECTION00472100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    session:[printable|binary|all];
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00472200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+The following example logs all printable strings in a telnet packet.
+
+<P>
+<PRE>
+    log tcp any any &lt;&gt; any 23 (session:printable;)
+</PRE>
+
+<P>
+Given an FTP data session on port 12345, this example logs the payload bytes
+in binary form.
+
+<P>
+<PRE>
+    log tcp any any &lt;&gt; any 12345 (metadata:service ftp-data; session:binary;)
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00472300000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Warnings</A>
+</H3>
+
+<P>
+Using the session keyword can slow Snort down considerably, so it should not be
+used in heavy load situations. The session keyword is best suited for
+post-processing binary (pcap) log files.
+
+<P>
+The <TT>binary</TT> keyword does not log any protocol headers below the
+application layer, and Stream reassembly will cause duplicate data when
+the reassembled packets are logged.
+
+<P>
+
+<H2><A NAME="SECTION00473000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> resp</A>
+</H2>
+
+<P>
+The resp keyword enables an active response that kills the offending session.
+Resp can be used in both passive or inline modes.  See <A HREF="node26.html#resp_section"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for
+details.
+
+<P>
+
+<H2><A NAME="SECTION00474000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> react</A>
+</H2>
+
+<P>
+The react keyword enables an active response that includes sending a web page
+or other content to the client and then closing the connection.  React can be
+used in both passive and inline modes.  See <A HREF="node26.html#react_section"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for details.
+
+<P>
+
+<H2><A NAME="SECTION00475000000000000000"></A>
+<A NAME="tag_section"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> tag
+</H2>
+
+<P>
+The tag keyword allow rules to log more than just the single packet that
+triggered the rule. Once a rule is triggered, additional traffic involving the
+source and/or destination host is <SPAN  CLASS="textit">tagged</SPAN>. Tagged traffic is logged to
+allow analysis of response codes and post-attack traffic.  <SPAN  CLASS="textit">tagged</SPAN> alerts
+will be sent to the same output plugins as the original alert, but it is the
+responsibility of the output plugin to properly handle these special alerts.
+
+<P>
+
+<H3><A NAME="SECTION00475100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    tag:host, &lt;count&gt;, &lt;metric&gt;, &lt;direction&gt;;
+    tag:session[, &lt;count&gt;, &lt;metric&gt;][, exclusive];
+</PRE>
+
+<P>
+<DL>
+<DD>
+</DD>
+<DT><STRONG><TT>type</TT></STRONG></DT>
+<DD>&nbsp;
+<P>
+
+
+<UL>
+<LI><TT>session</TT> - Log packets in the session that set off the rule 
+
+<P>
+</LI>
+<LI><TT>host</TT> - Log packets from the host that caused the tag to activate
+(uses [direction] modifier)
+
+<P>
+</LI>
+</UL>
+
+<P>
+</DD>
+<DT><STRONG><TT>count</TT></STRONG></DT>
+<DD>&nbsp;
+
+
+
+<UL>
+<LI><TT>&lt;integer&gt;</TT> - Count is specified as a number of units. Units are
+specified in the <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>metric<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN> field.
+
+<P>
+</LI>
+</UL>
+
+<P>
+</DD>
+<DT><STRONG><TT>metric</TT></STRONG></DT>
+<DD>&nbsp;
+
+<P>
+
+
+<UL>
+<LI><TT>packets</TT> - Tag the host/session for <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>count<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN> packets 
+</LI>
+<LI><TT>seconds</TT> - Tag the host/session for <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>count<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN> seconds
+</LI>
+<LI><TT>bytes</TT>   - Tag the host/session for <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>count<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN> bytes
+</LI>
+</UL>
+
+<P>
+</DD>
+<DT><STRONG><TT>other</TT></STRONG></DT>
+<DD><P>
+
+
+
+<UL>
+<LI><TT>src</TT> - Tag packets containing the source IP address of the packet
+that generated the initial event.  Only relevant if host type is used.
+
+<P>
+</LI>
+<LI><TT>dst</TT> - Tag packets containing the destination IP address of the
+packet that generated the initial event.  Only relevant if host type is used.
+
+<P>
+</LI>
+<LI><TT>exclusive</TT> - Tag packets only in the first matching session.
+Only relevant if session type is used.
+
+<P>
+</LI>
+</UL>
+</DD>
+</DL>
+
+<P>
+Note that neither subsequent alerts nor event filters will prevent a tagged
+packet from being logged.  Subsequent tagged alerts will cause the limit to
+reset.
+
+<P>
+<PRE>
+    alert tcp any any &lt;&gt; 10.1.1.1 any \
+        (flowbits:isnotset,tagged; content:"foobar"; nocase; \
+         flowbits:set,tagged; tag:host,600,seconds,src;)
+</PRE>
+
+<P>
+Also note that if you have a tag option in a rule that uses a metric other than
+<TT>packets</TT>, a <TT>tagged_packet_limit</TT> will be used to limit the
+number of tagged packets regardless of whether the <TT>seconds</TT> or
+<TT>bytes</TT> count has been reached.  The default
+<TT>tagged_packet_limit</TT> value is 256 and can be modified by using a
+config option in your snort.conf file (see Section <A HREF="node16.html#Config"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> on how to use
+the <TT>tagged_packet_limit</TT> config option).  You can disable this packet
+limit for a particular rule by adding a <TT>packets</TT> metric to your tag
+option and setting its count to 0 (This can be done on a global scale by
+setting the <TT>tagged_packet_limit</TT> option in snort.conf to 0).  Doing
+this will ensure that packets are tagged for the full amount of
+<TT>seconds</TT> or <TT>bytes</TT> and will not be cut off by the
+<TT>tagged_packet_limit</TT>.  (Note that the <TT>tagged_packet_limit</TT>
+was introduced to avoid DoS situations on high bandwidth sensors for tag rules
+with a high <TT>seconds</TT> or <TT>bytes</TT> counts.)
+
+<P>
+<PRE>
+    alert tcp 10.1.1.4 any -&gt; 10.1.1.1 any \
+        (content:"TAGMYPACKETS"; tag:host,0,packets,600,seconds,src;)
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00475200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+This example logs the first 10 seconds or the <TT>tagged_packet_limit</TT>
+(whichever comes first) of any telnet session.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 23 (flags:S,CE; tag:session,10,seconds;)
+</PRE>
+
+<P>
+While at least one count and metric is required for tag:host, tag:session
+with exclusive without any metrics can be used to get a full session like
+this:
+
+<P>
+<PRE>
+    pass tcp any any -&gt; 192.168.1.1 80 (flags:S; tag:session,exclusive;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00476000000000000000"></A>
+<A NAME="replace"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN> replace
+</H2>
+
+<P>
+The <TT>replace</TT> keyword is a feature available in inline mode which will
+cause Snort to replace the prior matching content with the given string.  Both
+the new string and the content it is to replace must have the same length.  You
+can have multiple replacements within a rule, one per content.
+
+<P>
+<PRE>
+    replace:"&lt;string&gt;";
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00477000000000000000"></A>
+<A NAME="detection_filter"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">7</SPAN> detection_filter
+</H2>
+
+<P>
+detection_filter defines a rate which must be exceeded by a source or
+destination host before a rule can generate an event.  detection_filter has
+the following format:
+
+<P>
+<PRE>
+    detection_filter: \
+        track &lt;by_src|by_dst&gt;, \
+        count &lt;c&gt;, seconds &lt;s&gt;;
+</PRE>
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>Option</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Description</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>track by_src|by_dst</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Rate is tracked either by source IP address or destination IP address.  This
+means count is maintained for each unique source IP address or each unique
+destination IP address.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>count c</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The maximum number of rule matches in s seconds allowed before the detection
+filter limit to be exceeded.  C must be nonzero.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>seconds s</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Time period over which count is accrued.  The value must be nonzero.</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+Snort evaluates a <TT>detection_filter</TT> as the last step of the detection
+phase, after evaluating all other rule options (regardless of the position of
+the filter within the rule source).  At most one <TT>detection_filter</TT> is
+permitted per rule.
+
+<P>
+Example - this rule will fire on every failed login attempt from 10.1.2.100
+during one sampling period of 60 seconds, after the first 30 failed login
+attempts:
+
+<P>
+<PRE>
+    drop tcp 10.1.2.100 any &gt; 10.1.1.100 22 ( \
+        msg:"SSH Brute Force Attempt";
+        flow:established,to_server; \
+        content:"SSH"; nocase; offset:0; depth:4; \
+        detection_filter:track by_src, count 30, seconds 60; \
+        sid:1000001; rev:1;)
+</PRE>
+
+<P>
+Since potentially many events will be generated, a <TT>detection_filter</TT>
+would normally be used in conjunction with an <TT>event_filter</TT> to reduce
+the number of logged events.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+As mentioned above, Snort evaluates <TT>detection_filter</TT> as the last step of 
+the detection and not in post-detection.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION00478000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">8</SPAN> Post-Detection Quick Reference</A>
+</H2>
+
+<P>
+<DIV ALIGN="CENTER">
+<A NAME="5705"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Table:</STRONG>
+Post-detection rule option keywords</CAPTION>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>Keyword</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Description</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>logto</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The logto keyword tells Snort to log all packets that trigger this rule to a
+special output log file.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>session</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The session keyword is built to extract user data from TCP Sessions.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>resp</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The resp keyword is used attempt to close sessions when an alert is triggered.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>react</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+This keyword implements an ability for users to react to traffic that matches a
+Snort rule by closing connection and sending a notice.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>tag</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The tag keyword allow rules to log more than just the single packet that
+triggered the rule.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>replace</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Replace the prior matching content with the given string of the same length.
+Available in inline mode only.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>detection_filter</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Track by source or destination IP address and if the rule otherwise matches
+more than the configured rate it will fire.</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1458"
+  HREF="node35.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1454"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1448"
+  HREF="node33.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1456"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1459"
+  HREF="node35.html">3.8 Rule Thresholds</A>
+<B> Up:</B> <A NAME="tex2html1455"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Previous:</B> <A NAME="tex2html1449"
+  HREF="node33.html">3.6 Non-Payload Detection Rule</A>
+ &nbsp; <B>  <A NAME="tex2html1457"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node34.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>

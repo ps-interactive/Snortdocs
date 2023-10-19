@@ -1,0 +1,653 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node44.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+<HEAD>
+<TITLE>5.3 Unified2 File Format</TITLE>
+<META NAME="description" CONTENT="5.3 Unified2 File Format">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node45.html">
+<LINK REL="previous" HREF="node43.html">
+<LINK REL="up" HREF="node41.html">
+<LINK REL="next" HREF="node45.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1642"
+  HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1638"
+  HREF="node41.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1632"
+  HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1640"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1643"
+  HREF="node45.html">5.4 Buffer dump utility</A>
+<B> Up:</B> <A NAME="tex2html1639"
+  HREF="node41.html">5. Snort Development</A>
+<B> Previous:</B> <A NAME="tex2html1633"
+  HREF="node43.html">5.2 Snort Data Flow</A>
+ &nbsp; <B>  <A NAME="tex2html1641"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1644"
+  HREF="node44.html#SECTION00631000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Serial Unified2 Header</A>
+<LI><A NAME="tex2html1645"
+  HREF="node44.html#SECTION00632000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Unified2 Packet</A>
+<LI><A NAME="tex2html1646"
+  HREF="node44.html#SECTION00633000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> Unified2 IDS Event</A>
+<LI><A NAME="tex2html1647"
+  HREF="node44.html#SECTION00634000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> Unified2 IDS Event IP6</A>
+<LI><A NAME="tex2html1648"
+  HREF="node44.html#SECTION00635000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN> Unified2 IDS Event (Version 2)</A>
+<LI><A NAME="tex2html1649"
+  HREF="node44.html#SECTION00636000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">6</SPAN> Unified2 IDS Event IP6 (Version 2)</A>
+<LI><A NAME="tex2html1650"
+  HREF="node44.html#SECTION00637000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN> Unified2 Extra Data</A>
+<LI><A NAME="tex2html1651"
+  HREF="node44.html#SECTION00638000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN> Description of Fields</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00630000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> Unified2 File Format</A>
+</H1>
+
+<P>
+Unified 2 records should not be assumed to be in any order.  All
+  values are stored in network byte order.
+
+<P>
+An example structure of unified2 files
+
+<P>
+<PRE>
+    [ Serial Unified2 Header    ]
+    [ Unified2 IDS Event        ]
+    [ Unified2 Packet           ]
+    [ Unified2 Extra Data       ]
+    .
+    .
+    .
+    [ Serial Unified2 Header    ]
+    [ Unified2 IDS Event        ]
+    [ Unified2 Packet           ]
+    [ Unified2 Extra Data       ]
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00631000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Serial Unified2 Header</A>
+</H2>
+
+<P>
+<PRE>
+    record type             4 bytes
+    record length           4 bytes
+</PRE>
+
+<P>
+All unified2 records are preceded by a Serial Unified2 header.  This
+  unified2 record allows an interpreting application to skip past and
+  apply simple heuristics against records.
+
+<P>
+The Record Type indicates one of the following unified2 records
+  follows the Serial Unified2 Header:
+
+<P>
+<PRE>
+    Value           Record Type
+    ----------      -----------
+    2               Unified2 Packet
+    7               Unified2 IDS Event
+    72              Unified2 IDS Event IP6
+    104             Unified2 IDS Event      (Version 2)
+    105             Unified2 IDS Event IP6  (Version 2)
+    110             Unified2 Extra Data
+</PRE>
+
+<P>
+The record length field specifies the entire length of the record 
+  (not including the Serial Unified2 Header itself) up to the next 
+  Serial Unified2 Header or EOF.
+
+<P>
+
+<H2><A NAME="SECTION00632000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Unified2 Packet</A>
+</H2>
+
+<P>
+<PRE>
+    sensor id               4 bytes
+    event id                4 bytes
+    event seconds           4 bytes
+    packet seconds          4 bytes
+    packet microseconds     4 bytes
+    linktype                4 bytes
+    packet length           4 bytes
+    packet data             &lt;variable length&gt;
+</PRE>
+
+<P>
+A Unified2 Packet is provided with each Unified2 Event record. This
+  packet is the `alerting' packet that caused a given event.
+
+<P>
+Unified2 Packet records contain contain a copy of the packet that
+  caused an alert (Packet Data) and is packet length octets long.
+
+<P>
+
+<H2><A NAME="SECTION00633000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> Unified2 IDS Event</A>
+</H2>
+
+<P>
+<PRE>
+    sensor id               4 bytes
+    event id                4 bytes
+    event second            4 bytes
+    event microsecond       4 bytes
+    signature id            4 bytes
+    generator id            4 bytes
+    signature revision      4 bytes
+    classification id       4 bytes
+    priority id             4 bytes
+    ip source               4 bytes
+    ip destination          4 bytes
+    source port/icmp type   2 bytes
+    dest. port/icmp code    2 bytes
+    protocol                1 byte
+    impact flag             1 byte
+    impact                  1 byte
+    blocked                 1 byte
+</PRE>
+
+<P>
+Unified2 IDS Event is logged for IPv4 Events without VLAN or MPLS
+  tagging. 
+
+<P>
+
+<H2><A NAME="SECTION00634000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> Unified2 IDS Event IP6</A>
+</H2>
+
+<P>
+<PRE>
+    sensor id               4 bytes
+    event id                4 bytes
+    event second            4 bytes
+    event microsecond       4 bytes
+    signature id            4 bytes
+    generator id            4 bytes
+    signature revision      4 bytes
+    classification id       4 bytes
+    priority id             4 bytes
+    ip source               16 bytes
+    ip destination          16 bytes
+    source port/icmp type   2 bytes
+    dest. port/icmp code    2 bytes
+    protocol                1 byte
+    impact flag             1 byte
+    impact                  1 byte
+    blocked                 1 byte
+</PRE>
+
+<P>
+Unified2 IDS Event IP6 is logged for IPv6 Events without VLAN or 
+  MPLS tagging. 
+
+<P>
+
+<H2><A NAME="SECTION00635000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN> Unified2 IDS Event (Version 2)</A>
+</H2>
+
+<P>
+<PRE>
+    sensor id               4 bytes
+    event id                4 bytes
+    event second            4 bytes
+    event microsecond       4 bytes
+    signature id            4 bytes
+    generator id            4 bytes
+    signature revision      4 bytes
+    classification id       4 bytes
+    priority id             4 bytes
+    ip source               4 bytes
+    ip destination          4 bytes
+    source port/icmp type   2 bytes
+    dest. port/icmp code    2 bytes
+    protocol                1 byte
+    impact flag             1 byte
+    impact                  1 byte
+    blocked                 1 byte
+    mpls label              4 bytes
+    vlan id                 2 bytes
+    padding                 2 bytes
+</PRE>
+
+<P>
+Unified2 IDS Event (Version 2) are logged for IPv4 packets which
+  contain either  MPLS or VLAN headers. Otherwise a Unified2 IDS Event
+  is logged.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<UL>
+<LI>Note that you'll need to pass -enable-mpls to configure in order to have Snort fill in the mpls label field.
+
+<P>
+</LI>
+<LI>Note that you'll need to configure unified2 logging with either mpls_event_types or vlan_event_types to get this record type.
+</LI>
+</UL>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION00636000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">6</SPAN> Unified2 IDS Event IP6 (Version 2)</A>
+</H2>
+
+<P>
+<PRE>
+    sensor id               4 bytes
+    event id                4 bytes
+    event second            4 bytes
+    event microsecond       4 bytes
+    signature id            4 bytes
+    generator id            4 bytes
+    signature revision      4 bytes
+    classification id       4 bytes
+    priority id             4 bytes
+    ip source               16 bytes
+    ip destination          16 bytes
+    source port/icmp type   2 bytes
+    dest. port/icmp code    2 bytes
+    protocol                1 byte
+    impact flag             1 byte
+    impact                  1 byte
+    blocked                 1 byte
+    mpls label              4 bytes
+    vlan id                 2 bytes
+    padding                 2 bytes
+</PRE>
+
+<P>
+Unified2 IDS Event IP6 (Version 2) are logged for IPv6 packets which
+  contain either MPLS or VLAN headers. Otherwise a Unified2 IDS Event
+  IP6 is logged.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<UL>
+<LI>Note that you'll need to pass -enable-mpls to configure in order to have Snort fill in the mpls label field.
+
+<P>
+</LI>
+<LI>Note that you'll need to configure unified2 logging with either mpls_event_types or vlan_event_types to get this record type.
+</LI>
+</UL>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION00637000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN> Unified2 Extra Data</A>
+</H2>
+
+<P>
+<PRE>
+    sensor id               4 bytes
+    event id                4 bytes
+    event second            4 bytes
+    type                    4 bytes
+    data type               4 bytes
+    data length             4 bytes
+    data                    &lt;variable length&gt;
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00638000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN> Description of Fields</A>
+</H2>
+
+<P>
+
+<UL>
+<LI>Sensor ID 
+
+<P>
+Unused 
+
+<P>
+</LI>
+<LI>Event ID
+
+<P>
+The upper 2 bytes represent the snort instance, if specified by passing the -G option to Snort.
+
+<P>
+The lower 2 bytes indicate the unique id of the event.
+
+<P>
+The Event ID field is used to facilitate the task of coalescing
+events with packet data.
+
+<P>
+</LI>
+<LI>Event Seconds and Event Microseconds
+
+<P>
+Timestamp represented as seconds since the epoch of when the alert was generated.
+
+<P>
+</LI>
+<LI>Link Type (Unified2 Packet)
+
+<P>
+The Datalink type of the packet, typically EN10M but could be any of the values as returned by pcap_datalink that Snort handles.
+
+<P>
+</LI>
+<LI>Packet Length (Unified2 Packet) 
+
+<P>
+Length of the Packet Data.
+
+<P>
+</LI>
+<LI>Packet Data (Unified2 Packet)
+
+<P>
+The alerting packet, of Packet Length bytes long.
+
+<P>
+</LI>
+<LI>Type (Unified2 Extra Data)
+
+<P>
+Type specifies the type of extra data that was logged, the valid types are:
+
+<P>
+<PRE>
+    Value           Description 
+    ----------      -----------
+    1               Original Client IPv4 
+    2               Original Client IPv6
+    3               UNUSED
+    4               GZIP Decompressed Data
+    5               SMTP Filename
+    6               SMTP Mail From
+    7               SMTP RCPT To
+    8               SMTP Email Headers
+    9               HTTP URI
+    10              HTTP Hostname
+    11              IPv6 Source Address
+    12              IPv6 Destination Address
+    13              Normalized Javascript Data
+</PRE>
+
+<P>
+</LI>
+<LI>Data Type (Unified2 Extra Data)
+
+<P>
+The type of extra data in the record.
+
+<P>
+<PRE>
+    Value           Description 
+    ----------      -----------
+    1               Blob
+</PRE>
+
+<P>
+</LI>
+<LI>Data Length (Unified2 Extra Data)
+
+<P>
+Length of the data stored in the extra data record
+
+<P>
+</LI>
+<LI>Data (Unified2 Extra Data)
+
+<P>
+Raw extra event data up to Data Length bytes in size.
+
+<P>
+All of these Extra data types, with the exception of 1, 2, 11, and
+    12 (IP Addresses) are stored in plain-text. The IP Address types
+    need to be interpreted as if they were coming off the wire.
+
+<P>
+</LI>
+<LI>Signature ID
+
+<P>
+The Signature ID of the alerting rule, as specified by the sid
+    keyword.
+
+<P>
+</LI>
+<LI>Generator ID
+
+<P>
+The Generator ID of the alerting rule, as specified by the gid
+    keyword.
+
+<P>
+</LI>
+<LI>Signature Revision
+
+<P>
+Revision of the rule as specified by the rev keyword.
+
+<P>
+</LI>
+<LI>Classification ID
+
+<P>
+Classification ID as mapped in the file classifications.conf 
+
+<P>
+</LI>
+<LI>Priority ID
+
+<P>
+Priority of the rule as mapped in the file classifications.conf or
+    overridden by the priority keyword for text rules. 
+
+<P>
+</LI>
+<LI>IP Source
+
+<P>
+Source IP of the packet that generated the event.
+
+<P>
+</LI>
+<LI>IP Destination
+
+<P>
+Destination IP of the packet that generated the event.
+
+<P>
+</LI>
+<LI>Source Port/ICMP Type
+
+<P>
+If Protocol is TCP or UDP than this field contains the source port
+    of the alerting packet.
+
+<P>
+If Protocol is ICMP than this field contains the ICMP type of the
+    alerting packet.
+
+<P>
+</LI>
+<LI>Destination Port/ICMP Code
+
+<P>
+If protocol is TCP or UDP than this field contains the source port
+    of the alerting packet.
+
+<P>
+If protocol is icmp than this field contains the icmp code of the
+    alerting packet.
+
+<P>
+</LI>
+<LI>Protocol
+
+<P>
+Transport protocol of the alerting packet. One of: ip, tcp, udp, or
+    icmp.
+
+<P>
+</LI>
+<LI>Impact flag
+
+<P>
+Legacy field, specifies whether a packet was dropped or not.
+
+<P>
+<PRE>
+    Value           Description 
+    ----------      -----------
+    32              Blocked
+</PRE>
+
+<P>
+</LI>
+<LI>Impact
+
+<P>
+UNUSED; deprecated.
+
+<P>
+</LI>
+<LI>Blocked
+
+<P>
+Whether the packet was not dropped, was dropped or would have been
+    dropped. 
+
+<P>
+<PRE>
+    Value           Description 
+    ----------      -----------
+    0               Was NOT Dropped 
+    1               Was Dropped
+    2               Would Have Dropped*
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+Note that you'll obtain Would Have Dropped on rules which are set to drop
+while Snort is running in inline-test mode.  Would Have Dropped is also 
+obtained when a drop rule fires while pruning sessions or during shutdown.
+        
+        </b></td></tr></table></p>
+
+<P>
+</LI>
+<LI>MPLS Label (4 bytes)
+
+<P>
+The extracted mpls label from the mpls header in the alerting
+    packet.
+
+<P>
+</LI>
+<LI>VLAN ID
+
+<P>
+The extracted vlan id from the vlan header in the alerting packet.
+
+<P>
+</LI>
+<LI>Padding
+
+<P>
+Padding is used to keep the event structures aligned on a 4 byte
+    boundary.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1642"
+  HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1638"
+  HREF="node41.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1632"
+  HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1640"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1643"
+  HREF="node45.html">5.4 Buffer dump utility</A>
+<B> Up:</B> <A NAME="tex2html1639"
+  HREF="node41.html">5. Snort Development</A>
+<B> Previous:</B> <A NAME="tex2html1633"
+  HREF="node43.html">5.2 Snort Data Flow</A>
+ &nbsp; <B>  <A NAME="tex2html1641"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node44.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>

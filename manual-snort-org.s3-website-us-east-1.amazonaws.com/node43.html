@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node43.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+<HEAD>
+<TITLE>5.2 Snort Data Flow</TITLE>
+<META NAME="description" CONTENT="5.2 Snort Data Flow">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node44.html">
+<LINK REL="previous" HREF="node42.html">
+<LINK REL="up" HREF="node41.html">
+<LINK REL="next" HREF="node44.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1627"
+  HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1623"
+  HREF="node41.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1617"
+  HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1625"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1628"
+  HREF="node44.html">5.3 Unified2 File Format</A>
+<B> Up:</B> <A NAME="tex2html1624"
+  HREF="node41.html">5. Snort Development</A>
+<B> Previous:</B> <A NAME="tex2html1618"
+  HREF="node42.html">5.1 Submitting Patches</A>
+ &nbsp; <B>  <A NAME="tex2html1626"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1629"
+  HREF="node43.html#SECTION00621000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Preprocessors</A>
+<LI><A NAME="tex2html1630"
+  HREF="node43.html#SECTION00622000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Detection Plugins</A>
+<LI><A NAME="tex2html1631"
+  HREF="node43.html#SECTION00623000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Output Plugins</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00620000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Snort Data Flow</A>
+</H1>
+
+<P>
+First, traffic is acquired from the network link via libpcap. Packets are
+passed through a series of decoder routines that first fill out the packet
+structure for link level protocols then are further decoded for things like TCP
+and UDP ports.
+
+<P>
+Packets are then sent through the registered set of preprocessors.  Each
+preprocessor checks to see if this packet is something it should look at.
+
+<P>
+Packets are then sent through the detection engine. The detection engine checks
+each packet against the various options listed in the Snort config files. Each
+of the keyword options is a plugin. This allows this to be easily extensible.
+
+<P>
+
+<H2><A NAME="SECTION00621000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Preprocessors</A>
+</H2>
+
+<P>
+For example, a TCP analysis preprocessor could simply return if the packet does
+not have a TCP header. It can do this by checking: 
+
+<P>
+<PRE>
+if (p-&gt;tcph==null)
+   return;
+</PRE>
+
+<P>
+Similarly, there are a lot of packet_flags available that can be used to mark
+a packet as &ldquo;reassembled&rdquo; or logged. Check out src/decode.h for the list of
+pkt_* constants.
+
+<P>
+
+<H2><A NAME="SECTION00622000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Detection Plugins</A>
+</H2>
+
+<P>
+Basically, look at an existing output plugin and copy it to a new item and
+change a few things. Later, we'll document what these few things are.
+
+<P>
+
+<H2><A NAME="SECTION00623000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Output Plugins</A>
+</H2>
+
+<P>
+Generally, new output plugins should go into the barnyard project rather than
+the Snort project. We are currently cleaning house on the available output
+options.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1627"
+  HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1623"
+  HREF="node41.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1617"
+  HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1625"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1628"
+  HREF="node44.html">5.3 Unified2 File Format</A>
+<B> Up:</B> <A NAME="tex2html1624"
+  HREF="node41.html">5. Snort Development</A>
+<B> Previous:</B> <A NAME="tex2html1618"
+  HREF="node42.html">5.1 Submitting Patches</A>
+ &nbsp; <B>  <A NAME="tex2html1626"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node43.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>

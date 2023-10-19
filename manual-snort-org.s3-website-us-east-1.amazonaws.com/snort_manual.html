@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/snort_manual.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:56 GMT -->
+<HEAD>
+<TITLE>SNORT Users Manual
+2.9.16</TITLE>
+<META NAME="description" CONTENT="SNORT Users Manual
+2.9.16">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node1.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html35"
+  HREF="node1.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev_g.png"> 
+<A NAME="tex2html33"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html36"
+  HREF="node1.html">Contents</A>
+ &nbsp; <B>  <A NAME="tex2html34"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<P>
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">SNORT<SUP><IMG
+ WIDTH="20" HEIGHT="26" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1.png"
+ ALT="\textregistered"></SUP> Users Manual
+<BR>
+2.9.16</H1>
+<DIV CLASS="author_info">
+
+<P ALIGN="CENTER"><STRONG>The Snort Project</STRONG></P>
+</DIV>
+
+<P>
+
+<P>
+Copyright &#169;1998-2003 Martin Roesch
+
+<P>
+Copyright &#169;2001-2003 Chris Green
+
+<P>
+Copyright &#169;2003-2013 Sourcefire, Inc.
+
+<P>
+Copyright &#169;2014-2020 Cisco and/or its affiliates. All rights reserved.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html37"
+  HREF="node1.html">Contents</A>
+<LI><A NAME="tex2html38"
+  HREF="node2.html"><SPAN CLASS="arabic">1</SPAN>. Snort Overview</A>
+<UL>
+<LI><A NAME="tex2html39"
+  HREF="node3.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Getting Started</A>
+<LI><A NAME="tex2html40"
+  HREF="node4.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Sniffer Mode</A>
+<LI><A NAME="tex2html41"
+  HREF="node5.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Packet Logger Mode</A>
+<LI><A NAME="tex2html42"
+  HREF="node6.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> Network Intrusion Detection System Mode</A>
+<LI><A NAME="tex2html43"
+  HREF="node7.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN> Packet Acquisition</A>
+<LI><A NAME="tex2html44"
+  HREF="node8.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN> Reading pcap files</A>
+<LI><A NAME="tex2html45"
+  HREF="node9.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN> Basic Output</A>
+<LI><A NAME="tex2html46"
+  HREF="node10.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">8</SPAN> Tunneling Protocol Support</A>
+<LI><A NAME="tex2html47"
+  HREF="node11.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN> Miscellaneous</A>
+<LI><A NAME="tex2html48"
+  HREF="node12.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">10</SPAN> Control socket</A>
+<LI><A NAME="tex2html49"
+  HREF="node13.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">11</SPAN> Configure signal value</A>
+<LI><A NAME="tex2html50"
+  HREF="node14.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">12</SPAN> More Information</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html51"
+  HREF="node15.html"><SPAN CLASS="arabic">2</SPAN>. Configuring Snort</A>
+<UL>
+<LI><A NAME="tex2html52"
+  HREF="node16.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Includes</A>
+<LI><A NAME="tex2html53"
+  HREF="node17.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Preprocessors</A>
+<LI><A NAME="tex2html54"
+  HREF="node18.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Decoder and Preprocessor Rules</A>
+<LI><A NAME="tex2html55"
+  HREF="node19.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Event Processing</A>
+<LI><A NAME="tex2html56"
+  HREF="node20.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN> Performance Profiling</A>
+<LI><A NAME="tex2html57"
+  HREF="node21.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN> Output Modules</A>
+<LI><A NAME="tex2html58"
+  HREF="node22.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN> Host Attribute Table</A>
+<LI><A NAME="tex2html59"
+  HREF="node23.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">8</SPAN> Dynamic Modules</A>
+<LI><A NAME="tex2html60"
+  HREF="node24.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN> Reloading a Snort Configuration</A>
+<LI><A NAME="tex2html61"
+  HREF="node25.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN> Multiple Configurations</A>
+<LI><A NAME="tex2html62"
+  HREF="node26.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN> Active Response</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html63"
+  HREF="node27.html"><SPAN CLASS="arabic">3</SPAN>. Writing Snort Rules</A>
+<UL>
+<LI><A NAME="tex2html64"
+  HREF="node28.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> The Basics</A>
+<LI><A NAME="tex2html65"
+  HREF="node29.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Rules Headers</A>
+<LI><A NAME="tex2html66"
+  HREF="node30.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> Rule Options</A>
+<LI><A NAME="tex2html67"
+  HREF="node31.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> General Rule Options</A>
+<LI><A NAME="tex2html68"
+  HREF="node32.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN> Payload Detection Rule Options</A>
+<LI><A NAME="tex2html69"
+  HREF="node33.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">6</SPAN> Non-Payload Detection Rule Options</A>
+<LI><A NAME="tex2html70"
+  HREF="node34.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN> Post-Detection Rule Options</A>
+<LI><A NAME="tex2html71"
+  HREF="node35.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN> Rule Thresholds</A>
+<LI><A NAME="tex2html72"
+  HREF="node36.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN> Writing Good Rules</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html73"
+  HREF="node37.html"><SPAN CLASS="arabic">4</SPAN>. Dynamic Modules</A>
+<UL>
+<LI><A NAME="tex2html74"
+  HREF="node38.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Data Structures</A>
+<LI><A NAME="tex2html75"
+  HREF="node39.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Required Functions</A>
+<LI><A NAME="tex2html76"
+  HREF="node40.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html77"
+  HREF="node41.html"><SPAN CLASS="arabic">5</SPAN>. Snort Development</A>
+<UL>
+<LI><A NAME="tex2html78"
+  HREF="node42.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Submitting Patches</A>
+<LI><A NAME="tex2html79"
+  HREF="node43.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Snort Data Flow</A>
+<LI><A NAME="tex2html80"
+  HREF="node44.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> Unified2 File Format</A>
+<LI><A NAME="tex2html81"
+  HREF="node45.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> Buffer dump utility</A>
+<LI><A NAME="tex2html82"
+  HREF="node46.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> The Snort Team</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html83"
+  HREF="node47.html">Bibliography</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/snort_manual.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:56 GMT -->
+</HTML>

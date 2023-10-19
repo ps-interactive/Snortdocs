@@ -1,0 +1,871 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node19.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:42 GMT -->
+<HEAD>
+<TITLE>2.4 Event Processing</TITLE>
+<META NAME="description" CONTENT="2.4 Event Processing">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node20.html">
+<LINK REL="previous" HREF="node18.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node20.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html857"
+  HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html853"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html847"
+  HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html855"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html858"
+  HREF="node20.html">2.5 Performance Profiling</A>
+<B> Up:</B> <A NAME="tex2html854"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html848"
+  HREF="node18.html">2.3 Decoder and Preprocessor</A>
+ &nbsp; <B>  <A NAME="tex2html856"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html859"
+  HREF="node19.html#SECTION00341000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rate Filtering</A>
+<UL>
+<LI><A NAME="tex2html860"
+  HREF="node19.html#SECTION00341100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html861"
+  HREF="node19.html#SECTION00341200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html862"
+  HREF="node19.html#SECTION00342000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Event Filtering</A>
+<UL>
+<LI><A NAME="tex2html863"
+  HREF="node19.html#SECTION00342100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html864"
+  HREF="node19.html#SECTION00342200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html865"
+  HREF="node19.html#SECTION00343000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Event Suppression</A>
+<UL>
+<LI><A NAME="tex2html866"
+  HREF="node19.html#SECTION00343100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html867"
+  HREF="node19.html#SECTION00343200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html868"
+  HREF="node19.html#SECTION00344000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Event Logging</A>
+<UL>
+<LI><A NAME="tex2html869"
+  HREF="node19.html#SECTION00344100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Event Queue Configuration Options</A>
+<LI><A NAME="tex2html870"
+  HREF="node19.html#SECTION00344200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Event Queue Configuration Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html871"
+  HREF="node19.html#SECTION00345000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN> Event Trace</A>
+<UL>
+<LI><A NAME="tex2html872"
+  HREF="node19.html#SECTION00345100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Event Trace Examples</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00340000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Event Processing</A>
+</H1>
+
+<P>
+Snort provides a variety of mechanisms to tune event processing to suit your
+needs:
+
+<P>
+
+<UL>
+<LI><TT>Detection Filters</TT> 
+
+<P>
+You can use detection filters to specify a threshold that must be exceeded
+before a rule generates an event.  This is covered in section
+<A HREF="node34.html#detection_filter"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.
+
+<P>
+</LI>
+<LI><TT>Rate Filters</TT> 
+
+<P>
+You can use rate filters to change a rule action when the number or rate of
+events indicates a possible attack.
+
+<P>
+</LI>
+<LI><TT>Event Filters</TT> 
+
+<P>
+You can use event filters to reduce the number of logged events for noisy
+rules.  This can be tuned to significantly reduce false alarms.
+
+<P>
+</LI>
+<LI><TT>Event Suppression</TT> 
+
+<P>
+You can completely suppress the logging of uninteresting events.
+
+<P>
+</LI>
+</UL> 
+
+<P>
+
+<H2><A NAME="SECTION00341000000000000000"></A>
+<A NAME="rate_filtering"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rate Filtering
+</H2>
+
+<P>
+<TT>rate_filter</TT> provides rate based attack prevention by allowing users
+to configure a new action to take for a specified time when a given rate is
+exceeded.  Multiple rate filters can be defined on the same rule, in which case
+they are evaluated in the order they appear in the configuration file, and the
+first applicable action is taken.  
+
+<P>
+
+<H3><A NAME="SECTION00341100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+Rate filters are used as standalone configurations (outside of a rule) and have
+the following format:
+
+<P>
+<PRE>
+    rate_filter \
+        gen_id &lt;gid&gt;, sig_id &lt;sid&gt;, \
+        track &lt;by_src|by_dst|by_rule&gt;, \
+        count &lt;c&gt;, seconds &lt;s&gt;, \
+        new_action alert|drop|pass|log|sdrop|reject, \
+        timeout &lt;seconds&gt; \
+        [, apply_to &lt;ip-list&gt;]
+</PRE>
+
+<P>
+The options are described in the table below - all are required except
+<TT>apply_to</TT>, which is optional.
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<TR><TH ALIGN="LEFT" VALIGN="TOP" WIDTH=144><SPAN  CLASS="textbf">Option</SPAN></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=288><SPAN  CLASS="textbf">Description</SPAN></TH>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144><TT>track by_src | by_dst | by_rule</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=288><P>
+rate is tracked either by source IP address, destination IP address, or by
+rule.  This means the match statistics are maintained for each unique source IP
+address, for each unique destination IP address, or they are aggregated at rule
+level.  For rules related to Stream sessions, source and destination means
+client and server respectively.  <TT>track by_rule</TT> and <TT>apply_to</TT>
+may not be used together.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144><TT>count c</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=288><P>
+the maximum number of rule matches in <TT>s</TT> seconds before the rate filter
+limit to is exceeded.  <TT>c</TT> must be nonzero value.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144><TT>seconds s</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=288><P>
+the time period over which <TT>count</TT> is accrued. 0 seconds means
+<TT>count</TT> is a total count instead of a specific rate.  For example,
+<TT>rate_filter</TT> may be used to detect if the number of connections to a
+specific server exceed a specific count.  0 seconds only applies to internal
+rules (gen_id 135) and other use will produce a fatal error by Snort.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144><TT>new_action alert | drop | pass | log | sdrop | reject</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=288><P>
+<TT>new_action</TT> replaces rule action for <TT>t</TT> seconds.
+<TT>drop</TT>, <TT>reject</TT>, and <TT>sdrop</TT> can be used only when snort
+is used in inline mode.  <TT>sdrop</TT> and <TT>reject</TT> are conditionally
+compiled with GIDS.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144><TT>timeout t</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=288><P>
+revert to the original rule action after <TT>t</TT> seconds.  If <TT>t</TT> is
+0, then rule action is never reverted back.  An <TT>event_filter</TT> may be
+used to manage number of alerts after the rule action is enabled by
+<TT>rate_filter</TT>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144><TT>apply_to &lt;ip-list&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=288><P>
+restrict the configuration to only to source or destination IP address
+(indicated by track parameter) determined by <TT>&lt;ip-list&gt;</TT>.  <TT>track
+by_rule</TT> and <TT>apply_to</TT> may not be used together.  Note that events
+are generated during the timeout period, even if the rate falls below the
+configured limit.</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+
+<H3><A NAME="SECTION00341200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+Example 1 - allow a maximum of 100 connection attempts per second from any one
+IP address, and block further connection attempts from that IP address for 10
+seconds:
+
+<P>
+<PRE>
+    rate_filter \
+        gen_id 135, sig_id 1, \
+        track by_src, \
+        count 100, seconds 1, \
+        new_action drop, timeout 10
+</PRE>
+
+<P>
+Example 2 - allow a maximum of 100 successful simultaneous connections from any
+one IP address, and block further connections from that IP address for 10
+seconds:
+
+<P>
+<PRE>
+    rate_filter \
+        gen_id 135, sig_id 2, \
+        track by_src, \
+        count 100, seconds 0, \
+        new_action drop, timeout 10
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00342000000000000000"></A>
+<A NAME="event_filtering"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Event Filtering
+</H2>
+
+<P>
+Event filtering can be used to reduce the number of logged alerts for noisy
+rules by limiting the number of times a particular event is logged during a
+specified time interval.  This can be tuned to significantly reduce false
+alarms.
+
+<P>
+There are 3 types of event filters:
+
+<P>
+
+<UL>
+<LI><TT>limit</TT> 
+
+<P>
+Alerts on the 1st <SPAN  CLASS="textit">m</SPAN> events during the time interval, then ignores
+events for the rest of the time interval.
+
+<P>
+</LI>
+<LI><TT>threshold</TT> 
+
+<P>
+Alerts every <SPAN  CLASS="textit">m</SPAN> times we see this event during the time interval.
+
+<P>
+</LI>
+<LI><TT>both</TT> 
+
+<P>
+Alerts once per time interval after seeing <SPAN  CLASS="textit">m</SPAN> occurrences of the event,
+then ignores any additional events during the time interval.
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00342100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    event_filter \
+        gen_id &lt;gid&gt;, sig_id &lt;sid&gt;, \
+        type &lt;limit|threshold|both&gt;, \
+        track &lt;by_src|by_dst&gt;, \
+        count &lt;c&gt;, seconds &lt;s&gt;  
+
+    threshold \
+        gen_id &lt;gid&gt;, sig_id &lt;sid&gt;, \
+        type &lt;limit|threshold|both&gt;, \
+        track &lt;by_src|by_dst&gt;, \
+        count &lt;c&gt;, seconds &lt;s&gt;
+</PRE>
+
+<P>
+<TT>threshold</TT> is an alias for <TT>event_filter</TT>.  Both formats are
+equivalent and support the options described below - all are required.
+<TT>threshold</TT> is deprecated and will not be supported in future releases.
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<TR><TH ALIGN="LEFT"><SPAN  CLASS="textbf">Option</SPAN></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=324><SPAN  CLASS="textbf">Description</SPAN></TH>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>gen_id &lt;gid&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Specify the generator ID of an associated rule.  <TT>gen_id 0, sig_id 0</TT>
+can be used to specify a "global" threshold that applies to all rules.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>sig_id &lt;sid&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Specify the signature ID of an associated rule.  <TT>sig_id 0</TT> specifies a
+"global" filter because it applies to all <TT>sig_id</TT>s for the given
+<TT>gen_id</TT>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>type limit|threshold|both</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+type <TT>limit</TT> alerts on the 1st m events during the time interval, then
+ignores events for the rest of the time interval.  Type <TT>threshold</TT>
+alerts every m times we see this event during the time interval.  Type
+<TT>both</TT> alerts once per time interval after seeing m occurrences of the
+event, then ignores any additional events during the time interval.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>track by_src|by_dst</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+rate is tracked either by source IP address, or destination IP address.  This
+means count is maintained for each unique source IP addresses, or for each
+unique destination IP addresses.  Ports or anything else are not tracked.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>count c</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+number of rule matching in s seconds that will cause <TT>event_filter</TT>
+limit to be exceeded.  <TT>c</TT> must be nonzero value.  A value of -1 disables
+the event filter and can be used to override the global <TT>event_filter</TT>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>seconds s</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+time period over which <TT>count</TT> is accrued.  <TT>s</TT> must be nonzero
+value.</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Only one <TT>event_filter</TT> may be defined for a given <TT>gen_id,
+sig_id</TT>.  If more than one <TT>event_filter</TT> is applied to a specific
+<TT>gen_id, sig_id</TT> pair, Snort will terminate with an error while
+reading the configuration information. 
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+<TT>event_filter</TT>s with <TT>sig_id</TT> 0 are considered "global" because
+they apply to all rules with the given <TT>gen_id</TT>.  If <TT>gen_id</TT>
+is also 0, then the filter applies to all rules.  (<TT>gen_id 0, sig_id
+!= 0</TT> is not allowed).  Standard filtering tests are applied first, if they do
+not block an event from being logged, the global filtering test is applied.
+Thresholds in a rule (deprecated) will override a global
+<TT>event_filter</TT>.  Global <TT>event_filter</TT>s do not override what's
+in a signature or a more specific stand-alone <TT>event_filter</TT>.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+<TT>event_filters</TT> can be used to suppress excessive <TT>rate_filter</TT>
+alerts, however, the first <TT>new_action</TT> event of the timeout period is
+never suppressed.  Such events indicate a change of state that are significant
+to the user monitoring the network.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H3><A NAME="SECTION00342200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+Limit logging to 1 event per 60 seconds:
+
+<P>
+<PRE>
+    event_filter \
+        gen_id 1, sig_id 1851, \
+        type limit, track by_src,  \
+        count 1, seconds 60
+</PRE>
+
+<P>
+Limit logging to every 3rd event:
+
+<P>
+<PRE>
+    event_filter \
+        gen_id 1, sig_id 1852,  \
+        type threshold, track by_src, \
+        count 3, seconds 60
+</PRE>
+
+<P>
+Limit logging to just 1 event per 60 seconds, but only if we exceed 30 events
+in 60 seconds:
+
+<P>
+<PRE>
+    event_filter \
+        gen_id 1, sig_id 1853, \
+        type both, track by_src, \
+        count 30, seconds 60
+</PRE>
+
+<P>
+Limit to logging 1 event per 60 seconds per IP triggering each rule (rule
+gen_id is 1):
+
+<P>
+<PRE>
+    event_filter \
+        gen_id 1, sig_id 0, \
+        type limit, track by_src, \
+        count 1, seconds 60
+</PRE>
+
+<P>
+Limit to logging 1 event per 60 seconds per IP, triggering each rule for each
+event generator:
+
+<P>
+<PRE>
+    event_filter \
+        gen_id 0, sig_id 0, \
+        type limit, track by_src, \
+        count 1, seconds 60
+</PRE>
+
+<P>
+Events in Snort are generated in the usual way, event filters are handled as
+part of the output system. Read gen-msg.map for details on gen ids.
+
+<P>
+Users can also configure a memcap for threshold with a &ldquo;config:&rdquo; option:
+
+<P>
+<PRE>
+    config event_filter: memcap &lt;bytes&gt;
+
+    # this is deprecated:
+    config threshold: memcap &lt;bytes&gt;
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00343000000000000000"></A>
+<A NAME="event_suppression"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Event Suppression
+</H2>
+
+<P>
+Event suppression stops specified events from firing without removing the rule
+from the rule base. Suppression uses an IP list to select specific networks and
+users for suppression.  Suppression tests are performed prior to either
+standard or global thresholding tests.
+
+<P>
+Suppression are standalone configurations that reference generators, SIDs, and
+IP addresses via an IP list . This allows a rule to be completely suppressed,
+or suppressed when the causative traffic is going to or coming from a specific
+IP or group of IP addresses.
+
+<P>
+You may apply multiple suppressions to a non-zero SID.  You may also combine
+one <TT>event_filter</TT> and several suppressions to the same non-zero SID.  
+
+<P>
+
+<H3><A NAME="SECTION00343100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+The suppress configuration has two forms:
+
+<P>
+<PRE>
+    suppress \
+        gen_id &lt;gid&gt;, sig_id &lt;sid&gt;
+</PRE>
+
+<P>
+<PRE>
+    suppress \
+        gen_id &lt;gid&gt;, sig_id &lt;sid&gt;, \
+        track &lt;by_src|by_dst&gt;, ip &lt;ip-list&gt;
+</PRE>
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<TR><TH ALIGN="LEFT"><SPAN  CLASS="textbf">Option</SPAN></TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=324><SPAN  CLASS="textbf">Description</SPAN></TH>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>gen_id &lt;gid&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Specify the generator ID of an associated rule.  <TT>gen_id 0, sig_id 0</TT>
+can be used to specify a "global" threshold that applies to all rules.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>sig_id &lt;sid&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Specify the signature ID of an associated rule.  <TT>sig_id 0</TT> specifies a
+"global" filter because it applies to all <TT>sig_id</TT>s for the given
+<TT>gen_id</TT>.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>track by_src|by_dst</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Suppress by source IP address or destination IP address.  This is optional, but
+if present, <TT>ip</TT> must be provided as well.</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>ip &lt;list&gt;</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+Restrict the suppression to only source or destination IP addresses (indicated
+by <TT>track</TT> parameter) determined by <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>list<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>.  If track is provided, ip
+must be provided as well.</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+
+<H3><A NAME="SECTION00343200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+Suppress this event completely:
+
+<P>
+<PRE>
+    suppress gen_id 1, sig_id 1852:
+</PRE>
+
+<P>
+Suppress this event from this IP:
+
+<P>
+<PRE>
+    suppress gen_id 1, sig_id 1852, track by_src, ip 10.1.1.54
+</PRE>
+
+<P>
+Suppress this event to this CIDR block:
+
+<P>
+<PRE>
+    suppress gen_id 1, sig_id 1852, track by_dst, ip 10.1.1.0/24
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00344000000000000000"></A>
+<A NAME="eventqueue"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Event Logging
+</H2>
+
+<P>
+Snort supports logging multiple events per packet/stream that are prioritized
+with different insertion methods, such as max content length or event ordering
+using the event queue.
+
+<P>
+The general configuration of the event queue is as follows:
+
+<P>
+<PRE>
+    config event_queue: [max_queue [size]] [log [size]] [order_events [TYPE]]
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00344100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Event Queue Configuration Options</A>
+</H3>
+
+<P>
+There are three configuration options to the configuration parameter
+'event_queue'.
+
+<P>
+
+<DL COMPACT>
+<DT> <B><SPAN CLASS="arabic">129</SPAN>.</B> 
+<DD><TT>max_queue</TT>
+
+<P>
+This determines the maximum size of the event queue.  For example, if the event
+queue has a max size of 8, only 8 events will be stored for a single packet or
+stream.
+
+<P>
+The default value is 8.
+
+<P>
+<DT> <B><SPAN CLASS="arabic">130</SPAN>.</B> 
+<DD><TT>log</TT>
+
+<P>
+This determines the number of events to log for a given packet or stream.  You
+can't log more than the max_event number that was specified.
+
+<P>
+The default value is 3.
+
+<P>
+<DT> <B><SPAN CLASS="arabic">131</SPAN>.</B> 
+<DD><TT>order_events</TT>
+
+<P>
+This argument determines the way that the incoming events are ordered.  We
+currently have two different methods:
+
+<P>
+
+<UL>
+<LI><TT>priority</TT> - The highest priority (1 being the highest) events are
+ordered first.
+
+<P>
+</LI>
+<LI><TT>content_length</TT> - Rules are ordered before decode or
+preprocessor alerts, and rules that have a longer content are ordered before
+rules with shorter contents.
+
+<P>
+</LI>
+</UL>
+
+<P>
+The method in which events are ordered does not affect rule types such as pass,
+alert, log, etc.
+
+<P>
+The default value is content_length. 
+</DD>
+</DL> 
+<P>
+
+<H3><A NAME="SECTION00344200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Event Queue Configuration Examples</A>
+</H3>
+
+<P>
+The default configuration:
+
+<P>
+<PRE>
+    config event_queue: max_queue 8 log 3 order_events content_length
+</PRE>
+
+<P>
+Example of a reconfigured event queue:
+
+<P>
+<PRE>
+    config event_queue: max_queue 10 log 3 order_events content_length
+</PRE>
+
+<P>
+Use the default event queue values, but change event order:
+
+<P>
+<PRE>
+    config event_queue: order_events priority
+</PRE>
+
+<P>
+Use the default event queue values but change the number of logged events:
+
+<P>
+<PRE>
+    config event_queue: log 2
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00345000000000000000"></A>
+<A NAME="eventtrace"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN> Event Trace
+</H2>
+
+<P>
+Snort supports logging additional information to a file about the events it is
+generating relative to specific blocks of data that are matching the rule.
+The blocks of data logged include information about the event, the GID, SID,
+and other data related to the event itself, plus packet data including sizes,
+timestamps, raw, normalized, and decompressed buffers extracted from the packet
+that may have been used in evaluating the rule.  The amount of packet data
+written is limited with each entry.  This is useful in debugging rules.
+
+<P>
+The <TT>config</TT> option <TT>event_trace</TT> to <TT>snort.conf</TT>
+provides this control.
+
+<P>
+The general configuration for event tracing is as follows:
+
+<P>
+<PRE>
+    config event_trace: [file &lt;filename&gt;] [max_data &lt;int&gt;]
+</PRE>
+
+<P>
+The are two configuration options for <TT>event_trace</TT>.
+
+<P>
+
+<DL COMPACT>
+<DT> <B><SPAN CLASS="arabic">132</SPAN>.</B> 
+<DD><TT>file</TT>
+
+<P>
+This sets the file name into which the trace data is written, within
+Snort's log directory (see -l command line option).
+
+<P>
+The default is event_trace.txt.
+
+<P>
+<DT> <B><SPAN CLASS="arabic">133</SPAN>.</B> 
+<DD><TT>max_data</TT>
+
+<P>
+This specifies the maximum number of bytes from each buffer of data to write into
+the file.
+
+<P>
+The default is 64 bytes and valid values range from 1 to 65535 bytes.
+
+<P>
+</DD>
+</DL> 
+<P>
+
+<H3><A NAME="SECTION00345100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Event Trace Examples</A>
+</H3>
+
+<P>
+The default configuration:
+
+<P>
+<PRE>
+    config event_trace: file event_trace.txt max_data 64
+</PRE>
+
+<P>
+Use the default file, but change the amount of data logged:
+
+<P>
+<PRE>
+    config event_trace: max_data 128
+</PRE>
+
+<P>
+Change the file name to which event traces are logged:
+
+<P>
+<PRE>
+    config event_trace: file snort_event_trace.out
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html857"
+  HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html853"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html847"
+  HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html855"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html858"
+  HREF="node20.html">2.5 Performance Profiling</A>
+<B> Up:</B> <A NAME="tex2html854"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html848"
+  HREF="node18.html">2.3 Decoder and Preprocessor</A>
+ &nbsp; <B>  <A NAME="tex2html856"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node19.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:42 GMT -->
+</HTML>

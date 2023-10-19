@@ -1,0 +1,448 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node11.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+<HEAD>
+<TITLE>1.9 Miscellaneous</TITLE>
+<META NAME="description" CONTENT="1.9 Miscellaneous">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node12.html">
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node12.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html537"
+  HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html533"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html527"
+  HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html535"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html538"
+  HREF="node12.html">1.10 Control socket</A>
+<B> Up:</B> <A NAME="tex2html534"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html528"
+  HREF="node10.html">1.8 Tunneling Protocol Support</A>
+ &nbsp; <B>  <A NAME="tex2html536"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html539"
+  HREF="node11.html#SECTION00291000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Running Snort as a Daemon</A>
+<UL>
+<LI><A NAME="tex2html540"
+  HREF="node11.html#SECTION00291100000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Snort PID File</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html541"
+  HREF="node11.html#SECTION00292000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Running in Rule Stub Creation Mode</A>
+<LI><A NAME="tex2html542"
+  HREF="node11.html#SECTION00293000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN> Obfuscating IP Address Printouts</A>
+<LI><A NAME="tex2html543"
+  HREF="node11.html#SECTION00294000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">4</SPAN> Specifying Multiple-Instance Identifiers</A>
+<LI><A NAME="tex2html544"
+  HREF="node11.html#SECTION00295000000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">5</SPAN> Snort Modes</A>
+<UL>
+<LI><A NAME="tex2html545"
+  HREF="node11.html#SECTION00295100000000000000"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Explanation of Modes</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00290000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN> Miscellaneous</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00291000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Running Snort as a Daemon</A>
+</H2>
+
+<P>
+If you want to run Snort as a daemon, you can the add -D switch to any
+combination described in the previous sections. Please notice that if you want
+to be able to restart Snort by sending a SIGHUP signal to the daemon, you <EM>must</EM> specify the full path to the Snort binary when you start it, for example:
+
+<P>
+<PRE>
+    /usr/local/bin/snort -d -h 192.168.1.0/24 \
+        -l /var/log/snortlogs -c /usr/local/etc/snort.conf -s -D
+</PRE>
+
+<P>
+Relative paths are not supported due to security concerns.
+
+<P>
+
+<H3><A NAME="SECTION00291100000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Snort PID File</A>
+</H3>
+
+<P>
+When Snort is run as a daemon , the daemon creates a PID file in the log
+directory.  In Snort 2.6, the <TT>-pid-path</TT> command line switch causes
+Snort to write the PID file in the directory specified.
+
+<P>
+Additionally, the <TT>-create-pidfile</TT> switch can be used to force
+creation of a PID file even when not running in daemon mode.
+
+<P>
+The PID file will be locked so that other snort processes cannot start.  Use
+the <TT>-nolock-pidfile</TT> switch to not lock the PID file.
+
+<P>
+If you do not wish to include the name of the interface in the PID file, use
+the <TT>-no-interface-pidfile</TT> switch.
+
+<P>
+
+<H2><A NAME="SECTION00292000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Running in Rule Stub Creation Mode</A>
+</H2>
+
+<P>
+If you need to dump the shared object rules stub to a directory, you must use the -dump-dynamic-rules command line option. These rule stub files are used in conjunction with the shared object rules. The path can be relative or absolute. 
+
+<P>
+<PRE>
+    /usr/local/bin/snort -c /usr/local/etc/snort.conf \
+        --dump-dynamic-rules=/tmp
+</PRE>
+
+<P>
+This path can also be configured in the snort.conf using the config option dump-dynamic-rules-path as follows:
+
+<P>
+<PRE>
+    config dump-dynamic-rules-path: /tmp/sorules
+</PRE>
+
+<P>
+The path configured by command line has precedence over the one configured using dump-dynamic-rules-path. 
+
+<P>
+<PRE>
+    /usr/local/bin/snort -c /usr/local/etc/snort.conf \
+        --dump-dynamic-rules
+
+    snort.conf:
+    config dump-dynamic-rules-path: /tmp/sorules
+</PRE>
+
+<P>
+In the above mentioned scenario the dump path is set to /tmp/sorules.
+
+<P>
+
+<H2><A NAME="SECTION00293000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN> Obfuscating IP Address Printouts</A>
+</H2>
+
+<P>
+If you need to post packet logs to public mailing lists, you might want to use
+the -O switch. This switch obfuscates your IP addresses in packet printouts.
+This is handy if you don't want people on the mailing list to know the IP
+addresses involved. You can also combine the -O switch with the -h switch to
+only obfuscate the IP addresses of hosts on the home network.  This is useful
+if you don't care who sees the address of the attacking host.  For example, you
+could use the following command to read the packets from a log file and dump
+them to the screen, obfuscating only the addresses from the 192.168.1.0/24
+class C network:
+
+<P>
+<PRE>
+    ./snort -d -v -r snort.log -O -h 192.168.1.0/24
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00294000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">4</SPAN> Specifying Multiple-Instance Identifiers</A>
+</H2>
+
+<P>
+In Snort v2.4, the <TT>-G</TT> command line option was added that specifies an
+instance identifier for the event logs.  This option can be used when running
+multiple instances of snort, either on different CPUs, or on the same CPU but a
+different interface.  Each Snort instance will use the value specified to
+generate unique event IDs.  Users can specify either a decimal value
+(<TT>-G 1</TT>) or hex value preceded by 0x (<TT>-G 0x11</TT>).  This is also
+supported via a long option <TT>-logid</TT>.
+
+<P>
+
+<H2><A NAME="SECTION00295000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">5</SPAN> Snort Modes</A>
+</H2>
+
+<P>
+Snort can operate in three different modes namely tap (passive), inline, and inline-test.
+Snort policies can be configured in these three modes too. 
+
+<P>
+
+<H3><A NAME="SECTION00295100000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Explanation of Modes</A>
+</H3>
+
+<P>
+
+<UL>
+<LI><TT>Inline</TT>
+
+<P>
+When Snort is in Inline mode, it acts as an IPS allowing drop rules to trigger. Snort can be 
+configured to run in inline mode using the command line argument -Q and snort config option 
+<TT>policy_mode</TT> as follows:
+
+<P>
+<PRE>
+    snort -Q
+    config policy_mode:inline
+</PRE>
+
+<P>
+</LI>
+<LI><TT>Passive</TT>
+
+<P>
+When Snort is in Passive mode, it acts as a IDS. Drop rules are not loaded (without -treat-drop-as-alert). 
+Snort can be configured to passive mode using the snort config option <TT>policy_mode</TT> as follows:
+
+<P>
+<PRE>
+    config policy_mode:tap
+</PRE>
+
+<P>
+</LI>
+<LI><TT>Inline-Test</TT>
+
+<P>
+Inline-Test mode simulates the inline mode of snort, allowing evaluation of inline behavior without affecting 
+traffic. The drop rules will be loaded and will be triggered as a Wdrop (Would Drop) alert. Snort can be 
+configured to run in inline-test mode using the command line option (-enable-inline-test) or using the 
+snort config option <TT>policy_mode</TT> as follows:
+
+<P>
+<PRE>
+    snort --enable-inline-test
+    config policy_mode:inline_test
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Please note -enable-inline-test cannot be used in conjunction with -Q.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+</LI>
+</UL>
+
+<P>
+<TT>Behavior of different modes with rule options</TT>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">Rule Option</TD>
+<TD ALIGN="CENTER">Inline Mode</TD>
+<TD ALIGN="CENTER">Passive Mode</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>Inline-Test Mode</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>reject</TT></TD>
+<TD ALIGN="CENTER">Drop + Response</TD>
+<TD ALIGN="CENTER">Alert + Response</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>Wdrop + Response</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>react</TT></TD>
+<TD ALIGN="CENTER">Blocks and send notice</TD>
+<TD ALIGN="CENTER">Blocks and send notice</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>Blocks and send notice</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>normalize</TT></TD>
+<TD ALIGN="CENTER">Normalizes packet</TD>
+<TD ALIGN="CENTER">Doesn't normalize</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>Doesn't normalize</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>replace</TT></TD>
+<TD ALIGN="CENTER">replace content</TD>
+<TD ALIGN="CENTER">Doesn't replace</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>Doesn't replace</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>respond</TT></TD>
+<TD ALIGN="CENTER">close session</TD>
+<TD ALIGN="CENTER">close session</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=170>close session</TD>
+</TR>
+</TABLE>
+
+<P>
+<TT>Behavior of different modes with rules actions</TT>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">Adapter Mode</TD>
+<TD ALIGN="CENTER">Snort args</TD>
+<TD ALIGN="CENTER">config policy_mode</TD>
+<TD ALIGN="CENTER">Drop Rule Handling</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Passive</TD>
+<TD ALIGN="CENTER"><TT> -treat-drop-as-alert</TT></TD>
+<TD ALIGN="CENTER">tap</TD>
+<TD ALIGN="CENTER">Alert</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Passive</TD>
+<TD ALIGN="CENTER"><TT> no args</TT></TD>
+<TD ALIGN="CENTER">tap</TD>
+<TD ALIGN="CENTER">Not Loaded</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Passive</TD>
+<TD ALIGN="CENTER"><TT> -treat-drop-as-alert</TT></TD>
+<TD ALIGN="CENTER">inline_test</TD>
+<TD ALIGN="CENTER">Alert</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Passive</TD>
+<TD ALIGN="CENTER"><TT> no args</TT></TD>
+<TD ALIGN="CENTER">inline_test</TD>
+<TD ALIGN="CENTER">Would Drop</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Passive</TD>
+<TD ALIGN="CENTER"><TT> -treat-drop-as-alert</TT></TD>
+<TD ALIGN="CENTER">inline</TD>
+<TD ALIGN="CENTER">Alert</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Passive</TD>
+<TD ALIGN="CENTER"><TT>no args</TT></TD>
+<TD ALIGN="CENTER">inline</TD>
+<TD ALIGN="CENTER">Not loaded + warning</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline Test</TD>
+<TD ALIGN="CENTER"><TT> -enable-inline-test -treat-drop-as-alert</TT></TD>
+<TD ALIGN="CENTER">tap</TD>
+<TD ALIGN="CENTER">Alert</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline Test</TD>
+<TD ALIGN="CENTER"><TT> -enable-inline-test</TT></TD>
+<TD ALIGN="CENTER">tap</TD>
+<TD ALIGN="CENTER">Would Drop</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline Test</TD>
+<TD ALIGN="CENTER"><TT> -enable-inline-test -treat-drop-as-alert</TT></TD>
+<TD ALIGN="CENTER">inline_test</TD>
+<TD ALIGN="CENTER">Alert</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline Test</TD>
+<TD ALIGN="CENTER"><TT> -enable-inline-test</TT></TD>
+<TD ALIGN="CENTER">inline_test</TD>
+<TD ALIGN="CENTER">Would Drop</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline Test</TD>
+<TD ALIGN="CENTER"><TT> -enable-inline-test -treat-drop-as-alert</TT></TD>
+<TD ALIGN="CENTER">inline</TD>
+<TD ALIGN="CENTER">Alert</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline Test</TD>
+<TD ALIGN="CENTER"><TT> -enable-inline-test</TT></TD>
+<TD ALIGN="CENTER">inline</TD>
+<TD ALIGN="CENTER">Would Drop</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline</TD>
+<TD ALIGN="CENTER"><TT> -Q -treat-drop-as-alert</TT></TD>
+<TD ALIGN="CENTER">tap</TD>
+<TD ALIGN="CENTER">Alert</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline</TD>
+<TD ALIGN="CENTER"><TT> -Q</TT></TD>
+<TD ALIGN="CENTER">tap</TD>
+<TD ALIGN="CENTER">Alert</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline</TD>
+<TD ALIGN="CENTER"><TT> -Q -treat-drop-as-alert</TT></TD>
+<TD ALIGN="CENTER">inline_test</TD>
+<TD ALIGN="CENTER">Alert</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline</TD>
+<TD ALIGN="CENTER"><TT> -Q</TT></TD>
+<TD ALIGN="CENTER">inline_test</TD>
+<TD ALIGN="CENTER">Would Drop</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline</TD>
+<TD ALIGN="CENTER"><TT> -Q -treat-drop-as-alert</TT></TD>
+<TD ALIGN="CENTER">inline</TD>
+<TD ALIGN="CENTER">Alert</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Inline</TD>
+<TD ALIGN="CENTER"><TT> -Q</TT></TD>
+<TD ALIGN="CENTER">inline</TD>
+<TD ALIGN="CENTER">Drop</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html537"
+  HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html533"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html527"
+  HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html535"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html538"
+  HREF="node12.html">1.10 Control socket</A>
+<B> Up:</B> <A NAME="tex2html534"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Previous:</B> <A NAME="tex2html528"
+  HREF="node10.html">1.8 Tunneling Protocol Support</A>
+ &nbsp; <B>  <A NAME="tex2html536"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node11.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+</HTML>

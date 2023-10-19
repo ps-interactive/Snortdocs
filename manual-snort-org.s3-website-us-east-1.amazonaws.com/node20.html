@@ -1,0 +1,811 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node20.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:42 GMT -->
+<HEAD>
+<TITLE>2.5 Performance Profiling</TITLE>
+<META NAME="description" CONTENT="2.5 Performance Profiling">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node21.html">
+<LINK REL="previous" HREF="node19.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node21.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html883"
+  HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html879"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html873"
+  HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html881"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html884"
+  HREF="node21.html">2.6 Output Modules</A>
+<B> Up:</B> <A NAME="tex2html880"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html874"
+  HREF="node19.html">2.4 Event Processing</A>
+ &nbsp; <B>  <A NAME="tex2html882"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html885"
+  HREF="node20.html#SECTION00351000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rule Profiling</A>
+<UL>
+<LI><A NAME="tex2html886"
+  HREF="node20.html#SECTION00351100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html887"
+  HREF="node20.html#SECTION00351200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+<LI><A NAME="tex2html888"
+  HREF="node20.html#SECTION00351300000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Output</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html889"
+  HREF="node20.html#SECTION00352000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Preprocessor Profiling</A>
+<UL>
+<LI><A NAME="tex2html890"
+  HREF="node20.html#SECTION00352100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html891"
+  HREF="node20.html#SECTION00352200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+<LI><A NAME="tex2html892"
+  HREF="node20.html#SECTION00352300000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Output</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html893"
+  HREF="node20.html#SECTION00353000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> Packet Performance Monitoring (PPM)</A>
+<UL>
+<LI><A NAME="tex2html894"
+  HREF="node20.html#SECTION00353100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Configuration</A>
+<LI><A NAME="tex2html895"
+  HREF="node20.html#SECTION00353200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+<LI><A NAME="tex2html896"
+  HREF="node20.html#SECTION00353300000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> Sample Snort Output</A>
+<LI><A NAME="tex2html897"
+  HREF="node20.html#SECTION00353400000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> Implementation Details</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00350000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN> Performance Profiling</A>
+</H1>
+
+<P>
+Snort can provide statistics on rule and preprocessor performance.  Each
+require only a simple <TT>config</TT> option to <TT>snort.conf</TT> and Snort
+will print statistics on the worst (or all) performers on exit. When a file
+name is provided in <TT>profile_rules</TT> or <TT>profile_preprocs</TT>, the
+statistics will be saved in these files.  If <TT>append</TT> is not specified,
+a new file will be created each time Snort is run. The filenames will have
+timestamps appended to them.  These files will be found in the logging
+directory.
+
+<P>
+To use this feature, you must build snort with the <TT>-enable-perfprofiling</TT>
+option to the configure script.
+
+<P>
+
+<H2><A NAME="SECTION00351000000000000000"></A>
+<A NAME="rule_profiling"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rule Profiling
+</H2>
+
+<P>
+
+<H3><A NAME="SECTION00351100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    config profile_rules: \
+        print [all | &lt;num&gt;], \
+        sort &lt;sort_option&gt; \
+        [,filename &lt;filename&gt; [append]]
+</PRE>
+
+<P>
+
+<UL>
+<LI><TT>&lt;num&gt;</TT> is the number of rules to print
+</LI>
+<LI><TT>&lt;sort_option&gt;</TT> is one of:
+
+<P>
+<TT>checks</TT>
+    <TT>matches</TT>
+    <TT>nomatches</TT>
+    <TT>avg_ticks</TT>
+    <TT>avg_ticks_per_match</TT>
+    <TT>avg_ticks_per_nomatch</TT>
+    <TT>total_ticks</TT>
+
+<P>
+</LI>
+<LI><TT>&lt;filename&gt;</TT> is the output filename
+
+<P>
+</LI>
+<LI><TT>[append]</TT> dictates that the output will go to the same file each
+time (optional)
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00351200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<UL>
+<LI>Print all rules, sort by avg_ticks (default configuration if option is turned on)
+<TT>config profile_rules</TT>
+
+<P>
+</LI>
+<LI>Print all rules, sort by avg_ticks, and append to file <TT>rules_stats.txt</TT> 
+<TT>config profile_rules: filename <TT>rules_stats.txt</TT> append</TT>
+
+<P>
+</LI>
+<LI>Print the top 10 rules, based on highest average time
+<TT>config profile_rules: print 10, sort avg_ticks</TT>
+
+<P>
+</LI>
+<LI>Print all rules, sorted by number of checks
+<TT>config profile_rules: print all, sort checks</TT>
+
+<P>
+</LI>
+<LI>Print top 100 rules, based on total time
+<TT>config profile_rules: print 100, sort total_ticks</TT>
+
+<P>
+</LI>
+<LI>Print with default options, save results to performance.txt each time
+<TT>config profile_rules: filename performance.txt append</TT>
+
+<P>
+</LI>
+<LI>Print top 20 rules, save results to perf.txt with timestamp in filename
+<TT>config profile_rules: print 20, filename perf.txt</TT>
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00351300000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Output</A>
+</H3>
+
+<P>
+Snort will print a table much like the following at exit.  
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="rule_profiling_example_output"></A><A NAME="6192"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure:</STRONG>
+Rule Profiling Example Output</CAPTION>
+<TR><TD><IMG
+ WIDTH="731" HEIGHT="115" BORDER="0"
+ SRC="img25.png"
+ ALT="\begin{figure}\footnotesize {
+\begin{verbatim}Rule Profile Statistics (worst 4...
+...229.0
+4 1734 1 37 2 0 0 90054 45027.0 0.0 45027.0\end{verbatim}
+}\end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Configuration line used to print the above table: 
+
+<P>
+<TT>config profile_rules: print 4, sort total_ticks</TT>
+
+<P>
+The columns represent:
+
+<P>
+
+<UL>
+<LI>Number (rank)
+</LI>
+<LI>Sig ID
+</LI>
+<LI>Generator ID
+</LI>
+<LI>Checks (number of times rule was evaluated after fast pattern match
+  within portgroup or any-<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>any rules)
+</LI>
+<LI>Matches (number of times ALL rule options matched, will be high for
+  rules that have no options)
+</LI>
+<LI>Alerts (number of alerts generated from this rule)
+</LI>
+<LI>CPU Ticks 
+</LI>
+<LI>Avg Ticks per Check
+</LI>
+<LI>Avg Ticks per Match
+</LI>
+<LI>Avg Ticks per Nonmatch
+</LI>
+</UL>
+
+<P>
+Interpreting this info is the key.  The Microsecs (or Ticks) column is
+important because that is the total time spent evaluating a given rule.  But,
+if that rule is causing alerts, it makes sense to leave it alone.
+
+<P>
+A high Avg/Check is a poor performing rule, that most likely contains PCRE.
+High Checks and low Avg/Check is usually an any-<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>any rule with few rule
+options and no content.  Quick to check, the few options may or may not match.
+We are looking at moving some of these into code, especially those with low
+SIDs.
+
+<P>
+By default, this information will be printed to the console when Snort exits.
+You can use the "filename" option in snort.conf to specify a file where this
+will be written. If "append" is not specified, a new file will be created each
+time Snort is run. The filenames will have timestamps appended to them. These
+files will be found in the logging directory.
+
+<P>
+
+<H2><A NAME="SECTION00352000000000000000"></A>
+<A NAME="preproc_profiling"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Preprocessor Profiling
+</H2>
+
+<P>
+
+<H3><A NAME="SECTION00352100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    config profile_preprocs: \
+        print [all | &lt;num&gt;], \
+        sort &lt;sort_option&gt; \
+        [, filename &lt;filename&gt; [append]]
+</PRE>
+
+<P>
+
+<UL>
+<LI><TT>&lt;num&gt;</TT> is the number of preprocessors to print
+</LI>
+<LI><TT>&lt;sort_option&gt;</TT> is one of:
+<TT>checks</TT>
+<TT>avg_ticks</TT>
+<TT>total_ticks</TT>
+</LI>
+<LI><TT>&lt;filename&gt;</TT> is the output filename
+</LI>
+<LI><TT>[append]</TT> dictates that the output will go to the same file each time (optional)
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00352200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+
+<UL>
+<LI>Print all preprocessors, sort by avg_ticks (default configuration if
+option is turned on)
+<TT>config profile_preprocs</TT>
+
+<P>
+</LI>
+<LI>Print all preprocessors, sort by avg_ticks, and append to file
+<TT>preprocs_stats.txt</TT> 
+<TT>config profile_preprocs: filename <TT>preprocs_stats.txt</TT> append</TT>
+
+<P>
+</LI>
+<LI>Print the top 10 preprocessors, based on highest average time
+<TT>config profile_preprocs: print 10, sort avg_ticks</TT>
+
+<P>
+</LI>
+<LI>Print all preprocessors, sorted by number of checks
+<TT>config profile_preprocs: print all, sort checks</TT>
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00352300000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Output</A>
+</H3>
+
+<P>
+Snort will print a table much like the following at exit.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="preprocessor_profiling_example_output"></A><A NAME="3687"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure:</STRONG>
+Preprocessor Profiling Example Output</CAPTION>
+<TR><TD><IMG
+ WIDTH="771" HEIGHT="599" BORDER="0"
+ SRC="img26.png"
+ ALT="\begin{figure}\footnotesize {
+\begin{verbatim}Preprocessor Profile Statistics ...
+...tal total 0 311202 311202 14011946 45.03 0.00 0.00\end{verbatim}
+}\end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Configuration line used to print the above table: 
+
+<P>
+<PRE>
+    config profile_preprocs: \
+        print 10, sort total_ticks
+</PRE>
+
+<P>
+The columns represent:
+
+<P>
+
+<UL>
+<LI>Number (rank) - The number is indented for each layer.  Layer 1
+preprocessors are listed under their respective caller (and sorted similarly).
+
+<P>
+</LI>
+<LI>Preprocessor Name
+
+<P>
+</LI>
+<LI>Layer - When printing a specific number of preprocessors all subtasks
+info for a particular preprocessor is printed for each layer 0 preprocessor
+stat.
+
+<P>
+</LI>
+<LI>Checks (number of times preprocessor decided to look at a packet, ports
+matched, app layer header was correct, etc)
+
+<P>
+</LI>
+<LI>Exits  (number of corresponding exits - just to verify code is
+instrumented correctly, should ALWAYS match Checks, unless an exception was
+trapped)
+
+<P>
+</LI>
+<LI>CPU Ticks
+
+<P>
+</LI>
+<LI>Avg Ticks per Check
+
+<P>
+</LI>
+<LI>Percent of caller - For non layer 0 preprocessors, i.e. subroutines
+within preprocessors, this identifies the percent of the caller's ticks that is
+spent for this subtask.
+
+<P>
+</LI>
+</UL>
+
+<P>
+Because of task swapping, non-instrumented code, and other factors, the Pct of
+Caller field will not add up to 100% of the caller's time.  It does give a
+reasonable indication of how much relative time is spent within each subtask.
+
+<P>
+By default, this information will be printed to the console when Snort exits.
+You can use the "filename" option in snort.conf to specify a file where this
+will be written. If "append" is not specified, a new file will be created each
+time Snort is run. The filenames will have timestamps appended to them. These
+files will be found in the logging directory.
+
+<P>
+
+<H2><A NAME="SECTION00353000000000000000"></A>
+<A NAME="ppm"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> Packet Performance Monitoring (PPM)
+</H2>
+PPM provides thresholding mechanisms that can be used to provide a basic
+level of latency control for snort.  It does not provide a hard and fast
+latency guarantee but should in effect provide a good average latency
+control.  Both rules and packets can be checked for latency.  The action
+taken upon detection of excessive latency is configurable.  The following
+sections describe configuration, sample output, and some implementation
+details worth noting.
+
+<P>
+To use PPM, you must build with the -enable-ppm or the -enable-sourcefire
+option to configure.
+
+<P>
+PPM is configured as follows:
+
+<P>
+<PRE>
+    # Packet configuration:
+    config ppm: max-pkt-time &lt;micro-secs&gt;, \
+        fastpath-expensive-packets, \
+        pkt-log, \
+        debug-pkts
+    
+    # Rule configuration:
+    config ppm: max-rule-time &lt;micro-secs&gt;, \
+        threshold count, \
+        suspend-expensive-rules, \
+        suspend-timeout &lt;seconds&gt;, \
+        rule-log [log] [alert]
+</PRE>
+
+<P>
+Packets and rules can be configured separately, as above, or together in just
+one config ppm statement.  Packet and rule monitoring is independent, so one or
+both or neither may be enabled.
+
+<P>
+
+<H3><A NAME="SECTION00353100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Configuration</A>
+</H3>
+
+<P>
+Packet Configuration Options
+
+<P>
+<TT>max-pkt-time &lt;micro-secs&gt;</TT>
+
+<UL>
+<LI>enables packet latency thresholding using 'micros-secs' as the limit.
+</LI>
+<LI>default is 0 (packet latency thresholding disabled)
+</LI>
+<LI>reasonable starting defaults: 100/250/1000 for 1G/100M/5M nets
+</LI>
+</UL>
+
+<P>
+<TT>fastpath-expensive-packets</TT>
+
+<UL>
+<LI>enables stopping further inspection of a packet if the max time is
+      exceeded
+</LI>
+<LI>default is off
+</LI>
+</UL>
+
+<P>
+<TT>pkt-log</TT>
+
+<UL>
+<LI>enables logging packet event if packet exceeds max-pkt-time
+</LI>
+<LI>default is no logging
+</LI>
+<LI>if no option is given for 'pkt-log', 'pkt-log log' is implied
+</LI>
+<LI>the log option enables output to syslog or console depending 
+      upon snort configuration
+</LI>
+</UL>
+
+<P>
+<TT>debug-pkts</TT>
+
+<UL>
+<LI>must build with the -enable-debug option to configure
+</LI>
+<LI>enables per packet timing stats to be printed after each packet
+</LI>
+<LI>default is off
+</LI>
+</UL>
+
+<P>
+Rule Configuration Options
+
+<P>
+<TT>max-rule-time &lt;micro-secs&gt;</TT>
+
+<UL>
+<LI>enables rule latency thresholding using 'micros-secs' as the limit.
+</LI>
+<LI>default is 0 (rule latency thresholding disabled)
+</LI>
+<LI>reasonable starting defaults: 100/250/1000 for 1G/100M/5M nets
+</LI>
+</UL>
+
+<P>
+<TT>threshold &lt;count&gt;</TT>
+
+<UL>
+<LI>sets the number of cumulative rule time excesses before disabling
+      a rule
+</LI>
+<LI>default is 5
+</LI>
+</UL>
+
+<P>
+<TT>suspend-expensive-rules</TT>
+
+<UL>
+<LI>enables suspending rule inspection if the max rule time is exceeded
+</LI>
+<LI>default is off
+</LI>
+</UL>
+
+<P>
+<TT>suspend-timeout &lt;seconds&gt;</TT>
+
+<UL>
+<LI>rule suspension time in seconds
+</LI>
+<LI>default is 60 seconds
+</LI>
+<LI>set to zero to permanently disable expensive rules
+</LI>
+</UL>
+
+<P>
+<TT>rule-log [log] [alert]</TT>
+
+<UL>
+<LI>enables event logging output for rules
+</LI>
+<LI>default is no logging
+</LI>
+<LI>one or both of the options 'log' and 'alert' must be used with
+      'rule-log'
+</LI>
+<LI>the log option enables output to syslog or console depending 
+      upon snort configuration
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00353200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+Example 1:
+The following enables packet tracking:
+
+<P>
+<PRE>
+    config ppm: max-pkt-time 100
+</PRE>
+
+<P>
+The following enables rule tracking:
+
+<P>
+<PRE>
+    config ppm: max-rule-time 50, threshold 5
+</PRE>
+
+<P>
+If fastpath-expensive-packets or suspend-expensive-rules is not used, then
+no action is taken other than to increment the count of the number of
+packets that should be fastpath'd or the rules that should be suspended. A
+summary of this information is printed out when snort exits.
+
+<P>
+Example 2:
+
+<P>
+The following suspends rules and aborts packet inspection.  These rules were
+used to generate the sample output that follows.
+
+<P>
+<PRE>
+    config ppm: \
+        max-pkt-time 50, fastpath-expensive-packets, \
+        pkt-log, debug-pkts
+    
+    config ppm: \
+        max-rule-time 50, threshold 5, suspend-expensive-rules, \
+        suspend-timeout 300, rule-log log alert
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00353300000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> Sample Snort Output</A>
+</H3>
+
+<P>
+Sample Snort Startup Output
+
+<P>
+<PRE>
+    Packet Performance Monitor Config:
+      ticks per usec  : 1600 ticks
+      max packet time : 50 usecs
+      packet action   : fastpath-expensive-packets
+      packet logging  : log
+      debug-pkts      : disabled
+    
+    Rule Performance Monitor Config:
+      ticks per usec  : 1600 ticks
+      max rule time   : 50 usecs
+      rule action     : suspend-expensive-rules
+      rule threshold  : 5 
+      suspend timeout : 300 secs
+      rule logging    : alert log
+</PRE>
+
+<P>
+Sample Snort Run-time Output
+
+<P>
+<PRE>
+    ...
+    PPM: Process-BeginPkt[61] caplen=60
+    PPM: Pkt[61] Used= 8.15385 usecs
+    PPM: Process-EndPkt[61]
+    
+    PPM: Process-BeginPkt[62] caplen=342
+    PPM: Pkt[62] Used= 65.3659 usecs
+    PPM: Process-EndPkt[62]
+    
+    PPM: Pkt-Event Pkt[63] used=56.0438 usecs, 0 rules, 1 nc-rules tested, packet fastpathed
+         (10.4.12.224:0 -&gt; 10.4.14.108:54321).
+    PPM: Process-BeginPkt[63] caplen=60
+    PPM: Pkt[63] Used= 8.394 usecs
+    PPM: Process-EndPkt[63]
+    
+    PPM: Process-BeginPkt[64] caplen=60
+    PPM: Pkt[64] Used= 8.21764 usecs
+    PPM: Process-EndPkt[64]
+    ...
+</PRE>
+
+<P>
+Sample Snort Exit Output
+
+<P>
+<PRE>
+    Packet Performance Summary:
+       max packet time       : 50 usecs
+       packet events         : 1
+       avg pkt time          : 0.633125 usecs
+    Rule Performance Summary:
+       max rule time         : 50 usecs
+       rule events           : 0
+       avg nc-rule time      : 0.2675 usecs
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00353400000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> Implementation Details</A>
+</H3>
+
+<P>
+
+<UL>
+<LI>Enforcement of packet and rule processing times is done after processing
+each rule.  Latency control is not enforced after each preprocessor.  
+
+<P>
+</LI>
+<LI>This implementation is software based and does not use an interrupt
+driven timing mechanism and is therefore subject to the granularity of the
+software based timing tests. Due to the granularity of the timing measurements
+any individual packet may exceed the user specified packet or rule processing
+time limit.  Therefore this implementation cannot implement a precise latency
+guarantee with strict timing guarantees.  Hence the reason this is considered a
+best effort approach.
+
+<P>
+</LI>
+<LI>Since this implementation depends on hardware based high performance
+frequency counters, latency thresholding is presently only available on Intel
+and PPC platforms. 
+
+<P>
+</LI>
+<LI>Time checks are made based on the total system time, not processor usage
+by Snort.  This was a conscious design decision because when a system is
+loaded, the latency for a packet is based on the total system time, not just
+the processor time the Snort application receives.  Therefore, it is
+recommended that you tune your thresholding to operate optimally when your
+system is under load.
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html883"
+  HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html879"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html873"
+  HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html881"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html884"
+  HREF="node21.html">2.6 Output Modules</A>
+<B> Up:</B> <A NAME="tex2html880"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html874"
+  HREF="node19.html">2.4 Event Processing</A>
+ &nbsp; <B>  <A NAME="tex2html882"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node20.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:44 GMT -->
+</HTML>

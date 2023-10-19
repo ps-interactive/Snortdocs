@@ -1,0 +1,465 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node22.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:44 GMT -->
+<HEAD>
+<TITLE>2.7 Host Attribute Table</TITLE>
+<META NAME="description" CONTENT="2.7 Host Attribute Table">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node23.html">
+<LINK REL="previous" HREF="node21.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node23.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html950"
+  HREF="node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html946"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html940"
+  HREF="node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html948"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html951"
+  HREF="node23.html">2.8 Dynamic Modules</A>
+<B> Up:</B> <A NAME="tex2html947"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html941"
+  HREF="node21.html">2.6 Output Modules</A>
+ &nbsp; <B>  <A NAME="tex2html949"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html952"
+  HREF="node22.html#SECTION00371000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rule evaluation</A>
+<LI><A NAME="tex2html953"
+  HREF="node22.html#SECTION00372000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Snort Configuration</A>
+<LI><A NAME="tex2html954"
+  HREF="node22.html#SECTION00373000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> Host Attribute Table File Format</A>
+<LI><A NAME="tex2html955"
+  HREF="node22.html#SECTION00374000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Attribute Table Example</A>
+<LI><A NAME="tex2html956"
+  HREF="node22.html#SECTION00375000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> Attribute Table Affect on preprocessors</A>
+<UL>
+<LI><A NAME="tex2html957"
+  HREF="node22.html#SECTION00375100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Attribute Table Affect on rules</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00370000000000000000"></A>
+<A NAME="targetbased"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN> Host Attribute Table
+</H1>
+
+<P>
+Snort can use information from an external source(s) to more accurately inspect
+network traffic. This information saved to a file is known as a host attributes
+table. Host attributes are used in IPS rule evalution, IP fragment (see section
+<A HREF="node17.html#frag3_section"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>)/TCP stream (see section <A HREF="node17.html#stream5_section"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>) reassembly
+policy selection, and by the application preprocessors. Host attribute table is
+loaded during initialization and supports runtime reloads; Snort reloads the
+host attributes table when it receives the signal SIGNAL_SNORT_READ_ATTR_TBL
+(See <A HREF="node13.html#signalactions"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> to learn more).
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+To use a host attribute table and service information, Snort must be configured
+with the -enable-targetbased flag.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION00371000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rule evaluation</A>
+</H2>
+
+<P>
+In rule evaluation, service information can be used instead of the ports when the
+metadata service(s) in the rule matches the service corresponding to the traffic.
+If the rule does not have metadata service(s), or the packet service was not
+matched then the port checks are used exclusively.
+
+<P>
+
+<H2><A NAME="SECTION00372000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Snort Configuration</A>
+</H2>
+
+<P>
+<PRE>
+attribute_table filename &lt;PATH/TO/HOSTS.XML&gt;
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00373000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> Host Attribute Table File Format</A>
+</H2>
+
+<P>
+The attribute table uses an XML format and consists of two sections, a mapping
+section, used to reduce the size of the file for common data elements, and the
+host attribute section.  The mapping section is optional.
+
+<P>
+Provided below is an example attribute table
+
+<P>
+<PRE>
+&lt;SNORT_ATTRIBUTES&gt;
+    &lt;ATTRIBUTE_MAP&gt;
+        &lt;ENTRY&gt;
+            &lt;ID&gt;1&lt;/ID&gt;
+            &lt;VALUE&gt;Linux&lt;/VALUE&gt;
+        &lt;/ENTRY&gt;
+        &lt;ENTRY&gt;
+            &lt;ID&gt;2&lt;/ID&gt;
+            &lt;VALUE&gt;ssh&lt;/VALUE&gt;
+        &lt;/ENTRY&gt;
+    &lt;/ATTRIBUTE_MAP&gt;
+    &lt;ATTRIBUTE_TABLE&gt;
+        &lt;HOST&gt;
+            &lt;IP&gt;192.168.1.234&lt;/IP&gt;
+            &lt;OPERATING_SYSTEM&gt;
+                &lt;NAME&gt;
+                    &lt;ATTRIBUTE_ID&gt;1&lt;/ATTRIBUTE_ID&gt;
+                    &lt;CONFIDENCE&gt;100&lt;/CONFIDENCE&gt;
+                &lt;/NAME&gt;
+                &lt;VENDOR&gt;
+                    &lt;ATTRIBUTE_VALUE&gt;Red Hat&lt;/ATTRIBUTE_VALUE&gt;
+                    &lt;CONFIDENCE&gt;99&lt;/CONFIDENCE&gt;
+                &lt;/VENDOR&gt;
+                &lt;VERSION&gt;
+                    &lt;ATTRIBUTE_VALUE&gt;2.6&lt;/ATTRIBUTE_VALUE&gt;
+                    &lt;CONFIDENCE&gt;98&lt;/CONFIDENCE&gt;
+                &lt;/VERSION&gt;
+                &lt;FRAG_POLICY&gt;linux&lt;/FRAG_POLICY&gt;
+                &lt;STREAM_POLICY&gt;linux&lt;/STREAM_POLICY&gt;
+            &lt;/OPERATING_SYSTEM&gt;
+            &lt;SERVICES&gt;
+                &lt;SERVICE&gt;
+                    &lt;PORT&gt;
+                        &lt;ATTRIBUTE_VALUE&gt;22&lt;/ATTRIBUTE_VALUE&gt;
+                        &lt;CONFIDENCE&gt;100&lt;/CONFIDENCE&gt;
+                    &lt;/PORT&gt;
+                    &lt;IPPROTO&gt;
+                        &lt;ATTRIBUTE_VALUE&gt;tcp&lt;/ATTRIBUTE_VALUE&gt;
+                        &lt;CONFIDENCE&gt;100&lt;/CONFIDENCE&gt;
+                    &lt;/IPPROTO&gt;
+                    &lt;PROTOCOL&gt;
+                        &lt;ATTRIBUTE_ID&gt;2&lt;/ATTRIBUTE_ID&gt;
+                        &lt;CONFIDENCE&gt;100&lt;/CONFIDENCE&gt;
+                    &lt;/PROTOCOL&gt;
+                    &lt;APPLICATION&gt;
+                        &lt;ATTRIBUTE_VALUE&gt;OpenSSH&lt;/ATTRIBUTE_VALUE&gt;
+                        &lt;CONFIDENCE&gt;100&lt;/CONFIDENCE&gt;
+                        &lt;VERSION&gt;
+                            &lt;ATTRIBUTE_VALUE&gt;3.9p1&lt;/ATTRIBUTE_VALUE&gt;
+                            &lt;CONFIDENCE&gt;93&lt;/CONFIDENCE&gt;
+                        &lt;/VERSION&gt;
+                    &lt;/APPLICATION&gt;
+                &lt;/SERVICE&gt;
+                &lt;SERVICE&gt;
+                    &lt;PORT&gt;
+                        &lt;ATTRIBUTE_VALUE&gt;2300&lt;/ATTRIBUTE_VALUE&gt;
+                        &lt;CONFIDENCE&gt;100&lt;/CONFIDENCE&gt;
+                    &lt;/PORT&gt;
+                    &lt;IPPROTO&gt;
+                        &lt;ATTRIBUTE_VALUE&gt;tcp&lt;/ATTRIBUTE_VALUE&gt;
+                        &lt;CONFIDENCE&gt;100&lt;/CONFIDENCE&gt;
+                    &lt;/IPPROTO&gt;
+                    &lt;PROTOCOL&gt;
+                        &lt;ATTRIBUTE_VALUE&gt;telnet&lt;/ATTRIBUTE_VALUE&gt;
+                        &lt;CONFIDENCE&gt;100&lt;/CONFIDENCE&gt;
+                    &lt;/PROTOCOL&gt;
+                    &lt;APPLICATION&gt;
+                        &lt;ATTRIBUTE_VALUE&gt;telnet&lt;/ATTRIBUTE_VALUE&gt;
+                        &lt;CONFIDENCE&gt;50&lt;/CONFIDENCE&gt;
+                    &lt;/APPLICATION&gt;
+                &lt;/SERVICE&gt;
+            &lt;/SERVICES&gt;
+            &lt;CLIENTS&gt;
+                &lt;CLIENT&gt;
+                    &lt;IPPROTO&gt;
+                        &lt;ATTRIBUTE_VALUE&gt;tcp&lt;/ATTRIBUTE_VALUE&gt;
+                        &lt;CONFIDENCE&gt;100&lt;/CONFIDENCE&gt;
+                    &lt;/IPPROTO&gt;
+                    &lt;PROTOCOL&gt;
+                        &lt;ATTRIBUTE_VALUE&gt;http&lt;/ATTRIBUTE_VALUE&gt;
+                        &lt;CONFIDENCE&gt;91&lt;/CONFIDENCE&gt;
+                    &lt;/PROTOCOL&gt;
+                    &lt;APPLICATION&gt;
+                        &lt;ATTRIBUTE_VALUE&gt;IE Http Browser&lt;/ATTRIBUTE_VALUE&gt;
+                        &lt;CONFIDENCE&gt;90&lt;/CONFIDENCE&gt;
+                        &lt;VERSION&gt;
+                            &lt;ATTRIBUTE_VALUE&gt;6.0&lt;/ATTRIBUTE_VALUE&gt;
+                            &lt;CONFIDENCE&gt;89&lt;/CONFIDENCE&gt;
+                        &lt;/VERSION&gt;
+                    &lt;/APPLICATION&gt;
+                &lt;/CLIENT&gt;
+            &lt;/CLIENTS&gt;
+        &lt;/HOST&gt;
+    &lt;/ATTRIBUTE_TABLE&gt;
+&lt;/SNORT_ATTRIBUTES&gt;
+</PRE>
+
+<P>
+A DTD for verification of the Host Attribute Table XML file is provided with
+the snort packages.
+
+<P>
+The confidence metric may be used to indicate the validity of a given service
+or client application and its respective elements.  That field is not
+currently used by Snort, but may be in future releases.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+Snort requires that the file be a properly formatted schema of the
+    format defined above. Empty or incorrectly formatted files will likely
+    cause a Fatal Error.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION00374000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Attribute Table Example</A>
+</H2>
+
+<P>
+In the example above, a host running Red Hat 2.6 is described. This host has
+an IP address of 192.168.1.234.  On that host, TCP port 22 is ssh (running
+Open SSH), and TCP port 2300 is telnet.
+
+<P>
+The IP fragmentation and TCP stream reassembly is mimicked by the "linux"
+configuration (see sections <A HREF="node17.html#frag3_section"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> and <A HREF="node17.html#stream5_section"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+
+<H2><A NAME="SECTION00375000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> Attribute Table Affect on preprocessors</A>
+</H2>
+
+<P>
+
+<UL>
+<LI>Network Layer Preprocessors
+
+<P>
+Each of the network layer preprocessors (frag3 and stream5) make use of the
+respective <TT>FRAG_POLICY</TT> and <TT>STREAM_POLICY</TT> in terms of
+how data is handled for reassembly for packets being received by that host.
+
+<P>
+</LI>
+<LI>Application Layer Preprocessors
+
+<P>
+The application layer preprocessors (HTTP, SMTP, FTP, Telnet, etc) make use of
+the <TT>SERVICE</TT> information for connections destined to that host on that
+port.
+
+<P>
+For example, even if the telnet portion of the FTP/Telnet preprocessor is only
+configured to inspect port 23, Snort will inspect packets for a connection to
+192.168.1.234 port 2300 as telnet.
+
+<P>
+Conversely, if, for example, HTTP Inspect is configured to inspect traffic on
+port 2300, HTTP Inspect will NOT process the packets on a connection to
+192.168.1.234 port 2300 because it is identified as telnet.
+
+<P>
+</LI>
+</UL>
+
+<P>
+Below is a list of the common services used by Snort's application layer
+preprocessors and Snort rules (see below).
+
+<P>
+<BR><P></P>
+<DIV ALIGN="CENTER">
+<A NAME="attribute:service_names"></A>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">http</TD>
+<TD ALIGN="LEFT">ftp</TD>
+<TD ALIGN="LEFT">ftp-data</TD>
+<TD ALIGN="LEFT">telnet</TD>
+<TD ALIGN="LEFT">smtp</TD>
+<TD ALIGN="LEFT">ssh</TD>
+<TD ALIGN="LEFT">tftp</TD>
+</TR>
+<TR><TD ALIGN="LEFT">dcerpc</TD>
+<TD ALIGN="LEFT">netbios-dgm</TD>
+<TD ALIGN="LEFT">netbios-ns</TD>
+<TD ALIGN="LEFT">netbios-ssn</TD>
+<TD ALIGN="LEFT">nntp</TD>
+<TD ALIGN="LEFT">finger</TD>
+<TD ALIGN="LEFT">sunrpc</TD>
+</TR>
+<TR><TD ALIGN="LEFT">dns</TD>
+<TD ALIGN="LEFT">isakmp</TD>
+<TD ALIGN="LEFT">mysql</TD>
+<TD ALIGN="LEFT">oracle</TD>
+<TD ALIGN="LEFT">cvs</TD>
+<TD ALIGN="LEFT">shell</TD>
+<TD ALIGN="LEFT">x11</TD>
+</TR>
+<TR><TD ALIGN="LEFT">imap</TD>
+<TD ALIGN="LEFT">pop2</TD>
+<TD ALIGN="LEFT">pop3</TD>
+<TD ALIGN="LEFT">snmp</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+</DIV>
+<BR>
+
+<P>
+
+<H3><A NAME="SECTION00375100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Attribute Table Affect on rules</A>
+</H3>
+
+<P>
+Snort uses service information in two ways; initialization of detection engine 
+and as a detection criteria. To take advantage of this, Snort rules must
+contain the <TT>metadata: service SERVICE</TT> convention specified. During rule 
+evaluation the default behavior will check first that the packet has been matched
+to a service, and then check that the packet's service matches the service(s)
+specified in the rule; if both these checks passed then Snort will disable
+source and destination port checks for the rule.
+
+<P>
+Snort 2.9.8 provides new functionality to control how rules use service
+information known as "service overrides". Service overrides are specified in
+the same way that services are specified in the rule, or more simply as a
+"reserved" <TT>SERVICE</TT>. The table below defines the new reserved service
+override names.
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=108><B>Metadata</B></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><B>Description</B></TD>
+</TR>
+<TR><TH ALIGN="LEFT" VALIGN="TOP" WIDTH=108><SPAN  CLASS="textbf">service and-ports</SPAN></TH>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><UL>
+<LI>Packet service must be set.
+</LI>
+<LI>Packet service must match one of the rule services.
+</LI>
+<LI>Packet must match the ports specified in the rule header.
+</LI>
+</UL></TD>
+</TR>
+<TR><TH ALIGN="LEFT" VALIGN="TOP" WIDTH=108><SPAN  CLASS="textbf">service or-ports</SPAN></TH>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><UL>
+<LI>Packet service is set and it matches one of the rule services (skipping port checks).
+</LI>
+<LI>Packet service is set but it DOES NOT match one of the rule services; packet must match the ports specified in the rule header.
+</LI>
+<LI>Packet service is NOT set, only perform port checks.
+</LI>
+</UL></TD>
+</TR>
+<TR><TH ALIGN="LEFT" VALIGN="TOP" WIDTH=108><SPAN  CLASS="textbf">service else-ports</SPAN></TH>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><UL>
+<LI>Packet service is set, packet must match one of the rule services.
+</LI>
+<LI>Packet service is NOT set; then packet must match the ports specified in the rule header.
+</LI>
+</UL>
+
+<P>
+This is the default behavior of a rule containing metadata service information.</TD>
+</TR>
+<TR><TH ALIGN="LEFT" VALIGN="TOP" WIDTH=108><SPAN  CLASS="textbf">service unknown</SPAN></TH>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The keyword "unknown" is an alias for "service else-ports" above. It is intended
+for use in rules that do not contain metadata service information (port only
+rules). When used in a rule that doesn't otherwise contain metadata (rule only
+specifies ports), the evaluation is:
+
+<P>
+
+<UL>
+<LI>Packet service must NOT be set; then match ports.
+</LI>
+</UL></TD>
+</TR>
+</TABLE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html950"
+  HREF="node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html946"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html940"
+  HREF="node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html948"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html951"
+  HREF="node23.html">2.8 Dynamic Modules</A>
+<B> Up:</B> <A NAME="tex2html947"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html941"
+  HREF="node21.html">2.6 Output Modules</A>
+ &nbsp; <B>  <A NAME="tex2html949"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node22.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:44 GMT -->
+</HTML>

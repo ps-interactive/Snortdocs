@@ -1,0 +1,792 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node38.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+<HEAD>
+<TITLE>4.1 Data Structures</TITLE>
+<META NAME="description" CONTENT="4.1 Data Structures">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node39.html">
+<LINK REL="previous" HREF="node37.html">
+<LINK REL="up" HREF="node37.html">
+<LINK REL="next" HREF="node39.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1537"
+  HREF="node39.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1533"
+  HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1527"
+  HREF="node37.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1535"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1538"
+  HREF="node39.html">4.2 Required Functions</A>
+<B> Up:</B> <A NAME="tex2html1534"
+  HREF="node37.html">4. Dynamic Modules</A>
+<B> Previous:</B> <A NAME="tex2html1528"
+  HREF="node37.html">4. Dynamic Modules</A>
+ &nbsp; <B>  <A NAME="tex2html1536"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1539"
+  HREF="node38.html#SECTION00511000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> DynamicPluginMeta</A>
+<LI><A NAME="tex2html1540"
+  HREF="node38.html#SECTION00512000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> DynamicPreprocessorData</A>
+<LI><A NAME="tex2html1541"
+  HREF="node38.html#SECTION00513000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> DynamicEngineData</A>
+<LI><A NAME="tex2html1542"
+  HREF="node38.html#SECTION00514000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> SFSnortPacket</A>
+<LI><A NAME="tex2html1543"
+  HREF="node38.html#SECTION00515000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN> Dynamic Rules</A>
+<UL>
+<LI><A NAME="tex2html1544"
+  HREF="node38.html#SECTION00515100000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rule</A>
+<LI><A NAME="tex2html1545"
+  HREF="node38.html#SECTION00515200000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> RuleInformation</A>
+<LI><A NAME="tex2html1546"
+  HREF="node38.html#SECTION00515300000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> RuleReference</A>
+<LI><A NAME="tex2html1547"
+  HREF="node38.html#SECTION00515400000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> IPInfo</A>
+<LI><A NAME="tex2html1548"
+  HREF="node38.html#SECTION00515500000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> RuleOption</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00510000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Data Structures</A>
+</H1>
+
+<P>
+A number of data structures are central to the API.  The definition of each is
+defined in the following sections.
+
+<P>
+
+<H2><A NAME="SECTION00511000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> DynamicPluginMeta</A>
+</H2>
+
+<P>
+The <EM>DynamicPluginMeta</EM> structure defines the type of dynamic module
+(preprocessor, rules, or detection engine), the version information, and path
+to the shared library.  A shared library can implement all three types, but
+typically is limited to a single functionality such as a preprocessor.  It is
+defined in <TT>sf_dynamic_meta.h</TT> as:
+
+<P>
+<PRE>
+#define MAX_NAME_LEN 1024
+
+#define TYPE_ENGINE 0x01
+#define TYPE_DETECTION 0x02
+#define TYPE_PREPROCESSOR 0x04
+
+typedef struct _DynamicPluginMeta
+{
+    int type;
+    int major;
+    int minor;
+    int build;
+    char uniqueName[MAX_NAME_LEN];
+    char *libraryPath;
+} DynamicPluginMeta;
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00512000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> DynamicPreprocessorData</A>
+</H2>
+
+<P>
+The <EM>DynamicPreprocessorData</EM> structure defines the interface the
+preprocessor uses to interact with snort itself.  This includes functions to
+register the preprocessor's configuration parsing, restart, exit, and
+processing functions.  It includes function to log messages, errors, fatal
+errors, and debugging info.  It also includes information for setting alerts,
+handling Inline drops, access to the StreamAPI, and it provides access to the
+normalized http and alternate data buffers.  This data structure should be
+initialized when the preprocessor shared library is loaded.  It is defined in
+<TT>sf_dynamic_preprocessor.h</TT>.  Check the header file for the current
+definition.
+
+<P>
+
+<H2><A NAME="SECTION00513000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> DynamicEngineData</A>
+</H2>
+
+<P>
+The <EM>DynamicEngineData</EM> structure defines the interface a detection engine
+uses to interact with snort itself.  This includes functions for logging
+messages, errors, fatal errors, and debugging info as well as a means to
+register and check flowbits.  It also includes a location to store rule-stubs
+for dynamic rules that are loaded, and it provides access to the normalized
+http and alternate data buffers.  It is defined in
+<TT>sf_dynamic_engine.h</TT> as:
+
+<P>
+<PRE>
+typedef struct _DynamicEngineData
+{
+    int version;
+    u_int8_t *altBuffer;
+    UriInfo *uriBuffers[MAX_URIINFOS];
+    RegisterRule ruleRegister;
+    RegisterBit flowbitRegister;
+    CheckFlowbit flowbitCheck;
+    DetectAsn1 asn1Detect;
+    LogMsgFunc logMsg;
+    LogMsgFunc errMsg;
+    LogMsgFunc fatalMsg;
+    char *dataDumpDirectory;
+
+    GetPreprocRuleOptFuncs getPreprocOptFuncs;
+
+    SetRuleData setRuleData;
+    GetRuleData getRuleData;
+
+    DebugMsgFunc debugMsg;
+#ifdef HAVE_WCHAR_H
+    DebugWideMsgFunc debugWideMsg;
+#endif
+
+    char **debugMsgFile;
+    int *debugMsgLine;
+
+    PCRECompileFunc pcreCompile;
+    PCREStudyFunc pcreStudy;
+    PCREExecFunc pcreExec;
+
+} DynamicEngineData;
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00514000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> SFSnortPacket</A>
+</H2>
+
+<P>
+The <EM>SFSnortPacket</EM> structure mirrors the snort Packet structure and
+provides access to all of the data contained in a given packet.
+
+<P>
+It and the data structures it incorporates are defined in
+<TT>sf_snort_packet.h</TT>.  Additional data structures may be defined to
+reference other protocol fields.  Check the header file for the current
+definitions.
+
+<P>
+
+<H2><A NAME="SECTION00515000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN> Dynamic Rules</A>
+</H2>
+
+<P>
+A dynamic rule should use any of the following data structures.  The following
+structures are defined in <TT>sf_snort_plugin_api.h</TT>.
+
+<P>
+
+<H3><A NAME="SECTION00515100000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rule</A>
+</H3>
+
+<P>
+The <EM>Rule</EM> structure defines the basic outline of a rule and contains the
+same set of information that is seen in a text rule.  That includes protocol,
+address and port information and rule information (classification, generator
+and signature IDs, revision, priority, classification, and a list of
+references).  It also includes a list of rule options and an optional
+evaluation function.
+
+<P>
+<PRE>
+#define RULE_MATCH 1
+#define RULE_NOMATCH 0
+
+typedef struct _Rule
+{
+    IPInfo ip;
+    RuleInformation info;
+
+    RuleOption **options; /* NULL terminated array of RuleOption union */
+
+    ruleEvalFunc evalFunc;
+
+    char initialized;     /* Rule Initialized, used internally */
+    u_int32_t numOptions; /* Rule option count, used internally */
+    char noAlert;         /* Flag with no alert, used internally */
+    void *ruleData;    /* Hash table for dynamic data pointers */
+} Rule;
+</PRE>
+
+<P>
+The rule evaluation function is defined as
+
+<P>
+<PRE>
+typedef int (*ruleEvalFunc)(void *);
+</PRE>
+
+<P>
+where the parameter is a pointer to the SFSnortPacket structure.
+
+<P>
+
+<H3><A NAME="SECTION00515200000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> RuleInformation</A>
+</H3>
+
+<P>
+The <EM>RuleInformation</EM> structure defines the meta data for a rule and
+includes generator ID, signature ID, revision, classification, priority,
+message text, and a list of references.
+
+<P>
+<PRE>
+typedef struct _RuleInformation
+{
+    u_int32_t genID;
+    u_int32_t sigID;
+    u_int32_t revision;
+    char     *classification; /* String format of classification name */
+    u_int32_t priority;
+    char     *message;
+    RuleReference **references; /* NULL terminated array of references */
+    RuleMetaData **meta; /* NULL terminated array of references */
+} RuleInformation;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00515300000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> RuleReference</A>
+</H3>
+
+<P>
+The <EM>RuleReference</EM> structure defines a single rule reference, including
+the system name and rereference identifier.
+
+<P>
+<PRE>
+typedef struct _RuleReference
+{
+    char *systemName;
+    char *refIdentifier;
+} RuleReference;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00515400000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> IPInfo</A>
+</H3>
+
+<P>
+The <EM>IPInfo</EM> structure defines the initial matching criteria for a rule and
+includes the protocol, src address and port, destination address and port, and
+direction.  Some of the standard strings and variables are predefined - any,
+HOME_NET, HTTP_SERVERS, HTTP_PORTS, etc.
+
+<P>
+<PRE>
+typedef struct _IPInfo
+{
+    u_int8_t protocol;
+    char *   src_addr;
+    char *   src_port; /* 0 for non TCP/UDP */
+    char     direction;     /* non-zero is bi-directional */
+    char *   dst_addr;
+    char *   dst_port; /* 0 for non TCP/UDP */
+} IPInfo;
+
+#define ANY_NET         "any"
+#define HOME_NET        "$HOME_NET"
+#define EXTERNAL_NET    "$EXTERNAL_NET"
+#define ANY_PORT        "any"
+#define HTTP_SERVERS    "$HTTP_SERVERS"
+#define HTTP_PORTS      "$HTTP_PORTS"
+#define SMTP_SERVERS    "$SMTP_SERVERS"
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00515500000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> RuleOption</A>
+</H3>
+
+<P>
+The <EM>RuleOption</EM> structure defines a single rule option as an option type
+and a reference to the data specific to that option.  Each option has a flags
+field that contains specific flags for that option as well as a "Not" flag.
+The "Not" flag is used to negate the results of evaluating that option.
+
+<P>
+<PRE>
+typedef enum DynamicOptionType {
+     OPTION_TYPE_PREPROCESSOR,
+     OPTION_TYPE_CONTENT,
+     OPTION_TYPE_PCRE,
+     OPTION_TYPE_FLOWBIT,
+     OPTION_TYPE_FLOWFLAGS,
+     OPTION_TYPE_ASN1,
+     OPTION_TYPE_CURSOR,
+     OPTION_TYPE_HDR_CHECK,
+     OPTION_TYPE_BYTE_TEST,
+     OPTION_TYPE_BYTE_JUMP,
+     OPTION_TYPE_BYTE_EXTRACT,
+     OPTION_TYPE_SET_CURSOR,
+     OPTION_TYPE_LOOP,
+     OPTION_TYPE_MAX
+};
+
+typedef struct _RuleOption
+{
+    int optionType;
+    union
+    {   
+        void *ptr;
+        ContentInfo *content;
+        CursorInfo *cursor;
+        PCREInfo *pcre;
+        FlowBitsInfo *flowBit;
+        ByteData *byte;
+        ByteExtract *byteExtract;
+        FlowFlags *flowFlags;
+        Asn1Context *asn1;
+        HdrOptCheck *hdrData;
+        LoopInfo    *loop;
+        PreprocessorOption *preprocOpt;
+    } option_u;
+} RuleOption;
+
+#define NOT_FLAG                0x10000000
+</PRE>
+
+<P>
+Some options also contain information that is initialized at run time, such as
+the compiled PCRE information, Boyer-Moore content information, the integer ID
+for a flowbit, etc.
+
+<P>
+The option types and related structures are listed below.
+
+<P>
+
+<UL>
+<LI>OptionType: Content &amp; Structure: <EM>ContentInfo</EM>
+
+<P>
+The <EM>ContentInfo</EM> structure defines an option for a content search.  It
+includes the pattern, depth and offset, and flags (one of which must specify
+the buffer - raw, URI or normalized - to search).  Additional flags include
+nocase, relative, unicode, and a designation that this content is to be used
+for snorts fast pattern evaluation.  The most unique content, that which
+distinguishes this rule as a possible match to a packet, should be marked for
+fast pattern evaluation.  In the dynamic detection engine provided with Snort,
+if no <EM>ContentInfo</EM> structure in a given rules uses that flag, the one with
+the longest content length will be used.
+
+<P>
+<PRE>
+typedef struct _ContentInfo
+{
+    u_int8_t *pattern;
+    u_int32_t depth;
+    int32_t   offset;
+    u_int32_t flags;        /* must include a CONTENT_BUF_X */
+    void     *boyer_ptr;
+    u_int8_t *patternByteForm;
+    u_int32_t patternByteFormLength;
+    u_int32_t incrementLength;
+} ContentInfo;
+
+#define CONTENT_NOCASE          0x01
+#define CONTENT_RELATIVE        0x02
+#define CONTENT_UNICODE2BYTE    0x04
+#define CONTENT_UNICODE4BYTE    0x08
+#define CONTENT_FAST_PATTERN    0x10
+#define CONTENT_END_BUFFER      0x20
+
+#define CONTENT_BUF_NORMALIZED  0x100
+#define CONTENT_BUF_RAW         0x200
+#define CONTENT_BUF_URI         0x400
+</PRE>
+
+<P>
+</LI>
+<LI>OptionType: PCRE &amp; Structure: <EM>PCREInfo</EM>
+
+<P>
+The <EM>PCREInfo</EM> structure defines an option for a PCRE search.  It includes
+the PCRE expression, pcre_flags such as caseless, as defined in PCRE.h, and
+flags to specify the buffer.
+
+<P>
+<PRE>
+/*
+pcre.h provides flags:
+
+PCRE_CASELESS
+PCRE_MULTILINE
+PCRE_DOTALL
+PCRE_EXTENDED
+PCRE_ANCHORED
+PCRE_DOLLAR_ENDONLY
+PCRE_UNGREEDY
+*/
+
+typedef struct _PCREInfo
+{
+    char     *expr;
+    void     *compiled_expr;
+    void     *compiled_extra;
+    u_int32_t compile_flags;
+    u_int32_t flags; /* must include a CONTENT_BUF_X */
+} PCREInfo;
+</PRE>
+
+<P>
+</LI>
+<LI>OptionType: Flowbit &amp; Structure: <EM>FlowBitsInfo</EM>
+
+<P>
+The <EM>FlowBitsInfo</EM> structure defines a flowbits option.  It includes the
+name of the flowbit and the operation (set, setx, unset, toggle, isset, isnotset).
+
+<P>
+<PRE>
+#define FLOWBIT_SET       0x01
+#define FLOWBIT_UNSET     0x02
+#define FLOWBIT_TOGGLE    0x04
+#define FLOWBIT_ISSET     0x08
+#define FLOWBIT_ISNOTSET  0x10
+#define FLOWBIT_RESET     0x20
+#define FLOWBIT_NOALERT   0x40
+#define FLOWBIT_SETX      0x80
+
+typedef struct _FlowBitsInfo
+{
+    char     *flowBitsName;
+    uint8_t   operation;
+    uint16_t  id;
+    uint32_t  flags;
+    char     *groupName;
+    uint8_t   eval;
+    uint16_t *ids;
+    uint8_t   num_ids;
+    
+} FlowBitsInfo;
+</PRE>
+
+<P>
+</LI>
+<LI>OptionType: Flow Flags &amp; Structure: <EM>FlowFlags</EM>
+
+<P>
+The <EM>FlowFlags</EM> structure defines a flow option.  It includes the flags,
+which specify the direction (from_server, to_server), established session,
+etc. 
+
+<P>
+<PRE>
+#define FLOW_ESTABLISHED 0x10
+#define FLOW_IGNORE_REASSEMBLED 0x1000
+#define FLOW_ONLY_REASSMBLED    0x2000
+#define FLOW_FR_SERVER   0x40
+#define FLOW_TO_CLIENT   0x40 /* Just for redundancy */
+#define FLOW_TO_SERVER   0x80
+#define FLOW_FR_CLIENT   0x80 /* Just for redundancy */
+
+typedef struct _FlowFlags
+{
+    u_int32_t   flags;
+} FlowFlags;
+</PRE>
+
+<P>
+</LI>
+<LI>OptionType: ASN.1 &amp; Structure: <EM>Asn1Context</EM>
+
+<P>
+The <EM>Asn1Context</EM> structure defines the information for an ASN1 option.  It
+mirrors the ASN1 rule option and also includes a flags field.
+
+<P>
+<PRE>
+#define ASN1_ABS_OFFSET 1
+#define ASN1_REL_OFFSET 2
+
+typedef struct _Asn1Context
+{
+    int bs_overflow;
+    int double_overflow;
+    int print;
+    int length;
+    unsigned int max_length;
+    int offset;
+    int offset_type;
+    u_int32_t  flags;
+} Asn1Context;
+</PRE>
+
+<P>
+</LI>
+<LI>OptionType: Cursor Check &amp; Structure: <EM>CursorInfo</EM>
+
+<P>
+The <EM>CursorInfo</EM> structure defines an option for a cursor evaluation.  The
+cursor is the current position within the evaluation buffer, as related to
+content and PCRE searches, as well as byte tests and byte jumps.  It includes
+an offset and flags that specify the buffer.  This can be used to verify there
+is sufficient data to continue evaluation, similar to the isdataat rule option.  
+
+<P>
+<PRE>
+typedef struct _CursorInfo
+{
+    int32_t   offset;
+    u_int32_t flags;        /* specify one of CONTENT_BUF_X */
+} CursorInfo;
+</PRE>
+
+<P>
+</LI>
+<LI>OptionType: Protocol Header &amp; Structure: <EM>HdrOptCheck</EM>
+
+<P>
+The <EM>HdrOptCheck</EM> structure defines an option to check a protocol header
+for a specific value.  It includes the header field, the operation (<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>,<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>,=,etc),
+a value, a mask to ignore that part of the header field, and flags.
+
+<P>
+<PRE>
+#define IP_HDR_ID           0x0001  /* IP Header ID */
+#define IP_HDR_PROTO        0x0002  /* IP Protocol */
+#define IP_HDR_FRAGBITS     0x0003  /* Frag Flags set in IP Header */
+#define IP_HDR_FRAGOFFSET   0x0004  /* Frag Offset set in IP Header */
+#define IP_HDR_OPTIONS      0x0005  /* IP Options -- is option xx included */
+#define IP_HDR_TTL          0x0006  /* IP Time to live */
+#define IP_HDR_TOS          0x0007  /* IP Type of Service */
+#define IP_HDR_OPTCHECK_MASK 0x000f
+
+#define TCP_HDR_ACK         0x0010  /* TCP Ack Value */
+#define TCP_HDR_SEQ         0x0020  /* TCP Seq Value */
+#define TCP_HDR_FLAGS       0x0030  /* Flags set in TCP Header */
+#define TCP_HDR_OPTIONS     0x0040  /* TCP Options -- is option xx included */
+#define TCP_HDR_WIN         0x0050  /* TCP Window */
+#define TCP_HDR_OPTCHECK_MASK 0x00f0
+
+#define ICMP_HDR_CODE       0x1000  /* ICMP Header Code */
+#define ICMP_HDR_TYPE       0x2000  /* ICMP Header Type */
+#define ICMP_HDR_ID         0x3000  /* ICMP ID for ICMP_ECHO/ICMP_ECHO_REPLY */
+#define ICMP_HDR_SEQ        0x4000  /* ICMP ID for ICMP_ECHO/ICMP_ECHO_REPLY */
+#define ICMP_HDR_OPTCHECK_MASK 0xf000
+
+typedef struct _HdrOptCheck
+{
+    u_int16_t hdrField;   /* Field to check */
+    u_int32_t op;         /* Type of comparison */
+    u_int32_t value;      /* Value to compare value against */
+    u_int32_t mask_value; /* bits of value to ignore */
+    u_int32_t flags;
+} HdrOptCheck;
+</PRE>
+
+<P>
+</LI>
+<LI>OptionType: Byte Test &amp; Structure: <EM>ByteData</EM>
+
+<P>
+The <EM>ByteData</EM> structure defines the information for both ByteTest and
+ByteJump operations.  It includes the number of bytes, an operation (for
+ByteTest, <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>,<SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN>,=,etc), a value, an offset, multiplier, and flags.  The flags
+must specify the buffer.
+
+<P>
+<PRE>
+#define CHECK_EQ            0
+#define CHECK_NEQ           1
+#define CHECK_LT            2
+#define CHECK_GT            3
+#define CHECK_LTE           4
+#define CHECK_GTE           5
+#define CHECK_AND           6
+#define CHECK_XOR           7
+#define CHECK_ALL           8
+#define CHECK_ATLEASTONE    9
+#define CHECK_NONE          10
+
+typedef struct _ByteData
+{
+    u_int32_t bytes;      /* Number of bytes to extract */
+    u_int32_t op;         /* Type of byte comparison, for checkValue */
+    u_int32_t value;      /* Value to compare value against, for checkValue, or extracted value */
+    int32_t   offset;     /* Offset from cursor */
+    u_int32_t multiplier; /* Used for byte jump -- 32bits is MORE than enough */
+    u_int32_t flags;      /* must include a CONTENT_BUF_X */
+} ByteData;
+</PRE>
+
+<P>
+</LI>
+<LI>OptionType: Byte Jump &amp; Structure: <EM>ByteData</EM>
+
+<P>
+See <EM>Byte Test</EM> above.
+
+<P>
+</LI>
+<LI>OptionType: Set Cursor &amp; Structure: <EM>CursorInfo</EM>
+
+<P>
+See <EM>Cursor Check</EM> above.
+
+<P>
+</LI>
+<LI>OptionType: Loop &amp; Structures: <EM>LoopInfo,ByteExtract,DynamicElement</EM>
+
+<P>
+The <EM>LoopInfo</EM> structure defines the information for a set of options that
+are to be evaluated repeatedly.  The loop option acts like a FOR loop and
+includes start, end, and increment values as well as the comparison operation
+for termination.  It includes a cursor adjust that happens through each
+iteration of the loop, a reference to a RuleInfo structure that defines the
+RuleOptions are to be evaluated through each iteration.  One of those options
+may be a ByteExtract.
+
+<P>
+<PRE>
+typedef struct _LoopInfo
+{
+    DynamicElement *start;      /* Starting value of FOR loop (i=start) */
+    DynamicElement *end;        /* Ending value of FOR loop (i OP end) */
+    DynamicElement *increment;  /* Increment value of FOR loop (i+= increment) */
+    u_int32_t op;               /* Type of comparison for loop termination */
+    CursorInfo *cursorAdjust;   /* How to move cursor each iteration of loop */
+    struct _Rule *subRule;      /* Pointer to SubRule &amp; options to evaluate within
+                                 * the loop */
+    u_int8_t initialized;       /* Loop initialized properly (safeguard) */
+    u_int32_t flags;            /* can be used to negate loop results, specifies                                 * relative. */
+} LoopInfo;
+</PRE>
+
+<P>
+The <EM>ByteExtract</EM> structure defines the information to use when extracting
+bytes for a DynamicElement used a in Loop evaluation.  It includes the number of
+bytes, an offset, multiplier, flags specifying the buffer, and a reference to
+the DynamicElement.
+
+<P>
+<PRE>
+typedef struct _ByteExtract
+{
+    u_int32_t bytes;      /* Number of bytes to extract */
+    int32_t   offset;     /* Offset from cursor */
+    u_int32_t multiplier; /* Multiply value by this (similar to byte jump) */
+    u_int32_t flags;      /* must include a CONTENT_BUF_X */
+    char *refId;          /* To match up with a DynamicElement refId */
+    void *memoryLocation; /* Location to store the data extracted */
+} ByteExtract;
+</PRE>
+
+<P>
+The <EM>DynamicElement</EM> structure is used to define the values for a looping
+evaluation.  It includes whether the element is static (an integer) or dynamic
+(extracted from a buffer in the packet) and the value.  For a dynamic element,
+the value is filled by a related ByteExtract option that is part of the loop.
+
+<P>
+<PRE>
+#define DYNAMIC_TYPE_INT_STATIC 1
+#define DYNAMIC_TYPE_INT_REF    2
+
+typedef struct _DynamicElement
+{
+    char dynamicType;           /* type of this field - static or reference */
+    char *refId;                /* reference ID (NULL if static) */
+    union
+    {
+        void *voidPtr;          /* Holder */
+        int32_t staticInt;        /* Value of static */
+        int32_t *dynamicInt;  /* Pointer to value of dynamic */
+    } data;
+} DynamicElement;
+</PRE>
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1537"
+  HREF="node39.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1533"
+  HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1527"
+  HREF="node37.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1535"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1538"
+  HREF="node39.html">4.2 Required Functions</A>
+<B> Up:</B> <A NAME="tex2html1534"
+  HREF="node37.html">4. Dynamic Modules</A>
+<B> Previous:</B> <A NAME="tex2html1528"
+  HREF="node37.html">4. Dynamic Modules</A>
+ &nbsp; <B>  <A NAME="tex2html1536"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node38.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>

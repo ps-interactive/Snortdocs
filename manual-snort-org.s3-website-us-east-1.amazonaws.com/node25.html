@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node25.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:46 GMT -->
+<HEAD>
+<TITLE>2.10 Multiple Configurations</TITLE>
+<META NAME="description" CONTENT="2.10 Multiple Configurations">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node26.html">
+<LINK REL="previous" HREF="node24.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node26.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html997"
+  HREF="node26.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html993"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html987"
+  HREF="node24.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html995"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html998"
+  HREF="node26.html">2.11 Active Response</A>
+<B> Up:</B> <A NAME="tex2html994"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html988"
+  HREF="node24.html">2.9 Reloading a Snort</A>
+ &nbsp; <B>  <A NAME="tex2html996"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html999"
+  HREF="node25.html#SECTION003101000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN> Creating Multiple Configurations</A>
+<LI><A NAME="tex2html1000"
+  HREF="node25.html#SECTION003102000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN> Configuration Specific Elements</A>
+<UL>
+<LI><A NAME="tex2html1001"
+  HREF="node25.html#SECTION003102100000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Config Options</A>
+<LI><A NAME="tex2html1002"
+  HREF="node25.html#SECTION003102200000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Rules</A>
+<LI><A NAME="tex2html1003"
+  HREF="node25.html#SECTION003102300000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Variables</A>
+<LI><A NAME="tex2html1004"
+  HREF="node25.html#SECTION003102400000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Preprocessors</A>
+<LI><A NAME="tex2html1005"
+  HREF="node25.html#SECTION003102500000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN> Events and Output</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1006"
+  HREF="node25.html#SECTION003103000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">3</SPAN> How Configuration is applied?</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION003100000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN> Multiple Configurations</A>
+</H1>
+
+<P>
+Snort now supports multiple configurations based on VLAN Id or IP subnet within 
+a single instance of Snort. This will allow administrators to specify multiple 
+snort configuration files and bind each configuration to one or more VLANs or 
+subnets rather than running one Snort for each configuration required. Each 
+unique snort configuration file will create a new configuration instance within 
+snort. VLANs/Subnets not bound to any specific configuration will use the default 
+configuration. Each configuration can have different preprocessor settings and 
+detection rules.
+
+<P>
+
+<H2><A NAME="SECTION003101000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN> Creating Multiple Configurations</A>
+</H2>
+Default configuration for snort is specified using the existing -c option. A 
+default configuration binds multiple vlans or networks to non-default configurations, 
+using the following configuration line:
+
+<P>
+<PRE>
+config binding: &lt;path_to_snort.conf&gt; vlan &lt;vlanIdList&gt;
+config binding: &lt;path_to_snort.conf&gt; net &lt;ipList&gt;
+config binding: &lt;path_to_snort.conf&gt; policy_id &lt;id&gt;
+</PRE>
+
+<P>
+<DL>
+<DD>
+<P>
+</DD>
+<DT><STRONG><TT>path_to_snort.conf</TT></STRONG></DT>
+<DD>- Refers to the absolute or relative path to 
+the snort.conf for specific configuration.
+
+<P>
+</DD>
+<DT><STRONG><TT>vlanIdList</TT></STRONG></DT>
+<DD>- Refers to the comma separated list of vlandIds and 
+vlanId ranges. The format for ranges is two vlanId separated by a "-". Spaces are 
+allowed within ranges. Valid vlanId is any number in 0-4095 range. Negative vland 
+Ids and alphanumeric are not supported.
+
+<P>
+</DD>
+<DT><STRONG><TT>ipList</TT></STRONG></DT>
+<DD>- Refers to ip subnets. Subnets can be CIDR blocks for 
+IPV6 or IPv4.  A maximum of 512 individual IPv4 or IPv6 addresses or CIDRs can be
+specified.
+
+<P>
+</DD>
+<DT><STRONG><TT>policy_id</TT></STRONG></DT>
+<DD>- Refers to the specific policyi_id to be applied. Valid policyi_id is any number in 0-4095 range.
+</DD>
+</DL>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+Vlan and Subnets can not be used in the same line. Configurations can be applied 
+based on either Vlans or Subnets not both.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+Even though Vlan Ids 0 and 4095 are reserved, they are included as valid in terms
+of configuring Snort.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION003102000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN> Configuration Specific Elements</A>
+</H2>
+
+<P>
+
+<H3><A NAME="SECTION003102100000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Config Options</A>
+</H3>
+Generally config options defined within the default configuration are global by 
+default i.e. their value applies to all other configurations. The following config 
+options are specific to each configuration.
+
+<P>
+<PRE>
+policy_id
+policy_mode
+policy_version
+</PRE>
+
+<P>
+The following config options are specific to each configuration. If not defined in 
+a configuration, the default values of the option (not the default configuration 
+values) take effect.
+
+<P>
+<PRE>
+config checksum_drop
+config disable_decode_alerts
+config disable_decode_drops
+config disable_ipopt_alerts
+config disable_ipopt_drops
+config disable_tcpopt_alerts
+config disable_tcpopt_drops
+config disable_tcpopt_experimental_alerts
+config disable_tcpopt_experimental_drops
+config disable_tcpopt_obsolete_alerts
+config disable_tcpopt_obsolete_drops
+config disable_ttcp_alerts
+config disable_tcpopt_ttcp_alerts
+config disable_ttcp_drops
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION003102200000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Rules</A>
+</H3>
+Rules are specific to configurations but only some parts of a rule can be customized 
+for performance reasons. If a rule is not specified in a configuration then the rule 
+will never raise an event for the configuration. A rule shares all parts of the rule 
+options, including the general options, payload detection options, non-payload detection 
+options, and post-detection options.  Parts of the rule header can be specified differently 
+across configurations, limited to:
+
+<P>
+<PRE>
+Source IP address and port
+Destination IP address and port
+Action
+</PRE>
+
+<P>
+A higher revision of a rule in one configuration will override other revisions of 
+the same rule in other configurations.
+
+<P>
+
+<H3><A NAME="SECTION003102300000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Variables</A>
+</H3>
+Variables defined using "var", "portvar" and "ipvar" are specific to configurations. 
+If the rules in a configuration use variables, those variables must be defined in 
+that configuration. 
+
+<P>
+
+<H3><A NAME="SECTION003102400000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Preprocessors</A>
+</H3>
+Preprocessors configurations can be defined within each vlan or subnet specific 
+configuration. Options controlling specific preprocessor memory usage, through specific 
+limit on memory usage or number of instances, are processed only in default policy. 
+The options control total memory usage for a preprocessor across all policies. These 
+options are ignored in non-default policies without raising an error. A preprocessor 
+must be configured in default configuration before it can be configured in non-default 
+configuration. This is required as some mandatory preprocessor configuration options 
+are processed only in default configuration.
+
+<P>
+
+<H3><A NAME="SECTION003102500000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN> Events and Output</A>
+</H3>
+An unique policy id can be assigned by user, to each configuration using the following 
+config line:
+
+<P>
+<PRE>
+config policy_id: &lt;id&gt;
+</PRE>
+
+<P>
+<DL>
+<DD>
+</DD>
+<DT><STRONG><TT>id</TT></STRONG></DT>
+<DD>- Refers to a 16-bit unsigned value. This policy id will be used to 
+identify alerts from a specific configuration in the unified2 records.
+</DD>
+</DL>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+If no policy id is specified, snort assigns 0 (zero) value to the configuration.
+        
+        </b></td></tr></table></p>
+
+<P>
+To enable vlanId logging in unified2 records the following option can be used.
+
+<P>
+<PRE>
+output alert_unified2: vlan_event_types (alert logging only)
+output unified2: filename &lt;filename&gt;, vlan_event_types (true unified logging)
+</PRE>
+
+<P>
+<DL>
+<DD>
+</DD>
+<DT><STRONG><TT>filename</TT></STRONG></DT>
+<DD>- Refers to the absolute or relative filename.
+</DD>
+<DT><STRONG><TT>vlan_event_types</TT></STRONG></DT>
+<DD>- When this option is set, snort will use unified2 event 
+type 104 and 105 for IPv4 and IPv6 respectively. 
+</DD>
+</DL>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+Each event logged will have the vlanId from the packet if vlan headers are present 
+otherwise 0 will be used.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION003103000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">3</SPAN> How Configuration is applied?</A>
+</H2>
+Snort assigns every incoming packet to a unique configuration based on the following criteria. 
+If VLANID is present, then the innermost VLANID is used to find bound configuration. If the 
+bound configuration is the default configuration, then destination IP address is searched to 
+the most specific subnet that is bound to a non-default  configuration. The packet is assigned 
+non-default configuration if found otherwise the check is repeated using source IP address. 
+In the end, default configuration is used if no other matching configuration is found.
+
+<P>
+For addressed based configuration binding, this can lead to conflicts between configurations 
+if source address is bound to one configuration and destination address is bound to another. 
+In this case, snort will use the first configuration in the order of definition, that can be 
+applied to the packet. 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html997"
+  HREF="node26.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html993"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html987"
+  HREF="node24.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html995"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html998"
+  HREF="node26.html">2.11 Active Response</A>
+<B> Up:</B> <A NAME="tex2html994"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html988"
+  HREF="node24.html">2.9 Reloading a Snort</A>
+ &nbsp; <B>  <A NAME="tex2html996"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node25.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:46 GMT -->
+</HTML>

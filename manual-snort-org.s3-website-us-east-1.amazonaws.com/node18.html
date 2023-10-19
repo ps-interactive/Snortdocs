@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node18.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:42 GMT -->
+<HEAD>
+<TITLE>2.3 Decoder and Preprocessor Rules</TITLE>
+<META NAME="description" CONTENT="2.3 Decoder and Preprocessor Rules">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node19.html">
+<LINK REL="previous" HREF="node17.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node19.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html843"
+  HREF="node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html839"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html833"
+  HREF="node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html841"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html844"
+  HREF="node19.html">2.4 Event Processing</A>
+<B> Up:</B> <A NAME="tex2html840"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html834"
+  HREF="node17.html">2.2 Preprocessors</A>
+ &nbsp; <B>  <A NAME="tex2html842"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html845"
+  HREF="node18.html#SECTION00331000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Configuring</A>
+<LI><A NAME="tex2html846"
+  HREF="node18.html#SECTION00332000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Reverting to original behavior</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00330000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Decoder and Preprocessor Rules</A>
+</H1>
+
+<P>
+Decoder and preprocessor rules allow one to enable and disable decoder and
+preprocessor events on a rule by rule basis.  They also allow one to specify
+the rule type or action of a decoder or preprocessor event on a rule by rule
+basis.
+
+<P>
+Decoder config options will still determine whether or not to generate decoder
+events.  For example, if <TT>config disable_decode_alerts</TT> is in
+<TT>snort.conf</TT>, decoder events will not be generated regardless of whether
+or not there are corresponding rules for the event.  Also note that if the
+decoder is configured to enable drops, e.g. <TT>config
+enable_decode_drops</TT>, these options will take precedence over the event type
+of the rule.  A packet will be dropped if either a decoder config drop option
+is in <TT>snort.conf</TT> or the decoder or preprocessor rule type is
+<TT>drop</TT>.  Of course, the drop cases only apply if Snort is running
+inline.  See <TT>doc/README.decode</TT> for config options that control decoder
+events.
+
+<P>
+
+<H2><A NAME="SECTION00331000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Configuring</A>
+</H2>
+
+<P>
+The decoder and preprocessor rules are located in the <TT>preproc_rules/</TT>
+directory in the top level source tree, and have the names
+<TT>decoder.rules</TT> and <TT>preprocessor.rules</TT> respectively.  These
+files are updated as new decoder and preprocessor events are added to Snort.
+The <TT>gen-msg.map</TT> under <TT>etc</TT> directory is also updated with 
+new decoder and preprocessor rules.
+
+<P>
+To enable these rules in <TT>snort.conf</TT>, define the path to where the
+rules are located and uncomment the <TT>include</TT> lines in
+<TT>snort.conf</TT> that reference the rules files.
+
+<P>
+<PRE>
+    var PREPROC_RULE_PATH /path/to/preproc_rules
+    ...
+    include $PREPROC_RULE_PATH/preprocessor.rules
+    include $PREPROC_RULE_PATH/decoder.rules
+</PRE>
+
+<P>
+To disable any rule, just comment it with a <TT>#</TT> or remove the rule
+completely from the file (commenting is recommended).
+
+<P>
+To change the rule type or action of a decoder/preprocessor rule, just replace
+<TT>alert</TT> with the desired rule type.  Any one of the following rule types
+can be used:
+
+<P>
+<PRE>
+    alert
+    log
+    pass
+    drop
+    sdrop
+    reject
+</PRE>
+
+<P>
+For example one can change:
+
+<P>
+<PRE>
+    alert ( msg: "DECODE_NOT_IPV4_DGRAM"; sid: 1; gid: 116; rev: 1; \
+        metadata: rule-type decode ; classtype:protocol-command-decode;)
+</PRE>
+
+<P>
+to
+
+<P>
+<PRE>
+    drop ( msg: "DECODE_NOT_IPV4_DGRAM"; sid: 1; gid: 116; rev: 1; \
+        metadata: rule-type decode ; classtype:protocol-command-decode;)
+</PRE>
+
+<P>
+to drop (as well as alert on) packets where the Ethernet protocol is IPv4 but
+version field in IPv4 header has a value other than 4.
+
+<P>
+See <TT>README.decode</TT>, <TT>README.gre</TT> and the various preprocessor
+READMEs for descriptions of the rules in <TT>decoder.rules</TT> and
+<TT>preprocessor.rules</TT>.
+
+<P>
+The generator ids ( gid ) for different preprocessors and the decoder are as follows:
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<TR><TH ALIGN="LEFT"><SPAN  CLASS="textbf">Generator Id</SPAN></TH>
+<TH ALIGN="LEFT"><SPAN  CLASS="textbf">Module</SPAN></TH>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>105</TT></TD>
+<TD ALIGN="LEFT">Back Orifice preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>106</TT></TD>
+<TD ALIGN="LEFT">RPC Decode preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>112</TT></TD>
+<TD ALIGN="LEFT">Arpspoof preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>116</TT></TD>
+<TD ALIGN="LEFT">Snort Decoder</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>119</TT></TD>
+<TD ALIGN="LEFT">HTTP Inspect preprocessor ( Client )</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>120</TT></TD>
+<TD ALIGN="LEFT">HTTP Inspect preprocessor ( Server )</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>122</TT></TD>
+<TD ALIGN="LEFT">Portscan preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>123</TT></TD>
+<TD ALIGN="LEFT">Frag3 preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>124</TT></TD>
+<TD ALIGN="LEFT">SMTP preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>125</TT></TD>
+<TD ALIGN="LEFT">FTP (FTP) preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>126</TT></TD>
+<TD ALIGN="LEFT">FTP (Telnet) preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>127</TT></TD>
+<TD ALIGN="LEFT">ISAKMP preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>128</TT></TD>
+<TD ALIGN="LEFT">SSH preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>129</TT></TD>
+<TD ALIGN="LEFT">Stream preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>131</TT></TD>
+<TD ALIGN="LEFT">DNS preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>132</TT></TD>
+<TD ALIGN="LEFT">Skype preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>133</TT></TD>
+<TD ALIGN="LEFT">DceRpc2 preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>134</TT></TD>
+<TD ALIGN="LEFT">PPM preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>136</TT></TD>
+<TD ALIGN="LEFT">Reputation preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>137</TT></TD>
+<TD ALIGN="LEFT">SSL preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>139</TT></TD>
+<TD ALIGN="LEFT">SDF preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>140</TT></TD>
+<TD ALIGN="LEFT">SIP preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>141</TT></TD>
+<TD ALIGN="LEFT">IMAP preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>142</TT></TD>
+<TD ALIGN="LEFT">POP preprocessor</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><TT>143</TT></TD>
+<TD ALIGN="LEFT">GTP preprocessor</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+
+<H2><A NAME="SECTION00332000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Reverting to original behavior</A>
+</H2>
+
+<P>
+The following config option in <TT>snort.conf</TT> will make Snort revert to the
+old behavior:
+
+<P>
+<PRE>
+    config autogenerate_preprocessor_decoder_rules
+</PRE>
+
+<P>
+Note that if you want to revert to the old behavior, you also have to remove
+the decoder and preprocessor rules and any reference to them from
+<TT>snort.conf</TT>, otherwise they will be loaded.  This option applies to
+rules not specified and the default behavior is to alert.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html843"
+  HREF="node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html839"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html833"
+  HREF="node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html841"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html844"
+  HREF="node19.html">2.4 Event Processing</A>
+<B> Up:</B> <A NAME="tex2html840"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html834"
+  HREF="node17.html">2.2 Preprocessors</A>
+ &nbsp; <B>  <A NAME="tex2html842"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node18.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:42 GMT -->
+</HTML>

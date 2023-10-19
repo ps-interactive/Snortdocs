@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node24.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:46 GMT -->
+<HEAD>
+<TITLE>2.9 Reloading a Snort Configuration</TITLE>
+<META NAME="description" CONTENT="2.9 Reloading a Snort Configuration">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node25.html">
+<LINK REL="previous" HREF="node23.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node25.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html982"
+  HREF="node25.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html978"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html972"
+  HREF="node23.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html980"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html983"
+  HREF="node25.html">2.10 Multiple Configurations</A>
+<B> Up:</B> <A NAME="tex2html979"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html973"
+  HREF="node23.html">2.8 Dynamic Modules</A>
+ &nbsp; <B>  <A NAME="tex2html981"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html984"
+  HREF="node24.html#SECTION00391000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Enabling support</A>
+<LI><A NAME="tex2html985"
+  HREF="node24.html#SECTION00392000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Reloading a configuration</A>
+<LI><A NAME="tex2html986"
+  HREF="node24.html#SECTION00393000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN> Non-reloadable configuration options</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00390000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN> Reloading a Snort Configuration</A>
+</H1>
+
+<P>
+Snort now supports reloading a configuration in lieu of restarting Snort in
+so as to provide seamless traffic inspection during a configuration change.
+A separate thread will parse and create a swappable configuration object while
+the main Snort packet processing thread continues inspecting traffic under the
+current configuration.  When a swappable configuration object is ready for use,
+the main Snort packet processing thread will swap in the new configuration to
+use and will continue processing under the new configuration.  Note that for
+some preprocessors, existing session data will continue to use the configuration
+under which they were created in order to continue with proper state for that
+session.  All newly created sessions will, however, use the new configuration.
+
+<P>
+
+<H2><A NAME="SECTION00391000000000000000"></A>
+<A NAME="reload:enable"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Enabling support
+</H2>
+To enable support for reloading a configuration, add <TT>-enable-reload</TT> to
+configure when compiling.
+
+<P>
+There is also an ancillary option that determines how Snort should behave
+if any non-reloadable options are changed (see section <A HREF="#reload:nonreloadable"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> below).
+This option is enabled by default and the behavior is for
+Snort to restart if any non-reloadable options are added/modified/removed.
+To disable this behavior and have Snort exit instead of restart, add
+<TT>-disable-reload-error-restart</TT> in addition to <TT>-enable-reload</TT> to configure
+when compiling.
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+This functionality is not currently supported in Windows.
+
+<P>
+Caveat : When Snort is run on the primary network interface of an OpenBSD system, the reload and failopen operations may not function as expected.
+
+<P>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION00392000000000000000"></A>
+<A NAME="reload:reload"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Reloading a configuration
+</H2>
+First modify your snort.conf (the file passed to the <TT>-c</TT> option on the
+command line).
+
+<P>
+Then, to initiate a reload, send Snort a <TT>SIGHUP</TT> signal, e.g.
+
+<P>
+<PRE>
+$ kill -SIGHUP &lt;snort pid&gt;
+</PRE>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+If reload support is not enabled, Snort will restart (as it always has)
+upon receipt of a SIGHUP.
+        
+        </b></td></tr></table></p>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+An invalid configuration will still result in a fatal error, so
+you should test your new configuration before issuing a reload, e.g.
+<TT>$ snort -c snort.conf -T</TT>
+        
+        </b></td></tr></table></p>
+
+<P>
+
+<H2><A NAME="SECTION00393000000000000000"></A>
+<A NAME="reload:nonreloadable"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN> Non-reloadable configuration options
+</H2>
+There are a number of option changes that are currently non-reloadable because
+they require changes to output, startup memory allocations, etc.  Modifying any
+of these options will cause Snort to restart (as a <TT>SIGHUP</TT> previously did) or
+exit (if <TT>-disable-reload-error-restart</TT> was used to configure Snort).
+
+<P>
+Reloadable configuration options of note:
+
+<UL>
+<LI>Adding/modifying/removing text rules and variables are reloadable.
+</LI>
+<LI>Adding/modifying/removing preprocessor configurations are reloadable (except
+  as noted below).
+</LI>
+</UL>
+
+<P>
+Non-reloadable configuration options of note:
+
+<UL>
+<LI>Adding/modifying/removing shared objects via dynamicdetection, dynamicengine
+  and dynamicpreprocessor are not reloadable, i.e. any new/modified/removed
+  shared objects will require a restart.
+</LI>
+<LI>Any changes to output will require a restart.
+</LI>
+</UL>
+
+<P>
+Changes to the following options are not reloadable:
+
+<P>
+<PRE>
+attribute_table
+config alertfile
+config asn1
+config chroot
+config daemon
+config detection_filter
+config flowbits_size
+config interface
+config logdir
+config max_attribute_hosts
+config max_attribute_services_per_host
+config nolog
+config no_promisc
+config pkt_count
+config rate_filter
+config response
+config set_gid
+config set_uid
+config snaplen
+config threshold
+dynamicdetection
+dynamicengine
+dynamicpreprocessor
+output
+</PRE>
+
+<P>
+In certain cases, only some of the parameters to a config option or
+preprocessor configuration are not reloadable.  Those parameters are
+listed below the relevant config option or preprocessor.
+
+<P>
+<PRE>
+config ppm: max-rule-time &lt;int&gt;
+ rule-log
+config profile_rules
+ filename
+ print
+ sort
+config profile_preprocs
+ filename
+ print
+ sort
+preprocessor dcerpc2
+ memcap
+preprocessor frag3_global
+ max_frags
+ memcap
+ prealloc_frags
+ prealloc_memcap
+ disabled
+preprocessor perfmonitor
+ file
+ snortfile
+preprocessor sfportscan
+ memcap
+ logfile
+ disabled
+preprocessor stream5_global
+ memcap
+ max_tcp
+ max_udp
+ max_icmp
+ track_tcp
+ track_udp
+ track_icmp
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html982"
+  HREF="node25.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html978"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html972"
+  HREF="node23.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html980"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html983"
+  HREF="node25.html">2.10 Multiple Configurations</A>
+<B> Up:</B> <A NAME="tex2html979"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html973"
+  HREF="node23.html">2.8 Dynamic Modules</A>
+ &nbsp; <B>  <A NAME="tex2html981"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node24.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:46 GMT -->
+</HTML>

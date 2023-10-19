@@ -1,0 +1,656 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node1.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:15 GMT -->
+<HEAD>
+<TITLE>Contents</TITLE>
+<META NAME="description" CONTENT="Contents">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node2.html">
+<LINK REL="previous" HREF="snort_manual.html">
+<LINK REL="up" HREF="snort_manual.html">
+<LINK REL="next" HREF="node2.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html92"
+  HREF="node2.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html90"
+  HREF="snort_manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html84"
+  HREF="snort_manual.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html93"
+  HREF="node2.html">1. Snort Overview</A>
+<B> Up:</B> <A NAME="tex2html91"
+  HREF="snort_manual.html">SNORTUsers Manual 2.9.16</A>
+<B> Previous:</B> <A NAME="tex2html85"
+  HREF="snort_manual.html">SNORTUsers Manual 2.9.16</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<BR>
+
+<H2><A NAME="SECTION00100000000000000000">
+Contents</A>
+</H2>
+<!--Table of Contents-->
+
+<UL CLASS="TofC">
+<LI><A NAME="tex2html94"
+  HREF="node2.html">1. Snort Overview</A>
+<UL>
+<LI><A NAME="tex2html95"
+  HREF="node3.html">1.1 Getting Started</A>
+<LI><A NAME="tex2html96"
+  HREF="node4.html">1.2 Sniffer Mode</A>
+<LI><A NAME="tex2html97"
+  HREF="node5.html">1.3 Packet Logger Mode</A>
+<LI><A NAME="tex2html98"
+  HREF="node6.html">1.4 Network Intrusion Detection System Mode</A>
+<UL>
+<LI><A NAME="tex2html99"
+  HREF="node6.html#SECTION00241000000000000000">1.4.1 NIDS Mode Output Options</A>
+<LI><A NAME="tex2html100"
+  HREF="node6.html#SECTION00242000000000000000">1.4.2 Understanding Standard Alert Output</A>
+<LI><A NAME="tex2html101"
+  HREF="node6.html#SECTION00243000000000000000">1.4.3 High Performance Configuration</A>
+<LI><A NAME="tex2html102"
+  HREF="node6.html#SECTION00244000000000000000">1.4.4 Changing Alert Order</A>
+</UL>
+<LI><A NAME="tex2html103"
+  HREF="node7.html">1.5 Packet Acquisition</A>
+<UL>
+<LI><A NAME="tex2html104"
+  HREF="node7.html#SECTION00251000000000000000">1.5.1 Configuration</A>
+<LI><A NAME="tex2html105"
+  HREF="node7.html#SECTION00252000000000000000">1.5.2 pcap</A>
+<LI><A NAME="tex2html106"
+  HREF="node7.html#SECTION00253000000000000000">1.5.3 AFPACKET</A>
+<LI><A NAME="tex2html107"
+  HREF="node7.html#SECTION00254000000000000000">1.5.4 NFQ</A>
+<LI><A NAME="tex2html108"
+  HREF="node7.html#SECTION00255000000000000000">1.5.5 IPQ</A>
+<LI><A NAME="tex2html109"
+  HREF="node7.html#SECTION00256000000000000000">1.5.6 IPFW</A>
+<LI><A NAME="tex2html110"
+  HREF="node7.html#SECTION00257000000000000000">1.5.7 Dump</A>
+<LI><A NAME="tex2html111"
+  HREF="node7.html#SECTION00258000000000000000">1.5.8 Statistics Changes</A>
+</UL>
+<LI><A NAME="tex2html112"
+  HREF="node8.html">1.6 Reading pcap files</A>
+<UL>
+<LI><A NAME="tex2html113"
+  HREF="node8.html#SECTION00261000000000000000">1.6.1 Command line arguments</A>
+<LI><A NAME="tex2html114"
+  HREF="node8.html#SECTION00262000000000000000">1.6.2 Examples</A>
+</UL>
+<LI><A NAME="tex2html115"
+  HREF="node9.html">1.7 Basic Output</A>
+<UL>
+<LI><A NAME="tex2html116"
+  HREF="node9.html#SECTION00271000000000000000">1.7.1 Timing Statistics</A>
+<LI><A NAME="tex2html117"
+  HREF="node9.html#SECTION00272000000000000000">1.7.2 Packet I/O Totals</A>
+<LI><A NAME="tex2html118"
+  HREF="node9.html#SECTION00273000000000000000">1.7.3 Protocol Statistics</A>
+<LI><A NAME="tex2html119"
+  HREF="node9.html#SECTION00274000000000000000">1.7.4 Snort Memory Statistics</A>
+<LI><A NAME="tex2html120"
+  HREF="node9.html#SECTION00275000000000000000">1.7.5 Actions, Limits, and Verdicts</A>
+</UL>
+<LI><A NAME="tex2html121"
+  HREF="node10.html">1.8 Tunneling Protocol Support</A>
+<UL>
+<LI><A NAME="tex2html122"
+  HREF="node10.html#SECTION00281000000000000000">1.8.1 Multiple Encapsulations</A>
+<LI><A NAME="tex2html123"
+  HREF="node10.html#SECTION00282000000000000000">1.8.2 Logging</A>
+</UL>
+<LI><A NAME="tex2html124"
+  HREF="node11.html">1.9 Miscellaneous</A>
+<UL>
+<LI><A NAME="tex2html125"
+  HREF="node11.html#SECTION00291000000000000000">1.9.1 Running Snort as a Daemon</A>
+<LI><A NAME="tex2html126"
+  HREF="node11.html#SECTION00292000000000000000">1.9.2 Running in Rule Stub Creation Mode</A>
+<LI><A NAME="tex2html127"
+  HREF="node11.html#SECTION00293000000000000000">1.9.3 Obfuscating IP Address Printouts</A>
+<LI><A NAME="tex2html128"
+  HREF="node11.html#SECTION00294000000000000000">1.9.4 Specifying Multiple-Instance Identifiers</A>
+<LI><A NAME="tex2html129"
+  HREF="node11.html#SECTION00295000000000000000">1.9.5 Snort Modes</A>
+</UL>
+<LI><A NAME="tex2html130"
+  HREF="node12.html">1.10 Control socket</A>
+<LI><A NAME="tex2html131"
+  HREF="node13.html">1.11 Configure signal value</A>
+<LI><A NAME="tex2html132"
+  HREF="node14.html">1.12 More Information</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html133"
+  HREF="node15.html">2. Configuring Snort</A>
+<UL>
+<LI><A NAME="tex2html134"
+  HREF="node16.html">2.1 Includes</A>
+<UL>
+<LI><A NAME="tex2html135"
+  HREF="node16.html#SECTION00311000000000000000">2.1.1 Format</A>
+<LI><A NAME="tex2html136"
+  HREF="node16.html#SECTION00312000000000000000">2.1.2 Variables</A>
+<LI><A NAME="tex2html137"
+  HREF="node16.html#SECTION00313000000000000000">2.1.3 Config</A>
+</UL>
+<LI><A NAME="tex2html138"
+  HREF="node17.html">2.2 Preprocessors</A>
+<UL>
+<LI><A NAME="tex2html139"
+  HREF="node17.html#SECTION00321000000000000000">2.2.1 Frag3</A>
+<LI><A NAME="tex2html140"
+  HREF="node17.html#SECTION00322000000000000000">2.2.2 Session</A>
+<LI><A NAME="tex2html141"
+  HREF="node17.html#SECTION00323000000000000000">2.2.3 Stream</A>
+<LI><A NAME="tex2html142"
+  HREF="node17.html#SECTION00324000000000000000">2.2.4 sfPortscan</A>
+<LI><A NAME="tex2html143"
+  HREF="node17.html#SECTION00325000000000000000">2.2.5 RPC Decode</A>
+<LI><A NAME="tex2html144"
+  HREF="node17.html#SECTION00326000000000000000">2.2.6 Performance Monitor</A>
+<LI><A NAME="tex2html145"
+  HREF="node17.html#SECTION00327000000000000000">2.2.7 HTTP Inspect</A>
+<LI><A NAME="tex2html146"
+  HREF="node17.html#SECTION00328000000000000000">2.2.8 SMTP Preprocessor</A>
+<LI><A NAME="tex2html147"
+  HREF="node17.html#SECTION00329000000000000000">2.2.9 POP Preprocessor</A>
+<LI><A NAME="tex2html148"
+  HREF="node17.html#SECTION003210000000000000000">2.2.10 IMAP Preprocessor</A>
+<LI><A NAME="tex2html149"
+  HREF="node17.html#SECTION003211000000000000000">2.2.11 FTP/Telnet Preprocessor</A>
+<LI><A NAME="tex2html150"
+  HREF="node17.html#SECTION003212000000000000000">2.2.12 SSH</A>
+<LI><A NAME="tex2html151"
+  HREF="node17.html#SECTION003213000000000000000">2.2.13 DNS</A>
+<LI><A NAME="tex2html152"
+  HREF="node17.html#SECTION003214000000000000000">2.2.14 SSL/TLS</A>
+<LI><A NAME="tex2html153"
+  HREF="node17.html#SECTION003215000000000000000">2.2.15 ARP Spoof Preprocessor</A>
+<LI><A NAME="tex2html154"
+  HREF="node17.html#SECTION003216000000000000000">2.2.16 DCE/RPC 2 Preprocessor</A>
+<LI><A NAME="tex2html155"
+  HREF="node17.html#SECTION003217000000000000000">2.2.17 Sensitive Data Preprocessor</A>
+<LI><A NAME="tex2html156"
+  HREF="node17.html#SECTION003218000000000000000">2.2.18 Normalizer</A>
+<LI><A NAME="tex2html157"
+  HREF="node17.html#SECTION003219000000000000000">2.2.19 SIP Preprocessor</A>
+<LI><A NAME="tex2html158"
+  HREF="node17.html#SECTION003220000000000000000">2.2.20 Reputation Preprocessor</A>
+<LI><A NAME="tex2html159"
+  HREF="node17.html#SECTION003221000000000000000">2.2.21 GTP Decoder and Preprocessor</A>
+<LI><A NAME="tex2html160"
+  HREF="node17.html#SECTION003222000000000000000">2.2.22 Modbus Preprocessor</A>
+<LI><A NAME="tex2html161"
+  HREF="node17.html#SECTION003223000000000000000">2.2.23 DNP3 Preprocessor</A>
+<LI><A NAME="tex2html162"
+  HREF="node17.html#SECTION003224000000000000000">2.2.24 AppId Preprocessor</A>
+</UL>
+<LI><A NAME="tex2html163"
+  HREF="node18.html">2.3 Decoder and Preprocessor Rules</A>
+<UL>
+<LI><A NAME="tex2html164"
+  HREF="node18.html#SECTION00331000000000000000">2.3.1 Configuring</A>
+<LI><A NAME="tex2html165"
+  HREF="node18.html#SECTION00332000000000000000">2.3.2 Reverting to original behavior</A>
+</UL>
+<LI><A NAME="tex2html166"
+  HREF="node19.html">2.4 Event Processing</A>
+<UL>
+<LI><A NAME="tex2html167"
+  HREF="node19.html#SECTION00341000000000000000">2.4.1 Rate Filtering</A>
+<LI><A NAME="tex2html168"
+  HREF="node19.html#SECTION00342000000000000000">2.4.2 Event Filtering</A>
+<LI><A NAME="tex2html169"
+  HREF="node19.html#SECTION00343000000000000000">2.4.3 Event Suppression</A>
+<LI><A NAME="tex2html170"
+  HREF="node19.html#SECTION00344000000000000000">2.4.4 Event Logging</A>
+<LI><A NAME="tex2html171"
+  HREF="node19.html#SECTION00345000000000000000">2.4.5 Event Trace</A>
+</UL>
+<LI><A NAME="tex2html172"
+  HREF="node20.html">2.5 Performance Profiling</A>
+<UL>
+<LI><A NAME="tex2html173"
+  HREF="node20.html#SECTION00351000000000000000">2.5.1 Rule Profiling</A>
+<LI><A NAME="tex2html174"
+  HREF="node20.html#SECTION00352000000000000000">2.5.2 Preprocessor Profiling</A>
+<LI><A NAME="tex2html175"
+  HREF="node20.html#SECTION00353000000000000000">2.5.3 Packet Performance Monitoring (PPM)</A>
+</UL>
+<LI><A NAME="tex2html176"
+  HREF="node21.html">2.6 Output Modules</A>
+<UL>
+<LI><A NAME="tex2html177"
+  HREF="node21.html#SECTION00361000000000000000">2.6.1 alert_syslog</A>
+<LI><A NAME="tex2html178"
+  HREF="node21.html#SECTION00362000000000000000">2.6.2 alert_fast</A>
+<LI><A NAME="tex2html179"
+  HREF="node21.html#SECTION00363000000000000000">2.6.3 alert_full</A>
+<LI><A NAME="tex2html180"
+  HREF="node21.html#SECTION00364000000000000000">2.6.4 alert_unixsock</A>
+<LI><A NAME="tex2html181"
+  HREF="node21.html#SECTION00365000000000000000">2.6.5 log_tcpdump</A>
+<LI><A NAME="tex2html182"
+  HREF="node21.html#SECTION00366000000000000000">2.6.6 csv</A>
+<LI><A NAME="tex2html183"
+  HREF="node21.html#SECTION00367000000000000000">2.6.7 unified 2</A>
+<LI><A NAME="tex2html184"
+  HREF="node21.html#SECTION00368000000000000000">2.6.8 log null</A>
+<LI><A NAME="tex2html185"
+  HREF="node21.html#SECTION00369000000000000000">2.6.9 Log Limits</A>
+</UL>
+<LI><A NAME="tex2html186"
+  HREF="node22.html">2.7 Host Attribute Table</A>
+<UL>
+<LI><A NAME="tex2html187"
+  HREF="node22.html#SECTION00371000000000000000">2.7.1 Rule evaluation</A>
+<LI><A NAME="tex2html188"
+  HREF="node22.html#SECTION00372000000000000000">2.7.2 Snort Configuration</A>
+<LI><A NAME="tex2html189"
+  HREF="node22.html#SECTION00373000000000000000">2.7.3 Host Attribute Table File Format</A>
+<LI><A NAME="tex2html190"
+  HREF="node22.html#SECTION00374000000000000000">2.7.4 Attribute Table Example</A>
+<LI><A NAME="tex2html191"
+  HREF="node22.html#SECTION00375000000000000000">2.7.5 Attribute Table Affect on preprocessors</A>
+</UL>
+<LI><A NAME="tex2html192"
+  HREF="node23.html">2.8 Dynamic Modules</A>
+<UL>
+<LI><A NAME="tex2html193"
+  HREF="node23.html#SECTION00381000000000000000">2.8.1 Format</A>
+<LI><A NAME="tex2html194"
+  HREF="node23.html#SECTION00382000000000000000">2.8.2 Directives</A>
+</UL>
+<LI><A NAME="tex2html195"
+  HREF="node24.html">2.9 Reloading a Snort Configuration</A>
+<UL>
+<LI><A NAME="tex2html196"
+  HREF="node24.html#SECTION00391000000000000000">2.9.1 Enabling support</A>
+<LI><A NAME="tex2html197"
+  HREF="node24.html#SECTION00392000000000000000">2.9.2 Reloading a configuration</A>
+<LI><A NAME="tex2html198"
+  HREF="node24.html#SECTION00393000000000000000">2.9.3 Non-reloadable configuration options</A>
+</UL>
+<LI><A NAME="tex2html199"
+  HREF="node25.html">2.10 Multiple Configurations</A>
+<UL>
+<LI><A NAME="tex2html200"
+  HREF="node25.html#SECTION003101000000000000000">2.10.1 Creating Multiple Configurations</A>
+<LI><A NAME="tex2html201"
+  HREF="node25.html#SECTION003102000000000000000">2.10.2 Configuration Specific Elements</A>
+<LI><A NAME="tex2html202"
+  HREF="node25.html#SECTION003103000000000000000">2.10.3 How Configuration is applied?</A>
+</UL>
+<LI><A NAME="tex2html203"
+  HREF="node26.html">2.11 Active Response</A>
+<UL>
+<LI><A NAME="tex2html204"
+  HREF="node26.html#SECTION003111000000000000000">2.11.1 Enabling Active Response</A>
+<LI><A NAME="tex2html205"
+  HREF="node26.html#SECTION003112000000000000000">2.11.2 Configure Sniping</A>
+<LI><A NAME="tex2html206"
+  HREF="node26.html#SECTION003113000000000000000">2.11.3 Flexresp</A>
+<LI><A NAME="tex2html207"
+  HREF="node26.html#SECTION003114000000000000000">2.11.4 React</A>
+<LI><A NAME="tex2html208"
+  HREF="node26.html#SECTION003115000000000000000">2.11.5 Rule Actions</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html209"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<UL>
+<LI><A NAME="tex2html210"
+  HREF="node28.html">3.1 The Basics</A>
+<LI><A NAME="tex2html211"
+  HREF="node29.html">3.2 Rules Headers</A>
+<UL>
+<LI><A NAME="tex2html212"
+  HREF="node29.html#SECTION00421000000000000000">3.2.1 Rule Actions</A>
+<LI><A NAME="tex2html213"
+  HREF="node29.html#SECTION00422000000000000000">3.2.2 Protocols</A>
+<LI><A NAME="tex2html214"
+  HREF="node29.html#SECTION00423000000000000000">3.2.3 IP Addresses</A>
+<LI><A NAME="tex2html215"
+  HREF="node29.html#SECTION00424000000000000000">3.2.4 Port Numbers</A>
+<LI><A NAME="tex2html216"
+  HREF="node29.html#SECTION00425000000000000000">3.2.5 The Direction Operator</A>
+<LI><A NAME="tex2html217"
+  HREF="node29.html#SECTION00426000000000000000">3.2.6 Activate/Dynamic Rules</A>
+</UL>
+<LI><A NAME="tex2html218"
+  HREF="node30.html">3.3 Rule Options</A>
+<LI><A NAME="tex2html219"
+  HREF="node31.html">3.4 General Rule Options</A>
+<UL>
+<LI><A NAME="tex2html220"
+  HREF="node31.html#SECTION00441000000000000000">3.4.1 msg</A>
+<LI><A NAME="tex2html221"
+  HREF="node31.html#SECTION00442000000000000000">3.4.2 reference</A>
+<LI><A NAME="tex2html222"
+  HREF="node31.html#SECTION00443000000000000000">3.4.3 gid</A>
+<LI><A NAME="tex2html223"
+  HREF="node31.html#SECTION00444000000000000000">3.4.4 sid</A>
+<LI><A NAME="tex2html224"
+  HREF="node31.html#SECTION00445000000000000000">3.4.5 rev</A>
+<LI><A NAME="tex2html225"
+  HREF="node31.html#SECTION00446000000000000000">3.4.6 classtype</A>
+<LI><A NAME="tex2html226"
+  HREF="node31.html#SECTION00447000000000000000">3.4.7 priority</A>
+<LI><A NAME="tex2html227"
+  HREF="node31.html#SECTION00448000000000000000">3.4.8 metadata</A>
+<LI><A NAME="tex2html228"
+  HREF="node31.html#SECTION00449000000000000000">3.4.9 General Rule Quick Reference</A>
+</UL>
+<LI><A NAME="tex2html229"
+  HREF="node32.html">3.5 Payload Detection Rule Options</A>
+<UL>
+<LI><A NAME="tex2html230"
+  HREF="node32.html#SECTION00451000000000000000">3.5.1 content</A>
+<LI><A NAME="tex2html231"
+  HREF="node32.html#SECTION00452000000000000000">3.5.2 protected_content</A>
+<LI><A NAME="tex2html232"
+  HREF="node32.html#SECTION00453000000000000000">3.5.3 hash</A>
+<LI><A NAME="tex2html233"
+  HREF="node32.html#SECTION00454000000000000000">3.5.4 length</A>
+<LI><A NAME="tex2html234"
+  HREF="node32.html#SECTION00455000000000000000">3.5.5 nocase</A>
+<LI><A NAME="tex2html235"
+  HREF="node32.html#SECTION00456000000000000000">3.5.6 rawbytes</A>
+<LI><A NAME="tex2html236"
+  HREF="node32.html#SECTION00457000000000000000">3.5.7 depth</A>
+<LI><A NAME="tex2html237"
+  HREF="node32.html#SECTION00458000000000000000">3.5.8 offset</A>
+<LI><A NAME="tex2html238"
+  HREF="node32.html#SECTION00459000000000000000">3.5.9 distance</A>
+<LI><A NAME="tex2html239"
+  HREF="node32.html#SECTION004510000000000000000">3.5.10 within</A>
+<LI><A NAME="tex2html240"
+  HREF="node32.html#SECTION004511000000000000000">3.5.11 http_client_body</A>
+<LI><A NAME="tex2html241"
+  HREF="node32.html#SECTION004512000000000000000">3.5.12 http_cookie</A>
+<LI><A NAME="tex2html242"
+  HREF="node32.html#SECTION004513000000000000000">3.5.13 http_raw_cookie</A>
+<LI><A NAME="tex2html243"
+  HREF="node32.html#SECTION004514000000000000000">3.5.14 http_header</A>
+<LI><A NAME="tex2html244"
+  HREF="node32.html#SECTION004515000000000000000">3.5.15 http_raw_header</A>
+<LI><A NAME="tex2html245"
+  HREF="node32.html#SECTION004516000000000000000">3.5.16 http_method</A>
+<LI><A NAME="tex2html246"
+  HREF="node32.html#SECTION004517000000000000000">3.5.17 http_uri</A>
+<LI><A NAME="tex2html247"
+  HREF="node32.html#SECTION004518000000000000000">3.5.18 http_raw_uri</A>
+<LI><A NAME="tex2html248"
+  HREF="node32.html#SECTION004519000000000000000">3.5.19 http_stat_code</A>
+<LI><A NAME="tex2html249"
+  HREF="node32.html#SECTION004520000000000000000">3.5.20 http_stat_msg</A>
+<LI><A NAME="tex2html250"
+  HREF="node32.html#SECTION004521000000000000000">3.5.21 http_encode</A>
+<LI><A NAME="tex2html251"
+  HREF="node32.html#SECTION004522000000000000000">3.5.22 fast_pattern</A>
+<LI><A NAME="tex2html252"
+  HREF="node32.html#SECTION004523000000000000000">3.5.23 uricontent</A>
+<LI><A NAME="tex2html253"
+  HREF="node32.html#SECTION004524000000000000000">3.5.24 urilen</A>
+<LI><A NAME="tex2html254"
+  HREF="node32.html#SECTION004525000000000000000">3.5.25 isdataat</A>
+<LI><A NAME="tex2html255"
+  HREF="node32.html#SECTION004526000000000000000">3.5.26 pcre</A>
+<LI><A NAME="tex2html256"
+  HREF="node32.html#SECTION004527000000000000000">3.5.27 pkt_data</A>
+<LI><A NAME="tex2html257"
+  HREF="node32.html#SECTION004528000000000000000">3.5.28 file_data</A>
+<LI><A NAME="tex2html258"
+  HREF="node32.html#SECTION004529000000000000000">3.5.29 base64_decode</A>
+<LI><A NAME="tex2html259"
+  HREF="node32.html#SECTION004530000000000000000">3.5.30 base64_data</A>
+<LI><A NAME="tex2html260"
+  HREF="node32.html#SECTION004531000000000000000">3.5.31 byte_test</A>
+<LI><A NAME="tex2html261"
+  HREF="node32.html#SECTION004532000000000000000">3.5.32 byte_jump</A>
+<LI><A NAME="tex2html262"
+  HREF="node32.html#SECTION004533000000000000000">3.5.33 byte_extract</A>
+<LI><A NAME="tex2html263"
+  HREF="node32.html#SECTION004534000000000000000">3.5.34 byte_math</A>
+<LI><A NAME="tex2html264"
+  HREF="node32.html#SECTION004535000000000000000">3.5.35 ftpbounce</A>
+<LI><A NAME="tex2html265"
+  HREF="node32.html#SECTION004536000000000000000">3.5.36 asn1</A>
+<LI><A NAME="tex2html266"
+  HREF="node32.html#SECTION004537000000000000000">3.5.37 cvs</A>
+<LI><A NAME="tex2html267"
+  HREF="node32.html#SECTION004538000000000000000">3.5.38 dce_iface</A>
+<LI><A NAME="tex2html268"
+  HREF="node32.html#SECTION004539000000000000000">3.5.39 dce_opnum</A>
+<LI><A NAME="tex2html269"
+  HREF="node32.html#SECTION004540000000000000000">3.5.40 dce_stub_data</A>
+<LI><A NAME="tex2html270"
+  HREF="node32.html#SECTION004541000000000000000">3.5.41 sip_method</A>
+<LI><A NAME="tex2html271"
+  HREF="node32.html#SECTION004542000000000000000">3.5.42 sip_stat_code</A>
+<LI><A NAME="tex2html272"
+  HREF="node32.html#SECTION004543000000000000000">3.5.43 sip_header</A>
+<LI><A NAME="tex2html273"
+  HREF="node32.html#SECTION004544000000000000000">3.5.44 sip_body</A>
+<LI><A NAME="tex2html274"
+  HREF="node32.html#SECTION004545000000000000000">3.5.45 gtp_type</A>
+<LI><A NAME="tex2html275"
+  HREF="node32.html#SECTION004546000000000000000">3.5.46 gtp_info</A>
+<LI><A NAME="tex2html276"
+  HREF="node32.html#SECTION004547000000000000000">3.5.47 gtp_version</A>
+<LI><A NAME="tex2html277"
+  HREF="node32.html#SECTION004548000000000000000">3.5.48 ssl_version</A>
+<LI><A NAME="tex2html278"
+  HREF="node32.html#SECTION004549000000000000000">3.5.49 ssl_state</A>
+<LI><A NAME="tex2html279"
+  HREF="node32.html#SECTION004550000000000000000">3.5.50 Payload Detection Quick Reference</A>
+</UL>
+<LI><A NAME="tex2html280"
+  HREF="node33.html">3.6 Non-Payload Detection Rule Options</A>
+<UL>
+<LI><A NAME="tex2html281"
+  HREF="node33.html#SECTION00461000000000000000">3.6.1 fragoffset</A>
+<LI><A NAME="tex2html282"
+  HREF="node33.html#SECTION00462000000000000000">3.6.2 ttl</A>
+<LI><A NAME="tex2html283"
+  HREF="node33.html#SECTION00463000000000000000">3.6.3 tos</A>
+<LI><A NAME="tex2html284"
+  HREF="node33.html#SECTION00464000000000000000">3.6.4 id</A>
+<LI><A NAME="tex2html285"
+  HREF="node33.html#SECTION00465000000000000000">3.6.5 ipopts</A>
+<LI><A NAME="tex2html286"
+  HREF="node33.html#SECTION00466000000000000000">3.6.6 fragbits</A>
+<LI><A NAME="tex2html287"
+  HREF="node33.html#SECTION00467000000000000000">3.6.7 dsize</A>
+<LI><A NAME="tex2html288"
+  HREF="node33.html#SECTION00468000000000000000">3.6.8 flags</A>
+<LI><A NAME="tex2html289"
+  HREF="node33.html#SECTION00469000000000000000">3.6.9 flow</A>
+<LI><A NAME="tex2html290"
+  HREF="node33.html#SECTION004610000000000000000">3.6.10 flowbits</A>
+<LI><A NAME="tex2html291"
+  HREF="node33.html#SECTION004611000000000000000">3.6.11 seq</A>
+<LI><A NAME="tex2html292"
+  HREF="node33.html#SECTION004612000000000000000">3.6.12 ack</A>
+<LI><A NAME="tex2html293"
+  HREF="node33.html#SECTION004613000000000000000">3.6.13 window</A>
+<LI><A NAME="tex2html294"
+  HREF="node33.html#SECTION004614000000000000000">3.6.14 itype</A>
+<LI><A NAME="tex2html295"
+  HREF="node33.html#SECTION004615000000000000000">3.6.15 icode</A>
+<LI><A NAME="tex2html296"
+  HREF="node33.html#SECTION004616000000000000000">3.6.16 icmp_id</A>
+<LI><A NAME="tex2html297"
+  HREF="node33.html#SECTION004617000000000000000">3.6.17 icmp_seq</A>
+<LI><A NAME="tex2html298"
+  HREF="node33.html#SECTION004618000000000000000">3.6.18 rpc</A>
+<LI><A NAME="tex2html299"
+  HREF="node33.html#SECTION004619000000000000000">3.6.19 ip_proto</A>
+<LI><A NAME="tex2html300"
+  HREF="node33.html#SECTION004620000000000000000">3.6.20 sameip</A>
+<LI><A NAME="tex2html301"
+  HREF="node33.html#SECTION004621000000000000000">3.6.21 stream_reassemble</A>
+<LI><A NAME="tex2html302"
+  HREF="node33.html#SECTION004622000000000000000">3.6.22 stream_size</A>
+<LI><A NAME="tex2html303"
+  HREF="node33.html#SECTION004623000000000000000">3.6.23 Non-Payload Detection Quick Reference</A>
+</UL>
+<LI><A NAME="tex2html304"
+  HREF="node34.html">3.7 Post-Detection Rule Options</A>
+<UL>
+<LI><A NAME="tex2html305"
+  HREF="node34.html#SECTION00471000000000000000">3.7.1 logto</A>
+<LI><A NAME="tex2html306"
+  HREF="node34.html#SECTION00472000000000000000">3.7.2 session</A>
+<LI><A NAME="tex2html307"
+  HREF="node34.html#SECTION00473000000000000000">3.7.3 resp</A>
+<LI><A NAME="tex2html308"
+  HREF="node34.html#SECTION00474000000000000000">3.7.4 react</A>
+<LI><A NAME="tex2html309"
+  HREF="node34.html#SECTION00475000000000000000">3.7.5 tag</A>
+<LI><A NAME="tex2html310"
+  HREF="node34.html#SECTION00476000000000000000">3.7.6 replace</A>
+<LI><A NAME="tex2html311"
+  HREF="node34.html#SECTION00477000000000000000">3.7.7 detection_filter</A>
+<LI><A NAME="tex2html312"
+  HREF="node34.html#SECTION00478000000000000000">3.7.8 Post-Detection Quick Reference</A>
+</UL>
+<LI><A NAME="tex2html313"
+  HREF="node35.html">3.8 Rule Thresholds</A>
+<LI><A NAME="tex2html314"
+  HREF="node36.html">3.9 Writing Good Rules</A>
+<UL>
+<LI><A NAME="tex2html315"
+  HREF="node36.html#SECTION00491000000000000000">3.9.1 Content Matching</A>
+<LI><A NAME="tex2html316"
+  HREF="node36.html#SECTION00492000000000000000">3.9.2 Catch the Vulnerability, Not the Exploit</A>
+<LI><A NAME="tex2html317"
+  HREF="node36.html#SECTION00493000000000000000">3.9.3 Catch the Oddities of the Protocol in the Rule</A>
+<LI><A NAME="tex2html318"
+  HREF="node36.html#SECTION00494000000000000000">3.9.4 Optimizing Rules</A>
+<LI><A NAME="tex2html319"
+  HREF="node36.html#SECTION00495000000000000000">3.9.5 Testing Numerical Values</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html320"
+  HREF="node37.html">4. Dynamic Modules</A>
+<UL>
+<LI><A NAME="tex2html321"
+  HREF="node38.html">4.1 Data Structures</A>
+<UL>
+<LI><A NAME="tex2html322"
+  HREF="node38.html#SECTION00511000000000000000">4.1.1 DynamicPluginMeta</A>
+<LI><A NAME="tex2html323"
+  HREF="node38.html#SECTION00512000000000000000">4.1.2 DynamicPreprocessorData</A>
+<LI><A NAME="tex2html324"
+  HREF="node38.html#SECTION00513000000000000000">4.1.3 DynamicEngineData</A>
+<LI><A NAME="tex2html325"
+  HREF="node38.html#SECTION00514000000000000000">4.1.4 SFSnortPacket</A>
+<LI><A NAME="tex2html326"
+  HREF="node38.html#SECTION00515000000000000000">4.1.5 Dynamic Rules</A>
+</UL>
+<LI><A NAME="tex2html327"
+  HREF="node39.html">4.2 Required Functions</A>
+<UL>
+<LI><A NAME="tex2html328"
+  HREF="node39.html#SECTION00521000000000000000">4.2.1 Preprocessors</A>
+<LI><A NAME="tex2html329"
+  HREF="node39.html#SECTION00522000000000000000">4.2.2 Detection Engine</A>
+<LI><A NAME="tex2html330"
+  HREF="node39.html#SECTION00523000000000000000">4.2.3 Rules</A>
+</UL>
+<LI><A NAME="tex2html331"
+  HREF="node40.html">4.3 Examples</A>
+<UL>
+<LI><A NAME="tex2html332"
+  HREF="node40.html#SECTION00531000000000000000">4.3.1 Preprocessor Example</A>
+<LI><A NAME="tex2html333"
+  HREF="node40.html#SECTION00532000000000000000">4.3.2 Rules</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html334"
+  HREF="node41.html">5. Snort Development</A>
+<UL>
+<LI><A NAME="tex2html335"
+  HREF="node42.html">5.1 Submitting Patches</A>
+<LI><A NAME="tex2html336"
+  HREF="node43.html">5.2 Snort Data Flow</A>
+<UL>
+<LI><A NAME="tex2html337"
+  HREF="node43.html#SECTION00621000000000000000">5.2.1 Preprocessors</A>
+<LI><A NAME="tex2html338"
+  HREF="node43.html#SECTION00622000000000000000">5.2.2 Detection Plugins</A>
+<LI><A NAME="tex2html339"
+  HREF="node43.html#SECTION00623000000000000000">5.2.3 Output Plugins</A>
+</UL>
+<LI><A NAME="tex2html340"
+  HREF="node44.html">5.3 Unified2 File Format</A>
+<UL>
+<LI><A NAME="tex2html341"
+  HREF="node44.html#SECTION00631000000000000000">5.3.1 Serial Unified2 Header</A>
+<LI><A NAME="tex2html342"
+  HREF="node44.html#SECTION00632000000000000000">5.3.2 Unified2 Packet</A>
+<LI><A NAME="tex2html343"
+  HREF="node44.html#SECTION00633000000000000000">5.3.3 Unified2 IDS Event</A>
+<LI><A NAME="tex2html344"
+  HREF="node44.html#SECTION00634000000000000000">5.3.4 Unified2 IDS Event IP6</A>
+<LI><A NAME="tex2html345"
+  HREF="node44.html#SECTION00635000000000000000">5.3.5 Unified2 IDS Event (Version 2)</A>
+<LI><A NAME="tex2html346"
+  HREF="node44.html#SECTION00636000000000000000">5.3.6 Unified2 IDS Event IP6 (Version 2)</A>
+<LI><A NAME="tex2html347"
+  HREF="node44.html#SECTION00637000000000000000">5.3.7 Unified2 Extra Data</A>
+<LI><A NAME="tex2html348"
+  HREF="node44.html#SECTION00638000000000000000">5.3.8 Description of Fields</A>
+</UL>
+<LI><A NAME="tex2html349"
+  HREF="node45.html">5.4 Buffer dump utility</A>
+<UL>
+<LI><A NAME="tex2html350"
+  HREF="node45.html#SECTION00641000000000000000">5.4.1 Example Buffer Dump output</A>
+</UL>
+<LI><A NAME="tex2html351"
+  HREF="node46.html">5.5 The Snort Team</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html352"
+  HREF="node47.html">Bibliography</A>
+</UL>
+<!--End of Table of Contents-->
+
+<P>
+<BR><HR>
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node1.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:18 GMT -->
+</HTML>

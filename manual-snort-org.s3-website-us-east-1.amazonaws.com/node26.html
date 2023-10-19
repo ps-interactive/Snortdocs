@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node26.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:46 GMT -->
+<HEAD>
+<TITLE>2.11 Active Response</TITLE>
+<META NAME="description" CONTENT="2.11 Active Response">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="previous" HREF="node25.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node27.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1015"
+  HREF="node27.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1011"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1007"
+  HREF="node25.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1013"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1016"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Up:</B> <A NAME="tex2html1012"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html1008"
+  HREF="node25.html">2.10 Multiple Configurations</A>
+ &nbsp; <B>  <A NAME="tex2html1014"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1017"
+  HREF="node26.html#SECTION003111000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN> Enabling Active Response</A>
+<LI><A NAME="tex2html1018"
+  HREF="node26.html#SECTION003112000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">2</SPAN> Configure Sniping</A>
+<LI><A NAME="tex2html1019"
+  HREF="node26.html#SECTION003113000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">3</SPAN> Flexresp</A>
+<LI><A NAME="tex2html1020"
+  HREF="node26.html#SECTION003114000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">4</SPAN> React</A>
+<LI><A NAME="tex2html1021"
+  HREF="node26.html#SECTION003115000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">5</SPAN> Rule Actions</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION003110000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN> Active Response</A>
+</H1>
+
+<P>
+Snort 2.9 includes a number of changes to better handle inline operation,
+including:
+
+<P>
+
+<UL>
+<LI>a single mechanism for all responses
+</LI>
+<LI>fully encoded reset or icmp unreachable packets
+</LI>
+<LI>updated flexible response rule option
+</LI>
+<LI>updated react rule option
+</LI>
+<LI>added block and sblock rule actions
+</LI>
+</UL>
+
+<P>
+These changes are outlined below.
+
+<P>
+
+<H2><A NAME="SECTION003111000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN> Enabling Active Response</A>
+</H2>
+
+<P>
+This enables active responses (snort will send TCP RST or ICMP
+unreachable/port) when dropping a session.
+
+<P>
+<PRE>
+    ./configure --enable-active-response / -DACTIVE_RESPONSE
+
+    preprocessor stream5_global: \
+        max_active_responses &lt;max_rsp&gt;, \
+        min_response_seconds &lt;min_sec&gt; 
+
+    &lt;max_rsp&gt; ::= (0..25)
+    &lt;min_sec&gt; ::= (1..300)
+</PRE>
+
+<P>
+Active responses will be encoded based on the triggering packet.  TTL will be
+set to the value captured at session pickup.
+
+<P>
+
+<H2><A NAME="SECTION003112000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">2</SPAN> Configure Sniping</A>
+</H2>
+
+<P>
+Configure the number of attempts to land a TCP RST within the session's current
+window (so that it is accepted by the receiving TCP).  This sequence "strafing"
+is really only useful in passive mode.  In inline mode the reset is put
+straight into the stream in lieu of the triggering packet so strafing is not
+necessary.
+
+<P>
+Each attempt (sent in rapid succession) has a different sequence number.  Each
+active response will actually cause this number of TCP resets to be sent.  TCP
+data (sent for react) is multiplied similarly.  At most 1 ICMP unreachable is
+sent, if and only if attempts <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$&gt;$"></SPAN> 0.
+
+<P>
+<PRE>
+    ./configure --enable-active-response
+
+    config response: [device &lt;dev&gt;] [dst_mac &lt;MAC address&gt;] attempts &lt;att&gt;
+
+    &lt;dev&gt; ::= ip | eth0 | etc.
+    &lt;att&gt; ::= (1..20)
+    &lt;MAC address&gt; ::= nn:nn:nn:nn:nn:nn    
+     (n is a hex number from 0-F)
+</PRE>
+
+<P>
+device ip will perform network layer injection.  It is probably a better choice
+to specify an interface and avoid kernel routing tables, etc.
+
+<P>
+dst_mac will change response destination MAC address, if the device is eth0, eth1, eth2 etc.
+Otherwise, response destination MAC address is derived from packet.
+Example:
+<PRE>
+    config response: device eth0 dst_mac 00:06:76:DD:5F:E3 attempts 2
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION003113000000000000000"></A>
+<A NAME="resp_section"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">3</SPAN> Flexresp
+</H2>
+
+<P>
+Flexresp and flexresp2 are replaced with flexresp3.
+
+<P>
+* Flexresp is deleted; these features are no longer available:
+
+<P>
+<PRE>
+    ./configure --enable-flexresp / -DENABLE_RESPOND -DENABLE_RESPONSE
+    config flexresp: attempts 1
+</PRE>
+
+<P>
+* Flexresp2 is deleted; these features are deprecated, non-functional, and will
+  be deleted in a future release:
+
+<P>
+<PRE>
+    ./configure --enable-flexresp2 / -DENABLE_RESPOND -DENABLE_RESPONSE2
+
+    config flexresp2_interface: eth0
+    config flexresp2_attempts: 4
+    config flexresp2_memcap: 1000000
+    config flexresp2_rows: 1000
+</PRE>
+
+<P>
+* Flexresp3 is new: the resp rule option keyword is used to configure active
+  responses for rules that fire.
+
+<P>
+<PRE>
+    ./configure --enable-flexresp3 / -DENABLE_RESPOND -DENABLE_RESPONSE3
+
+    alert tcp any any -&gt; any 80 (content:"a"; resp:&lt;resp_t&gt;; sid:1;)
+</PRE>
+
+<P>
+* <TT>resp_t</TT> includes all flexresp and flexresp2 options:
+
+<P>
+<PRE>
+    &lt;resp_t&gt; ::= \
+        rst_snd | rst_rcv | rst_all | \
+        reset_source | reset_dest | reset_both | icmp_net | \
+        icmp_host | icmp_port | icmp_all
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION003114000000000000000"></A>
+<A NAME="react_section"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">4</SPAN> React
+</H2>
+
+<P>
+react is a rule option keyword that enables sending an HTML page on a session
+and then resetting it.  This is built with:
+
+<P>
+<PRE>
+    ./configure --enable-react / -DENABLE_REACT
+</PRE>
+
+<P>
+The page to be sent can be read from a file:
+
+<P>
+<PRE>
+    config react: &lt;block.html&gt;
+</PRE>
+
+<P>
+or else the default is used:
+
+<P>
+<PRE>
+    &lt;default_page&gt; ::= \
+        "HTTP/1.1 403 Forbidden\r\n"
+        "Connection: close\r\n"
+        "Content-Type: text/html; charset=utf-8\r\n"
+        "\r\n"
+        "&lt;!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"\r\n" \
+        "    \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"&gt;\r\n" \
+        "&lt;html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"&gt;\r\n" \
+        "&lt;head&gt;\r\n" \
+        "&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /&gt;\r\n" \
+        "&lt;title&gt;Access Denied&lt;/title&gt;\r\n" \
+        "&lt;/head&gt;\r\n" \
+        "&lt;body&gt;\r\n" \
+        "&lt;h1&gt;Access Denied&lt;/h1&gt;\r\n" \
+        "&lt;p&gt;%s&lt;/p&gt;\r\n" \
+        "&lt;/body&gt;\r\n" \
+        "&lt;/html&gt;\r\n";
+</PRE>
+
+<P>
+Note that the file must contain the entire response, including any HTTP headers.
+In fact, the response isn't strictly limited to HTTP.  You could craft a binary
+payload of arbitrary content.
+
+<P>
+Be aware of size when creating such responses. While it may be possible
+to respond with arbitrarily large responses, responses for TCP sessions will need
+to take into account that the receiver's window may only accept up to a certain
+amount of data. Sending past this limit will result in truncated data. In general,
+the smaller the response, the more likely it will be successful.
+
+<P>
+When the rule is configured, the page is loaded and the selected message, which defaults to:
+
+<P>
+<PRE>
+    &lt;default_msg&gt; ::= \
+        "You are attempting to access a forbidden site.&lt;br /&gt;" \
+        "Consult your system administrator for details.";
+</PRE>
+
+<P>
+Additional formatting operators beyond a single within a reference URL.
+
+<P>
+This is an example rule:
+
+<P>
+<PRE>
+    drop tcp any any -&gt; any $HTTP_PORTS ( \
+        content: "d"; msg:"Unauthorized Access Prohibited!"; \
+        react: &lt;react_opts&gt;; sid:4;)
+
+    &lt;react_opts&gt; ::= [msg] [, &lt;dep_opts&gt;]
+</PRE>
+
+<P>
+These options are deprecated:
+
+<P>
+<PRE>
+    &lt;dep_opts&gt; ::= [block|warn], [proxy &lt;port#&gt;]
+</PRE>
+
+<P>
+The original version sent the web page to one end of the session only if the
+other end of the session was port 80 or the optional proxy port.  The new
+version always sends the page to the client.  If no page should be sent, a resp
+option can be used instead.  The deprecated options are ignored.
+
+<P>
+
+<H2><A NAME="SECTION003115000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">5</SPAN> Rule Actions</A>
+</H2>
+
+<P>
+The block and sblock actions have been introduced as synonyms for drop and
+sdrop to help avoid confusion between packets dropped due to load (e.g. lack of
+available buffers for incoming packets) and packets blocked due to Snort's
+analysis.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1015"
+  HREF="node27.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1011"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1007"
+  HREF="node25.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1013"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1016"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Up:</B> <A NAME="tex2html1012"
+  HREF="node15.html">2. Configuring Snort</A>
+<B> Previous:</B> <A NAME="tex2html1008"
+  HREF="node25.html">2.10 Multiple Configurations</A>
+ &nbsp; <B>  <A NAME="tex2html1014"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node26.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:46 GMT -->
+</HTML>

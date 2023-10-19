@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node41.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+<HEAD>
+<TITLE>5. Snort Development</TITLE>
+<META NAME="description" CONTENT="5. Snort Development">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node47.html">
+<LINK REL="previous" HREF="node37.html">
+<LINK REL="up" HREF="snort_manual.html">
+<LINK REL="next" HREF="node42.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1586"
+  HREF="node42.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1582"
+  HREF="snort_manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1576"
+  HREF="node40.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1584"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1587"
+  HREF="node42.html">5.1 Submitting Patches</A>
+<B> Up:</B> <A NAME="tex2html1583"
+  HREF="snort_manual.html">SNORTUsers Manual 2.9.16</A>
+<B> Previous:</B> <A NAME="tex2html1577"
+  HREF="node40.html">4.3 Examples</A>
+ &nbsp; <B>  <A NAME="tex2html1585"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00600000000000000000">
+<SPAN CLASS="arabic">5</SPAN>. Snort Development</A>
+</H1>
+
+<P>
+Currently, this chapter is here as a place holder. It will someday contain
+references on how to create new detection plugins and preprocessors.  End users
+don't really need to be reading this section. This is intended to help
+developers get a basic understanding of whats going on quickly.
+
+<P>
+If you are going to be helping out with Snort development, please use the
+<SMALL>HEAD</SMALL> branch of cvs. We've had problems in the past of people
+submitting patches only to the stable branch (since they are likely writing
+this stuff for their own IDS purposes). Bug fixes are what goes into
+<SMALL>STABLE</SMALL>. Features go into <SMALL>HEAD</SMALL>.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1588"
+  HREF="node42.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Submitting Patches</A>
+<LI><A NAME="tex2html1589"
+  HREF="node43.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Snort Data Flow</A>
+<UL>
+<LI><A NAME="tex2html1590"
+  HREF="node43.html#SECTION00621000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Preprocessors</A>
+<LI><A NAME="tex2html1591"
+  HREF="node43.html#SECTION00622000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Detection Plugins</A>
+<LI><A NAME="tex2html1592"
+  HREF="node43.html#SECTION00623000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Output Plugins</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1593"
+  HREF="node44.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> Unified2 File Format</A>
+<UL>
+<LI><A NAME="tex2html1594"
+  HREF="node44.html#SECTION00631000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Serial Unified2 Header</A>
+<LI><A NAME="tex2html1595"
+  HREF="node44.html#SECTION00632000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Unified2 Packet</A>
+<LI><A NAME="tex2html1596"
+  HREF="node44.html#SECTION00633000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> Unified2 IDS Event</A>
+<LI><A NAME="tex2html1597"
+  HREF="node44.html#SECTION00634000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> Unified2 IDS Event IP6</A>
+<LI><A NAME="tex2html1598"
+  HREF="node44.html#SECTION00635000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN> Unified2 IDS Event (Version 2)</A>
+<LI><A NAME="tex2html1599"
+  HREF="node44.html#SECTION00636000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">6</SPAN> Unified2 IDS Event IP6 (Version 2)</A>
+<LI><A NAME="tex2html1600"
+  HREF="node44.html#SECTION00637000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN> Unified2 Extra Data</A>
+<LI><A NAME="tex2html1601"
+  HREF="node44.html#SECTION00638000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN> Description of Fields</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1602"
+  HREF="node45.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> Buffer dump utility</A>
+<UL>
+<LI><A NAME="tex2html1603"
+  HREF="node45.html#SECTION00641000000000000000"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Example Buffer Dump output</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1604"
+  HREF="node46.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> The Snort Team</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node41.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>

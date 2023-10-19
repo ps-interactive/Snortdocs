@@ -1,0 +1,826 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node31.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:52 GMT -->
+<HEAD>
+<TITLE>3.4 General Rule Options</TITLE>
+<META NAME="description" CONTENT="3.4 General Rule Options">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node32.html">
+<LINK REL="previous" HREF="node30.html">
+<LINK REL="up" HREF="node27.html">
+<LINK REL="next" HREF="node32.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1196"
+  HREF="node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1192"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1186"
+  HREF="node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1194"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1197"
+  HREF="node32.html">3.5 Payload Detection Rule</A>
+<B> Up:</B> <A NAME="tex2html1193"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Previous:</B> <A NAME="tex2html1187"
+  HREF="node30.html">3.3 Rule Options</A>
+ &nbsp; <B>  <A NAME="tex2html1195"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1198"
+  HREF="node31.html#SECTION00441000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> msg</A>
+<UL>
+<LI><A NAME="tex2html1199"
+  HREF="node31.html#SECTION00441100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1200"
+  HREF="node31.html#SECTION00442000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> reference</A>
+<UL>
+<LI><A NAME="tex2html1201"
+  HREF="node31.html#SECTION00442100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1202"
+  HREF="node31.html#SECTION00442200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1203"
+  HREF="node31.html#SECTION00443000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> gid</A>
+<UL>
+<LI><A NAME="tex2html1204"
+  HREF="node31.html#SECTION00443100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1205"
+  HREF="node31.html#SECTION00443200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1206"
+  HREF="node31.html#SECTION00444000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> sid</A>
+<UL>
+<LI><A NAME="tex2html1207"
+  HREF="node31.html#SECTION00444100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1208"
+  HREF="node31.html#SECTION00444200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1209"
+  HREF="node31.html#SECTION00445000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN> rev</A>
+<UL>
+<LI><A NAME="tex2html1210"
+  HREF="node31.html#SECTION00445100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1211"
+  HREF="node31.html#SECTION00445200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1212"
+  HREF="node31.html#SECTION00446000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN> classtype</A>
+<UL>
+<LI><A NAME="tex2html1213"
+  HREF="node31.html#SECTION00446100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1214"
+  HREF="node31.html#SECTION00446200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+<LI><A NAME="tex2html1215"
+  HREF="node31.html#SECTION00446300000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> Warnings</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1216"
+  HREF="node31.html#SECTION00447000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">7</SPAN> priority</A>
+<UL>
+<LI><A NAME="tex2html1217"
+  HREF="node31.html#SECTION00447100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1218"
+  HREF="node31.html#SECTION00447200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1219"
+  HREF="node31.html#SECTION00448000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">8</SPAN> metadata</A>
+<UL>
+<LI><A NAME="tex2html1220"
+  HREF="node31.html#SECTION00448100000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html1221"
+  HREF="node31.html#SECTION00448200000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1222"
+  HREF="node31.html#SECTION00449000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">9</SPAN> General Rule Quick Reference</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00440000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> General Rule Options</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00441000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> msg</A>
+</H2>
+
+<P>
+The msg rule option tells the logging and alerting engine the message to print
+along with a packet dump or to an alert. It is a simple text string that
+utilizes the &#92; as an escape character to indicate a discrete
+character that might otherwise confuse Snort's rules parser (such as the
+semi-colon ; character).
+
+<P>
+
+<H3><A NAME="SECTION00441100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    msg:"&lt;message text&gt;";
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00442000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> reference</A>
+</H2>
+
+<P>
+The reference keyword allows rules to include references to external attack
+identification systems. The plugin currently supports several specific systems
+as well as unique URLs. This plugin is to be used by output plugins to provide
+a link to additional information about the alert produced.
+
+<P>
+Make sure to also take a look at
+<TT><A NAME="tex2html19"
+  HREF="http://www.snort.org/pub-bin/sigs-search.cgi/">http://www.snort.org/pub-bin/sigs-search.cgi/</A></TT> for a system that is
+indexing descriptions of alerts based on of the sid (See Section <A HREF="#keyword_sid"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>).
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<A NAME="references_systems"></A><A NAME="4258"></A>
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<CAPTION><STRONG>Table:</STRONG>
+Supported Systems</CAPTION>
+<TR><TD ALIGN="CENTER">System</TD>
+<TD ALIGN="CENTER">URL Prefix</TD>
+</TR>
+<TR><TD ALIGN="CENTER">bugtraq</TD>
+<TD ALIGN="CENTER">http://www.securityfocus.com/bid/</TD>
+</TR>
+<TR><TD ALIGN="CENTER">cve</TD>
+<TD ALIGN="CENTER">http://cve.mitre.org/cgi-bin/cvename.cgi?name=</TD>
+</TR>
+<TR><TD ALIGN="CENTER">nessus</TD>
+<TD ALIGN="CENTER">http://cgi.nessus.org/plugins/dump.php3?id=</TD>
+</TR>
+<TR><TD ALIGN="CENTER">arachnids</TD>
+<TD ALIGN="CENTER">(currently down) http://www.whitehats.com/info/IDS</TD>
+</TR>
+<TR><TD ALIGN="CENTER">mcafee</TD>
+<TD ALIGN="CENTER">http://vil.nai.com/vil/content/v_</TD>
+</TR>
+<TR><TD ALIGN="CENTER">osvdb</TD>
+<TD ALIGN="CENTER">http://osvdb.org/show/osvdb/</TD>
+</TR>
+<TR><TD ALIGN="CENTER">msb</TD>
+<TD ALIGN="CENTER">http://technet.microsoft.com/en-us/security/bulletin/</TD>
+</TR>
+<TR><TD ALIGN="CENTER">url</TD>
+<TD ALIGN="CENTER">http://</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+
+<H3><A NAME="SECTION00442100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    reference:&lt;id system&gt;, &lt;id&gt;; [reference:&lt;id system&gt;, &lt;id&gt;;]
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00442200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 7070 (msg:"IDS411/dos-realaudio"; \
+        flags:AP; content:"|fff4 fffd 06|"; reference:arachnids,IDS411;)
+    
+    alert tcp any any -&gt; any 21 (msg:"IDS287/ftp-wuftp260-venglin-linux"; \
+        flags:AP; content:"|31c031db 31c9b046 cd80 31c031db|"; \
+        reference:arachnids,IDS287; reference:bugtraq,1387; \
+        reference:cve,CAN-2000-1574;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00443000000000000000"></A>
+<A NAME="keyword_gid"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> gid
+</H2>
+
+<P>
+The <TT>gid</TT> keyword (generator id) is used to identify what part of Snort
+generates the event when a particular rule fires.  For example gid 1 is
+associated with the rules subsystem and various gids over 100 are designated
+for specific preprocessors and the decoder.  See etc/generators in the source
+tree for the current generator ids in use.  Note that the gid keyword is
+optional and if it is not specified in a rule, it will default to 1 and the
+rule will be part of the general rule subsystem.  To avoid potential conflict
+with gids defined in Snort (that for some reason aren't noted it
+etc/generators), it is recommended that values starting at 1,000,000 be used.
+For general rule writing, it is not recommended that the <TT>gid</TT> keyword
+be used.  This option should be used with the <TT>sid</TT> keyword.  (See
+section <A HREF="#keyword_sid"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>)
+
+<P>
+The file etc/gen-msg.map contains contains more information on preprocessor and
+decoder gids.
+
+<P>
+
+<H3><A NAME="SECTION00443100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    gid:&lt;generator id&gt;;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00443200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+This example is a rule with a generator id of 1000001. 
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"BOB"; gid:1000001; sid:1; rev:1;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00444000000000000000"></A>
+<A NAME="keyword_sid"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> sid
+</H2>
+
+<P>
+The <TT>sid</TT> keyword is used to uniquely identify Snort rules. This
+information allows output plugins to identify rules easily.  This option should
+be used with the <TT>rev</TT> keyword.  (See section <A HREF="#keyword_rev"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>)
+
+<P>
+
+<UL>
+<LI><SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&lt;$"></SPAN>100 Reserved for future use
+</LI>
+<LI>100-999,999 Rules included with the Snort distribution
+</LI>
+<LI><SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img35.png"
+ ALT="$&gt;=$"></SPAN>1,000,000 Used for local rules
+</LI>
+</UL>
+
+<P>
+The file sid-msg.map contains a mapping of alert messages to Snort rule IDs.
+This information is useful when post-processing alert to map an ID to an alert
+message.  
+
+<P>
+
+<H3><A NAME="SECTION00444100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    sid:&lt;snort rules id&gt;;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00444200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+This example is a rule with the Snort Rule ID of 1000983.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"BOB"; sid:1000983; rev:1;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00445000000000000000"></A>
+<A NAME="keyword_rev"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN> rev
+</H2>
+
+<P>
+The <TT>rev</TT> keyword is used to uniquely identify revisions of Snort rules.
+Revisions, along with Snort rule id's, allow signatures and descriptions to be
+refined and replaced with updated information.  This option should be used with
+the <TT>sid</TT> keyword.  (See section <A HREF="#keyword_sid"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>)
+
+<P>
+
+<H3><A NAME="SECTION00445100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    rev:&lt;revision integer&gt;;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00445200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+This example is a rule with the Snort Rule Revision of 1.
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (content:"BOB"; sid:1000983; rev:1;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00446000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN> classtype</A>
+</H2>
+
+<P>
+The <TT>classtype</TT> keyword is used to categorize a rule as detecting an
+attack that is part of a more general type of attack class. Snort provides a
+default set of attack classes that are used by the default set of rules it
+provides. Defining classifications for rules provides a way to better organize
+the event data Snort produces.
+
+<P>
+
+<H3><A NAME="SECTION00446100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    classtype:&lt;class name&gt;;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00446200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Example</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 25 (msg:"SMTP expn root"; flags:A+; \
+        content:"expn root"; nocase; classtype:attempted-recon;)
+</PRE>
+
+<P>
+Attack classifications defined by Snort reside in the
+<TT>classification.config</TT> file. The file uses the following syntax:
+
+<P>
+<PRE>
+    config classification:  &lt;class name&gt;,&lt;class description&gt;,&lt;default priority&gt;
+</PRE>
+
+<P>
+These attack classifications are listed in Table <A HREF="#Snort_Default_Classifications"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>. They are currently ordered with 4 default priorities. A
+priority of 1 (high) is the most severe and 4 (very low) is the least severe.
+
+<P>
+<DIV ALIGN="CENTER">
+<A NAME="4323"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Table:</STRONG>
+Snort Default Classifications</CAPTION>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144><A NAME="Snort_Default_Classifications"></A></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>Classtype</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Description</TD>
+<TD ALIGN="CENTER">Priority</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>attempted-admin</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Attempted Administrator Privilege Gain</TD>
+<TD ALIGN="CENTER">high</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>attempted-user</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Attempted User Privilege Gain</TD>
+<TD ALIGN="CENTER">high</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>inappropriate-content</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Inappropriate Content was Detected</TD>
+<TD ALIGN="CENTER">high</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>policy-violation</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Potential Corporate Privacy Violation</TD>
+<TD ALIGN="CENTER">high</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>shellcode-detect</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Executable code was detected</TD>
+<TD ALIGN="CENTER">high</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>successful-admin</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Successful Administrator Privilege Gain</TD>
+<TD ALIGN="CENTER">high</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>successful-user</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Successful User Privilege Gain</TD>
+<TD ALIGN="CENTER">high</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>trojan-activity</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>A Network Trojan was detected</TD>
+<TD ALIGN="CENTER">high</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>unsuccessful-user</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Unsuccessful User Privilege Gain</TD>
+<TD ALIGN="CENTER">high</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>web-application-attack</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Web Application Attack</TD>
+<TD ALIGN="CENTER">high</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>attempted-dos</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Attempted Denial of Service</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>attempted-recon</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Attempted Information Leak</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>bad-unknown</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Potentially Bad Traffic</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>default-login-attempt</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Attempt to login by a default username and password</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>denial-of-service</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Detection of a Denial of Service Attack</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>misc-attack</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Misc Attack</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>non-standard-protocol</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Detection of a non-standard protocol or event</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>rpc-portmap-decode</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Decode of an RPC Query</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>successful-dos</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Denial of Service</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>successful-recon-largescale</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Large Scale Information Leak</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>successful-recon-limited</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Information Leak</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>suspicious-filename-detect</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>A suspicious filename was detected</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>suspicious-login</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>An attempted login using a suspicious username was detected</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>system-call-detect</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>A system call was detected</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>unusual-client-port-connection</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>A client was using an unusual port</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>web-application-activity</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Access to a potentially vulnerable web application</TD>
+<TD ALIGN="CENTER">medium</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>icmp-event</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Generic ICMP event</TD>
+<TD ALIGN="CENTER">low</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>misc-activity</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Misc activity</TD>
+<TD ALIGN="CENTER">low</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>network-scan</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Detection of a Network Scan</TD>
+<TD ALIGN="CENTER">low</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>not-suspicious</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Not Suspicious Traffic</TD>
+<TD ALIGN="CENTER">low</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>protocol-command-decode</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Generic Protocol Command Decode</TD>
+<TD ALIGN="CENTER">low</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>string-detect</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>A suspicious string was detected</TD>
+<TD ALIGN="CENTER">low</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>unknown</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Unknown Traffic</TD>
+<TD ALIGN="CENTER">low</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=144>tcp-connection</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>A TCP connection was detected</TD>
+<TD ALIGN="CENTER">very low</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<H3><A NAME="SECTION00446300000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> Warnings</A>
+</H3>
+
+<P>
+The <TT>classtype</TT> option can only use classifications that have been
+defined in <TT>snort.conf</TT> by using the <TT>config classification</TT>
+option.  Snort provides a default set of classifications in
+<TT>classification.config</TT> that are used by the rules it provides.
+
+<P>
+
+<H2><A NAME="SECTION00447000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">7</SPAN> priority</A>
+</H2>
+
+<P>
+The <TT>priority</TT> tag assigns a severity level to rules. A
+<TT>classtype</TT> rule assigns a default priority (defined by the
+<TT>config classification</TT> option) that may be overridden with a priority
+rule.  Examples of each case are given below.
+
+<P>
+
+<H3><A NAME="SECTION00447100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+<PRE>
+    priority:&lt;priority integer&gt;;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00447200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (msg:"WEB-MISC phf attempt"; flags:A+; \
+        content:"/cgi-bin/phf"; priority:10;)
+
+    alert tcp any any -&gt; any 80 (msg:"EXPLOIT ntpdx overflow"; \ 
+        dsize:&gt;128; classtype:attempted-admin; priority:10 );
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00448000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">8</SPAN> metadata</A>
+</H2>
+
+<P>
+The <TT>metadata</TT> tag allows a rule writer to embed additional information
+about the rule, typically in a key-value format.  Certain metadata keys and
+values have meaning to Snort and are listed in Table <A HREF="#Snort_Metadata_Keys"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A>.
+Keys other than those listed in the table are effectively ignored by Snort and
+can be free-form, with a key and a value.  Multiple keys are separated by a
+comma, while keys and values are separated by a space.
+
+<P>
+<BR>
+<DIV ALIGN="CENTER">
+<A NAME="Snort_Metadata_Keys"></A><A NAME="4347"></A>
+<TABLE CELLPADDING=3 BORDER="1" ALIGN="CENTER">
+<CAPTION><STRONG>Table:</STRONG>
+Snort Metadata Keys</CAPTION>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>Key</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Description</TD>
+<TD ALIGN="CENTER">Value Format</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>engine</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Indicate a Shared Library Rule</TD>
+<TD ALIGN="CENTER">"shared"</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>soid</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Shared Library Rule Generator and SID</TD>
+<TD ALIGN="CENTER">gid<SPAN CLASS="MATH"><IMG
+ WIDTH="9" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$\vert$"></SPAN>sid</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>service</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=180>Target-Based Service Identifier</TD>
+<TD ALIGN="CENTER">"http"</TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+
+<P>
+
+        
+        <p><table border="1"><tr><td><b>
+        Note:&nbsp;&nbsp;</b>
+
+<P>
+The <TT>service</TT> Metadata Key is only meaningful when a Host Attribute
+Table is provided. See Section <A HREF="node22.html#targetbased"><IMG  ALIGN="BOTTOM" BORDER="1" ALT="[*]" SRC="crossref.png"></A> for details on the Host Attribute Table.
+
+<P>
+        
+        </b></td></tr></table></p>
+.
+
+<P>
+
+<H3><A NAME="SECTION00448100000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+</H3>
+
+<P>
+The examples below show an stub rule from a shared library rule.  The first
+uses multiple metadata keywords, the second a single metadata keyword, with
+keys separated by commas.
+
+<P>
+<PRE>
+    metadata:key1 value1;
+    metadata:key1 value1, key2 value2;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00448200000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> Examples</A>
+</H3>
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 80 (msg:"Shared Library Rule Example"; \
+        metadata:engine shared; metadata:soid 3|12345;)
+
+    alert tcp any any -&gt; any 80 (msg:"Shared Library Rule Example"; \
+        metadata:engine shared, soid 3|12345;)
+
+    alert tcp any any -&gt; any 80 (msg:"HTTP Service Rule Example"; \
+        metadata:service http;)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00449000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">9</SPAN> General Rule Quick Reference</A>
+</H2>
+<DIV ALIGN="CENTER">
+<A NAME="4373"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Table:</STRONG>
+General rule option keywords</CAPTION>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72>Keyword</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324>Description</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>msg</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The msg keyword tells the logging and alerting engine the message to print with
+the packet dump or alert.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>reference</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The reference keyword allows rules to include references to external attack
+identification systems.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>gid</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The gid keyword (generator id) is used to identify what part of Snort generates
+the event when a particular rule fires.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>sid</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The sid keyword is used to uniquely identify Snort rules.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>rev</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The rev keyword is used to uniquely identify revisions of Snort rules.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>classtype</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The classtype keyword is used to categorize a rule as detecting an attack that
+is part of a more general type of attack class.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>priority</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The priority keyword assigns a severity level to rules.</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=72><TT>metadata</TT></TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=324><P>
+The metadata keyword allows a rule writer to embed additional information about
+the rule, typically in a key-value format.</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1196"
+  HREF="node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1192"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1186"
+  HREF="node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1194"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1197"
+  HREF="node32.html">3.5 Payload Detection Rule</A>
+<B> Up:</B> <A NAME="tex2html1193"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Previous:</B> <A NAME="tex2html1187"
+  HREF="node30.html">3.3 Rule Options</A>
+ &nbsp; <B>  <A NAME="tex2html1195"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node31.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:53 GMT -->
+</HTML>

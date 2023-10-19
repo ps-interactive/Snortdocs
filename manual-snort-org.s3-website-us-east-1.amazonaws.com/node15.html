@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node15.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+<HEAD>
+<TITLE>2. Configuring Snort</TITLE>
+<META NAME="description" CONTENT="2. Configuring Snort">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node27.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="snort_manual.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html590"
+  HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html586"
+  HREF="snort_manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html580"
+  HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html588"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html591"
+  HREF="node16.html">2.1 Includes</A>
+<B> Up:</B> <A NAME="tex2html587"
+  HREF="snort_manual.html">SNORTUsers Manual 2.9.16</A>
+<B> Previous:</B> <A NAME="tex2html581"
+  HREF="node14.html">1.12 More Information</A>
+ &nbsp; <B>  <A NAME="tex2html589"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00300000000000000000"></A>
+<A NAME="Configuring_Snort"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>. Configuring Snort
+</H1>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html592"
+  HREF="node16.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Includes</A>
+<UL>
+<LI><A NAME="tex2html593"
+  HREF="node16.html#SECTION00311000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html594"
+  HREF="node16.html#SECTION00312000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Variables</A>
+<LI><A NAME="tex2html595"
+  HREF="node16.html#SECTION00313000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Config</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html596"
+  HREF="node17.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Preprocessors</A>
+<UL>
+<LI><A NAME="tex2html597"
+  HREF="node17.html#SECTION00321000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Frag3</A>
+<LI><A NAME="tex2html598"
+  HREF="node17.html#SECTION00322000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Session</A>
+<LI><A NAME="tex2html599"
+  HREF="node17.html#SECTION00323000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Stream</A>
+<LI><A NAME="tex2html600"
+  HREF="node17.html#SECTION00324000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> sfPortscan</A>
+<LI><A NAME="tex2html601"
+  HREF="node17.html#SECTION00325000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN> RPC Decode</A>
+<LI><A NAME="tex2html602"
+  HREF="node17.html#SECTION00326000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN> Performance Monitor</A>
+<LI><A NAME="tex2html603"
+  HREF="node17.html#SECTION00327000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN> HTTP Inspect</A>
+<LI><A NAME="tex2html604"
+  HREF="node17.html#SECTION00328000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">8</SPAN> SMTP Preprocessor</A>
+<LI><A NAME="tex2html605"
+  HREF="node17.html#SECTION00329000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN> POP Preprocessor</A>
+<LI><A NAME="tex2html606"
+  HREF="node17.html#SECTION003210000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN> IMAP Preprocessor</A>
+<LI><A NAME="tex2html607"
+  HREF="node17.html#SECTION003211000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN> FTP/Telnet Preprocessor</A>
+<LI><A NAME="tex2html608"
+  HREF="node17.html#SECTION003212000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">12</SPAN> SSH</A>
+<LI><A NAME="tex2html609"
+  HREF="node17.html#SECTION003213000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">13</SPAN> DNS</A>
+<LI><A NAME="tex2html610"
+  HREF="node17.html#SECTION003214000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">14</SPAN> SSL/TLS</A>
+<LI><A NAME="tex2html611"
+  HREF="node17.html#SECTION003215000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">15</SPAN> ARP Spoof Preprocessor</A>
+<LI><A NAME="tex2html612"
+  HREF="node17.html#SECTION003216000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">16</SPAN> DCE/RPC 2 Preprocessor</A>
+<LI><A NAME="tex2html613"
+  HREF="node17.html#SECTION003217000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">17</SPAN> Sensitive Data Preprocessor</A>
+<LI><A NAME="tex2html614"
+  HREF="node17.html#SECTION003218000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">18</SPAN> Normalizer</A>
+<LI><A NAME="tex2html615"
+  HREF="node17.html#SECTION003219000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">19</SPAN> SIP Preprocessor</A>
+<LI><A NAME="tex2html616"
+  HREF="node17.html#SECTION003220000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">20</SPAN> Reputation Preprocessor</A>
+<LI><A NAME="tex2html617"
+  HREF="node17.html#SECTION003221000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">21</SPAN> GTP Decoder and Preprocessor</A>
+<LI><A NAME="tex2html618"
+  HREF="node17.html#SECTION003222000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">22</SPAN> Modbus Preprocessor</A>
+<LI><A NAME="tex2html619"
+  HREF="node17.html#SECTION003223000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">23</SPAN> DNP3 Preprocessor</A>
+<LI><A NAME="tex2html620"
+  HREF="node17.html#SECTION003224000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">24</SPAN> AppId Preprocessor</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html621"
+  HREF="node18.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Decoder and Preprocessor Rules</A>
+<UL>
+<LI><A NAME="tex2html622"
+  HREF="node18.html#SECTION00331000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Configuring</A>
+<LI><A NAME="tex2html623"
+  HREF="node18.html#SECTION00332000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Reverting to original behavior</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html624"
+  HREF="node19.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN> Event Processing</A>
+<UL>
+<LI><A NAME="tex2html625"
+  HREF="node19.html#SECTION00341000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rate Filtering</A>
+<LI><A NAME="tex2html626"
+  HREF="node19.html#SECTION00342000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Event Filtering</A>
+<LI><A NAME="tex2html627"
+  HREF="node19.html#SECTION00343000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Event Suppression</A>
+<LI><A NAME="tex2html628"
+  HREF="node19.html#SECTION00344000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Event Logging</A>
+<LI><A NAME="tex2html629"
+  HREF="node19.html#SECTION00345000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN> Event Trace</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html630"
+  HREF="node20.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN> Performance Profiling</A>
+<UL>
+<LI><A NAME="tex2html631"
+  HREF="node20.html#SECTION00351000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rule Profiling</A>
+<LI><A NAME="tex2html632"
+  HREF="node20.html#SECTION00352000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Preprocessor Profiling</A>
+<LI><A NAME="tex2html633"
+  HREF="node20.html#SECTION00353000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> Packet Performance Monitoring (PPM)</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html634"
+  HREF="node21.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN> Output Modules</A>
+<UL>
+<LI><A NAME="tex2html635"
+  HREF="node21.html#SECTION00361000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> alert_syslog</A>
+<LI><A NAME="tex2html636"
+  HREF="node21.html#SECTION00362000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> alert_fast</A>
+<LI><A NAME="tex2html637"
+  HREF="node21.html#SECTION00363000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> alert_full</A>
+<LI><A NAME="tex2html638"
+  HREF="node21.html#SECTION00364000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN> alert_unixsock</A>
+<LI><A NAME="tex2html639"
+  HREF="node21.html#SECTION00365000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">5</SPAN> log_tcpdump</A>
+<LI><A NAME="tex2html640"
+  HREF="node21.html#SECTION00366000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">6</SPAN> csv</A>
+<LI><A NAME="tex2html641"
+  HREF="node21.html#SECTION00367000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN> unified 2</A>
+<LI><A NAME="tex2html642"
+  HREF="node21.html#SECTION00368000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">8</SPAN> log null</A>
+<LI><A NAME="tex2html643"
+  HREF="node21.html#SECTION00369000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">9</SPAN> Log Limits</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html644"
+  HREF="node22.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN> Host Attribute Table</A>
+<UL>
+<LI><A NAME="tex2html645"
+  HREF="node22.html#SECTION00371000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Rule evaluation</A>
+<LI><A NAME="tex2html646"
+  HREF="node22.html#SECTION00372000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Snort Configuration</A>
+<LI><A NAME="tex2html647"
+  HREF="node22.html#SECTION00373000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> Host Attribute Table File Format</A>
+<LI><A NAME="tex2html648"
+  HREF="node22.html#SECTION00374000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Attribute Table Example</A>
+<LI><A NAME="tex2html649"
+  HREF="node22.html#SECTION00375000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> Attribute Table Affect on preprocessors</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html650"
+  HREF="node23.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">8</SPAN> Dynamic Modules</A>
+<UL>
+<LI><A NAME="tex2html651"
+  HREF="node23.html#SECTION00381000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Format</A>
+<LI><A NAME="tex2html652"
+  HREF="node23.html#SECTION00382000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> Directives</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html653"
+  HREF="node24.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN> Reloading a Snort Configuration</A>
+<UL>
+<LI><A NAME="tex2html654"
+  HREF="node24.html#SECTION00391000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Enabling support</A>
+<LI><A NAME="tex2html655"
+  HREF="node24.html#SECTION00392000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Reloading a configuration</A>
+<LI><A NAME="tex2html656"
+  HREF="node24.html#SECTION00393000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN> Non-reloadable configuration options</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html657"
+  HREF="node25.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN> Multiple Configurations</A>
+<UL>
+<LI><A NAME="tex2html658"
+  HREF="node25.html#SECTION003101000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN> Creating Multiple Configurations</A>
+<LI><A NAME="tex2html659"
+  HREF="node25.html#SECTION003102000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN> Configuration Specific Elements</A>
+<LI><A NAME="tex2html660"
+  HREF="node25.html#SECTION003103000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">3</SPAN> How Configuration is applied?</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html661"
+  HREF="node26.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN> Active Response</A>
+<UL>
+<LI><A NAME="tex2html662"
+  HREF="node26.html#SECTION003111000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN> Enabling Active Response</A>
+<LI><A NAME="tex2html663"
+  HREF="node26.html#SECTION003112000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">2</SPAN> Configure Sniping</A>
+<LI><A NAME="tex2html664"
+  HREF="node26.html#SECTION003113000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">3</SPAN> Flexresp</A>
+<LI><A NAME="tex2html665"
+  HREF="node26.html#SECTION003114000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">4</SPAN> React</A>
+<LI><A NAME="tex2html666"
+  HREF="node26.html#SECTION003115000000000000000"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">5</SPAN> Rule Actions</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node15.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:21 GMT -->
+</HTML>

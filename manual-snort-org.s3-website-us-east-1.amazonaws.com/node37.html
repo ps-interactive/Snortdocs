@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node37.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+<HEAD>
+<TITLE>4. Dynamic Modules</TITLE>
+<META NAME="description" CONTENT="4. Dynamic Modules">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="next" HREF="node41.html">
+<LINK REL="previous" HREF="node27.html">
+<LINK REL="up" HREF="snort_manual.html">
+<LINK REL="next" HREF="node38.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1512"
+  HREF="node38.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1508"
+  HREF="snort_manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1502"
+  HREF="node36.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1510"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1513"
+  HREF="node38.html">4.1 Data Structures</A>
+<B> Up:</B> <A NAME="tex2html1509"
+  HREF="snort_manual.html">SNORTUsers Manual 2.9.16</A>
+<B> Previous:</B> <A NAME="tex2html1503"
+  HREF="node36.html">3.9 Writing Good Rules</A>
+ &nbsp; <B>  <A NAME="tex2html1511"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00500000000000000000"></A><A NAME="Dynamic_Modules"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>. Dynamic Modules
+</H1>
+
+<P>
+Preprocessors, detection capabilities, and rules can now be developed as
+dynamically loadable modules to snort.  The dynamic API presents a means for
+loading dynamic libraries and allowing the module to utilize certain functions
+within the main snort code.
+
+<P>
+The remainder of this chapter will highlight the data structures and API
+functions used in developing preprocessors, detection engines, and rules as a
+dynamic plugin to snort.
+
+<P>
+Beware:  the definitions herein may be out of date; check the appropriate
+header files for the current definitions.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1514"
+  HREF="node38.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Data Structures</A>
+<UL>
+<LI><A NAME="tex2html1515"
+  HREF="node38.html#SECTION00511000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> DynamicPluginMeta</A>
+<LI><A NAME="tex2html1516"
+  HREF="node38.html#SECTION00512000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> DynamicPreprocessorData</A>
+<LI><A NAME="tex2html1517"
+  HREF="node38.html#SECTION00513000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> DynamicEngineData</A>
+<LI><A NAME="tex2html1518"
+  HREF="node38.html#SECTION00514000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> SFSnortPacket</A>
+<LI><A NAME="tex2html1519"
+  HREF="node38.html#SECTION00515000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN> Dynamic Rules</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1520"
+  HREF="node39.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Required Functions</A>
+<UL>
+<LI><A NAME="tex2html1521"
+  HREF="node39.html#SECTION00521000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Preprocessors</A>
+<LI><A NAME="tex2html1522"
+  HREF="node39.html#SECTION00522000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Detection Engine</A>
+<LI><A NAME="tex2html1523"
+  HREF="node39.html#SECTION00523000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Rules</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html1524"
+  HREF="node40.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Examples</A>
+<UL>
+<LI><A NAME="tex2html1525"
+  HREF="node40.html#SECTION00531000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Preprocessor Example</A>
+<LI><A NAME="tex2html1526"
+  HREF="node40.html#SECTION00532000000000000000"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Rules</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node37.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>

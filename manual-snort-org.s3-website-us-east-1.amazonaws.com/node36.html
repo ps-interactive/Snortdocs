@@ -1,0 +1,573 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node36.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+<HEAD>
+<TITLE>3.9 Writing Good Rules</TITLE>
+<META NAME="description" CONTENT="3.9 Writing Good Rules">
+<META NAME="keywords" CONTENT="snort_manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="snort_manual.css">
+
+<LINK REL="previous" HREF="node35.html">
+<LINK REL="up" HREF="node27.html">
+<LINK REL="next" HREF="node37.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1495"
+  HREF="node37.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1491"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1487"
+  HREF="node35.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1493"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1496"
+  HREF="node37.html">4. Dynamic Modules</A>
+<B> Up:</B> <A NAME="tex2html1492"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Previous:</B> <A NAME="tex2html1488"
+  HREF="node35.html">3.8 Rule Thresholds</A>
+ &nbsp; <B>  <A NAME="tex2html1494"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html1497"
+  HREF="node36.html#SECTION00491000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Content Matching</A>
+<LI><A NAME="tex2html1498"
+  HREF="node36.html#SECTION00492000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Catch the Vulnerability, Not the Exploit</A>
+<LI><A NAME="tex2html1499"
+  HREF="node36.html#SECTION00493000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN> Catch the Oddities of the Protocol in the Rule</A>
+<LI><A NAME="tex2html1500"
+  HREF="node36.html#SECTION00494000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">4</SPAN> Optimizing Rules</A>
+<LI><A NAME="tex2html1501"
+  HREF="node36.html#SECTION00495000000000000000"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">5</SPAN> Testing Numerical Values</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00490000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN> Writing Good Rules</A>
+</H1>
+
+<P>
+There are some general concepts to keep in mind when developing Snort rules to
+maximize efficiency and speed.
+
+<P>
+
+<H2><A NAME="SECTION00491000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Content Matching</A>
+</H2>
+
+<P>
+Snort groups rules by protocol (ip, tcp, udp, icmp), then by ports
+(ip and icmp use slightly different logic), then by those with <TT>content</TT>
+and those without.  For rules with <TT>content</TT>, a multi-pattern matcher is
+used to select rules that have a chance at matching based on a single content.
+Selecting rules for evaluation via this "fast" pattern matcher was found to
+increase performance, especially when applied to large rule groups like HTTP.
+The longer and more unique a <TT>content</TT> is, the less likely that rule and
+all of its rule options will be evaluated unnecessarily - it's safe to say
+there is generally more "good" traffic than "bad".  Rules without
+<TT>content</TT> are always evaluated (relative to the protocol and port group
+in which they reside), potentially putting a drag on performance.
+While some detection options, such as <TT>pcre</TT> and <TT>byte_test</TT>,
+perform detection in the payload section of the packet, they are not used by the
+fast pattern matching engine.  If at all possible, try and have at least one
+<TT>content</TT> (or <TT>uricontent</TT>) rule option in your rule.
+
+<P>
+
+<H2><A NAME="SECTION00492000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Catch the Vulnerability, Not the Exploit</A>
+</H2>
+
+<P>
+Try to write rules that target the vulnerability, instead of a specific
+exploit.
+
+<P>
+For example, look for a the vulnerable command with an argument that is too
+large, instead of shellcode that binds a shell.
+
+<P>
+By writing rules for the vulnerability, the rule is less vulnerable to evasion
+when an attacker changes the exploit slightly.
+
+<P>
+
+<H2><A NAME="SECTION00493000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN> Catch the Oddities of the Protocol in the Rule</A>
+</H2>
+
+<P>
+Many services typically send the commands in upper case letters.  FTP is a good
+example.  In FTP, to send the username, the client sends:
+
+<P>
+<PRE>
+    user username_here
+</PRE>
+
+<P>
+A simple rule to look for FTP root login attempts could be:
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any any 21 (content:"user root";)
+</PRE>
+
+<P>
+While it may <SPAN  CLASS="textit">seem</SPAN> trivial to write a rule that looks for the username
+root, a good rule will handle all of the odd things that the protocol might
+handle when accepting the user command.
+
+<P>
+For example, each of the following are accepted by most FTP servers:
+
+<P>
+<PRE>
+    user root
+    user root
+    user root
+    user root
+    user&lt;tab&gt;root
+</PRE>
+
+<P>
+To handle all of the cases that the FTP server might handle, the rule needs
+more smarts than a simple string match.
+
+<P>
+A good rule that looks for root login on ftp would be:
+
+<P>
+<PRE>
+    alert tcp any any -&gt; any 21 (flow:to_server,established; \
+        content:"root"; pcre:"/user\s+root/i";)
+</PRE>
+
+<P>
+There are a few important things to note in this rule:
+
+<P>
+
+<UL>
+<LI>The rule has a <SPAN  CLASS="textit">flow</SPAN> option, verifying this is traffic going to the
+server on an established session.
+
+<P>
+</LI>
+<LI>The rule has a <SPAN  CLASS="textit">content</SPAN> option, looking for <SPAN  CLASS="textit">root</SPAN>, which is
+the longest, most unique string in the attack.  This option is added to allow
+the fast pattern matcher to select this rule for evaluation only if the
+content <SPAN  CLASS="textit">root</SPAN> is found in the payload.
+
+<P>
+</LI>
+<LI>The rule has a <SPAN  CLASS="textit">pcre</SPAN> option, looking for user, followed at least
+one space character (which includes tab), followed by root, ignoring case.
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00494000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">4</SPAN> Optimizing Rules</A>
+</H2>
+
+<P>
+The content matching portion of the detection engine has recursion to handle a
+few evasion cases.  Rules that are not properly written can cause Snort to
+waste time duplicating checks.
+
+<P>
+The way the recursion works now is if a pattern matches, and if any of the
+detection options after that pattern fail, then look for the pattern again
+after where it was found the previous time.  Repeat until the pattern is not
+found again or the opt functions all succeed.
+
+<P>
+On first read, that may not sound like a smart idea, but it is needed.  For
+example, take the following rule:
+
+<P>
+<PRE>
+    alert ip any any -&gt; any any (content:"a"; content:"b"; within:1;)
+</PRE>
+
+<P>
+This rule would look for &ldquo;a&rdquo;, immediately followed by &ldquo;b&rdquo;.  Without
+recursion, the payload &ldquo;aab&rdquo; would fail, even though it is obvious that the
+payload &ldquo;aab&rdquo; has &ldquo;a&rdquo; immediately followed by &ldquo;b&rdquo;, because the first "a"
+is not immediately followed by &ldquo;b&rdquo;.
+
+<P>
+While recursion is important for detection, the recursion implementation is not
+very smart.
+
+<P>
+For example, the following rule options are not optimized:
+
+<P>
+<PRE>
+    content:"|13|"; dsize:1;
+</PRE>
+
+<P>
+By looking at this rule snippet, it is obvious the rule looks for a packet with
+a single byte of 0x13.  However, because of recursion, a packet with 1024 bytes
+of 0x13 could cause 1023 too many pattern match attempts and 1023 too many
+dsize checks.  Why?  The content 0x13 would be found in the first byte, then
+the dsize option would fail, and because of recursion, the content 0x13 would
+be found again starting after where the previous 0x13 was found, once it is
+found, then check the dsize again, repeating until 0x13 is not found in the
+payload again.
+
+<P>
+Reordering the rule options so that discrete checks (such as dsize) are moved
+to the beginning of the rule speed up Snort.  
+
+<P>
+The optimized rule snipping would be:
+<PRE>
+    dsize:1; content:"|13|";
+</PRE>
+
+<P>
+A packet of 1024 bytes of 0x13 would fail immediately, as the dsize check is
+the first option checked and dsize is a discrete check without recursion.
+
+<P>
+The following rule options are discrete and should generally be placed at the
+beginning of any rule:
+
+<P>
+
+<UL>
+<LI><TT>dsize</TT>
+</LI>
+<LI><TT>flags</TT>
+</LI>
+<LI><TT>flow</TT>
+</LI>
+<LI><TT>fragbits</TT>
+</LI>
+<LI><TT>icmp_id</TT>
+</LI>
+<LI><TT>icmp_seq</TT> 
+</LI>
+<LI><TT>icode</TT> 
+</LI>
+<LI><TT>id</TT>
+</LI>
+<LI><TT>ipopts</TT>
+</LI>
+<LI><TT>ip_proto</TT> 
+</LI>
+<LI><TT>itype</TT> 
+</LI>
+<LI><TT>seq</TT>
+</LI>
+<LI><TT>session</TT> 
+</LI>
+<LI><TT>tos</TT>
+</LI>
+<LI><TT>ttl</TT>
+</LI>
+<LI><TT>ack</TT>
+</LI>
+<LI><TT>window</TT>
+</LI>
+<LI><TT>resp</TT> 
+</LI>
+<LI><TT>sameip</TT>
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00495000000000000000"></A>
+<A NAME="testing_numerical_values"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">5</SPAN> Testing Numerical Values
+</H2>
+
+<P>
+The rule options <SPAN  CLASS="textit">byte_test</SPAN> and <SPAN  CLASS="textit">byte_jump</SPAN> were written to
+support writing rules for protocols that have length encoded data.  RPC was the
+protocol that spawned the requirement for these two rule options, as RPC uses
+simple length based encoding for passing data.
+
+<P>
+In order to understand <SPAN  CLASS="textit">why</SPAN> byte_test and byte_jump are useful, let's
+go through an exploit attempt against the sadmind service.
+
+<P>
+This is the payload of the exploit:
+
+<P>
+<PRE>
+89 09 9c e2 00 00 00 00 00 00 00 02 00 01 87 88  ................
+00 00 00 0a 00 00 00 01 00 00 00 01 00 00 00 20  ...............
+40 28 3a 10 00 00 00 0a 4d 45 54 41 53 50 4c 4f  @(:.....metasplo
+49 54 00 00 00 00 00 00 00 00 00 00 00 00 00 00  it..............
+00 00 00 00 00 00 00 00 40 28 3a 14 00 07 45 df  ........@(:...e.
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00 00 00 00 00 00 00 06 00 00 00 00 00 00 00 00  ................
+00 00 00 00 00 00 00 04 00 00 00 00 00 00 00 04  ................
+7f 00 00 01 00 01 87 88 00 00 00 0a 00 00 00 04  ................
+7f 00 00 01 00 01 87 88 00 00 00 0a 00 00 00 11  ................
+00 00 00 1e 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00 00 00 00 00 00 00 3b 4d 45 54 41 53 50 4c 4f  .......;metasplo
+49 54 00 00 00 00 00 00 00 00 00 00 00 00 00 00  it..............
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00 00 00 00 00 00 00 06 73 79 73 74 65 6d 00 00  ........system..
+00 00 00 15 2e 2e 2f 2e 2e 2f 2e 2e 2f 2e 2e 2f  ....../../../../
+2e 2e 2f 62 69 6e 2f 73 68 00 00 00 00 00 04 1e  ../bin/sh.......
+&lt;snip&gt;
+</PRE>
+
+<P>
+Let's break this up, describe each of the fields, and figure out how to write a
+rule to catch this exploit.  
+
+<P>
+There are a few things to note with RPC:
+
+<P>
+
+<UL>
+<LI>Numbers are written as uint32s, taking four bytes.  The number 26 would
+show up as 0x0000001a.
+
+<P>
+</LI>
+<LI>Strings are written as a uint32 specifying the length of the string, the
+string, and then null bytes to pad the length of the string to end on a 4 byte
+boundary.  The string &ldquo;bob&rdquo; would show up as 0x00000003626f6200.
+
+<P>
+</LI>
+</UL>
+
+<P>
+<PRE>
+89 09 9c e2     - the request id, a random uint32, unique to each request
+00 00 00 00     - rpc type (call = 0, response = 1)
+00 00 00 02     - rpc version (2)
+00 01 87 88     - rpc program (0x00018788 = 100232 = sadmind)
+00 00 00 0a     - rpc program version (0x0000000a = 10)
+00 00 00 01     - rpc procedure (0x00000001 = 1)
+00 00 00 01     - credential flavor (1 = auth\_unix)
+00 00 00 20     - length of auth\_unix data (0x20 = 32
+
+## the next 32 bytes are the auth\_unix data
+40 28 3a 10 - unix timestamp (0x40283a10 = 1076378128 = feb 10 01:55:28 2004 gmt)
+00 00 00 0a - length of the client machine name (0x0a = 10)
+4d 45 54 41 53 50 4c 4f 49 54 00 00  - metasploit
+
+00 00 00 00 - uid of requesting user (0)
+00 00 00 00 - gid of requesting user (0)
+00 00 00 00 - extra group ids (0)
+
+00 00 00 00     - verifier flavor (0 = auth\_null, aka none)
+00 00 00 00     - length of verifier (0, aka none)
+</PRE>
+
+<P>
+The rest of the packet is the request that gets passed to procedure 1 of
+sadmind.
+
+<P>
+However, we know the vulnerability is that sadmind trusts the uid coming from
+the client.  sadmind runs any request where the client's uid is 0 as root.  As
+such, we have decoded enough of the request to write our rule.  
+
+<P>
+First, we need to make sure that our packet is an RPC call.
+
+<P>
+<PRE>
+    content:"|00 00 00 00|"; offset:4; depth:4;
+</PRE>
+
+<P>
+Then, we need to make sure that our packet is a call to sadmind.
+
+<P>
+<PRE>
+    content:"|00 01 87 88|"; offset:12; depth:4;
+</PRE>
+
+<P>
+Then, we need to make sure that our packet is a call to the procedure 1, the
+vulnerable procedure.  
+
+<P>
+<PRE>
+    content:"|00 00 00 01|"; offset:20; depth:4;
+</PRE>
+
+<P>
+Then, we need to make sure that our packet has auth_unix credentials.  
+
+<P>
+<PRE>
+    content:"|00 00 00 01|"; offset:24; depth:4;
+</PRE>
+
+<P>
+We don't care about the hostname, but we want to skip over it and check a
+number value after the hostname.  This is where byte_test is useful.  Starting
+at the length of the hostname, the data we have is:
+
+<P>
+<PRE>
+00 00 00 0a 4d 45 54 41 53 50 4c 4f 49 54 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00
+</PRE>
+
+<P>
+We want to read 4 bytes, turn it into a number, and jump that many bytes
+forward, making sure to account for the padding that RPC requires on strings.
+If we do that, we are now at:
+
+<P>
+<PRE>
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00
+</PRE>
+
+<P>
+which happens to be the exact location of the uid, the value we want to check.
+
+<P>
+In English, we want to read 4 bytes, 36 bytes from the beginning of the packet,
+and turn those 4 bytes into an integer and jump that many bytes forward,
+aligning on the 4 byte boundary.  To do that in a Snort rule, we use:
+
+<P>
+<PRE>
+    byte_jump:4,36,align;
+</PRE>
+
+<P>
+then we want to look for the uid of 0.
+
+<P>
+<PRE>
+    content:"|00 00 00 00|"; within:4;
+</PRE>
+
+<P>
+Now that we have all the detection capabilities for our rule, let's put them
+all together.  
+
+<P>
+<PRE>
+    content:"|00 00 00 00|"; offset:4; depth:4;
+    content:"|00 01 87 88|"; offset:12; depth:4;
+    content:"|00 00 00 01|"; offset:20; depth:4;
+    content:"|00 00 00 01|"; offset:24; depth:4;
+    byte_jump:4,36,align;
+    content:"|00 00 00 00|"; within:4;
+</PRE>
+
+<P>
+The 3rd and fourth string match are right next to each other, so we should
+combine those patterns.  We end up with:
+
+<P>
+<PRE>
+    content:"|00 00 00 00|"; offset:4; depth:4;
+    content:"|00 01 87 88|"; offset:12; depth:4;
+    content:"|00 00 00 01 00 00 00 01|"; offset:20; depth:8;
+    byte_jump:4,36,align;
+    content:"|00 00 00 00|"; within:4;
+</PRE>
+
+<P>
+If the sadmind service was vulnerable to a buffer overflow when reading the
+client's hostname, instead of reading the length of the hostname and jumping
+that many bytes forward, we would check the length of the hostname to make sure
+it is not too large.  
+
+<P>
+To do that, we would read 4 bytes, starting 36 bytes into the packet, turn it
+into a number, and then make sure it is not too large (let's say bigger than
+200 bytes).  In Snort, we do: 
+
+<P>
+<PRE>
+    byte_test:4,&gt;,200,36;
+</PRE>
+
+<P>
+Our full rule would be:    
+
+<P>
+<PRE>
+    content:"|00 00 00 00|"; offset:4; depth:4;
+    content:"|00 01 87 88|"; offset:12; depth:4;
+    content:"|00 00 00 01 00 00 00 01|"; offset:20; depth:8;
+    byte_test:4,&gt;,200,36;
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1495"
+  HREF="node37.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1491"
+  HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1487"
+  HREF="node35.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1493"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1496"
+  HREF="node37.html">4. Dynamic Modules</A>
+<B> Up:</B> <A NAME="tex2html1492"
+  HREF="node27.html">3. Writing Snort Rules</A>
+<B> Previous:</B> <A NAME="tex2html1488"
+  HREF="node35.html">3.8 Rule Thresholds</A>
+ &nbsp; <B>  <A NAME="tex2html1494"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+
+<!-- Mirrored from manual-snort-org.s3-website-us-east-1.amazonaws.com/node36.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Oct 2023 20:09:55 GMT -->
+</HTML>
